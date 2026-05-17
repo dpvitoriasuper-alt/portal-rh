@@ -1,361 +1,433 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portal do Colaborador | Vitória Supermercados</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Inter',sans-serif;
-  background:
-    radial-gradient(circle at top right,rgba(255,197,62,.18),transparent 30%),
-    radial-gradient(circle at bottom left,rgba(190,0,20,.28),transparent 25%),
-    #020202;
+  font-family:Inter,sans-serif;
+  background:#020202;
   color:#fff;
 }
 
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top right,rgba(255,190,50,.18),transparent 28%),
+    radial-gradient(circle at bottom left,rgba(150,0,0,.35),transparent 30%),
+    linear-gradient(145deg,#030303,#000);
+  z-index:-2;
+}
+
 .container{
-  width:min(1180px,94%);
+  width:min(1220px,96%);
   margin:auto;
 }
 
+/* GLOSS */
 .gloss{
-  background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.03));
-  border:1px solid rgba(255,215,120,.45);
+  background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 45%,rgba(0,0,0,.55));
+  border:1px solid rgba(255,194,55,.65);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.25),
-    0 0 22px rgba(255,183,48,.18),
-    0 20px 40px rgba(0,0,0,.45);
-  backdrop-filter:blur(14px);
+    inset 0 1px 0 rgba(255,255,255,.35),
+    inset 0 -20px 40px rgba(0,0,0,.45),
+    0 0 18px rgba(255,181,35,.28),
+    0 20px 45px rgba(0,0,0,.7);
+  backdrop-filter:blur(12px);
 }
 
-/* TOPO */
+/* HEADER */
 header{
-  margin:18px auto 14px;
-  padding:18px 24px;
-  border-radius:22px;
+  margin:18px 0;
+  padding:18px 28px;
+  border-radius:20px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
 }
 
 .logo{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:16px;
 }
 
-.logo-mark{
-  width:62px;
-  height:62px;
-  border-radius:16px;
-  background:linear-gradient(145deg,#ffdf73,#8b5b00);
+.logo-symbol{
+  width:72px;
+  height:72px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#ffe27a,#a56d00);
+  color:#050505;
+  font-size:44px;
+  font-weight:900;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:38px;
-  font-weight:900;
-  color:#111;
-  box-shadow:0 0 25px rgba(255,196,54,.55);
+  box-shadow:0 0 30px rgba(255,196,52,.75);
+  position:relative;
 }
 
-.logo h1{
-  font-size:30px;
+.logo-symbol::before{
+  content:"♛";
+  position:absolute;
+  top:-20px;
+  color:#c90014;
+  font-size:28px;
+}
+
+.logo-text h1{
+  font-size:34px;
+  font-weight:900;
   letter-spacing:1px;
 }
 
-.logo span{
-  color:#f0b72f;
+.logo-text p{
+  color:#ffc83f;
+  font-weight:800;
   letter-spacing:4px;
-  font-size:13px;
-  font-weight:700;
+  font-size:14px;
 }
 
 nav{
   display:flex;
-  gap:12px;
+  gap:20px;
+  align-items:center;
 }
 
 nav a{
-  color:white;
+  color:#fff;
   text-decoration:none;
-  padding:12px 15px;
+  text-align:center;
+  padding:12px 14px;
   border-radius:16px;
   font-size:14px;
-  text-align:center;
   transition:.25s;
 }
 
-nav a b{
+nav a span{
   display:block;
-  font-size:24px;
+  font-size:30px;
   margin-bottom:4px;
+  filter:drop-shadow(0 0 7px rgba(255,0,0,.65));
 }
 
-nav a:hover,
 nav a.active{
-  background:linear-gradient(145deg,#f7c84d,#8b5b00);
+  background:linear-gradient(145deg,#ffd766,#9d6b00);
   color:#111;
-  box-shadow:0 0 22px rgba(255,190,45,.7);
+  box-shadow:0 0 28px rgba(255,196,48,.85);
+}
+
+nav a:hover{
+  background:rgba(255,190,40,.15);
+  box-shadow:0 0 20px rgba(255,190,40,.45);
 }
 
 /* HERO */
 .hero{
-  border-radius:26px;
+  height:390px;
+  border-radius:24px;
   overflow:hidden;
-  min-height:380px;
   position:relative;
   display:flex;
   align-items:center;
-  margin-bottom:28px;
   background:
-    linear-gradient(90deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.72) 38%,rgba(0,0,0,.12) 100%),
-    url("https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=1600&auto=format&fit=crop");
+    linear-gradient(90deg,rgba(0,0,0,.96) 0%,rgba(0,0,0,.75) 36%,rgba(0,0,0,.08) 100%),
+    url("https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=1800&auto=format&fit=crop");
   background-size:cover;
   background-position:center;
 }
 
-.hero::after{
+.hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(135deg,rgba(255,204,70,.28),transparent 25%,transparent 70%,rgba(255,204,70,.22));
-  pointer-events:none;
+  background:
+    linear-gradient(120deg,rgba(255,200,70,.4),transparent 22%,transparent 78%,rgba(255,200,70,.3)),
+    radial-gradient(circle at 70% 0%,rgba(255,255,255,.26),transparent 20%);
 }
 
 .hero-content{
   position:relative;
   z-index:2;
-  padding:55px;
-  max-width:560px;
+  padding-left:55px;
+  max-width:520px;
 }
 
 .hero h2{
-  font-size:36px;
+  font-size:34px;
   font-weight:400;
 }
 
 .hero h3{
+  margin-top:4px;
   font-size:58px;
-  line-height:.95;
-  color:#f3c24a;
+  line-height:.93;
+  color:#ffd15a;
   font-weight:900;
-  text-shadow:0 0 20px rgba(255,196,60,.35);
+  text-shadow:0 0 22px rgba(255,195,60,.45);
 }
 
 .hero p{
+  margin-top:22px;
   font-size:20px;
-  margin:22px 0 14px;
-  line-height:1.45;
+  line-height:1.4;
 }
 
 .hero .frase{
-  font-family:'Pacifico',cursive;
-  color:#ffd45d;
+  margin-top:18px;
+  font-family:Pacifico,cursive;
+  color:#ffd15a;
   font-size:28px;
 }
 
 .dots{
   position:absolute;
-  bottom:22px;
+  bottom:24px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:10px;
+  gap:12px;
+  z-index:3;
 }
 
-.dots span{
-  width:12px;
-  height:12px;
+.dots i{
+  width:13px;
+  height:13px;
   border-radius:50%;
-  background:white;
-  opacity:.6;
+  background:#fff;
+  opacity:.65;
 }
 
-.dots span:first-child{
-  background:#f5bd35;
+.dots i:first-child{
+  background:#ffc337;
   opacity:1;
 }
 
-/* TÍTULOS */
-.section-title{
-  color:#f4b832;
-  font-size:23px;
-  margin:26px 0 16px;
+/* TITLES */
+.title-row{
   display:flex;
   align-items:center;
-  gap:10px;
+  justify-content:space-between;
+  margin-top:28px;
 }
 
-/* ACESSO RÁPIDO */
+.section-title{
+  color:#ffc337;
+  font-size:24px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.section-title span{
+  font-size:27px;
+  filter:drop-shadow(0 0 8px rgba(255,193,50,.8));
+}
+
+/* QUICK */
 .quick-grid{
+  margin-top:18px;
   display:grid;
   grid-template-columns:repeat(6,1fr);
   gap:16px;
 }
 
 .quick-card{
-  border-radius:20px;
-  padding:28px 16px;
+  height:210px;
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
-  min-height:175px;
-  transition:.25s;
-}
-
-.quick-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 0 28px rgba(255,196,58,.45);
+  padding:18px;
 }
 
 .quick-card .icon{
-  font-size:46px;
-  margin-bottom:15px;
-  filter:drop-shadow(0 0 10px rgba(255,0,0,.5));
+  font-size:50px;
+  margin-bottom:20px;
+  filter:
+    drop-shadow(0 0 9px rgba(255,0,0,.9))
+    drop-shadow(0 0 18px rgba(255,0,0,.35));
 }
 
-.quick-card h4{
-  font-size:18px;
-  margin-bottom:8px;
+.quick-card h3{
+  font-size:20px;
+  margin-bottom:10px;
 }
 
 .quick-card p{
-  font-size:13px;
-  color:#ddd;
+  font-size:14px;
+  color:#e8e8e8;
+  line-height:1.35;
 }
 
-/* AVISOS */
-.notice-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.quick-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 28px rgba(255,190,40,.5);
 }
 
-.btn-small{
-  color:#ffd15a;
+/* BUTTON */
+.btn{
+  color:#ffd25c;
+  border:1px solid #d79a1e;
   text-decoration:none;
-  border:1px solid #d39c25;
-  padding:10px 18px;
+  padding:12px 22px;
   border-radius:14px;
-  font-weight:700;
+  font-weight:800;
+  box-shadow:inset 0 0 15px rgba(255,190,45,.1);
 }
 
+/* NOTICES */
 .notice-grid{
+  margin-top:16px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
 }
 
-.notice{
-  border-radius:20px;
+.notice-card{
+  border-radius:18px;
   overflow:hidden;
 }
 
 .notice-img{
-  height:210px;
+  height:240px;
   padding:28px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  position:relative;
+  overflow:hidden;
 }
 
-.rosa{
-  background:linear-gradient(135deg,#ffd1df,#bf1658);
-}
-
-.azul{
-  background:linear-gradient(135deg,#d7eeff,#0057ae);
-}
-
-.seg{
-  background:linear-gradient(135deg,#fff,#c9921b);
-  color:#111;
+.notice-img::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.26),transparent 45%,rgba(255,255,255,.08));
 }
 
 .notice-img h3{
-  font-size:36px;
+  position:relative;
+  z-index:2;
+  font-size:34px;
   font-weight:900;
+  line-height:1.05;
 }
 
 .notice-img p{
-  margin-top:14px;
+  position:relative;
+  z-index:2;
+  margin-top:18px;
+  font-size:17px;
   font-weight:700;
+}
+
+.rosa{
+  background:
+    radial-gradient(circle at 70% 40%,rgba(255,255,255,.35),transparent 23%),
+    linear-gradient(135deg,#ffc4d8,#b60045);
+}
+
+.azul{
+  background:
+    radial-gradient(circle at 70% 40%,rgba(255,255,255,.35),transparent 23%),
+    linear-gradient(135deg,#cce9ff,#0058b7);
+}
+
+.gold{
+  background:linear-gradient(135deg,#fff2bf,#d59b25);
+  color:#000;
 }
 
 .notice-body{
   padding:18px;
-  background:rgba(0,0,0,.58);
+  background:rgba(0,0,0,.82);
 }
 
 .notice-body h4{
-  margin-bottom:6px;
+  font-size:17px;
+  margin-bottom:7px;
 }
 
 .notice-body p{
   font-size:14px;
   color:#ddd;
+  line-height:1.4;
 }
 
 .date{
   display:block;
   text-align:right;
-  color:#ffc84b;
-  font-size:13px;
   margin-top:12px;
+  color:#ffc337;
+  font-size:13px;
 }
 
-/* BAIXO */
+/* LOWER */
 .bottom-grid{
+  margin-top:18px;
   display:grid;
-  grid-template-columns:1fr 1.1fr 1.1fr;
+  grid-template-columns:1fr 1.05fr 1.05fr;
   gap:18px;
-  margin-top:20px;
 }
 
 .panel{
-  border-radius:22px;
+  border-radius:18px;
   padding:22px;
 }
 
-.birthday-list{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
+.birthday{
+  margin-top:16px;
 }
 
 .person{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  padding-bottom:10px;
+  justify-content:space-between;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.09);
+  font-size:16px;
 }
 
-.person span:first-child::before{
-  content:"👤";
-  margin-right:10px;
+.person img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  margin-right:12px;
+}
+
+.person div{
+  display:flex;
+  align-items:center;
 }
 
 .gallery{
+  margin-top:16px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:8px;
 }
 
 .gallery div{
-  height:88px;
-  border-radius:12px;
+  height:92px;
+  border-radius:10px;
   background:url("https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600&auto=format&fit=crop");
   background-size:cover;
   background-position:center;
+}
+
+.center-btn{
+  margin:18px auto 0;
+  display:block;
+  width:max-content;
 }
 
 .highlight{
@@ -363,89 +435,173 @@ nav a.active{
 }
 
 .avatar{
-  width:145px;
-  height:145px;
-  margin:10px auto;
+  width:150px;
+  height:150px;
+  margin:18px auto 10px;
   border-radius:50%;
+  border:3px solid #ffc337;
   background:url("https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=500&auto=format&fit=crop");
   background-size:cover;
   background-position:center;
-  border:3px solid #f2bd3d;
-  box-shadow:0 0 24px rgba(255,194,52,.4);
+  box-shadow:0 0 25px rgba(255,196,48,.55);
 }
 
 .highlight h3{
-  color:#f4b832;
-  font-size:25px;
+  color:#ffc337;
+  font-size:26px;
 }
 
-/* CTA */
+.highlight p{
+  margin-top:8px;
+  font-size:16px;
+}
+
+/* RED CTA BAR */
 .cta{
-  margin:28px auto 18px;
-  border-radius:22px;
-  padding:28px;
-  background:linear-gradient(90deg,#8c0008,#c91522,#6d0005);
+  margin-top:26px;
+  border-radius:18px;
+  min-height:128px;
+  padding:22px 32px;
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns:1fr 1fr 1.25fr;
   align-items:center;
-  gap:20px;
+  gap:24px;
+  background:
+    radial-gradient(circle at 0% 50%,rgba(255,255,255,.18),transparent 16%),
+    linear-gradient(90deg,#7d0000,#c90012 45%,#710000);
+  border:1px solid rgba(255,193,60,.8);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    inset 0 -18px 40px rgba(0,0,0,.32),
+    0 0 25px rgba(255,50,20,.35);
 }
 
-.whats{
-  display:inline-block;
-  margin-top:10px;
-  background:linear-gradient(145deg,#fff08b,#c9921b);
-  color:#111;
-  padding:14px 28px;
-  border-radius:14px;
-  font-weight:900;
-  text-decoration:none;
+.cta-left{
+  display:flex;
+  align-items:center;
+  gap:18px;
 }
 
-.qr{
-  width:110px;
-  height:110px;
-  background:white;
-  color:#111;
+.whats-icon{
+  width:68px;
+  height:68px;
+  border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:900;
-  margin-left:auto;
-  border-radius:14px;
-  box-shadow:0 0 20px rgba(255,255,255,.5);
+  font-size:38px;
+  border:1px solid rgba(255,220,120,.6);
+  box-shadow:0 0 24px rgba(255,209,80,.45);
 }
 
-/* RODAPÉ */
-footer{
-  padding:26px 0 40px;
-  display:flex;
-  justify-content:space-between;
+.cta h3{
+  font-size:22px;
+}
+
+.cta p{
+  font-size:15px;
+}
+
+.whats-btn{
+  display:inline-flex;
   align-items:center;
-  color:#ddd;
+  gap:10px;
+  justify-content:center;
+  width:230px;
+  padding:16px;
+  border-radius:14px;
+  background:linear-gradient(145deg,#fff08b,#c6901a);
+  color:#111;
+  text-decoration:none;
+  font-weight:900;
+  box-shadow:0 0 18px rgba(255,203,65,.55);
+}
+
+.qr-area{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.arrow{
+  font-size:42px;
+  transform:rotate(10deg);
+}
+
+.qr{
+  width:105px;
+  height:105px;
+  background:#fff;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#111;
+  font-weight:900;
+  box-shadow:0 0 25px rgba(255,255,255,.6);
+}
+
+/* FOOTER */
+footer{
+  padding:22px 0 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.footer-logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.footer-logo .logo-symbol{
+  width:48px;
+  height:48px;
+  font-size:28px;
+  border-radius:12px;
+}
+
+.footer-logo .logo-symbol::before{
+  top:-15px;
+  font-size:20px;
+}
+
+.footer-logo h3{
+  font-size:26px;
+}
+
+.footer-logo p{
+  font-size:11px;
+  color:#ffc337;
+  letter-spacing:3px;
+  font-weight:800;
 }
 
 footer .frase{
-  font-family:'Pacifico',cursive;
-  color:#ffd45d;
-  font-size:25px;
+  font-family:Pacifico,cursive;
+  color:#ffd15a;
+  font-size:28px;
+}
+
+.copy{
+  text-align:right;
+  font-size:14px;
+  color:#ddd;
 }
 
 /* RESPONSIVO */
-@media(max-width:900px){
+@media(max-width:950px){
   header{
     flex-direction:column;
     gap:18px;
   }
 
   nav{
-    overflow-x:auto;
     width:100%;
+    overflow-x:auto;
     justify-content:flex-start;
-  }
-
-  .hero h3{
-    font-size:42px;
   }
 
   .quick-grid{
@@ -458,20 +614,29 @@ footer .frase{
     grid-template-columns:1fr;
   }
 
+  .hero h3{
+    font-size:42px;
+  }
+
   footer{
     flex-direction:column;
-    gap:14px;
+    gap:18px;
+    text-align:center;
+  }
+
+  .copy{
     text-align:center;
   }
 }
 
 @media(max-width:520px){
-  .hero-content{
-    padding:34px 24px;
+  .hero{
+    height:auto;
+    min-height:360px;
   }
 
-  .hero h2{
-    font-size:28px;
+  .hero-content{
+    padding:35px 24px;
   }
 
   .hero h3{
@@ -482,8 +647,8 @@ footer .frase{
     grid-template-columns:1fr;
   }
 
-  .logo h1{
-    font-size:24px;
+  .notice-img{
+    height:200px;
   }
 }
 </style>
@@ -495,21 +660,21 @@ footer .frase{
 
 <header class="gloss">
   <div class="logo">
-    <div class="logo-mark">V</div>
-    <div>
+    <div class="logo-symbol">V</div>
+    <div class="logo-text">
       <h1>VITÓRIA</h1>
-      <span>SUPERMERCADOS</span>
+      <p>SUPERMERCADOS</p>
     </div>
   </div>
 
   <nav>
-    <a href="#" class="active"><b>🏠</b>Início</a>
-    <a href="#avisos"><b>📢</b>Avisos</a>
-    <a href="#aniversariantes"><b>🎂</b>Aniversariantes</a>
-    <a href="#saude"><b>❤️</b>Saúde</a>
-    <a href="#treinamentos"><b>🎓</b>Treinamentos</a>
-    <a href="#documentos"><b>📁</b>Documentos</a>
-    <a href="#contatos"><b>📞</b>Contatos</a>
+    <a class="active" href="#"><span>🏠</span>Início</a>
+    <a href="#avisos"><span>📢</span>Avisos</a>
+    <a href="#aniversariantes"><span>🎂</span>Aniversariantes</a>
+    <a href="#saude"><span>❤️</span>Saúde</a>
+    <a href="#treinamentos"><span>🎓</span>Treinamentos</a>
+    <a href="#documentos"><span>📁</span>Documentos</a>
+    <a href="#contatos"><span>📞</span>Contatos</a>
   </nav>
 </header>
 
@@ -517,152 +682,134 @@ footer .frase{
   <div class="hero-content">
     <h2>Bem-vindo ao</h2>
     <h3>PORTAL DO<br>COLABORADOR</h3>
-    <p>Aqui você encontra informações, avisos e novidades da nossa empresa.</p>
+    <p>Aqui você encontra informações,<br>avisos e novidades da nossa empresa.</p>
     <div class="frase">Juntos somos mais fortes!</div>
   </div>
-
-  <div class="dots">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="dots"><i></i><i></i><i></i></div>
 </section>
 
-<h2 class="section-title">⚡ Acesso rápido</h2>
+<div class="title-row">
+  <h2 class="section-title"><span>⚡</span>Acesso rápido</h2>
+</div>
 
 <section class="quick-grid">
-  <div class="quick-card gloss">
-    <div class="icon">📢</div>
-    <h4>Avisos</h4>
-    <p>Veja os comunicados e novidades</p>
-  </div>
-
-  <div class="quick-card gloss">
-    <div class="icon">🎂</div>
-    <h4>Aniversariantes</h4>
-    <p>Confira quem faz aniversário</p>
-  </div>
-
-  <div class="quick-card gloss">
-    <div class="icon">❤️</div>
-    <h4>Saúde</h4>
-    <p>Campanhas e dicas de saúde</p>
-  </div>
-
-  <div class="quick-card gloss">
-    <div class="icon">🎓</div>
-    <h4>Treinamentos</h4>
-    <p>Cursos e materiais para você</p>
-  </div>
-
-  <div class="quick-card gloss">
-    <div class="icon">📁</div>
-    <h4>Documentos</h4>
-    <p>Políticas, normas e documentos úteis</p>
-  </div>
-
-  <div class="quick-card gloss">
-    <div class="icon">📞</div>
-    <h4>Contatos RH</h4>
-    <p>Fale com o RH sempre que precisar</p>
-  </div>
+  <div class="quick-card gloss"><div class="icon">📢</div><h3>Avisos</h3><p>Veja os comunicados<br>e novidades</p></div>
+  <div class="quick-card gloss"><div class="icon">🎂</div><h3>Aniversariantes</h3><p>Confira quem faz<br>aniversário</p></div>
+  <div class="quick-card gloss"><div class="icon">❤️</div><h3>Saúde</h3><p>Campanhas e dicas<br>de saúde</p></div>
+  <div class="quick-card gloss"><div class="icon">🎓</div><h3>Treinamentos</h3><p>Cursos e materiais<br>para você</p></div>
+  <div class="quick-card gloss"><div class="icon">📁</div><h3>Documentos</h3><p>Políticas, normas e<br>documentos úteis</p></div>
+  <div class="quick-card gloss"><div class="icon">📞</div><h3>Contatos RH</h3><p>Fale com o RH<br>sempre que precisar</p></div>
 </section>
 
-<div class="notice-top" id="avisos">
-  <h2 class="section-title">📢 Avisos importantes</h2>
-  <a href="#" class="btn-small">Ver todos ›</a>
+<div class="title-row" id="avisos">
+  <h2 class="section-title"><span>📢</span>Avisos importantes</h2>
+  <a class="btn" href="#">Ver todos ›</a>
 </div>
 
 <section class="notice-grid">
-  <div class="notice gloss">
+  <div class="notice-card gloss">
     <div class="notice-img rosa">
       <h3>OUTUBRO<br>ROSA</h3>
-      <p>Mês de prevenção ao câncer de mama.</p>
+      <p>Mês de prevenção ao câncer de mama.<br><br><em>Cuide-se, você é muito importante!</em></p>
     </div>
     <div class="notice-body">
       <h4>Outubro Rosa</h4>
       <p>Campanha de prevenção ao câncer de mama. Participe!</p>
-      <span class="date">01/10/2026</span>
+      <span class="date">📅 01/10/2026</span>
     </div>
   </div>
 
-  <div class="notice gloss">
+  <div class="notice-card gloss">
     <div class="notice-img azul">
       <h3>NOVEMBRO<br>AZUL</h3>
-      <p>Mês de prevenção ao câncer de próstata.</p>
+      <p>Mês de prevenção ao câncer de próstata.<br><br><em>Prevenir é o melhor caminho!</em></p>
     </div>
     <div class="notice-body">
       <h4>Novembro Azul</h4>
       <p>Campanha de prevenção ao câncer de próstata. Participe!</p>
-      <span class="date">01/11/2026</span>
+      <span class="date">📅 01/11/2026</span>
     </div>
   </div>
 
-  <div class="notice gloss">
-    <div class="notice-img seg">
+  <div class="notice-card gloss">
+    <div class="notice-img gold">
       <h3>🛡️ SEGURANÇA<br>EM 1º LUGAR</h3>
-      <p>Nossa prioridade é cuidar de você.</p>
+      <p>Nossa prioridade é cuidar de você. Respeite as normas e trabalhe com segurança.</p>
     </div>
     <div class="notice-body">
       <h4>Segurança no trabalho</h4>
       <p>Cuide de você e dos seus colegas. Segurança é responsabilidade de todos!</p>
-      <span class="date">20/09/2026</span>
+      <span class="date">📅 20/09/2026</span>
     </div>
   </div>
 </section>
 
 <section class="bottom-grid">
   <div class="panel gloss" id="aniversariantes">
-    <h2 class="section-title">🎂 Aniversariantes do mês</h2>
-    <div class="birthday-list">
-      <div class="person"><span>Maria Oliveira</span><span>05/10</span></div>
-      <div class="person"><span>João Santos</span><span>12/10</span></div>
-      <div class="person"><span>Ana Paula</span><span>18/10</span></div>
-      <div class="person"><span>Carlos Lima</span><span>27/10</span></div>
-      <div class="person"><span>Bruna Souza</span><span>30/10</span></div>
+    <h2 class="section-title"><span>🎂</span>Aniversariantes do mês</h2>
+    <div class="birthday">
+      <div class="person"><div><img src="https://randomuser.me/api/portraits/women/44.jpg">Maria Oliveira</div><span>05/10</span></div>
+      <div class="person"><div><img src="https://randomuser.me/api/portraits/men/35.jpg">João Santos</div><span>12/10</span></div>
+      <div class="person"><div><img src="https://randomuser.me/api/portraits/women/65.jpg">Ana Paula</div><span>18/10</span></div>
+      <div class="person"><div><img src="https://randomuser.me/api/portraits/men/52.jpg">Carlos Lima</div><span>27/10</span></div>
+      <div class="person"><div><img src="https://randomuser.me/api/portraits/women/12.jpg">Bruna Souza</div><span>30/10</span></div>
     </div>
+    <a class="btn center-btn" href="#">Ver todos ›</a>
   </div>
 
   <div class="panel gloss">
-    <h2 class="section-title">📸 Galeria</h2>
+    <h2 class="section-title"><span>📸</span>Galeria</h2>
     <div class="gallery">
       <div></div><div></div><div></div>
       <div></div><div></div><div></div>
     </div>
+    <a class="btn center-btn" href="#">Ver todas as fotos ›</a>
   </div>
 
   <div class="panel gloss highlight">
-    <h2 class="section-title">🏆 Destaque do mês</h2>
+    <h2 class="section-title"><span>🏆</span>Destaque do mês</h2>
     <div class="avatar"></div>
     <h3>Carlos Ferreira</h3>
-    <p>Parabéns pelo seu empenho e dedicação!</p>
+    <p>Parabéns pelo seu empenho<br>e dedicação!</p>
+    <a class="btn center-btn" href="#">Ver todos os destaques ›</a>
   </div>
 </section>
 
-<section class="cta gloss" id="contatos">
-  <div>
-    <h2>💬 Fale com o RH</h2>
-    <p>Estamos aqui para ajudar!</p>
+<section class="cta" id="contatos">
+  <div class="cta-left">
+    <div class="whats-icon">💬</div>
+    <div>
+      <h3>Fale com o RH</h3>
+      <p>Estamos aqui para ajudar!</p>
+    </div>
   </div>
 
   <div>
-    <a class="whats" href="https://wa.me/5592999999999" target="_blank">Enviar mensagem</a>
+    <a class="whats-btn" href="https://wa.me/5592999999999" target="_blank">🟢 Enviar mensagem</a>
   </div>
 
-  <div>
-    <h3>Acesse pelo QR Code</h3>
-    <p>Escaneie e acesse o Portal do Colaborador pelo celular!</p>
-    <div class="qr">QR CODE</div>
+  <div class="qr-area">
+    <div>
+      <h3>Acesse pelo QR Code</h3>
+      <p>Escaneie e acesse o Portal do Colaborador pelo celular!</p>
+    </div>
+    <div class="arrow">➜</div>
+    <div class="qr">QR<br>CODE</div>
   </div>
 </section>
 
 <footer>
-  <div>
-    <strong>VITÓRIA</strong><br>
-    SUPERMERCADOS
+  <div class="footer-logo">
+    <div class="logo-symbol">V</div>
+    <div>
+      <h3>VITÓRIA</h3>
+      <p>SUPERMERCADOS</p>
+    </div>
   </div>
 
   <div class="frase">Juntos somos mais fortes! ♡</div>
 
-  <div>
+  <div class="copy">
     © 2026 Vitória Supermercados<br>
     Todos os direitos reservados.
   </div>
