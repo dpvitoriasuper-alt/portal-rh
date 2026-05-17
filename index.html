@@ -3,86 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Portal RH - Vitória Supermercados</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-body{
+
+*{
 margin:0;
-font-family:Arial, sans-serif;
-background:#f5f5f5;
-color:#333;
+padding:0;
+box-sizing:border-box;
 }
 
-header{
-background:#c40000;
+body{
+font-family:'Poppins',sans-serif;
+background:#0f1117;
 color:white;
-padding:30px;
+overflow-x:hidden;
+}
+
+/* FUNDO */
+
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+background:
+linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.88)),
+url('https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+z-index:-1;
+}
+
+/* HEADER */
+
+header{
+padding:80px 20px 60px;
 text-align:center;
+background:linear-gradient(135deg,#b30000,#001f7a,#000000);
+box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+.logo{
+width:120px;
+height:120px;
+border-radius:50%;
+border:4px solid #d4af37;
+margin-bottom:20px;
+object-fit:cover;
+background:white;
 }
 
 header h1{
-margin:0;
+font-size:58px;
+font-weight:700;
+color:white;
+text-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+
+header p{
+margin-top:12px;
+font-size:20px;
+color:#f5d77d;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+/* CARDS */
+
+.card{
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
+padding:30px;
+border-radius:25px;
+transition:0.4s;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:#d4af37;
+box-shadow:0 15px 35px rgba(212,175,55,0.25);
+}
+
+.card h2{
+font-size:28px;
+margin-bottom:20px;
+color:#ffd700;
+}
+
+.card p{
+line-height:1.7;
+color:#ddd;
+}
+
+/* AVISOS */
+
+.aviso{
+background:linear-gradient(135deg,#b30000,#001f7a);
+padding:18px;
+border-radius:15px;
+margin-top:15px;
+font-weight:500;
+border-left:5px solid gold;
+}
+
+/* BOTÕES */
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:14px 24px;
+background:linear-gradient(135deg,#ffd700,#d4af37);
+color:black;
+text-decoration:none;
+font-weight:600;
+border-radius:12px;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+/* BANNER */
+
+.banner{
+margin-top:30px;
+background:linear-gradient(135deg,#001f7a,#b30000);
+padding:35px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.banner h2{
+font-size:36px;
+margin-bottom:15px;
+color:#ffd700;
+}
+
+.banner p{
+font-size:18px;
+color:#eee;
+}
+
+/* FOOTER */
+
+footer{
+margin-top:50px;
+padding:30px;
+text-align:center;
+background:#050505;
+border-top:2px solid #d4af37;
+}
+
+footer p{
+color:#aaa;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:768px){
+
+header h1{
 font-size:40px;
 }
 
 header p{
-font-size:18px;
-margin-top:10px;
+font-size:16px;
 }
 
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
+.banner h2{
+font-size:28px;
 }
 
-.card{
-background:white;
-padding:25px;
-border-radius:15px;
-margin-bottom:20px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-.card h2{
-color:#c40000;
-margin-top:0;
-}
-
-.aviso{
-background:#fff3cd;
-padding:15px;
-border-radius:10px;
-margin-top:10px;
-}
-
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:30px;
-}
 </style>
 </head>
 
 <body>
 
 <header>
+
+<img class="logo" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
 <h1>Portal RH</h1>
+
 <p>Vitória Supermercados</p>
+
 </header>
 
 <div class="container">
 
-<div class="card">
-<h2>Bem-vindo 👋</h2>
+<div class="banner">
+<h2>Bem-vindo ao Portal Corporativo</h2>
 <p>
-Este é o portal oficial do RH do Vitória Supermercados.
+Comunicados, documentos, treinamentos e informações importantes do RH em um só lugar.
 </p>
 </div>
 
+<br><br>
+
+<div class="grid">
+
 <div class="card">
+
 <h2>📢 Comunicados</h2>
 
 <div class="aviso">
@@ -90,22 +237,95 @@ Entrega de documentos até dia 25.
 </div>
 
 <div class="aviso">
-Atualização cadastral obrigatória.
+Atualização cadastral obrigatória para todos os colaboradores.
+</div>
+
+<div class="aviso">
+Treinamento interno na próxima semana.
 </div>
 
 </div>
 
 <div class="card">
+
 <h2>📄 Documentos</h2>
+
 <p>
-Em breve documentos e formulários disponíveis aqui.
+Acesse formulários, declarações, políticas internas e documentos importantes do RH.
 </p>
+
+<a class="btn" href="#">
+Acessar documentos
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🎉 Aniversariantes</h2>
+
+<p>
+Confira os aniversariantes do mês e envie sua mensagem especial aos colegas.
+</p>
+
+<a class="btn" href="#">
+Ver aniversariantes
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>📚 Treinamentos</h2>
+
+<p>
+Área dedicada aos treinamentos, integração e capacitação dos colaboradores.
+</p>
+
+<a class="btn" href="#">
+Abrir treinamentos
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>💼 Sistema RH</h2>
+
+<p>
+Acesse rapidamente o sistema interno do RH e demais ferramentas corporativas.
+</p>
+
+<a class="btn" href="#">
+Abrir sistema
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>❤️ Saúde & Bem-estar</h2>
+
+<p>
+Espaço voltado ao bem-estar, saúde emocional e qualidade de vida no trabalho.
+</p>
+
+<a class="btn" href="#">
+Saiba mais
+</a>
+
+</div>
+
 </div>
 
 </div>
 
 <footer>
-Portal RH © 2026
+
+<p>
+Portal RH • Vitória Supermercados © 2026
+</p>
+
 </footer>
 
 </body>
