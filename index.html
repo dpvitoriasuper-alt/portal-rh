@@ -64,11 +64,56 @@ backdrop-filter:blur(15px);
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-/* LOGO TOPO */
+/* LOGOS */
 
 .logo-topo{
 height:70px;
 object-fit:contain;
+background:transparent !important;
+mix-blend-mode:normal;
+
+filter:
+drop-shadow(0 0 10px rgba(255,255,255,0.15));
+}
+
+.hero-logo{
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:30px;
+}
+
+.logo-principal{
+
+width:340px;
+max-width:90%;
+
+object-fit:contain;
+
+background:transparent !important;
+mix-blend-mode:normal;
+
+filter:
+drop-shadow(0 0 15px rgba(255,255,255,0.25))
+drop-shadow(0 0 25px rgba(0,102,255,0.35));
+
+animation:flutuar 3s ease-in-out infinite;
+}
+
+@keyframes flutuar{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
 }
 
 /* MENU */
@@ -119,48 +164,6 @@ margin-top:3px;
 padding:70px 20px;
 text-align:center;
 }
-
-/* LOGO PRINCIPAL */
-
-.hero-logo{
-display:flex;
-justify-content:center;
-align-items:center;
-margin-bottom:30px;
-}
-
-.logo-principal{
-width:320px;
-max-width:90%;
-
-object-fit:contain;
-
-filter:
-drop-shadow(0 0 15px rgba(255,255,255,0.25))
-drop-shadow(0 0 25px rgba(0,102,255,0.35));
-
-animation:flutuar 3s ease-in-out infinite;
-
-background:none !important;
-}
-
-@keyframes flutuar{
-
-0%{
-transform:translateY(0px);
-}
-
-50%{
-transform:translateY(-8px);
-}
-
-100%{
-transform:translateY(0px);
-}
-
-}
-
-/* TITULO */
 
 .hero h1{
 font-size:82px;
@@ -457,7 +460,8 @@ width:220px;
 <div class="topo">
 
 <img 
-src="https://portal-rh.dpvitoriasuper.workers.dev/logo-vitoria-sem-fundo.png?v=10"
+src="https://i.postimg.cc/FKxz3mpq/logo-vitoria-sem-fundo.png"
+alt="Vitória Supermercados"
 class="logo-topo"
 >
 
@@ -488,7 +492,7 @@ class="logo-topo"
 <div class="hero-logo">
 
 <img 
-src="https://portal-rh.dpvitoriasuper.workers.dev/logo-vitoria-sem-fundo.png?v=10"
+src="https://i.postimg.cc/FKxz3mpq/logo-vitoria-sem-fundo.png"
 alt="Vitória Supermercados"
 class="logo-principal"
 >
