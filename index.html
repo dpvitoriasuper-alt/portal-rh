@@ -966,6 +966,123 @@ footer.footer-final{
 </footer>
 
 </div>
+<script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbwd_niFvRjSA_bZ20Gj5DeGoigEeGcwj7cR1WhpS1HYsI-xbhZkaWFKOJ1eRP6CZg1n/exec";
+
+async function carregarPortal(){
+
+  try{
+
+    const resposta = await fetch(API_URL);
+    const dados = await resposta.json();
+
+    console.log("DADOS DO PORTAL:", dados);
+
+    carregarAvisos(dados.AVISOS);
+    carregarAniversariantes(dados.ANIVERSARIANTES);
+    carregarDestaque(dados.DESTAQUE);
+
+  }catch(erro){
+
+    console.error("Erro ao carregar portal:", erro);
+
+  }
+
+}
+
+/* AVISOS */
+
+function carregarAvisos(lista){
+
+  if(!lista || lista.length === 0) return;
+
+  const cards = document.querySelectorAll(".notice");
+
+  lista.forEach((item,index)=>{
+
+    if(cards[index]){
+
+      const titulo = cards[index].querySelector(".notice-top h3");
+      const descricao = cards[index].querySelector(".notice-top p");
+      const tituloBaixo = cards[index].querySelector(".notice-body h4");
+      const textoBaixo = cards[index].querySelector(".notice-body p");
+      const data = cards[index].querySelector(".date");
+
+      titulo.innerHTML = item.TITULO || "";
+      descricao.innerHTML = item.DESCRICAO || "";
+
+      tituloBaixo.innerHTML = item.TITULO || "";
+      textoBaixo.innerHTML = item.DESCRICAO || "";
+
+      data.innerHTML = "📅 " + (item.DATA || "");
+
+    }
+
+  });
+
+}
+
+/* ANIVERSARIANTES */
+
+function carregarAniversariantes(lista){
+
+  if(!lista || lista.length === 0) return;
+
+  const container = document.querySelector(".people");
+
+  container.innerHTML = "";
+
+  lista.forEach(item=>{
+
+    container.innerHTML += `
+    
+      <div class="person">
+
+        <div class="person-left">
+
+          <img src="${item.FOTO || 'https://randomuser.me/api/portraits/men/1.jpg'}">
+
+          ${item.NOME}
+
+        </div>
+
+        <span>${item.DATA}</span>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+/* DESTAQUE */
+
+function carregarDestaque(lista){
+
+  if(!lista || lista.length === 0) return;
+
+  const destaque = lista[0];
+
+  const avatar = document.querySelector(".avatar");
+  const nome = document.querySelector(".highlight h3");
+  const texto = document.querySelector(".highlight p");
+
+  if(destaque.FOTO){
+
+    avatar.style.backgroundImage = `url('${destaque.FOTO}')`;
+
+  }
+
+  nome.innerHTML = destaque.NOME || "";
+  texto.innerHTML = destaque.TEXTO || "";
+
+}
+
+carregarPortal();
+
+</script>
 
 </body>
 </html>
