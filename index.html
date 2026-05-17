@@ -131,15 +131,39 @@ nav a:hover{
   margin-top:18px;
   border-radius:26px;
   overflow:hidden;
-  height:410px;
+  height:430px;
   position:relative;
   display:flex;
   align-items:center;
+
   background:
-    linear-gradient(90deg,rgba(0,0,0,.95) 0%,rgba(0,0,0,.78) 34%,rgba(0,0,0,.18) 100%),
-    url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1800&auto=format&fit=crop');
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.92) 0%,
+      rgba(0,0,0,.76) 35%,
+      rgba(0,0,0,.18) 100%
+    ),
+    url('fachada-vitoria.png');
+
   background-size:cover;
   background-position:center;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      130deg,
+      rgba(255,190,0,.22),
+      transparent 24%,
+      transparent 70%,
+      rgba(0,81,255,.14)
+    );
+
+  backdrop-filter:blur(.5px);
 }
 
 .hero::before{
