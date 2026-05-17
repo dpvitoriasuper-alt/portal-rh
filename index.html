@@ -34,31 +34,37 @@ width:100%;
 height:100%;
 top:0;
 left:0;
+
 background:
 linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.88)),
 url('https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2000&auto=format&fit=crop');
 
 background-size:cover;
 background-position:center;
+
 z-index:-1;
 }
 
-/* MENU */
+/* TOPO */
 
 .topo{
 position:sticky;
 top:0;
 z-index:999;
-backdrop-filter:blur(18px);
-background:rgba(0,0,0,0.55);
-border-bottom:1px solid rgba(255,255,255,0.08);
-
-padding:12px 25px;
 
 display:flex;
-align-items:center;
 justify-content:space-between;
+align-items:center;
+
+padding:15px 30px;
+
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(15px);
+
+border-bottom:1px solid rgba(255,255,255,0.08);
 }
+
+/* LOGO TOPO */
 
 .logo-topo{
 height:70px;
@@ -70,12 +76,11 @@ object-fit:contain;
 .menu{
 display:flex;
 gap:25px;
-align-items:center;
 }
 
 .menu a{
-color:white;
 text-decoration:none;
+color:white;
 font-weight:500;
 transition:0.3s;
 }
@@ -84,27 +89,28 @@ transition:0.3s;
 color:#ffd700;
 }
 
-/* RELOGIO */
+/* RELÓGIO */
 
 .relogio{
 background:linear-gradient(135deg,#001f7a,#0066ff);
-padding:15px 25px;
-border-radius:20px;
+
+padding:12px 22px;
+
+border-radius:18px;
+
+box-shadow:0 0 20px rgba(0,102,255,0.35);
+
 text-align:center;
-
-border:1px solid rgba(255,255,255,0.15);
-
-box-shadow:0 0 25px rgba(0,102,255,0.35);
 }
 
 #hora{
-font-size:34px;
+font-size:28px;
 font-weight:700;
 }
 
 #data{
-font-size:14px;
-margin-top:5px;
+font-size:13px;
+margin-top:3px;
 }
 
 /* HERO */
@@ -114,16 +120,28 @@ padding:70px 20px;
 text-align:center;
 }
 
-.logo-central{
-width:220px;
-max-width:80%;
-margin-bottom:25px;
+/* LOGO PRINCIPAL */
+
+.hero-logo{
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:30px;
+}
+
+.logo-principal{
+width:320px;
+max-width:90%;
+
+object-fit:contain;
 
 filter:
-drop-shadow(0 0 25px rgba(255,255,255,0.15))
-drop-shadow(0 0 30px rgba(0,102,255,0.35));
+drop-shadow(0 0 15px rgba(255,255,255,0.25))
+drop-shadow(0 0 25px rgba(0,102,255,0.35));
 
-animation:flutuar 4s ease-in-out infinite;
+animation:flutuar 3s ease-in-out infinite;
+
+background:none !important;
 }
 
 @keyframes flutuar{
@@ -133,7 +151,7 @@ transform:translateY(0px);
 }
 
 50%{
-transform:translateY(-10px);
+transform:translateY(-8px);
 }
 
 100%{
@@ -141,6 +159,8 @@ transform:translateY(0px);
 }
 
 }
+
+/* TITULO */
 
 .hero h1{
 font-size:82px;
@@ -161,29 +181,32 @@ color:#ddd;
 /* MURAL */
 
 .mural{
-margin:20px auto;
 width:95%;
+margin:auto;
+
+padding:18px;
 
 background:rgba(255,255,255,0.06);
 
-backdrop-filter:blur(10px);
+backdrop-filter:blur(12px);
 
-padding:18px;
 border-radius:20px;
 
 overflow:hidden;
 
-border:1px solid rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.08);
 }
 
 .marquee{
 display:flex;
 gap:60px;
+
 white-space:nowrap;
 
 animation:rolar 18s linear infinite;
 
 font-weight:600;
+
 color:#ffd700;
 }
 
@@ -204,8 +227,10 @@ transform:translateX(-100%);
 .container{
 width:95%;
 max-width:1500px;
+
 margin:auto;
-padding:30px 0;
+
+padding:35px 0;
 }
 
 /* GRID */
@@ -213,6 +238,7 @@ padding:30px 0;
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
 gap:25px;
 }
 
@@ -243,14 +269,14 @@ box-shadow:0 15px 40px rgba(255,215,0,0.25);
 }
 
 .card h2{
-font-size:36px;
-margin-bottom:20px;
+font-size:34px;
+margin-bottom:18px;
 color:#ffd700;
 }
 
 .card p{
-line-height:1.8;
 font-size:18px;
+line-height:1.8;
 color:#ddd;
 }
 
@@ -258,15 +284,21 @@ color:#ddd;
 
 .btn{
 display:inline-block;
-margin-top:25px;
-padding:16px 28px;
-border-radius:16px;
+
+margin-top:22px;
+
+padding:14px 26px;
+
+border-radius:14px;
 
 background:linear-gradient(135deg,#ffd700,#ffcc00);
 
 color:black;
+
 font-weight:700;
+
 text-decoration:none;
+
 transition:0.3s;
 }
 
@@ -279,20 +311,22 @@ transform:scale(1.05);
 .campanhas{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
 gap:20px;
-margin-top:25px;
+
+margin-top:20px;
 }
 
 .campanha{
 padding:25px;
+
 border-radius:22px;
+
 min-height:220px;
 
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
 }
 
 .c1{
@@ -311,12 +345,36 @@ background:linear-gradient(135deg,#001f7a,#0066ff);
 background:linear-gradient(135deg,#8a2be2,#ff1493);
 }
 
-.campanha h3{
-font-size:30px;
+/* ANIVERSARIANTES */
+
+.aniversariantes{
+display:flex;
+flex-direction:column;
+gap:15px;
 }
 
-.campanha p{
-margin-top:15px;
+.pessoa{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:15px;
+
+border-radius:16px;
+
+background:rgba(255,255,255,0.05);
+}
+
+.data-aniver{
+background:#ffd700;
+
+color:black;
+
+padding:8px 14px;
+
+border-radius:10px;
+
+font-weight:700;
 }
 
 /* GALERIA */
@@ -324,19 +382,21 @@ margin-top:15px;
 .galeria{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
 gap:20px;
+
 margin-top:20px;
 }
 
 .galeria img{
 width:100%;
 height:240px;
+
 object-fit:cover;
 
 border-radius:20px;
 
 transition:0.4s;
-cursor:pointer;
 
 border:2px solid rgba(255,255,255,0.08);
 }
@@ -347,52 +407,18 @@ transform:scale(1.03);
 border-color:#ffd700;
 }
 
-/* ANIVERSARIANTES */
-
-.aniversariantes{
-display:flex;
-flex-direction:column;
-gap:18px;
-}
-
-.pessoa{
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-background:rgba(255,255,255,0.05);
-
-padding:15px;
-
-border-radius:16px;
-}
-
-.nome{
-font-size:18px;
-font-weight:600;
-}
-
-.data-aniver{
-background:#ffd700;
-color:black;
-
-padding:10px 15px;
-
-border-radius:12px;
-
-font-weight:700;
-}
-
 /* FOOTER */
 
 footer{
 margin-top:50px;
+
 padding:30px;
+
 text-align:center;
 
-border-top:1px solid rgba(255,255,255,0.1);
-
 background:#02030a;
+
+border-top:1px solid rgba(255,255,255,0.08);
 }
 
 footer p{
@@ -412,7 +438,11 @@ font-size:52px;
 }
 
 #hora{
-font-size:24px;
+font-size:22px;
+}
+
+.logo-principal{
+width:220px;
 }
 
 }
@@ -422,11 +452,14 @@ font-size:24px;
 
 <body>
 
-<!-- MENU -->
+<!-- TOPO -->
 
 <div class="topo">
 
-<img src="logo-vitoria-sem-fundo.png" class="logo-topo">
+<img 
+src="https://portal-rh.dpvitoriasuper.workers.dev/logo-vitoria-sem-fundo.png?v=10"
+class="logo-topo"
+>
 
 <div class="menu">
 
@@ -452,7 +485,15 @@ font-size:24px;
 
 <section class="hero">
 
-<img src="logo-vitoria-sem-fundo.png" class="logo-central">
+<div class="hero-logo">
+
+<img 
+src="https://portal-rh.dpvitoriasuper.workers.dev/logo-vitoria-sem-fundo.png?v=10"
+alt="Vitória Supermercados"
+class="logo-principal"
+>
+
+</div>
 
 <h1>PORTAL <span>RH</span></h1>
 
@@ -493,7 +534,7 @@ Informação, comunicação e valorização para nosso time.
 <h2>📢 Comunicados</h2>
 
 <p>
-Fique por dentro de avisos, comunicados e informações importantes do RH.
+Fique por dentro de avisos e informações importantes do RH.
 </p>
 
 <a class="btn" href="#">
@@ -532,56 +573,23 @@ Abrir treinamentos
 
 <div class="card">
 
-<h2>💼 Sistema RH</h2>
-
-<p>
-Acesse rapidamente o sistema interno do RH.
-</p>
-
-<a class="btn" href="#">
-Abrir sistema
-</a>
-
-</div>
-
-<div class="card">
-
-<h2>❤️ Saúde & Bem-estar</h2>
-
-<p>
-Conteúdos e ações voltadas à saúde emocional e qualidade de vida.
-</p>
-
-<a class="btn" href="#">
-Saiba mais
-</a>
-
-</div>
-
-<div class="card">
-
 <h2>🎉 Aniversariantes</h2>
 
 <div class="aniversariantes">
 
 <div class="pessoa">
-<div class="nome">Marcos Silva</div>
+<span>Marcos Silva</span>
 <div class="data-aniver">17 MAI</div>
 </div>
 
 <div class="pessoa">
-<div class="nome">Juliana Costa</div>
+<span>Juliana Costa</span>
 <div class="data-aniver">20 MAI</div>
 </div>
 
 <div class="pessoa">
-<div class="nome">Carlos Lima</div>
+<span>Carlos Lima</span>
 <div class="data-aniver">22 MAI</div>
-</div>
-
-<div class="pessoa">
-<div class="nome">Fernanda Araújo</div>
-<div class="data-aniver">25 MAI</div>
 </div>
 
 </div>
@@ -602,13 +610,9 @@ Saiba mais
 
 <h3>Campanha do Agasalho</h3>
 
-<p>
-Doe amor e calor para quem precisa.
-</p>
+<p>Doe amor e calor para quem precisa.</p>
 
-<a class="btn" href="#">
-Saiba mais
-</a>
+<a class="btn" href="#">Saiba mais</a>
 
 </div>
 
@@ -616,13 +620,9 @@ Saiba mais
 
 <h3>Maio Verde</h3>
 
-<p>
-Mês da conscientização da saúde mental.
-</p>
+<p>Mês da conscientização da saúde mental.</p>
 
-<a class="btn" href="#">
-Saiba mais
-</a>
+<a class="btn" href="#">Saiba mais</a>
 
 </div>
 
@@ -630,13 +630,9 @@ Saiba mais
 
 <h3>Olho na Validade</h3>
 
-<p>
-Verifique sempre os produtos e garanta qualidade.
-</p>
+<p>Verifique sempre os produtos.</p>
 
-<a class="btn" href="#">
-Saiba mais
-</a>
+<a class="btn" href="#">Saiba mais</a>
 
 </div>
 
@@ -644,13 +640,9 @@ Saiba mais
 
 <h3>Dia das Mães</h3>
 
-<p>
-Homenagem a quem sempre cuida da gente.
-</p>
+<p>Homenagem especial às mães.</p>
 
-<a class="btn" href="#">
-Saiba mais
-</a>
+<a class="btn" href="#">Saiba mais</a>
 
 </div>
 
@@ -662,7 +654,7 @@ Saiba mais
 
 <div class="card" style="margin-top:30px;">
 
-<h2>📸 Galeria de Fotos</h2>
+<h2>📸 Galeria</h2>
 
 <div class="galeria">
 
