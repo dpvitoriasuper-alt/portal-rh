@@ -681,6 +681,96 @@ footer.footer-final{
     height:65px;
   }
 }
+  .galeria-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  z-index:99999;
+  display:none;
+  overflow:auto;
+  padding:30px;
+}
+
+.galeria-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.galeria-header h2{
+  color:#fff;
+  font-size:32px;
+}
+
+.galeria-header button{
+  background:#111;
+  border:1px solid #ffcc00;
+  color:#fff;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:20px;
+}
+
+.galeria-filtros{
+  display:flex;
+  gap:15px;
+  margin-bottom:25px;
+  flex-wrap:wrap;
+}
+
+.galeria-filtros select{
+  background:#111;
+  border:1px solid #333;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:12px;
+  font-size:15px;
+}
+
+.galeria-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:18px;
+}
+
+.galeria-item{
+  height:240px;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  background-size:cover;
+  background-position:center;
+  border:2px solid rgba(255,204,0,.3);
+}
+
+.galeria-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),transparent);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:18px;
+}
+
+.galeria-overlay h3{
+  color:#fff;
+  font-size:20px;
+  margin-bottom:6px;
+}
+
+.galeria-overlay p{
+  color:#ddd;
+  font-size:14px;
+}
+
+.center-btn{
+  margin-top:18px;
+  width:100%;
+}
 </style>
 </head>
 
@@ -937,7 +1027,9 @@ footer.footer-final{
       <div></div>
       <div></div>
     </div>
-
+<button onclick="abrirGaleria()" class="btn center-btn">
+  Ver todas as fotos ›
+</button>
   </div>
 
   <div class="panel gloss highlight">
@@ -1156,6 +1248,31 @@ function carregarGaleria(lista){
 carregarPortal();
 
 </script>
+<div class="galeria-modal" id="galeriaModal">
+
+  <div class="galeria-header">
+
+    <h2>📸 Galeria da Rede</h2>
+
+    <button onclick="fecharGaleria()">✕</button>
+
+  </div>
+
+  <div class="galeria-filtros">
+
+    <select id="filtroLoja" onchange="filtrarGaleria()">
+      <option value="">Todas as lojas</option>
+    </select>
+
+    <select id="filtroCategoria" onchange="filtrarGaleria()">
+      <option value="">Todas categorias</option>
+    </select>
+
+  </div>
+
+  <div class="galeria-grid" id="galeriaGrid"></div>
+
+</div>
 
 </body>
 </html>
