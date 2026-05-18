@@ -402,26 +402,42 @@ background-position:center;
 
 .people{
   margin-top:14px;
+  max-height:330px;
+  overflow-y:auto;
+  padding-right:8px;
 }
 
 .person{
-  display:flex;
-  justify-content:space-between;
+  display:grid;
+  grid-template-columns:1fr 55px;
   align-items:center;
-  padding:12px 0;
+  gap:10px;
+  padding:9px 0;
   border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .person-left{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
+  min-width:0;
+  font-size:13px;
+  font-weight:700;
+  line-height:1.25;
 }
 
 .person img{
-  width:34px;
-  height:34px;
+  width:32px;
+  height:32px;
   border-radius:50%;
+  object-fit:cover;
+  flex-shrink:0;
+}
+
+.person > span{
+  text-align:right;
+  font-size:14px;
+  font-weight:800;
 }
 
 .gallery{
