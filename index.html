@@ -1030,7 +1030,7 @@ function carregarAvisos(lista){
       tituloBaixo.innerHTML = item.TITULO || "";
       textoBaixo.innerHTML = item.DESCRICAO || "";
 
-      data.innerHTML = "📅 " + (item.DATA || "");
+      data.innerHTML = "📅 " + (item.DATA ? new Date(item.DATA).toLocaleDateString("pt-BR") : "");
 
     }
 
@@ -1062,7 +1062,7 @@ function carregarAniversariantes(lista){
 
         </div>
 
-        <span>${item.DATA}</span>
+        <span>${formatarData(item.DATA)}</span>
 
       </div>
 
