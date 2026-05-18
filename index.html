@@ -1097,7 +1097,31 @@ function carregarDestaque(lista){
   texto.innerHTML = destaque.TEXTO || "";
 
 }
+function carregarGaleria(lista){
 
+  if(!lista || lista.length === 0) return;
+
+  const fotos = document.querySelectorAll(".gallery div");
+
+  const galeriaAtiva = lista
+    .filter(item => item.ATIVO === "SIM")
+    .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM))
+    .slice(0,6);
+
+  galeriaAtiva.forEach((item,index)=>{
+
+    if(fotos[index] && item.IMAGEM){
+
+      fotos[index].style.backgroundImage = `url('${item.IMAGEM}')`;
+      fotos[index].style.backgroundSize = "cover";
+      fotos[index].style.backgroundPosition = "center";
+      fotos[index].title = `${item.TITULO || ""} - ${item.LOJA || ""}`;
+
+    }
+
+  });
+
+}
 carregarPortal();
 
 </script>
