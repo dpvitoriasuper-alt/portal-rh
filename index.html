@@ -1223,6 +1223,9 @@ function carregarDestaque(lista){
 function carregarGaleria(lista){
 
   if(!lista || lista.length === 0) return;
+  galeriaCompleta = lista
+  .filter(item => item.ATIVO === "SIM")
+  .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM));
 
   const fotos = document.querySelectorAll(".gallery div");
 
