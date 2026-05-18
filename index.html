@@ -1223,18 +1223,45 @@ function carregarDestaque(lista){
 function carregarGaleria(lista){
 
   if(!lista || lista.length === 0) return;
+
   galeriaCompleta = lista
-  .filter(item => item.ATIVO === "SIM")
-  .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM));
+    .filter(item => item.ATIVO === "SIM")
+    .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM));
 
   const fotos = document.querySelectorAll(".gallery div");
 
-  const galeriaAtiva = lista
-    .filter(item => item.ATIVO === "SIM")
-    .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM))
-    .slice(0,6);
+  // mistura as fotos por loja
+  const porLoja = {};
 
-  galeriaAtiva.forEach((item,index)=>{
+  galeriaCompleta.forEach(item => {
+    if(!porLoja[item.LOJA]){
+      porLoja[item.LOJA] = [];
+    }
+    porLoja[item.LOJA].push(item);
+  });
+
+  const lojas = Object.keys(porLoja);
+  const destaque = [];
+
+  let rodada = 0;
+
+  while(destaque.length < 6){
+
+    let adicionou = false;
+
+    lojas.forEach(loja => {
+      if(porLoja[loja][rodada] && destaque.length < 6){
+        destaque.push(porLoja[loja][rodada]);
+        adicionou = true;
+      }
+    });
+
+    if(!adicionou) break;
+
+    rodada++;
+  }
+
+  destaque.forEach((item,index)=>{
 
     if(fotos[index] && item.IMAGEM){
 
