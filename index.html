@@ -1245,6 +1245,80 @@ function carregarGaleria(lista){
   });
 
 }
+  let galeriaCompleta = [];
+
+function abrirGaleria(){
+  document.getElementById("galeriaModal").style.display = "block";
+  renderizarGaleria(galeriaCompleta);
+  preencherFiltros();
+}
+
+function fecharGaleria(){
+  document.getElementById("galeriaModal").style.display = "none";
+}
+
+function preencherFiltros(){
+
+  const lojas = [...new Set(galeriaCompleta.map(item => item.LOJA).filter(Boolean))];
+  const categorias = [...new Set(galeriaCompleta.map(item => item.CATEGORIA).filter(Boolean))];
+
+  const filtroLoja = document.getElementById("filtroLoja");
+  const filtroCategoria = document.getElementById("filtroCategoria");
+
+  filtroLoja.innerHTML =
+    '<option value="">Todas as lojas</option>';
+
+  filtroCategoria.innerHTML =
+    '<option value="">Todas categorias</option>';
+
+  lojas.forEach(loja=>{
+    filtroLoja.innerHTML += `<option value="${loja}">${loja}</option>`;
+  });
+
+  categorias.forEach(cat=>{
+    filtroCategoria.innerHTML += `<option value="${cat}">${cat}</option>`;
+  });
+}
+
+function filtrarGaleria(){
+
+  const loja = document.getElementById("filtroLoja").value;
+  const categoria = document.getElementById("filtroCategoria").value;
+
+  let filtrada = galeriaCompleta;
+
+  if(loja){
+    filtrada = filtrada.filter(item => item.LOJA === loja);
+  }
+
+  if(categoria){
+    filtrada = filtrada.filter(item => item.CATEGORIA === categoria);
+  }
+
+  renderizarGaleria(filtrada);
+}
+
+function renderizarGaleria(lista){
+
+  const grid = document.getElementById("galeriaGrid");
+
+  grid.innerHTML = "";
+
+  lista.forEach(item=>{
+
+    grid.innerHTML += `
+      <div class="galeria-item"
+      style="background-image:url('${item.IMAGEM}')">
+
+        <div class="galeria-overlay">
+          <h3>${item.TITULO || ""}</h3>
+          <p>${item.LOJA || ""}</p>
+        </div>
+
+      </div>
+    `;
+  });
+}
 carregarPortal();
 
 </script>
