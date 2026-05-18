@@ -1024,14 +1024,13 @@ function carregarAvisos(lista){
       const textoBaixo = cards[index].querySelector(".notice-body p");
       const data = cards[index].querySelector(".date");
 
-      titulo.innerHTML = item.TITULO || "";
-      descricao.innerHTML = item.DESCRICAO || "";
+    titulo.innerHTML = item.TITULO || "";
+descricao.innerHTML = item.SUBTITULO || "";
 
-      tituloBaixo.innerHTML = item.TITULO || "";
-      textoBaixo.innerHTML = item.DESCRICAO || "";
+tituloBaixo.innerHTML = "";
+textoBaixo.innerHTML = "<i>" + (item.DESCRICAO || "") + "</i>";
 
-      data.innerHTML = "📅 " + (item.DATA ? new Date(item.DATA).toLocaleDateString("pt-BR") : "");
-
+data.innerHTML = "📅 " + (item.DATA ? new Date(item.DATA).toLocaleDateString("pt-BR") : "");
     }
 
   });
