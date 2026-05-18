@@ -327,32 +327,52 @@ background-position:center;
   height:250px;
   padding:26px;
   position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  color:#fff !important;
 }
 
-.notice-top h3{
-  position: relative;
-  z-index: 2;
-  font-size: 34px;
-  line-height: 1.05;
-  font-weight: 900;
-  color: white;
-}
-
-.notice-top em{
-  color: white;
-  font-style: italic;
-  font-weight: 600;
-}
-.notice-top em{
-   color: white;
-   font-style: italic;
-   font-weight: 600;
-}
 .notice-top::after{
   content:"";
   position:absolute;
   inset:0;
   background:linear-gradient(135deg,rgba(255,255,255,.24),transparent 45%);
+}
+
+.notice-top h3,
+.notice-top h3 *,
+.notice-top p,
+.notice-top p *,
+.notice-top em{
+  color:#fff !important;
+}
+
+.notice-top h3{
+  position:relative;
+  z-index:2;
+  font-size:36px;
+  line-height:1.05;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.notice-top p{
+  position:relative;
+  z-index:2;
+  font-size:18px;
+  line-height:1.35;
+  font-weight:600;
+  margin:0;
+}
+
+.notice-top em{
+  display:block;
+  margin-top:22px;
+  font-size:18px;
+  line-height:1.35;
+  font-style:italic;
+  font-weight:800;
 }
 
 .rosa{
@@ -369,17 +389,25 @@ background-position:center;
 }
 
 .notice-body{
-  background:rgba(0,0,0,.85);
-  padding:18px;
+  min-height:145px;
+  background:rgba(0,0,0,.88);
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 
 .notice-body h4{
-  margin-bottom:8px;
+  margin-bottom:10px;
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
 }
 
 .notice-body p{
-  color:#ddd;
-  line-height:1.45;
+  color:#fff;
+  font-size:16px;
+  line-height:1.35;
 }
 
 .date{
