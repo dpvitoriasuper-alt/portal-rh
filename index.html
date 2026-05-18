@@ -1023,8 +1023,12 @@ function carregarAvisos(lista){
       const tituloBaixo = cards[index].querySelector(".notice-body h4");
       const textoBaixo = cards[index].querySelector(".notice-body p");
       const data = cards[index].querySelector(".date");
+      const topo = cards[index].querySelector(".notice-top");
 
     titulo.innerHTML = item.TITULO || "";
+      if(item.FUNDO){
+   topo.style.background = item.FUNDO;
+}
 
 descricao.innerHTML = `
 ${item.SUBTITULO || ""}
