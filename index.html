@@ -1056,21 +1056,13 @@ function carregarAniversariantes(lista){
   lista.forEach(item=>{
 
     container.innerHTML += `
-    
       <div class="person">
-
         <div class="person-left">
-
-          <img src="${item.FOTO || 'https://randomuser.me/api/portraits/men/1.jpg'}">
-
-          ${item.NOME}
-
+          <img src="${item.FOTO || 'https://i.pravatar.cc/150?img=12'}">
+          <span>${item.NOME || ""}</span>
         </div>
-
-        <span>${formatarData(item.DATA)}</span>
-
+        <span>${item.DATA || ""}</span>
       </div>
-
     `;
 
   });
@@ -1090,9 +1082,7 @@ function carregarDestaque(lista){
   const texto = document.querySelector(".highlight p");
 
   if(destaque.FOTO){
-
     avatar.style.backgroundImage = `url('${destaque.FOTO}')`;
-
   }
 
   nome.innerHTML = destaque.NOME || "";
