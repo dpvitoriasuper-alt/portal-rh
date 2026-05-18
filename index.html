@@ -973,7 +973,7 @@ async function carregarPortal(){
 
   try{
 
-    const resposta = await fetch(API_URL);
+    const resposta = await fetch(API_URL + "?v=" + new Date().getTime());
     const dados = await resposta.json();
 
     console.log("DADOS DO PORTAL:", dados);
