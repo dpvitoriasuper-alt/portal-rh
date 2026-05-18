@@ -1025,10 +1025,16 @@ function carregarAvisos(lista){
       const data = cards[index].querySelector(".date");
 
     titulo.innerHTML = item.TITULO || "";
-descricao.innerHTML = item.SUBTITULO || "";
 
-tituloBaixo.innerHTML = "";
-textoBaixo.innerHTML = "<i>" + (item.DESCRICAO || "") + "</i>";
+descricao.innerHTML = `
+${item.SUBTITULO || ""}
+<br><br>
+<em>${item.FRASE || ""}</em>
+`;
+
+tituloBaixo.innerHTML = item.TITULO_BAIXO || "";
+
+textoBaixo.innerHTML = item.DESCRICAO_BAIXO || "";
 
 data.innerHTML = "📅 " + (item.DATA ? new Date(item.DATA).toLocaleDateString("pt-BR") : "");
     }
