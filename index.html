@@ -771,52 +771,6 @@ footer.footer-final{
   margin-top:18px;
   width:100%;
 }
-  .modal-rh{
-  display:none;
-  position:fixed;
-  z-index:9999;
-  left:0;
-  top:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.8);
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-content-rh{
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  width:90%;
-  max-width:400px;
-  border:2px solid #ffcc00;
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-}
-
-.modal-content-rh h2{
-  color:#ffcc00;
-  text-align:center;
-}
-
-.modal-content-rh a{
-  background:#25D366;
-  color:white;
-  padding:14px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:bold;
-  text-align:center;
-}
-
-.fechar-rh{
-  color:white;
-  font-size:30px;
-  cursor:pointer;
-  text-align:right;
-}
 </style>
 </head>
 
@@ -940,16 +894,6 @@ footer.footer-final{
   </div>
 
 </section>
-  </section
-  <div class="quick-card glass" onclick="abrirRH()">
-    <div class="icon">📞</div>
-    <h3>Contatos RH</h3>
-    <p>Fale com o RH sempre que precisar</p>
-</div>
-
-</section>
-
-<div class="row-title">
 
 <div class="row-title">
 
@@ -1163,13 +1107,7 @@ footer.footer-final{
 </footer>
 
 </div>
-<function abrirRH(){
-  document.getElementById("modal-rh").style.display = "flex";
-}
-
-function fecharRH(){
-  document.getElementById("modal-rh").style.display = "none";
-}>
+<script>
 
 const API_URL = "https://script.google.com/macros/s/AKfycbwd_niFvRjSA_bZ20Gj5DeGoigEeGcwj7cR1WhpS1HYsI-xbhZkaWFKOJ1eRP6CZg1n/exec";
 
@@ -1439,44 +1377,6 @@ carregarPortal();
   <div class="galeria-grid" id="galeriaGrid"></div>
 
 </div>
-<div id="modal-rh" class="modal-rh">
 
-  <div class="modal-content-rh">
-
-    <span class="fechar-rh" onclick="fecharRH()">&times;</span>
-
-    <h2>📞 Contatos RH</h2>
-
-    <a href="https://wa.me/5592981708226" target="_blank">
-      🏬 Loja Centro
-    </a>
-
-    <a href="https://wa.me/5592982352382" target="_blank">
-      🏬 Loja São José
-    </a>
-
-    <a href="https://wa.me/5592982554733" target="_blank">
-      🏬 Loja Coroado
-    </a>
-
-    <a href="https://wa.me/5592982285909" target="_blank">
-      🏬 Loja Grande Circular
-    </a>
-
-    <a href="https://wa.me/5592993454607" target="_blank">
-      🏬 Loja Japiim
-    </a>
-
-    <a href="https://wa.me/5592988170568" target="_blank">
-      🏬 Loja Turismo
-    </a>
-
-    <a href="https://wa.me/5592992772611" target="_blank">
-      🏬 Loja Torquato
-    </a>
-
-  </div>
-
-</div>
 </body>
 </html>
