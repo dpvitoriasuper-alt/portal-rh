@@ -1711,6 +1711,84 @@ function fecharImagem(){
 function fecharNoticia(){
   document.getElementById("noticiaModal").style.display = "none";
 }
+  let documentosCompletos = [];
+
+function carregarDocumentos(lista){
+
+  const grid = document.getElementById("documentosGrid");
+  const filtros = document.getElementById("documentosFiltros");
+
+  if(!grid || !filtros) return;
+
+  documentosCompletos = (lista || [])
+    .filter(item => String(item.ATIVO || "").trim().toUpperCase() === "SIM")
+    .sort((a,b) => Number(a.ORDEM || 0) - Number(b.ORDEM || 0));
+
+  const categorias = [
+    ...new Set(documentosCompletos.map(item => item.CATEGORIA).filter(Boolean))
+  ];
+
+  filtros.innerHTML = `
+    <button class="doc-filtro ativo" onclick="filtrarDocumentos('', this)">Todos</button>
+  `;
+
+  categorias.forEach(cat=>{
+    filtros.innerHTML += `
+      <button class="doc-filtro" onclick="filtrarDocumentos('${cat}', this)">
+        ${cat}
+      </button>
+    `;
+  });
+
+  renderizarDocumentos(documentosCompletos);
+}
+
+function filtrarDocumentos(categoria, botao){
+
+  document.querySelectorAll(".doc-filtro").forEach(btn=>{
+    btn.classList.remove("ativo");
+  });
+
+  if(botao) botao.classList.add("ativo");
+
+  const filtrados = categoria
+    ? documentosCompletos.filter(item => item.CATEGORIA === categoria)
+    : documentosCompletos;
+
+  renderizarDocumentos(filtrados);
+}
+
+function renderizarDocumentos(lista){
+
+  const grid = document.getElementById("documentosGrid");
+
+  if(!lista || lista.length === 0){
+    grid.innerHTML = "<p>Nenhum documento encontrado.</p>";
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  lista.forEach(item=>{
+
+    grid.innerHTML += `
+      <a href="${item.LINK || "#"}" target="_blank" class="documento-card">
+
+        <div class="doc-icone">📄</div>
+
+        <div>
+          <small>${item.CATEGORIA || "Documento"}</small>
+          <h3>${item.TITULO || ""}</h3>
+          <p>${item.DESCRICAO || "Clique para visualizar o documento."}</p>
+
+          <span class="abrir-doc">📥 Abrir documento</span>
+        </div>
+
+      </a>
+    `;
+
+  });
+}
 carregarPortal();
 
 </script>
