@@ -1341,7 +1341,9 @@ function carregarDestaque(lista){
 
 }
  function carregarNoticias(lista){
-   console.log("NOTICIAS COMPLETAS:", lista);
+   function carregarNoticias(lista){
+
+  console.log("NOTICIAS COMPLETAS:", lista);
 
   const container = document.getElementById("noticiasGrid");
 
@@ -1368,24 +1370,28 @@ function carregarDestaque(lista){
     .slice(0,3)
     .forEach(item=>{
 
-    container.innerHTML += `
-  <div class="noticia-home-card gloss">
+      container.innerHTML += `
+        <div class="noticia-home-card gloss">
 
-    <div class="noticia-home-img"
-      style="background-image:url('${item.IMAGEM || ""}')">
-    </div>
+          <div class="noticia-home-img"
+            style="background-image:url('${item.IMAGEM || ""}')">
+          </div>
 
-    <div class="noticia-home-info">
-      <h3>${item.TITULO || ""}</h3>
-      <p>${item.RESUMO || ""}</p>
+          <div class="noticia-home-info">
+            <h3>${item.TITULO || ""}</h3>
+            <p>${item.RESUMO || ""}</p>
 
-      <span class="noticia-home-data">
-        📅 ${new Date(item.DATA).toLocaleDateString('pt-BR')}
-      </span>
-    </div>
+            <span class="noticia-home-data">
+              📅 ${new Date(item.DATA).toLocaleDateString('pt-BR')}
+            </span>
+          </div>
 
-  </div>
-`;}
+        </div>
+      `;
+
+    });
+
+}
 function carregarGaleria(lista){
 
   if(!lista || lista.length === 0) return;
