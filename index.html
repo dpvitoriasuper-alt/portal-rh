@@ -266,6 +266,62 @@ background-position:center;
   font-size:25px;
   font-weight:800;
 }
+  /* NOTÍCIAS HOME */
+
+.noticias-home{
+  margin-top:28px;
+}
+
+.noticias-home .row-title{
+  margin-top:0;
+}
+
+.noticias-home-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.noticia-home-card{
+  border-radius:22px;
+  overflow:hidden;
+  min-height:330px;
+}
+
+.noticia-home-img{
+  height:190px;
+  background:#222;
+  background-size:cover;
+  background-position:center;
+}
+
+.noticia-home-info{
+  padding:18px;
+}
+
+.noticia-home-info h3{
+  color:#ffc400;
+  font-size:21px;
+  margin-bottom:10px;
+}
+
+.noticia-home-info p{
+  color:#ddd;
+  line-height:1.45;
+}
+
+.noticia-home-data{
+  display:block;
+  margin-top:12px;
+  color:#ffc400;
+  font-weight:800;
+}
+
+@media(max-width:980px){
+  .noticias-home-grid{
+    grid-template-columns:1fr;
+  }
+}
 
 /* ACESSO RÁPIDO */
 
@@ -894,7 +950,24 @@ body:not(.carregando) .highlight {
   </div>
 
 </section>
+<section class="noticias-home">
 
+  <div class="row-title">
+    <h2 class="section-title">📰 Notícias da Rede Vitória</h2>
+    <a href="#" class="btn">Ver todas ›</a>
+  </div>
+
+  <div class="noticias-home-grid" id="noticiasGrid">
+    <div class="noticia-home-card gloss">
+      <div class="noticia-home-img"></div>
+      <div class="noticia-home-info">
+        <h3>Carregando notícias...</h3>
+        <p>Aguarde...</p>
+      </div>
+    </div>
+  </div>
+
+</section>
 <h2 class="section-title">
   ⚡ Acesso rápido
 </h2>
@@ -1168,6 +1241,7 @@ async function carregarPortal(){
     carregarAniversariantes(dados.ANIVERSARIANTES);
     carregarDestaque(dados.DESTAQUE);
     carregarGaleria(dados.GALERIA);
+    carregarNoticias(dados.NOTICIAS);
     
     document.body.classList.remove("carregando");
 
@@ -1264,6 +1338,39 @@ function carregarDestaque(lista){
 
   nome.innerHTML = destaque.NOME || "";
   texto.innerHTML = destaque.TEXTO || "";
+
+}
+  function carregarNoticias(lista){
+
+  if(!lista || lista.length === 0) return;
+
+  const container = document.getElementById("noticiasGrid");
+
+  if(!container) return;
+
+  container.innerHTML = "";
+
+  lista
+    .filter(item => item.ATIVO === "SIM")
+    .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM))
+    .slice(0,3)
+    .forEach(item=>{
+
+      container.innerHTML += `
+        <div class="noticia-home-card gloss">
+          <div class="noticia-home-img"
+            style="background-image:url('${item.IMAGEM || ""}')">
+          </div>
+
+          <div class="noticia-home-info">
+            <h3>${item.TITULO || ""}</h3>
+            <p>${item.RESUMO || ""}</p>
+            <span class="noticia-home-data">📅 ${item.DATA || ""}</span>
+          </div>
+        </div>
+      `;
+
+    });
 
 }
 function carregarGaleria(lista){
