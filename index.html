@@ -136,7 +136,7 @@ header{
   border-radius:24px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  gap:25px;
 }
 
 .logo{
@@ -153,11 +153,27 @@ header{
     drop-shadow(0 0 10px rgba(0,81,255,.45))
     drop-shadow(0 0 10px rgba(255,0,0,.35));
 }
+.topo-info{
+  flex:1;
+  text-align:center;
+  padding:10px 20px;
+}
 
+.empresa-status{
+  color:#fff;
+  font-size:15px;
+  line-height:2;
+  margin-bottom:8px;
+  font-weight:600;
+}
+
+.empresa-data{
+  color:#ddd;
+  font-size:14px;
+  font-weight:600;
+}
 nav{
-  display:flex;
-  gap:18px;
-  align-items:center;
+  display:none;
 }
 
 nav a{
@@ -383,6 +399,10 @@ background-position:center;
   text-align:center;
   padding:20px;
   transition:.25s;
+
+  text-decoration:none;
+  color:#fff;
+}
 }
 
 .quick-card:hover{
@@ -916,8 +936,6 @@ body:not(.carregando) .highlight {
 </style>
 </head>
 
-<body>
-
 <body class="carregando">
 
 <header class="gloss">
@@ -926,43 +944,29 @@ body:not(.carregando) .highlight {
     <img src="logo-vitoria.png" alt="Vitória Supermercados" class="logo-img">
   </div>
 
-  <nav>
-    <a class="active" href="#">
-      <span>🏠</span>
-      <p>Início</p>
-    </a>
+ <div class="topo-info">
 
-    <a href="#">
-      <span>📢</span>
-      <p>Avisos</p>
-    </a>
+  <div class="empresa-nome">
+    🏢 REDE VITÓRIA SUPERMERCADOS
+  </div>
 
-    <a href="#">
-      <span>🎂</span>
-      <p>Aniversariantes</p>
-    </a>
+  <div class="empresa-status">
+    👥 <span id="totalColaboradores">1.280</span> colaboradores
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    🏬 <span id="totalLojas">7</span> lojas
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    🎂 <span id="totalAniversariantes">12</span> aniversariantes este mês
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    📢 <span id="totalAvisos">3</span> comunicados ativos
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    📰 <span id="totalNoticias">5</span> notícias publicadas
+  </div>
 
-    <a href="#">
-      <span>❤️</span>
-      <p>Saúde</p>
-    </a>
+  <div class="empresa-data" id="dataHoraAtual">
+    Carregando data...
+  </div>
 
-    <a href="#">
-      <span>🎓</span>
-      <p>Treinamentos</p>
-    </a>
-
-    <a href="#">
-      <span>📁</span>
-      <p>Documentos</p>
-    </a>
-
-    <a href="#">
-      <span>📞</span>
-      <p>Contatos</p>
-    </a>
-  </nav>
-
+</div>
 </header>
 
 <section class="hero gloss">
@@ -992,7 +996,7 @@ body:not(.carregando) .highlight {
   </div>
 
 </section>
-<section class="noticias-home">
+<section id="noticias" class="noticias-home">
 
   <div class="row-title">
     <h2 class="section-title">📰 Notícias da Rede Vitória</h2>
@@ -1016,41 +1020,53 @@ body:not(.carregando) .highlight {
 
 <section class="quick-grid">
 
-  <div class="quick-card gloss">
+  <a href="#avisos" class="quick-card gloss">
     <div class="icon">📢</div>
     <h3>Avisos</h3>
-    <p>Veja os comunicados e novidades</p>
-  </div>
+    <p>Veja comunicados importantes</p>
+  </a>
 
-  <div class="quick-card gloss">
+  <a href="#aniversariantes" class="quick-card gloss">
     <div class="icon">🎂</div>
     <h3>Aniversariantes</h3>
-    <p>Confira quem faz aniversário</p>
-  </div>
+    <p>Confira os aniversariantes do mês</p>
+  </a>
 
-  <div class="quick-card gloss">
-    <div class="icon">❤️</div>
-    <h3>Saúde</h3>
-    <p>Campanhas e dicas de saúde</p>
-  </div>
+  <a href="#noticias" class="quick-card gloss">
+    <div class="icon">📰</div>
+    <h3>Notícias</h3>
+    <p>Novidades da Rede Vitória</p>
+  </a>
 
-  <div class="quick-card gloss">
-    <div class="icon">🎓</div>
-    <h3>Treinamentos</h3>
-    <p>Cursos e materiais para você</p>
-  </div>
+  <a href="#galeria" class="quick-card gloss">
+    <div class="icon">📸</div>
+    <h3>Galeria</h3>
+    <p>Fotos de ações e eventos</p>
+  </a>
+  
+<a href="#saude" class="quick-card gloss">
+  <div class="icon">❤️</div>
+  <h3>Saúde</h3>
+  <p>Campanhas e orientações</p>
+</a>
 
-  <div class="quick-card gloss">
-    <div class="icon">📁</div>
-    <h3>Documentos</h3>
-    <p>Políticas, normas e documentos úteis</p>
-  </div>
+  <a href="#documentos" class="quick-card gloss">
+  <div class="icon">📁</div>
+  <h3>Documentos</h3>
+  <p>Arquivos e formulários úteis</p>
+</a>
+  
+  <a href="#destaque" class="quick-card gloss">
+    <div class="icon">🏆</div>
+    <h3>Destaque</h3>
+    <p>Colaborador destaque do mês</p>
+  </a>
 
-  <div class="quick-card gloss">
+  <a href="#contatos" class="quick-card gloss">
     <div class="icon">📞</div>
     <h3>Contatos RH</h3>
-    <p>Fale com o RH sempre que precisar</p>
-  </div>
+    <p>Fale com o RH quando precisar</p>
+  </a>
 
 </section>
 
@@ -1066,7 +1082,7 @@ body:not(.carregando) .highlight {
 
 </div>
 
-<section class="notice-grid">
+<section id="avisos" class="notice-grid">
 
   <div class="notice gloss">
     <div class="notice-top rosa">
@@ -1120,7 +1136,7 @@ body:not(.carregando) .highlight {
 
 <section class="lower-grid">
 
-  <div class="panel gloss">
+  <div id="aniversariantes" class="panel gloss">
 
     <h2 class="section-title">
       🎂 Aniversariantes do mês
@@ -1172,7 +1188,7 @@ body:not(.carregando) .highlight {
 
   </div>
 
-  <div class="panel gloss">
+  <div id="galeria" class="panel gloss">
 
     <h2 class="section-title">
       📸 Galeria
@@ -1191,7 +1207,7 @@ body:not(.carregando) .highlight {
 </button>
   </div>
 
-  <div class="panel gloss highlight">
+  <div id="destaque" class="panel gloss highlight">
 
     <h2 class="section-title">
       🏆 Destaque do mês
@@ -1210,7 +1226,7 @@ body:not(.carregando) .highlight {
 
 </section>
 
-<section class="cta">
+<section id="contatos" class="cta">
 
   <div class="cta-left">
 
