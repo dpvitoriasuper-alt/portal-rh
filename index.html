@@ -1352,17 +1352,17 @@ function renderizarGaleria(lista){
 
   lista.forEach(item=>{
 
-    grid.innerHTML += `
-      <div class="galeria-item"
-      style="background-image:url('${item.IMAGEM}')">
+   grid.innerHTML += `
+  <div class="galeria-item"
+       onclick="abrirImagem('${item.IMAGEM}')"
+       style="background-image:url('${item.IMAGEM}')">
 
-        <div class="galeria-overlay">
-          <h3>${item.TITULO || ""}</h3>
-          <p>${item.LOJA || ""}</p>
-        </div>
+    <div class="galeria-overlay">
+      <p>📍 ${item.LOJA || ""}</p>
+    </div>
 
-      </div>
-    `;
+  </div>
+`;
   });
 }
 carregarPortal();
