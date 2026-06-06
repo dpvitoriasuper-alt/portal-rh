@@ -858,11 +858,6 @@ footer.footer-final{
 }
 
 .documentos-filtros{
-  display:flex;
-  gap:10px;
-}
-
-.documentos-filtros{
   display:flex !important;
   gap:12px !important;
   flex-wrap:wrap !important;
@@ -891,23 +886,6 @@ footer.footer-final{
   display:flex !important;
   flex-wrap:wrap !important;
   gap:20px !important;
-}
-
-.documento-card{
-  width:340px !important;
-  min-height:180px !important;
-
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:flex-start !important;
-  justify-content:flex-start !important;
-
-  gap:12px !important;
-  padding:22px !important;
-  border-radius:20px !important;
-
-  background:rgba(0,0,0,.65) !important;
-  border:1px solid rgba(255,196,0,.4) !important;
 }
 
 .documento-card{
@@ -1871,29 +1849,19 @@ function renderizarDocumentos(lista){
   lista.forEach(item=>{
 
     grid.innerHTML += `
-     <a href="${item.LINK || "#"}"
-   target="_blank"
-   class="documento-card"
-   style="
-      display:flex;
-      gap:16px;
-      padding:20px;
-      border:2px solid red;
-      background:#222;
-      border-radius:20px;
-      color:white;
-      text-decoration:none;
-   ">
+      <a href="${item.LINK || "#"}"
+         target="_blank"
+         class="documento-card">
 
         <div class="doc-icone">📄</div>
 
-        <div>
-          <small>${item.CATEGORIA || "Documento"}</small>
-          <h3>${item.TITULO || ""}</h3>
-          <p>${item.DESCRICAO || "Clique para visualizar o documento."}</p>
+        <h3>${item.TITULO || ""}</h3>
 
-          <span class="abrir-doc">📥 Abrir documento</span>
-        </div>
+        <p>${item.DESCRICAO || ""}</p>
+
+        <span class="categoria-doc">
+          ${item.CATEGORIA || ""}
+        </span>
 
       </a>
     `;
