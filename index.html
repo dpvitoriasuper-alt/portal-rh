@@ -1341,9 +1341,7 @@ function carregarDestaque(lista){
   texto.innerHTML = destaque.TEXTO || "";
 
 }
-  function carregarNoticias(lista){
-
-  if(!lista || lista.length === 0) return;
+ function carregarNoticias(lista){
 
   const container = document.getElementById("noticiasGrid");
 
@@ -1351,9 +1349,22 @@ function carregarDestaque(lista){
 
   container.innerHTML = "";
 
-  lista
-    .filter(item => item.ATIVO === "SIM")
-    .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM))
+  if(!lista || lista.length === 0){
+    container.innerHTML = "<p>Nenhuma notícia cadastrada.</p>";
+    return;
+  }
+
+  const noticiasAtivas = lista.filter(item =>
+    String(item.ATIVO || "").trim().toUpperCase() === "SIM"
+  );
+
+  if(noticiasAtivas.length === 0){
+    container.innerHTML = "<p>Nenhuma notícia ativa. Verifique a coluna ATIVO.</p>";
+    return;
+  }
+
+  noticiasAtivas
+    .sort((a,b) => Number(a.ORDEM || 0) - Number(b.ORDEM || 0))
     .slice(0,3)
     .forEach(item=>{
 
