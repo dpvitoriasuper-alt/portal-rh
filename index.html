@@ -1371,12 +1371,7 @@ function carregarDestaque(lista){
 
     container.innerHTML += `
   <div class="noticia-home-card gloss"
-       onclick="abrirNoticia(
-         '${item.TITULO || ""}',
-         '${item.DATA || ""}',
-         '${item.IMAGEM || ""}',
-         \`${item.CONTEUDO || item.RESUMO || ""}\`
-       )">
+       onclick='abrirNoticia(${JSON.stringify(item)})'>
 
     <div class="noticia-home-img"
       style="background-image:url('${item.IMAGEM || ""}')">
@@ -1389,7 +1384,6 @@ function carregarDestaque(lista){
       <span class="noticia-home-data">
         📅 ${new Date(item.DATA).toLocaleDateString('pt-BR')}
       </span>
-
     </div>
 
   </div>
@@ -1538,13 +1532,23 @@ function fecharImagem(){
   document.getElementById("imagemModal").style.display = "none";
 
 }
-   function abrirNoticia(titulo, data, imagem, texto){
-  document.getElementById("noticiaTitulo").innerText = titulo;
+  function abrirNoticia(item){
+
+  document.getElementById("noticiaTitulo").innerText =
+    item.TITULO || "";
+
   document.getElementById("noticiaData").innerText =
-    new Date(data).toLocaleDateString('pt-BR');
-  document.getElementById("noticiaImagem").src = imagem;
-  document.getElementById("noticiaTexto").innerText = texto;
-  document.getElementById("noticiaModal").style.display = "flex";
+    item.DATA ? new Date(item.DATA).toLocaleDateString("pt-BR") : "";
+
+  document.getElementById("noticiaImagem").src =
+    item.IMAGEM || "";
+
+  document.getElementById("noticiaTexto").innerText =
+    item.CONTEUDO || item.RESUMO || "";
+
+  document.getElementById("noticiaModal").style.display =
+    "flex";
+
 }
 
 function fecharNoticia(){
