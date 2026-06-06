@@ -444,6 +444,56 @@ background-position:center;
   color:#ffc400;
 }
 
+  /* NOTÍCIAS */
+
+.noticias-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-bottom:20px;
+}
+
+.noticia-card{
+  overflow:hidden;
+  border-radius:22px;
+}
+
+.noticia-img{
+  height:220px;
+  background:#222;
+  background-size:cover;
+  background-position:center;
+}
+
+.noticia-content{
+  padding:18px;
+}
+
+.noticia-content h3{
+  color:#ffc400;
+  margin-bottom:10px;
+  font-size:20px;
+}
+
+.noticia-content p{
+  line-height:1.5;
+  color:#ddd;
+}
+
+.noticia-data{
+  display:block;
+  margin-top:12px;
+  color:#ffc400;
+  font-weight:700;
+}
+
+@media(max-width:980px){
+
+  .noticias-grid{
+    grid-template-columns:1fr;
+  }
+
+}
 /* PARTE DE BAIXO */
 
 .lower-grid{
@@ -1006,7 +1056,34 @@ body:not(.carregando) .highlight {
 <section class="lower-grid">
 
   <div class="panel gloss">
+<section class="noticias-section">
 
+  <div class="row-title">
+
+    <h2 class="section-title">
+      📰 Notícias da Rede Vitória
+    </h2>
+
+    <a href="#" class="btn">
+      Ver todas ›
+    </a>
+
+  </div>
+
+  <div class="noticias-grid" id="noticiasGrid">
+
+    <div class="noticia-card gloss">
+      <div class="noticia-img"></div>
+
+      <div class="noticia-content">
+        <h3>Carregando notícias...</h3>
+        <p>Aguarde...</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
     <h2 class="section-title">
       🎂 Aniversariantes do mês
     </h2>
@@ -1168,6 +1245,7 @@ async function carregarPortal(){
     carregarAniversariantes(dados.ANIVERSARIANTES);
     carregarDestaque(dados.DESTAQUE);
     carregarGaleria(dados.GALERIA);
+    carregarNoticias(dados.NOTICIAS);
     
     document.body.classList.remove("carregando");
 
@@ -1264,6 +1342,47 @@ function carregarDestaque(lista){
 
   nome.innerHTML = destaque.NOME || "";
   texto.innerHTML = destaque.TEXTO || "";
+
+}
+  function carregarNoticias(lista){
+
+  if(!lista || lista.length === 0) return;
+
+  const container =
+    document.getElementById("noticiasGrid");
+
+  container.innerHTML = "";
+
+  lista
+    .filter(item => item.ATIVO === "SIM")
+    .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM))
+    .forEach(item=>{
+
+      container.innerHTML += `
+
+      <div class="noticia-card gloss">
+
+        <div class="noticia-img"
+          style="background-image:url('${item.IMAGEM || ""}')">
+        </div>
+
+        <div class="noticia-content">
+
+          <h3>${item.TITULO || ""}</h3>
+
+          <p>${item.RESUMO || ""}</p>
+
+          <span class="noticia-data">
+            📅 ${item.DATA || ""}
+          </span>
+
+        </div>
+
+      </div>
+
+      `;
+
+    });
 
 }
 function carregarGaleria(lista){
