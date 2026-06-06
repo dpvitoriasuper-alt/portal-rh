@@ -9,6 +9,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
+  .noticia-home-card{
+  cursor:pointer;
+}
+
+.noticia-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  z-index:999999;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+}
+
+.noticia-modal-box{
+  width:min(900px,95%);
+  max-height:90vh;
+  overflow:auto;
+  background:#111;
+  border-radius:25px;
+  padding:25px;
+  border:1px solid #ffc400;
+}
+
+.noticia-modal-box img{
+  width:100%;
+  border-radius:15px;
+  margin-bottom:20px;
+}
+
+.noticia-modal-box h2{
+  color:#ffc400;
+  margin-bottom:10px;
+}
+
+.noticia-modal-box span{
+  float:right;
+  cursor:pointer;
+  font-size:30px;
+  color:#fff;
+}
   .imagem-modal{
   display:none;
   position:fixed;
@@ -1371,7 +1413,11 @@ function carregarDestaque(lista){
     .forEach(item=>{
 
       container.innerHTML += `
-        <div class="noticia-home-card gloss">
+        <div class="noticia-home-card gloss"
+     data-titulo="${item.TITULO || ""}"
+     data-data="${item.DATA || ""}"
+     data-imagem="${item.IMAGEM || ""}"
+     data-conteudo="${(item.CONTEUDO || item.RESUMO || "").replace(/"/g,'&quot;')}">
 
           <div class="noticia-home-img"
             style="background-image:url('${item.IMAGEM || ""}')">
@@ -1390,6 +1436,20 @@ function carregarDestaque(lista){
       `;
 
     });
+     document.querySelectorAll(".noticia-home-card").forEach(card => {
+
+    card.addEventListener("click", () => {
+
+      abrirNoticia({
+        TITULO: card.dataset.titulo,
+        DATA: card.dataset.data,
+        IMAGEM: card.dataset.imagem,
+        CONTEUDO: card.dataset.conteudo
+      });
+
+    });
+
+  });
 
 }
 function carregarGaleria(lista){
@@ -1590,6 +1650,23 @@ carregarPortal();
   <span onclick="fecharImagem()">✕</span>
 
   <img id="imagemGrande">
+
+</div>
+  <div id="noticiaModal" class="noticia-modal">
+
+  <div class="noticia-modal-box">
+
+    <span onclick="fecharNoticia()">✕</span>
+
+    <img id="noticiaImagem">
+
+    <h2 id="noticiaTitulo"></h2>
+
+    <div id="noticiaData"></div>
+
+    <p id="noticiaTexto"></p>
+
+  </div>
 
 </div>
   
