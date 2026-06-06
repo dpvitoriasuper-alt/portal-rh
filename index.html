@@ -1378,7 +1378,9 @@ function carregarDestaque(lista){
           <div class="noticia-home-info">
             <h3>${item.TITULO || ""}</h3>
             <p>${item.RESUMO || ""}</p>
-            <span class="noticia-home-data">📅 ${item.DATA || ""}</span>
+            <span class="noticia-home-data">
+📅 ${new Date(item.DATA).toLocaleDateString('pt-BR')}
+</span>
           </div>
         </div>
       `;
