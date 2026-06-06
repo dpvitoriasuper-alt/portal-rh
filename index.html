@@ -833,39 +833,81 @@ footer.footer-final{
   }
 .documentos-section{
   margin-top:28px;
-  padding:24px;
+  padding:28px;
   border-radius:24px;
 }
 
+.documentos-filtros{
+  display:flex !important;
+  gap:12px !important;
+  flex-wrap:wrap !important;
+  margin:15px 0 24px !important;
+}
+
+.documentos-filtros button,
+.doc-filtro{
+  background:rgba(0,0,0,.75) !important;
+  border:1px solid rgba(255,196,0,.65) !important;
+  color:#ffc400 !important;
+  padding:10px 18px !important;
+  border-radius:999px !important;
+  cursor:pointer !important;
+  font-weight:800 !important;
+  font-size:14px !important;
+}
+
+.documentos-filtros button:hover,
+.doc-filtro.ativo{
+  background:#ffc400 !important;
+  color:#111 !important;
+}
+
 .documentos-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr)) !important;
+  gap:18px !important;
 }
 
 .documento-card{
-  padding:18px;
-  border-radius:18px;
-  background:rgba(0,0,0,.55);
-  border:1px solid rgba(255,190,0,.35);
-  text-decoration:none;
-  color:#fff;
-  transition:.25s;
+  display:flex !important;
+  gap:16px !important;
+  padding:22px !important;
+  border-radius:20px !important;
+  background:rgba(0,0,0,.65) !important;
+  border:1px solid rgba(255,196,0,.4) !important;
+  text-decoration:none !important;
+  color:#fff !important;
 }
 
-.documento-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 20px rgba(255,190,0,.25);
+.documento-card *{
+  text-decoration:none !important;
+}
+
+.doc-icone{
+  font-size:38px !important;
+}
+
+.documento-card small{
+  color:#ffc400 !important;
+  font-weight:800 !important;
 }
 
 .documento-card h3{
-  color:#ffc400;
-  margin-bottom:8px;
+  color:#fff !important;
+  font-size:20px !important;
+  margin:6px 0 8px !important;
 }
 
 .documento-card p{
-  color:#ddd;
-  font-size:14px;
+  color:#ddd !important;
+  font-size:14px !important;
+}
+
+.abrir-doc{
+  display:inline-block !important;
+  margin-top:12px !important;
+  color:#ffc400 !important;
+  font-weight:900 !important;
 }
 
 @media(max-width:980px){
