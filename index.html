@@ -1370,8 +1370,7 @@ function carregarDestaque(lista){
     .forEach(item=>{
 
     container.innerHTML += `
-  <div class="noticia-home-card gloss"
-       onclick='abrirNoticia(${JSON.stringify(item)})'>
+  <div class="noticia-home-card gloss">
 
     <div class="noticia-home-img"
       style="background-image:url('${item.IMAGEM || ""}')">
@@ -1387,8 +1386,7 @@ function carregarDestaque(lista){
     </div>
 
   </div>
-`;
-}
+`;}
 function carregarGaleria(lista){
 
   if(!lista || lista.length === 0) return;
