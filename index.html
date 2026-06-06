@@ -1908,6 +1908,8 @@ function renderizarDocumentos(lista){
 
   const grid = document.getElementById("documentosGrid");
 
+  if(!grid) return;
+
   if(!lista || lista.length === 0){
     grid.innerHTML = "<p>Nenhum documento encontrado.</p>";
     return;
@@ -1927,6 +1929,8 @@ function renderizarDocumentos(lista){
     `;
 
   });
+
+}
 }carregarPortal();
 
 </script>
