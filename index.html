@@ -633,6 +633,17 @@ background-position:center;
   padding:9px 0;
   border-bottom:1px solid rgba(255,255,255,.08);
 }
+  .avatar-aniversario{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 0 4px rgba(255,255,255,.35))
+    drop-shadow(0 0 6px rgba(0,81,255,.35));
+
+  flex-shrink:0;
+}
 
 .person-left{
   display:flex;
@@ -1166,55 +1177,14 @@ body:not(.carregando) .highlight {
 
   <div id="aniversariantes" class="panel gloss">
 
-    <h2 class="section-title">
-      🎂 Aniversariantes do mês
-    </h2>
+  <h2 class="section-title">
+    🎂 Aniversariantes do mês
+  </h2>
 
-    <div class="people">
-
-      <div class="person">
-        <div class="person-left">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg">
-          Maria Oliveira
-        </div>
-        <span>05/10</span>
-      </div>
-
-      <div class="person">
-        <div class="person-left">
-          <img src="https://randomuser.me/api/portraits/men/35.jpg">
-          João Santos
-        </div>
-        <span>12/10</span>
-      </div>
-
-      <div class="person">
-        <div class="person-left">
-          <img src="https://randomuser.me/api/portraits/women/65.jpg">
-          Ana Paula
-        </div>
-        <span>18/10</span>
-      </div>
-
-      <div class="person">
-        <div class="person-left">
-          <img src="https://randomuser.me/api/portraits/men/52.jpg">
-          Carlos Lima
-        </div>
-        <span>27/10</span>
-      </div>
-
-      <div class="person">
-        <div class="person-left">
-          <img src="https://randomuser.me/api/portraits/women/12.jpg">
-          Bruna Souza
-        </div>
-        <span>30/10</span>
-      </div>
-
-    </div>
-
+  <div class="people">
   </div>
+
+</div>
 
   <div id="galeria" class="panel gloss">
 
@@ -1396,7 +1366,7 @@ function carregarAniversariantes(lista){
     container.innerHTML += `
       <div class="person">
         <div class="person-left">
-          <img src="${item.FOTO || 'https://i.pravatar.cc/150?img=12'}">
+          <img src="logo-vitoria-mini.png" class="avatar-aniversario">
           <span>${item.NOME || ""}</span>
         </div>
         <span>${item.DATA || ""}</span>
