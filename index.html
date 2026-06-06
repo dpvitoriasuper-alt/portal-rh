@@ -771,12 +771,26 @@ footer.footer-final{
   margin-top:18px;
   width:100%;
 }
+body.carregando .notice-grid,
+body.carregando .people,
+body.carregando .gallery,
+body.carregando .highlight {
+  opacity: 0;
+}
+
+body:not(.carregando) .notice-grid,
+body:not(.carregando) .people,
+body:not(.carregando) .gallery,
+body:not(.carregando) .highlight {
+  opacity: 1;
+  transition: opacity .3s ease;
+}  
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<body class="carregando">
 
 <header class="gloss">
 
@@ -1124,6 +1138,8 @@ async function carregarPortal(){
     carregarAniversariantes(dados.ANIVERSARIANTES);
     carregarDestaque(dados.DESTAQUE);
     carregarGaleria(dados.GALERIA);
+    
+    document.body.classList.remove("carregando");
 
   }catch(erro){
 
