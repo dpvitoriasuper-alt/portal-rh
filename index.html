@@ -416,7 +416,18 @@ background-position:center;
   color:#ffc400;
   font-weight:800;
 }
+.row-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
 
+.documentos-filtros{
+  margin:0 !important;
+}
+  
 @media(max-width:980px){
   .noticias-home-grid{
     grid-template-columns:1fr;
@@ -864,8 +875,9 @@ footer.footer-final{
 
 .documentos-grid{
   display:grid !important;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr)) !important;
+  grid-template-columns:repeat(auto-fit,minmax(320px,420px)) !important;
   gap:18px !important;
+  justify-content:start !important;
 }
 
 .documento-card{
@@ -912,13 +924,14 @@ footer.footer-final{
 
 @media(max-width:980px){
   .documentos-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr !important;
   }
-}
+
   footer.footer-final{
     grid-template-columns:1fr;
     text-align:center;
   }
+}
 
   .footer-line{
     width:100%;
@@ -1313,11 +1326,14 @@ body:not(.carregando) .highlight {
 <section id="documentos" class="documentos-section gloss">
 
   <div class="row-title">
-    <h2 class="section-title">📁 Documentos úteis</h2>
-  </div>
+
+  <h2 class="section-title">
+    📁 Documentos úteis
+  </h2>
 
   <div class="documentos-filtros" id="documentosFiltros"></div>
 
+</div>
   <div class="documentos-grid" id="documentosGrid">
     <p>Carregando documentos...</p>
   </div>
