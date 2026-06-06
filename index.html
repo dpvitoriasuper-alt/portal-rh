@@ -1824,7 +1824,19 @@ function renderizarDocumentos(lista){
   lista.forEach(item=>{
 
     grid.innerHTML += `
-      <a href="${item.LINK || "#"}" target="_blank" class="documento-card">
+     <a href="${item.LINK || "#"}"
+   target="_blank"
+   class="documento-card"
+   style="
+      display:flex;
+      gap:16px;
+      padding:20px;
+      border:2px solid red;
+      background:#222;
+      border-radius:20px;
+      color:white;
+      text-decoration:none;
+   ">
 
         <div class="doc-icone">📄</div>
 
