@@ -779,7 +779,13 @@ footer.footer-final{
   justify-content:flex-end;
   padding:18px;
 }
+.galeria-item{
+  cursor:pointer;
+}
 
+.galeria-overlay{
+  pointer-events:none;
+}
 .galeria-overlay h3{
   color:#fff;
   font-size:20px;
@@ -1378,8 +1384,9 @@ function renderizarGaleria(lista){
 
    grid.innerHTML += `
   <div class="galeria-item"
-       onclick="abrirImagem('${item.IMAGEM}')"
-       style="background-image:url('${item.IMAGEM}')">
+     onclick="abrirImagem(this.dataset.img)"
+     data-img="${item.IMAGEM}"
+     style="background-image:url('${item.IMAGEM}')">
 
     <div class="galeria-overlay">
       <p>📍 ${item.LOJA || ""}</p>
