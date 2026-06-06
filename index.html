@@ -633,16 +633,12 @@ background-position:center;
   padding:9px 0;
   border-bottom:1px solid rgba(255,255,255,.08);
 }
-  .avatar-aniversario{
-  width:34px;
-  height:34px;
-  object-fit:contain;
-
-  filter:
-    drop-shadow(0 0 4px rgba(255,255,255,.35))
-    drop-shadow(0 0 6px rgba(0,81,255,.35));
-
-  flex-shrink:0;
+.avatar-aniversario{
+  font-size:22px;
+  width:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .person-left{
@@ -1366,7 +1362,7 @@ function carregarAniversariantes(lista){
     container.innerHTML += `
       <div class="person">
         <div class="person-left">
-          <img src="logo-vitoria-mini.png" class="avatar-aniversario">
+         <span class="avatar-aniversario">🥳</span>
           <span>${item.NOME || ""}</span>
         </div>
         <span>${item.DATA || ""}</span>
