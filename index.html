@@ -1180,6 +1180,76 @@ body:not(.carregando) .highlight {
   font-size:12px;
   font-weight:800;
 }
+  .documentos-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  z-index:99999;
+  justify-content:center;
+  align-items:center;
+}
+
+.documentos-box{
+  width:90%;
+  max-width:1000px;
+  max-height:85vh;
+  overflow:auto;
+  background:#111;
+  border-radius:24px;
+  padding:24px;
+  border:1px solid rgba(255,196,0,.4);
+}
+
+.documentos-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.documentos-header h2{
+  color:#ffc400;
+}
+
+.documentos-header button{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:28px;
+  cursor:pointer;
+}
+
+#documentosGrid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.doc-card{
+  width:240px;
+  height:180px;
+  background:#1a1a1a;
+  border:1px solid rgba(255,196,0,.3);
+  border-radius:20px;
+  text-decoration:none;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.doc-icon{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.doc-card h3{
+  color:#ffc400;
+}
 </style>
 </head>
 
@@ -1283,7 +1353,7 @@ body:not(.carregando) .highlight {
   <p>Campanhas e orientações</p>
 </a>
 
-  <a href="#documentos" class="quick-card gloss">
+  <a href="javascript:void(0)" onclick="abrirDocumentos()" class="quick-card gloss">
   <div class="icon">📁</div>
   <h3>Documentos</h3>
   <p>Arquivos e formulários úteis</p>
@@ -1908,28 +1978,38 @@ function renderizarDocumentos(lista){
 
   const grid = document.getElementById("documentosGrid");
 
-  if(!lista || lista.length === 0){
-    grid.innerHTML = "<p>Nenhum documento encontrado.</p>";
-    return;
-  }
+  if(!grid) return;
 
   grid.innerHTML = "";
 
   lista.forEach(item=>{
 
     grid.innerHTML += `
-      <a class="doc-card" href="${item.LINK || "#"}" target="_blank">
+      <a href="${item.LINK}"
+         target="_blank"
+         class="doc-card">
+
         <div class="doc-icon">📄</div>
-        <h3>${item.TITULO || ""}</h3>
-        <p>${item.DESCRICAO || ""}</p>
-        <span>${item.CATEGORIA || ""}</span>
+
+        <h3>${item.TITULO}</h3>
+
+        <p>${item.DESCRICAO}</p>
+
+        <span>${item.CATEGORIA}</span>
+
       </a>
     `;
 
   });
 
 }
-  
+  function abrirDocumentos(){
+  document.getElementById("documentosModal").style.display = "flex";
+}
+
+function fecharDocumentos(){
+  document.getElementById("documentosModal").style.display = "none";
+}
   carregarPortal();
 
 </script>
@@ -1982,6 +2062,20 @@ function renderizarDocumentos(lista){
   </div>
 
 </div>
-  
+  <div id="documentosModal" class="documentos-modal">
+
+  <div class="documentos-box">
+
+    <div class="documentos-header">
+      <h2>📁 Documentos úteis</h2>
+
+      <button onclick="fecharDocumentos()">✕</button>
+    </div>
+
+    <div id="documentosGrid"></div>
+
+  </div>
+
+</div>
 </body>
 </html>
