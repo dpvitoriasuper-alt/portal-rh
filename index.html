@@ -1958,11 +1958,12 @@ categorias.forEach(cat=>{
 
 });
 
- document.getElementById("documentosGrid").innerHTML = `
+  document.getElementById("documentosGrid").innerHTML = `
   <div class="mensagem-documentos">
     Selecione uma categoria acima.
   </div>
 `;
+}
 
 function filtrarDocumentos(categoria, botao){
 
@@ -1998,10 +1999,7 @@ function renderizarDocumentos(lista){
     .forEach(item=>{
 
       grid.innerHTML += `
-        <a href="${item.LINK || "#"}"
-           target="_blank"
-           class="doc-card">
-
+      
         <a href="${item.LINK}" target="_blank" class="doc-card">
           <h3>${item.TITULO || ""}</h3>
           <p>${item.DESCRICAO || ""}</p>
