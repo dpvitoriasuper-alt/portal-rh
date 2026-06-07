@@ -154,6 +154,7 @@
   .lojas-grid{
     grid-template-columns:1fr;
   }
+}
   .noticia-home-card{
   cursor:pointer;
 }
@@ -1694,6 +1695,93 @@ body:not(.carregando) .highlight {
   }
 }
 
+
+/* AJUSTE FINAL - CONTATOS RH E CANAL DE DENÚNCIAS */
+#contatos.cta{
+  margin-top:28px;
+  border-radius:24px;
+  padding:24px 30px;
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:24px;
+  align-items:stretch !important;
+  background:linear-gradient(90deg,rgba(190,0,0,.95),rgba(140,0,40,.95),rgba(0,30,140,.95));
+  border:1px solid rgba(255,190,0,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 0 24px rgba(255,190,0,.16);
+}
+
+#contatos .cta-bloco-rh,
+#contatos .cta-bloco-denuncia{
+  border:1px solid rgba(255,196,0,.35);
+  border-radius:22px;
+  padding:22px;
+  background:rgba(0,0,0,.18);
+}
+
+#contatos .cta-bloco-rh{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+#contatos .cta-bloco-denuncia{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:18px;
+}
+
+#contatos .denuncia-area{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+#contatos .qr{
+  width:85px;
+  height:85px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#contatos .qr img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:8px;
+}
+
+#contatos .denuncia-btn{
+  background:rgba(0,0,0,.55);
+  color:#ffc400;
+  border:1px solid rgba(255,196,0,.55);
+  border-radius:999px;
+  padding:12px 18px;
+  text-decoration:none;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+@media(max-width:980px){
+  #contatos.cta{
+    grid-template-columns:1fr !important;
+  }
+
+  #contatos .cta-bloco-rh,
+  #contatos .cta-bloco-denuncia{
+    grid-template-columns:1fr;
+  }
+
+  #contatos .denuncia-area{
+    justify-content:flex-start;
+    flex-wrap:wrap;
+  }
+}
+
 </style>
 </head>
 
@@ -2063,45 +2151,6 @@ body:not(.carregando) .highlight {
         🔒 Acessar canal
       </a>
     </div>
-
-  </div>
-
-</section>
-
-  <div class="cta-left">
-
-    <div class="whats-icon">
-      💬
-    </div>
-
-    <div>
-      <h3>Fale com o RH</h3>
-      <p>Estamos aqui para ajudar!</p>
-    </div>
-
-  </div>
-
-  <div>
-    <a class="whats-btn" href="https://wa.me/5592982554733" target="_blank">
-  🟢 Enviar mensagem
-</a>
-  </div>
-
-  <div class="qr-area">
-
-    <div>
-      <h3>QR Code</h3>
-      <p>
-        Escaneie o QR Code e faça sua denúncia ou sugestão de forma anônima!
-      </p>
-    </div>
-
-    <div class="qr">
-  <img
-    src="qr-denuncias.png"
-    alt="Canal de Denúncias"
-    style="width:100%;max-width:250px;border-radius:12px;">
-</div>
 
   </div>
 
@@ -2883,23 +2932,6 @@ async function limparNotificacaoAtual(){
   }
 }
   carregarPortal();
-<script>
-
-const API_URL = "...";
-
-function carregarDocumentos(lista){
-  ...
-}
-
-function carregarNoticias(lista){
-  ...
-}
-
-function carregarGaleria(lista){
-  ...
-}
-
-/* COLE AQUI */
 
 const TELEFONES_RH_LOJAS = {
   COROADO: "5592982554733",
