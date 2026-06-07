@@ -6,7 +6,7 @@
 
 <title>Portal do Colaborador | Vitória Supermercados</title>
 
-<link href="https://script.google.com/macros/s/AKfycbz4aLtDg_OEpJ2PD9fyVGlfmSsjFY8MBiZoCJIgE2i79Qe_XYUY-XBNjFhpSG4gtb8/exec">
+<!-- API configurada no JavaScript -->
   
 <style>
   .noticia-home-card{
@@ -1370,6 +1370,179 @@ body:not(.carregando) .highlight {
   color:#ffc400;
   font-weight:700;
 }
+
+/* ÁREA DO COLABORADOR */
+.area-colaborador{
+  margin-top:22px;
+  display:none;
+  grid-template-columns:1.3fr .9fr;
+  gap:18px;
+}
+
+.colaborador-card{
+  border-radius:24px;
+  padding:24px;
+}
+
+.colaborador-card h2{
+  color:#ffc400;
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.colaborador-card p{
+  color:#ddd;
+  line-height:1.45;
+}
+
+.perfil-grid{
+  margin-top:16px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.perfil-item{
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(255,196,0,.25);
+  border-radius:16px;
+  padding:13px;
+}
+
+.perfil-item small{
+  display:block;
+  color:#ffc400;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+.perfil-item span{
+  color:#fff;
+  font-weight:700;
+}
+
+.notificacao-card{
+  border-radius:24px;
+  padding:24px;
+  position:relative;
+}
+
+.sino-notificacao{
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+.badge-notificacao{
+  position:absolute;
+  top:20px;
+  right:22px;
+  background:#e30613;
+  color:#fff;
+  border-radius:999px;
+  padding:5px 10px;
+  font-weight:900;
+  display:none;
+}
+
+.notificacao-card h3{
+  color:#ffc400;
+  margin-bottom:8px;
+}
+
+.notificacao-card p{
+  color:#ddd;
+  line-height:1.45;
+}
+
+.notificacao-lista{
+  margin-top:14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.notificacao-mini{
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(255,196,0,.28);
+  border-radius:16px;
+  padding:12px;
+  color:#fff;
+}
+
+.notificacao-mini strong{
+  display:block;
+  color:#ffc400;
+  margin-bottom:5px;
+}
+
+.notificacao-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  z-index:99999999;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+}
+
+.notificacao-box{
+  width:min(520px,95%);
+  background:#111;
+  border:1px solid rgba(255,196,0,.7);
+  border-radius:26px;
+  padding:28px;
+  box-shadow:0 0 30px rgba(255,196,0,.25);
+}
+
+.notificacao-box h2{
+  color:#ffc400;
+  margin-bottom:12px;
+}
+
+.notificacao-box p{
+  color:#fff;
+  line-height:1.55;
+  margin-bottom:20px;
+}
+
+.notificacao-acoes{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn-notificacao{
+  flex:1;
+  min-width:150px;
+  border:none;
+  border-radius:999px;
+  padding:13px 18px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.btn-entendi{
+  background:linear-gradient(145deg,#ffc400,#d99a00);
+  color:#111;
+}
+
+.btn-limpar{
+  background:#222;
+  color:#ffc400;
+  border:1px solid rgba(255,196,0,.5);
+}
+
+@media(max-width:980px){
+  .area-colaborador{
+    grid-template-columns:1fr;
+  }
+
+  .perfil-grid{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 </head>
 
@@ -1381,7 +1554,7 @@ body:not(.carregando) .highlight {
     <img src="logo-vitoria.png" class="login-logo">
 
     <h2>Portal do Colaborador</h2>
-    <p>Acesse com seu CPF e senha.</p>
+    <p id="loginInstrucao">Acesse com seu CPF e senha.</p>
 
     <input type="text" id="loginCpf" placeholder="Digite seu CPF">
     <div class="campo-senha">
@@ -1389,7 +1562,7 @@ body:not(.carregando) .highlight {
   <button type="button" onclick="mostrarSenha('loginSenha', this)">👁️</button>
 </div>
 
-    <button onclick="fazerLogin()">Entrar</button>
+    <button id="btnEntrar" onclick="fazerLogin()">Entrar</button>
 
     <div id="loginMensagem"></div>
 
@@ -1408,7 +1581,7 @@ body:not(.carregando) .highlight {
   <button type="button" onclick="mostrarSenha('confirmaSenha', this)">👁️</button>
 </div>
 
-      <button onclick="criarSenhaPortal()">Salvar senha</button>
+      <button id="btnSalvarSenha" onclick="criarSenhaPortal()">Salvar senha</button>
     </div>
 
   </div>
@@ -1431,6 +1604,52 @@ body:not(.carregando) .highlight {
 
 </div>
 </header>
+
+
+<section id="areaColaborador" class="area-colaborador">
+
+  <div class="colaborador-card gloss">
+    <h2 id="saudacaoColaborador">Olá, colaborador!</h2>
+    <p id="ultimoAcessoTexto">Seu último acesso será exibido aqui.</p>
+
+    <div class="perfil-grid">
+      <div class="perfil-item">
+        <small>Nome</small>
+        <span id="perfilNome">-</span>
+      </div>
+
+      <div class="perfil-item">
+        <small>CPF</small>
+        <span id="perfilCpf">-</span>
+      </div>
+
+      <div class="perfil-item">
+        <small>Matrícula</small>
+        <span id="perfilMatricula">-</span>
+      </div>
+
+      <div class="perfil-item">
+        <small>Função</small>
+        <span id="perfilFuncao">-</span>
+      </div>
+
+      <div class="perfil-item">
+        <small>Admissão</small>
+        <span id="perfilAdmissao">-</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="notificacao-card gloss">
+    <div class="badge-notificacao" id="badgeNotificacao">0</div>
+    <div class="sino-notificacao">🔔</div>
+    <h3>Notificações</h3>
+    <p id="resumoNotificacoes">Nenhuma notificação nova.</p>
+    <div class="notificacao-lista" id="listaNotificacoes"></div>
+  </div>
+
+</section>
+
 
 <section class="hero gloss">
 
@@ -2179,9 +2398,11 @@ function fecharDocumentos(){
 }
   let cpfLoginTemporario = "";
 let senhaLoginTemporaria = "";
+let cpfLogado = "";
+let notificacoesAtuais = [];
+let notificacaoAtual = null;
 
 async function fazerLogin(){
-
 
   const cpf = document.getElementById("loginCpf").value;
   const senha = document.getElementById("loginSenha").value;
@@ -2189,6 +2410,16 @@ async function fazerLogin(){
 
   cpfLoginTemporario = cpf;
   senhaLoginTemporaria = senha;
+
+  if(!cpf){
+    msg.innerText = "Informe o CPF.";
+    return;
+  }
+
+  if(!senha){
+    msg.innerText = "Informe sua senha ou sua data de nascimento no primeiro acesso.";
+    return;
+  }
 
   msg.innerText = "Verificando acesso...";
 
@@ -2198,22 +2429,34 @@ async function fazerLogin(){
     "&cpf=" + encodeURIComponent(cpf) +
     "&senha=" + encodeURIComponent(senha);
 
-  const resposta = await fetch(url);
-  const dados = await resposta.json();
-  console.log("RESPOSTA LOGIN:", dados);
+  try{
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
 
-  if(!dados.sucesso){
-    msg.innerText = dados.mensagem || "Acesso não autorizado.";
-    return;
+    console.log("RESPOSTA LOGIN:", dados);
+
+    if(!dados.sucesso){
+      msg.innerText = dados.mensagem || "Acesso não autorizado.";
+      return;
+    }
+
+    if(dados.primeiroAcesso){
+      msg.innerText = "Bem-vindo, " + dados.nome + ". Crie sua senha.";
+      document.getElementById("primeiroAcessoBox").style.display = "block";
+      document.getElementById("btnEntrar").style.display = "none";
+      document.getElementById("loginCpf").readOnly = true;
+      document.getElementById("loginSenha").readOnly = true;
+      document.getElementById("loginInstrucao").innerText = "Primeiro acesso confirmado. Agora crie sua senha.";
+      document.getElementById("novaSenha").focus();
+      return;
+    }
+
+    liberarPortal(dados);
+
+  }catch(erro){
+    console.error("ERRO NO LOGIN:", erro);
+    msg.innerText = "Erro ao acessar. Tente novamente.";
   }
-
-  if(dados.primeiroAcesso){
-    msg.innerText = "Bem-vindo, " + dados.nome + ". Crie sua senha.";
-    document.getElementById("primeiroAcessoBox").style.display = "block";
-    return;
-  }
-
-  liberarPortal(dados.nome);
 }
 
 async function criarSenhaPortal(){
@@ -2222,8 +2465,18 @@ async function criarSenhaPortal(){
   const confirma = document.getElementById("confirmaSenha").value;
   const msg = document.getElementById("loginMensagem");
 
+  if(!nova){
+    msg.innerText = "Digite a nova senha.";
+    return;
+  }
+
   if(nova.length < 6){
     msg.innerText = "A senha precisa ter pelo menos 6 caracteres.";
+    return;
+  }
+
+  if(senhaEhFacil(nova)){
+    msg.innerText = "Senha muito fácil. Escolha outra e tente novamente.";
     return;
   }
 
@@ -2243,8 +2496,6 @@ async function criarSenhaPortal(){
       "&senha=" + encodeURIComponent(senhaLoginTemporaria) +
       "&novaSenha=" + encodeURIComponent(nova);
 
-    console.log("URL CRIAR SENHA:", url);
-
     const resposta = await fetch(url);
     const dados = await resposta.json();
 
@@ -2252,21 +2503,155 @@ async function criarSenhaPortal(){
 
     if(dados.sucesso){
       msg.innerText = "Senha criada com sucesso!";
-      liberarPortal(dados.nome);
+      liberarPortal(dados);
     }else{
       msg.innerText = dados.mensagem || "Erro ao criar senha.";
     }
 
   }catch(erro){
     console.error("ERRO AO CRIAR SENHA:", erro);
-    msg.innerText = "Erro ao salvar senha. Verifique o console.";
+    msg.innerText = "Erro ao salvar senha. Tente novamente.";
   }
 }
-function liberarPortal(nome){
+
+function senhaEhFacil(senha){
+  const senhaLimpa = String(senha || "").trim().toLowerCase();
+
+  const fracas = [
+    "123456",
+    "1234567",
+    "12345678",
+    "123456789",
+    "1234",
+    "12345",
+    "111111",
+    "000000",
+    "654321",
+    "abcdef",
+    "abc123",
+    "senha",
+    "senha123",
+    "qwerty",
+    "11111111"
+  ];
+
+  if(fracas.includes(senhaLimpa)) return true;
+  if(/^(\d)\1+$/.test(senhaLimpa)) return true;
+
+  return false;
+}
+
+function liberarPortal(dados){
+
+  cpfLogado = dados.cpf || cpfLoginTemporario || "";
 
   document.getElementById("loginTela").style.display = "none";
   document.body.classList.remove("carregando");
 
+  preencherPerfilColaborador(dados);
+  carregarNotificacoesColaborador(dados.notificacoes || []);
+}
+
+function preencherPerfilColaborador(dados){
+
+  document.getElementById("areaColaborador").style.display = "grid";
+
+  document.getElementById("saudacaoColaborador").innerText =
+    "Olá, " + (dados.nome || "colaborador") + "!";
+
+  document.getElementById("ultimoAcessoTexto").innerText =
+    "Seu último acesso foi: " + (dados.ultimoAcesso || "Este é seu primeiro acesso.");
+
+  document.getElementById("perfilNome").innerText = dados.nome || "-";
+  document.getElementById("perfilCpf").innerText = dados.cpf || "-";
+  document.getElementById("perfilMatricula").innerText = dados.matricula || "-";
+  document.getElementById("perfilFuncao").innerText = dados.funcao || "-";
+  document.getElementById("perfilAdmissao").innerText = dados.admissao || "-";
+}
+
+function carregarNotificacoesColaborador(lista){
+
+  notificacoesAtuais = lista || [];
+
+  const badge = document.getElementById("badgeNotificacao");
+  const resumo = document.getElementById("resumoNotificacoes");
+  const container = document.getElementById("listaNotificacoes");
+
+  container.innerHTML = "";
+
+  if(notificacoesAtuais.length === 0){
+    badge.style.display = "none";
+    resumo.innerText = "Nenhuma notificação nova.";
+    return;
+  }
+
+  badge.style.display = "block";
+  badge.innerText = notificacoesAtuais.length;
+
+  resumo.innerText =
+    notificacoesAtuais.length === 1
+      ? "Você tem 1 notificação nova."
+      : "Você tem " + notificacoesAtuais.length + " notificações novas.";
+
+  notificacoesAtuais.forEach(notificacao => {
+    container.innerHTML += `
+      <div class="notificacao-mini">
+        <strong>${notificacao.titulo || "Notificação"}</strong>
+        <span>${notificacao.mensagem || ""}</span>
+      </div>
+    `;
+  });
+
+  abrirNotificacao(notificacoesAtuais[0]);
+}
+
+function abrirNotificacao(notificacao){
+
+  if(!notificacao) return;
+
+  notificacaoAtual = notificacao;
+
+  document.getElementById("notificacaoTitulo").innerText =
+    "📢 " + (notificacao.titulo || "Notificação");
+
+  document.getElementById("notificacaoMensagem").innerText =
+    notificacao.mensagem || "";
+
+  document.getElementById("notificacaoModal").style.display = "flex";
+}
+
+function fecharNotificacaoAtual(){
+  document.getElementById("notificacaoModal").style.display = "none";
+}
+
+async function limparNotificacaoAtual(){
+
+  if(!notificacaoAtual){
+    fecharNotificacaoAtual();
+    return;
+  }
+
+  try{
+    const url =
+      API_URL +
+      "?action=limparNotificacao" +
+      "&cpf=" + encodeURIComponent(cpfLogado) +
+      "&idNotificacao=" + encodeURIComponent(notificacaoAtual.id);
+
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+
+    console.log("LIMPAR NOTIFICAÇÃO:", dados);
+
+    notificacoesAtuais = notificacoesAtuais.filter(item => item.id !== notificacaoAtual.id);
+
+    fecharNotificacaoAtual();
+    carregarNotificacoesColaborador(notificacoesAtuais);
+
+  }catch(erro){
+    console.error("ERRO AO LIMPAR NOTIFICAÇÃO:", erro);
+    fecharNotificacaoAtual();
+  }
 }
   function mostrarSenha(idCampo, botao){
   const campo = document.getElementById(idCampo);
@@ -2356,5 +2741,18 @@ function liberarPortal(nome){
 </div>
 
 </div>
+
+<div id="notificacaoModal" class="notificacao-modal">
+  <div class="notificacao-box">
+    <h2 id="notificacaoTitulo">📢 Notificação</h2>
+    <p id="notificacaoMensagem"></p>
+
+    <div class="notificacao-acoes">
+      <button class="btn-notificacao btn-entendi" onclick="fecharNotificacaoAtual()">Entendi</button>
+      <button class="btn-notificacao btn-limpar" onclick="limparNotificacaoAtual()">Limpar notificação</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
