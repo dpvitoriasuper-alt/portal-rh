@@ -2920,7 +2920,17 @@ function fecharModalLojas(){
 }
 
 function abrirWhatsappLoja(loja){
-  ...
+  const telefone = TELEFONES_RH_LOJAS[loja];
+
+  if(!telefone){
+    alert("Telefone da loja não encontrado.");
+    return;
+  }
+
+  const mensagem = "Olá, RH. Vim pelo Portal do Colaborador.";
+  const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
+
+  window.open(url, "_blank");
 }
 
 </script>
