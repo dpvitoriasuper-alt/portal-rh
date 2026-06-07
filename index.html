@@ -2652,7 +2652,7 @@ async function limparNotificacaoAtual(){
     const url =
       API_URL +
       "?action=limparNotificacao" +
-      "&cpf=" + encodeURIComponent(cpfLogado) +
+      "&cpf=" + encodeURIComponent(String(cpfLogado || document.getElementById("perfilCpf").innerText || "").replace(/\D/g, "")) +
       "&idNotificacao=" + encodeURIComponent(notificacaoAtual.id);
 
     const resposta = await fetch(url);
