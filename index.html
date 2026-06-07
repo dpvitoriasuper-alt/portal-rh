@@ -1271,10 +1271,103 @@ body:not(.carregando) .highlight {
 .doc-card h3{
   color:#ffc400;
 }
+  .login-tela{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.95);
+  z-index:9999999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+}
+
+.login-box{
+  width:min(420px,95%);
+  padding:32px;
+  border-radius:26px;
+  text-align:center;
+  border:1px solid rgba(255,196,0,.4);
+}
+
+.login-logo{
+  height:100px;
+  object-fit:contain;
+  margin-bottom:15px;
+}
+
+.login-box h2{
+  color:#ffc400;
+  margin-bottom:8px;
+}
+
+.login-box p{
+  color:#ddd;
+  margin-bottom:18px;
+}
+
+.login-box input{
+  width:100%;
+  padding:14px;
+  margin-bottom:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,196,0,.4);
+  background:#111;
+  color:#fff;
+  font-size:16px;
+}
+
+.login-box button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(145deg,#ffc400,#d99a00);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+#loginMensagem{
+  margin-top:14px;
+  color:#ffc400;
+  font-weight:700;
+}
 </style>
 </head>
 
 <body class="carregando">
+  <div id="loginTela" class="login-tela">
+
+  <div class="login-box gloss">
+
+    <img src="logo-vitoria.png" class="login-logo">
+
+    <h2>Portal do Colaborador</h2>
+    <p>Acesse com seu CPF e senha.</p>
+
+    <input type="text" id="loginCpf" placeholder="Digite seu CPF">
+    <input type="password" id="loginSenha" placeholder="Senha">
+
+    <button onclick="fazerLogin()">Entrar</button>
+
+    <div id="loginMensagem"></div>
+
+    <div id="primeiroAcessoBox" style="display:none;">
+      <hr>
+
+      <p>Primeiro acesso. Crie sua nova senha:</p>
+
+      <input type="password" id="novaSenha" placeholder="Nova senha">
+      <input type="password" id="confirmaSenha" placeholder="Confirmar senha">
+
+      <button onclick="criarSenhaPortal()">Salvar senha</button>
+    </div>
+
+  </div>
+
+</div>
 
 <header class="gloss">
 
@@ -2037,6 +2130,84 @@ function renderizarDocumentos(lista){
 
 function fecharDocumentos(){
   document.getElementById("documentosModal").style.display = "none";
+}
+  let cpfLoginTemporario = "";
+let senhaLoginTemporaria = "";
+
+async function fazerLogin(){
+
+  const cpf = document.getElementById("loginCpf").value;
+  const senha = document.getElementById("loginSenha").value;
+  const msg = document.getElementById("loginMensagem");
+
+  cpfLoginTemporario = cpf;
+  senhaLoginTemporaria = senha;
+
+  msg.innerText = "Verificando acesso...";
+
+  const url =
+    API_URL +
+    "?action=login" +
+    "&cpf=" + encodeURIComponent(cpf) +
+    "&senha=" + encodeURIComponent(senha);
+
+  const resposta = await fetch(url);
+  const dados = await resposta.json();
+
+  if(!dados.sucesso){
+    msg.innerText = dados.mensagem || "Acesso não autorizado.";
+    return;
+  }
+
+  if(dados.primeiroAcesso){
+    msg.innerText = "Bem-vindo, " + dados.nome + ". Crie sua senha.";
+    document.getElementById("primeiroAcessoBox").style.display = "block";
+    return;
+  }
+
+  liberarPortal(dados.nome);
+}
+
+async function criarSenhaPortal(){
+
+  const nova = document.getElementById("novaSenha").value;
+  const confirma = document.getElementById("confirmaSenha").value;
+  const msg = document.getElementById("loginMensagem");
+
+  if(nova.length < 6){
+    msg.innerText = "A senha precisa ter pelo menos 6 caracteres.";
+    return;
+  }
+
+  if(nova !== confirma){
+    msg.innerText = "As senhas não conferem.";
+    return;
+  }
+
+  msg.innerText = "Salvando nova senha...";
+
+  const url =
+    API_URL +
+    "?action=login" +
+    "&cpf=" + encodeURIComponent(cpfLoginTemporario) +
+    "&senha=" + encodeURIComponent(senhaLoginTemporaria) +
+    "&novaSenha=" + encodeURIComponent(nova);
+
+  const resposta = await fetch(url);
+  const dados = await resposta.json();
+
+  if(dados.sucesso){
+    liberarPortal(dados.nome);
+  }else{
+    msg.innerText = dados.mensagem || "Erro ao criar senha.";
+  }
+}
+
+function liberarPortal(nome){
+
+  document.getElementById("loginTela").style.display = "none";
+  document.body.classList.remove("carregando");
+
 }
   carregarPortal();
 
