@@ -1153,8 +1153,9 @@ body:not(.carregando) .highlight {
 }
 
 .doc-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 20px rgba(255,196,0,.25);
+  transform:translateY(-6px) scale(1.03);
+  box-shadow:0 0 25px rgba(255,196,0,.35);
+  border-color:#ffc400;
 }
 
 .doc-icon{
@@ -1944,20 +1945,24 @@ function carregarDocumentos(lista){
     ...new Set(documentosCompletos.map(item => item.CATEGORIA).filter(Boolean))
   ];
 
-  filtros.innerHTML = `
-    <button class="doc-filtro ativo" onclick="filtrarDocumentos('', this)">Todos</button>
+ filtros.innerHTML = "";
+
+categorias.forEach(cat=>{
+
+  filtros.innerHTML += `
+    <button class="categoria-card"
+            onclick="filtrarDocumentos('${cat}', this)">
+      ${cat}
+    </button>
   `;
 
-  categorias.forEach(cat=>{
-    filtros.innerHTML += `
-      <button class="doc-filtro" onclick="filtrarDocumentos('${cat}', this)">
-        ${cat}
-      </button>
-    `;
-  });
+});
 
-  renderizarDocumentos(documentosCompletos);
-}
+ document.getElementById("documentosGrid").innerHTML = `
+  <div class="mensagem-documentos">
+    Selecione uma categoria acima.
+  </div>
+`;
 
 function filtrarDocumentos(categoria, botao){
 
@@ -1997,7 +2002,7 @@ function renderizarDocumentos(lista){
            target="_blank"
            class="doc-card">
 
-          <div class="doc-icon">📄</div>
+        <a href="${item.LINK}" target="_blank" class="doc-card">
           <h3>${item.TITULO || ""}</h3>
           <p>${item.DESCRICAO || ""}</p>
           <span>${item.CATEGORIA || ""}</span>
