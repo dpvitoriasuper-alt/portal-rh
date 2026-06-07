@@ -1554,8 +1554,11 @@ body:not(.carregando) .highlight {
 
     <h2>Portal do Colaborador</h2>
     <p id="loginInstrucao">Acesse com seu CPF e senha.</p>
-
+    
+<div id="formLogin">
+  
     <input type="text" id="loginCpf" placeholder="Digite seu CPF">
+  
     <div class="campo-senha">
   <input type="password" id="loginSenha" placeholder="Senha">
   <button type="button" onclick="mostrarSenha('loginSenha', this)">👁️</button>
@@ -1563,6 +1566,8 @@ body:not(.carregando) .highlight {
 
     <button id="btnEntrar" onclick="fazerLogin()">Entrar</button>
 
+  </div>
+    
     <div id="loginMensagem"></div>
 
     <div id="primeiroAcessoBox" style="display:none;">
@@ -2442,9 +2447,7 @@ async function fazerLogin(){
     if(dados.primeiroAcesso){
       msg.innerText = "Bem-vindo, " + dados.nome + ". Crie sua senha.";
       document.getElementById("primeiroAcessoBox").style.display = "block";
-      document.getElementById("btnEntrar").style.display = "none";
-      document.getElementById("loginCpf").readOnly = true;
-      document.getElementById("loginSenha").readOnly = true;
+      document.getElementById("formLogin").style.display = "none";
       document.getElementById("loginInstrucao").innerText = "Primeiro acesso confirmado. Agora crie sua senha.";
       document.getElementById("novaSenha").focus();
       return;
