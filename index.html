@@ -1274,7 +1274,9 @@ body:not(.carregando) .highlight {
   .login-tela{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.95);
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
   z-index:9999999;
   display:flex;
   justify-content:center;
@@ -1289,7 +1291,32 @@ body:not(.carregando) .highlight {
   text-align:center;
   border:1px solid rgba(255,196,0,.4);
 }
+.campo-senha{
+  position:relative;
+  width:100%;
+  margin-bottom:12px;
+}
 
+.campo-senha input{
+  width:100%;
+  padding-right:55px;
+  margin-bottom:0;
+}
+
+.campo-senha button{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:auto;
+  padding:0;
+  margin:0;
+  background:transparent;
+  color:#ffc400;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+}
 .login-logo{
   height:100px;
   object-fit:contain;
@@ -1348,7 +1375,10 @@ body:not(.carregando) .highlight {
     <p>Acesse com seu CPF e senha.</p>
 
     <input type="text" id="loginCpf" placeholder="Digite seu CPF">
-    <input type="password" id="loginSenha" placeholder="Senha">
+    <div class="campo-senha">
+  <input type="password" id="loginSenha" placeholder="Senha">
+  <button type="button" onclick="mostrarSenha('loginSenha', this)">👁️</button>
+</div>
 
     <button onclick="fazerLogin()">Entrar</button>
 
@@ -1359,8 +1389,15 @@ body:not(.carregando) .highlight {
 
       <p>Primeiro acesso. Crie sua nova senha:</p>
 
-      <input type="password" id="novaSenha" placeholder="Nova senha">
-      <input type="password" id="confirmaSenha" placeholder="Confirmar senha">
+     <div class="campo-senha">
+  <input type="password" id="novaSenha" placeholder="Nova senha">
+  <button type="button" onclick="mostrarSenha('novaSenha', this)">👁️</button>
+</div>
+
+<div class="campo-senha">
+  <input type="password" id="confirmaSenha" placeholder="Confirmar senha">
+  <button type="button" onclick="mostrarSenha('confirmaSenha', this)">👁️</button>
+</div>
 
       <button onclick="criarSenhaPortal()">Salvar senha</button>
     </div>
@@ -2221,6 +2258,17 @@ function liberarPortal(nome){
   document.getElementById("loginTela").style.display = "none";
   document.body.classList.remove("carregando");
 
+}
+  function mostrarSenha(idCampo, botao){
+  const campo = document.getElementById(idCampo);
+
+  if(campo.type === "password"){
+    campo.type = "text";
+    botao.innerText = "🙈";
+  }else{
+    campo.type = "password";
+    botao.innerText = "👁️";
+  }
 }
   carregarPortal();
 
