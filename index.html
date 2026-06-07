@@ -2188,23 +2188,34 @@ async function criarSenhaPortal(){
 
   msg.innerText = "Salvando nova senha...";
 
-  const url =
-    API_URL +
-    "?action=login" +
-    "&cpf=" + encodeURIComponent(cpfLoginTemporario) +
-    "&senha=" + encodeURIComponent(senhaLoginTemporaria) +
-    "&novaSenha=" + encodeURIComponent(nova);
+  try{
 
-  const resposta = await fetch(url);
-  const dados = await resposta.json();
+    const url =
+      API_URL +
+      "?action=login" +
+      "&cpf=" + encodeURIComponent(cpfLoginTemporario) +
+      "&senha=" + encodeURIComponent(senhaLoginTemporaria) +
+      "&novaSenha=" + encodeURIComponent(nova);
 
-  if(dados.sucesso){
-    liberarPortal(dados.nome);
-  }else{
-    msg.innerText = dados.mensagem || "Erro ao criar senha.";
+    console.log("URL CRIAR SENHA:", url);
+
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+
+    console.log("RESPOSTA CRIAR SENHA:", dados);
+
+    if(dados.sucesso){
+      msg.innerText = "Senha criada com sucesso!";
+      liberarPortal(dados.nome);
+    }else{
+      msg.innerText = dados.mensagem || "Erro ao criar senha.";
+    }
+
+  }catch(erro){
+    console.error("ERRO AO CRIAR SENHA:", erro);
+    msg.innerText = "Erro ao salvar senha. Verifique o console.";
   }
 }
-
 function liberarPortal(nome){
 
   document.getElementById("loginTela").style.display = "none";
