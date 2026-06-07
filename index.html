@@ -2126,38 +2126,7 @@ body:not(.carregando) .highlight {
 
 </div>
 <script>
-  const TELEFONES_RH_LOJAS = {
-  COROADO: "5592982554733",
-  CENTRO: "5592981708226",
-  SAO_JOSE: "5592982352382",
-  TURISMO: "5592988170568",
-  TORQUATO: "5592992772611",
-  JAPIIM: "5592993454607",
-  GRANDE_CIRCULAR: "5592982285909"
-};
-
-function abrirModalLojas(){
-  document.getElementById("modalLojas").style.display = "flex";
-}
-
-function fecharModalLojas(){
-  document.getElementById("modalLojas").style.display = "none";
-}
-
-function abrirWhatsappLoja(loja){
-  const telefone = TELEFONES_RH_LOJAS[loja];
-
-  if(!telefone){
-    alert("Telefone da loja não encontrado.");
-    return;
-  }
-
-  const mensagem = "Olá, RH. Vim pelo Portal do Colaborador.";
-  const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
-
-  window.open(url, "_blank");
-}
-
+  
 const API_URL = "https://script.google.com/macros/s/AKfycbz4aLtDg_OEpJ2PD9fyVGlfmSsjFY8MBiZoCJIgE2i79Qe_XYUY-XBNjFhpSG4gtb8/exec";
 function carregarDocumentos(lista){
 
@@ -2914,6 +2883,45 @@ async function limparNotificacaoAtual(){
   }
 }
   carregarPortal();
+<script>
+
+const API_URL = "...";
+
+function carregarDocumentos(lista){
+  ...
+}
+
+function carregarNoticias(lista){
+  ...
+}
+
+function carregarGaleria(lista){
+  ...
+}
+
+/* COLE AQUI */
+
+const TELEFONES_RH_LOJAS = {
+  COROADO: "5592982554733",
+  CENTRO: "5592981708226",
+  SAO_JOSE: "5592982352382",
+  TURISMO: "5592988170568",
+  TORQUATO: "5592992772611",
+  JAPIIM: "5592993454607",
+  GRANDE_CIRCULAR: "5592982285909"
+};
+
+function abrirModalLojas(){
+  document.getElementById("modalLojas").style.display = "flex";
+}
+
+function fecharModalLojas(){
+  document.getElementById("modalLojas").style.display = "none";
+}
+
+function abrirWhatsappLoja(loja){
+  ...
+}
 
 </script>
 <div class="galeria-modal" id="galeriaModal">
