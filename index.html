@@ -2136,6 +2136,7 @@ let senhaLoginTemporaria = "";
 
 async function fazerLogin(){
 
+
   const cpf = document.getElementById("loginCpf").value;
   const senha = document.getElementById("loginSenha").value;
   const msg = document.getElementById("loginMensagem");
@@ -2153,6 +2154,7 @@ async function fazerLogin(){
 
   const resposta = await fetch(url);
   const dados = await resposta.json();
+  console.log("RESPOSTA LOGIN:", dados);
 
   if(!dados.sucesso){
     msg.innerText = dados.mensagem || "Acesso não autorizado.";
