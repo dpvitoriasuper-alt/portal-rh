@@ -9,6 +9,151 @@
 <!-- API configurada no JavaScript -->
   
 <style>
+  .cta{
+  margin-top:28px;
+  border-radius:24px;
+  padding:24px 30px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:stretch;
+  background:linear-gradient(90deg,rgba(190,0,0,.95),rgba(140,0,40,.95),rgba(0,30,140,.95));
+  border:1px solid rgba(255,190,0,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 0 24px rgba(255,190,0,.16);
+}
+
+.cta-bloco-rh,
+.cta-bloco-denuncia{
+  border:1px solid rgba(255,196,0,.35);
+  border-radius:22px;
+  padding:22px;
+  background:rgba(0,0,0,.18);
+}
+
+.cta-bloco-rh{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.cta-bloco-denuncia{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:18px;
+}
+
+.denuncia-area{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.qr{
+  width:85px;
+  height:85px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.qr img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:8px;
+}
+
+.denuncia-btn{
+  background:rgba(0,0,0,.55);
+  color:#ffc400;
+  border:1px solid rgba(255,196,0,.55);
+  border-radius:999px;
+  padding:12px 18px;
+  text-decoration:none;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.modal-lojas{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.86);
+  z-index:9999999;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.modal-lojas-box{
+  width:min(520px,95%);
+  background:linear-gradient(145deg,#111,#050505);
+  border:1px solid rgba(255,196,0,.55);
+  border-radius:24px;
+  padding:26px;
+  text-align:center;
+  position:relative;
+  box-shadow:0 0 30px rgba(255,196,0,.25);
+}
+
+.modal-lojas-box h2{
+  color:#ffc400;
+  margin-bottom:8px;
+}
+
+.modal-lojas-box p{
+  color:#ddd;
+  margin-bottom:20px;
+}
+
+.fechar-modal-lojas{
+  position:absolute;
+  top:12px;
+  right:14px;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.lojas-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.lojas-grid button{
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(145deg,#ffc400,#d99a00);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+}
+
+@media(max-width:980px){
+  .cta{
+    grid-template-columns:1fr;
+  }
+
+  .cta-bloco-rh,
+  .cta-bloco-denuncia{
+    grid-template-columns:1fr;
+  }
+
+  .denuncia-area{
+    justify-content:flex-start;
+  }
+
+  .lojas-grid{
+    grid-template-columns:1fr;
+  }
   .noticia-home-card{
   cursor:pointer;
 }
@@ -1880,6 +2025,49 @@ body:not(.carregando) .highlight {
 
 <section id="contatos" class="cta">
 
+  <div class="cta-bloco-rh">
+
+    <div class="cta-left">
+      <div class="whats-icon">💬</div>
+
+      <div>
+        <h3>Fale com o RH</h3>
+        <p>Escolha sua loja e fale com o RH responsável.</p>
+      </div>
+    </div>
+
+    <button class="whats-btn" onclick="abrirModalLojas()">
+      🟢 Enviar mensagem
+    </button>
+
+  </div>
+
+  <div class="cta-bloco-denuncia">
+
+    <div>
+      <h3>Canal de denúncias anônimas</h3>
+      <p>
+        Para ocorrência, crítica ou sugestão anônima,
+        acesse o canal oficial abaixo.
+      </p>
+    </div>
+
+    <div class="denuncia-area">
+      <div class="qr">
+        <img src="qr-denuncias.png" alt="Canal de Denúncias">
+      </div>
+
+      <a class="denuncia-btn"
+         href="https://reclameaquivitor1.websiteseguro.com/colaboradores/"
+         target="_blank">
+        🔒 Acessar canal
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
   <div class="cta-left">
 
     <div class="whats-icon">
@@ -1938,6 +2126,37 @@ body:not(.carregando) .highlight {
 
 </div>
 <script>
+  const TELEFONES_RH_LOJAS = {
+  COROADO: "5592982554733",
+  CENTRO: "5592981708226",
+  SAO_JOSE: "5592982352382",
+  TURISMO: "5592988170568",
+  TORQUATO: "5592992772611",
+  JAPIIM: "5592993454607",
+  GRANDE_CIRCULAR: "5592982285909"
+};
+
+function abrirModalLojas(){
+  document.getElementById("modalLojas").style.display = "flex";
+}
+
+function fecharModalLojas(){
+  document.getElementById("modalLojas").style.display = "none";
+}
+
+function abrirWhatsappLoja(loja){
+  const telefone = TELEFONES_RH_LOJAS[loja];
+
+  if(!telefone){
+    alert("Telefone da loja não encontrado.");
+    return;
+  }
+
+  const mensagem = "Olá, RH. Vim pelo Portal do Colaborador.";
+  const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
+
+  window.open(url, "_blank");
+}
 
 const API_URL = "https://script.google.com/macros/s/AKfycbz4aLtDg_OEpJ2PD9fyVGlfmSsjFY8MBiZoCJIgE2i79Qe_XYUY-XBNjFhpSG4gtb8/exec";
 function carregarDocumentos(lista){
@@ -2783,6 +3002,23 @@ async function limparNotificacaoAtual(){
     </div>
   </div>
 </div>
+<div id="modalLojas" class="modal-lojas">
+  <div class="modal-lojas-box">
+    <button class="fechar-modal-lojas" onclick="fecharModalLojas()">✕</button>
 
+    <h2>Escolha sua loja</h2>
+    <p>Selecione a unidade para falar com o RH responsável.</p>
+
+    <div class="lojas-grid">
+      <button onclick="abrirWhatsappLoja('COROADO')">Coroado</button>
+      <button onclick="abrirWhatsappLoja('CENTRO')">Centro</button>
+      <button onclick="abrirWhatsappLoja('SAO_JOSE')">São José</button>
+      <button onclick="abrirWhatsappLoja('TURISMO')">Turismo</button>
+      <button onclick="abrirWhatsappLoja('TORQUATO')">Torquato</button>
+      <button onclick="abrirWhatsappLoja('JAPIIM')">Japiim</button>
+      <button onclick="abrirWhatsappLoja('GRANDE_CIRCULAR')">Grande Circular</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
