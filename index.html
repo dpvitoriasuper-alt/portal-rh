@@ -1587,7 +1587,7 @@ async function carregarPortal(){
     const dados = await resposta.json();
 
     console.log("DADOS DO PORTAL:", dados);
-
+console.log("DOCUMENTOS RECEBIDOS:", dados.DOCUMENTOS);
     carregarAvisos(dados.AVISOS);
     carregarAniversariantes(dados.ANIVERSARIANTES);
     carregarDestaque(dados.DESTAQUE);
@@ -2067,17 +2067,20 @@ function fecharDocumentos(){
   </div>
 
 </div>
-  <div id="documentosModal" class="documentos-modal">
+ <div id="documentosModal" class="documentos-modal">
 
   <div class="documentos-box">
 
     <div class="documentos-header">
       <h2>📁 Documentos úteis</h2>
-
       <button onclick="fecharDocumentos()">✕</button>
     </div>
 
-    <div id="documentosGrid"></div>
+    <div class="documentos-filtros" id="documentosFiltros"></div>
+
+    <div class="documentos-grid" id="documentosGrid">
+      <p>Carregando documentos...</p>
+    </div>
 
   </div>
 
