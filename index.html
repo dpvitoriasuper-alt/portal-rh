@@ -1977,8 +1977,9 @@ body:not(.carregando) .highlight {
 
   <div class="row-title">
     <h2 class="section-title">📰 Notícias da Rede Vitória</h2>
-    <a href="#" class="btn">Ver todas ›</a>
-  </div>
+   <a href="javascript:void(0)" class="btn" onclick="mostrarTodasNoticias()">
+  Ver todas ›
+</a>
 
   <div class="noticias-home-grid" id="noticiasGrid">
     <div class="noticia-home-card gloss">
@@ -2053,9 +2054,9 @@ body:not(.carregando) .highlight {
     📢 Avisos importantes
   </h2>
 
-  <a href="#" class="btn">
-    Ver todos ›
-  </a>
+  <a href="javascript:void(0)" class="btn" onclick="mostrarTodosAvisos()">
+  Ver todos ›
+</a>
 
 </div>
 
@@ -2268,13 +2269,18 @@ async function carregarPortal(){
     const dados = await resposta.json();
 
     console.log("DADOS DO PORTAL:", dados);
-console.log("DOCUMENTOS RECEBIDOS:", dados.DOCUMENTOS);
-    carregarAvisos(dados.AVISOS);
+    console.log("DOCUMENTOS RECEBIDOS:", dados.DOCUMENTOS);
+
+    window.todosAvisos = dados.AVISOS || [];
+    window.todasNoticias = dados.NOTICIAS || [];
+
+    carregarAvisos(window.todosAvisos, false);
     carregarAniversariantes(dados.ANIVERSARIANTES);
     carregarDestaque(dados.DESTAQUE);
     carregarGaleria(dados.GALERIA);
-    carregarNoticias(dados.NOTICIAS);
+    carregarNoticias(window.todasNoticias, false);
     carregarDocumentos(dados.DOCUMENTOS);
+
     console.log("NOTICIAS RECEBIDAS:", dados.NOTICIAS);
     
     document.body.classList.remove("carregando");
@@ -2289,9 +2295,13 @@ console.log("DOCUMENTOS RECEBIDOS:", dados.DOCUMENTOS);
 
 /* AVISOS */
 
-function carregarAvisos(lista){
+function carregarAvisos(lista, mostrarTodos = false){
 
   if(!lista || lista.length === 0) return;
+  
+  lista = mostrarTodos
+  ? lista
+  : lista.slice(0,3);
 
   const cards = document.querySelectorAll(".notice");
 
@@ -2374,7 +2384,7 @@ function carregarDestaque(lista){
   texto.innerHTML = destaque.TEXTO || "";
 
 }
- function carregarNoticias(lista){
+ function carregarNoticias(lista, mostrarTodas = false){
 
   console.log("NOTICIAS COMPLETAS:", lista);
 
@@ -2398,10 +2408,11 @@ function carregarDestaque(lista){
     return;
   }
 
-  noticiasAtivas
-    .sort((a,b) => Number(a.ORDEM || 0) - Number(b.ORDEM || 0))
-    .slice(0,3)
-    .forEach(item=>{
+  const noticiasExibidas = noticiasAtivas
+  .sort((a,b) => Number(a.ORDEM || 0) - Number(b.ORDEM || 0))
+  .slice(0, mostrarTodas ? noticiasAtivas.length : 3);
+
+noticiasExibidas.forEach(item=>{
 
       container.innerHTML += `
         <div class="noticia-home-card gloss"
@@ -3014,6 +3025,13 @@ function abrirWhatsappLoja(loja){
   const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
 
   window.open(url, "_blank");
+}
+  function mostrarTodasNoticias(){
+  carregarNoticias(window.todasNoticias || [], true);
+}
+
+function mostrarTodosAvisos(){
+  carregarAvisos(window.todosAvisos || [], true);
 }
 
 </script>
