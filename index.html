@@ -2037,6 +2037,12 @@ body:not(.carregando) .highlight {
 
 <section class="quick-grid">
 
+  <a href="javascript:void(0)" onclick="abrirMeusContracheques()" class="quick-card gloss">
+    <div class="icon">📄</div>
+    <h3>Meus Contracheques</h3>
+    <p>Acesse seus contracheques disponíveis</p>
+  </a>
+
   <a href="#avisos" class="quick-card gloss">
     <div class="icon">📢</div>
     <h3>Avisos</h3>
@@ -2330,6 +2336,67 @@ async function carregarPortal(){
 
   }
 
+}
+  async function abrirMeusContracheques(){
+  const modal = document.getElementById("contrachequesModal");
+  const lista = document.getElementById("contrachequesLista");
+
+  modal.style.display = "flex";
+  lista.innerHTML = "<p>Carregando seus contracheques...</p>";
+
+  const loginSalvo = localStorage.getItem("portalLogin");
+
+  if(!loginSalvo){
+    lista.innerHTML = "<p>Sessão expirada. Faça login novamente.</p>";
+    return;
+  }
+
+  const sessao = JSON.parse(loginSalvo);
+  const cpf = sessao.dados.cpf;
+
+  const url =
+    API_URL +
+    "?action=contracheques" +
+    "&cpf=" + encodeURIComponent(cpf);
+
+  try{
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+
+    if(!dados.sucesso){
+      lista.innerHTML = "<p>" + (dados.mensagem || "Erro ao buscar contracheques.") + "</p>";
+      return;
+    }
+
+    if(!dados.contracheques || dados.contracheques.length === 0){
+      lista.innerHTML = "<p>Nenhum contracheque disponível para este CPF.</p>";
+      return;
+    }
+
+    lista.innerHTML = "";
+
+    dados.contracheques.forEach(item => {
+      lista.innerHTML += `
+        <div class="doc-card" style="height:auto;min-height:150px;">
+          <div class="doc-icon">📄</div>
+          <h3>${item.competencia || "Contracheque"}</h3>
+          <p>Status: ${item.status || "Disponível"}</p>
+
+          <a href="${item.link}" target="_blank" class="btn">
+            👁 Visualizar
+          </a>
+        </div>
+      `;
+    });
+
+  }catch(erro){
+    console.error("Erro ao buscar contracheques:", erro);
+    lista.innerHTML = "<p>Erro ao carregar contracheques.</p>";
+  }
+}
+
+function fecharMeusContracheques(){
+  document.getElementById("contrachequesModal").style.display = "none";
 }
 
 /* AVISOS */
@@ -3222,6 +3289,19 @@ function mostrarTodosAvisos(){
       <button onclick="abrirWhatsappLoja('TORQUATO')">Torquato</button>
       <button onclick="abrirWhatsappLoja('JAPIIM')">Japiim</button>
       <button onclick="abrirWhatsappLoja('GRANDE_CIRCULAR')">Grande Circular</button>
+    </div>
+  </div>
+</div>
+  
+  <div id="contrachequesModal" class="documentos-modal">
+  <div class="documentos-box">
+    <div class="documentos-header">
+      <h2>📄 Meus Contracheques</h2>
+      <button onclick="fecharMeusContracheques()">×</button>
+    </div>
+
+    <div id="contrachequesLista">
+      Carregando...
     </div>
   </div>
 </div>
