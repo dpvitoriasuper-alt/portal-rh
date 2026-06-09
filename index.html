@@ -393,6 +393,36 @@ nav a:hover{
   background:rgba(255,190,0,.08);
   box-shadow:0 0 16px rgba(255,190,0,.25);
 }
+  .topo-colaborador{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:10px;
+}
+
+.btn-sair{
+  background:linear-gradient(145deg,#d40000,#8f0000);
+  color:#fff;
+  border:none;
+  border-radius:999px;
+  padding:10px 18px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.btn-sair:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 15px rgba(255,0,0,.4);
+}
+
+@media(max-width:980px){
+  .topo-colaborador{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
 
 /* HERO */
 
@@ -1904,7 +1934,16 @@ body:not(.carregando) .highlight {
 <section id="areaColaborador" class="area-colaborador">
 
   <div class="colaborador-card gloss">
-    <h2 id="saudacaoColaborador">Olá, colaborador!</h2>
+
+    <div class="topo-colaborador">
+      <h2 id="saudacaoColaborador">Olá, colaborador!</h2>
+
+      <button onclick="sairPortal()" class="btn-sair">
+        🚪 Sair
+      </button>
+    </div>
+
+    <p id="ultimoAcessoTexto">Seu último acesso será exibido aqui.</p>
     <p id="ultimoAcessoTexto">Seu último acesso será exibido aqui.</p>
 
     <div class="perfil-grid">
@@ -2857,7 +2896,17 @@ function senhaEhFacil(senha){
 
   return false;
 }
-  
+  function sairPortal(){
+
+  localStorage.removeItem("portalLogin");
+
+  cpfLogado = "";
+
+  document.getElementById("loginTela").style.display = "flex";
+  document.getElementById("areaColaborador").style.display = "none";
+
+  location.reload();
+}
 function liberarPortal(dados){
 
   localStorage.setItem("portalLogin", JSON.stringify({
