@@ -2294,48 +2294,54 @@ async function carregarPortal(){
 }
 
 /* AVISOS */
-
 function carregarAvisos(lista, mostrarTodos = false){
 
-  if(!lista || lista.length === 0) return;
-  
-  lista = mostrarTodos
-  ? lista
-  : lista.slice(0,3);
+  const container = document.getElementById("avisos");
 
-  const cards = document.querySelectorAll(".notice");
+  if(!container) return;
 
-  lista.forEach((item,index)=>{
+  container.innerHTML = "";
 
-    if(cards[index]){
+  if(!lista || lista.length === 0){
+    container.innerHTML = "<p>Nenhum aviso cadastrado.</p>";
+    return;
+  }
 
-      const titulo = cards[index].querySelector(".notice-top h3");
-      const descricao = cards[index].querySelector(".notice-top p");
-      const tituloBaixo = cards[index].querySelector(".notice-body h4");
-      const textoBaixo = cards[index].querySelector(".notice-body p");
-      const data = cards[index].querySelector(".date");
-      const topo = cards[index].querySelector(".notice-top");
+  const avisosAtivos = lista
+    .filter(item => String(item.ATIVO || "").trim().toUpperCase() === "SIM")
+    .sort((a,b) => Number(a.ORDEM || 0) - Number(b.ORDEM || 0));
 
-    titulo.innerHTML = item.TITULO || "";
-      if(item.FUNDO){
-   topo.style.background = item.FUNDO;
-}
+  const avisosExibidos = mostrarTodos
+    ? avisosAtivos
+    : avisosAtivos.slice(0,3);
 
-descricao.innerHTML = `
-${item.SUBTITULO || ""}
-<br><br>
-<em>${item.FRASE || ""}</em>
-`;
+  avisosExibidos.forEach(item => {
 
-tituloBaixo.innerHTML = item.TITULO_BAIXO || "";
+    container.innerHTML += `
+      <div class="notice gloss">
 
-textoBaixo.innerHTML = item.DESCRICAO_BAIXO || "";
+        <div class="notice-top" style="background:${item.FUNDO || 'linear-gradient(135deg,#fff2bf,#c89112)'}">
+          <h3>${item.TITULO || ""}</h3>
+          <p>
+            ${item.SUBTITULO || ""}
+            <br><br>
+            <em>${item.FRASE || ""}</em>
+          </p>
+        </div>
 
-data.innerHTML = "📅 " + (item.DATA ? new Date(item.DATA).toLocaleDateString("pt-BR") : "");
-    }
+        <div class="notice-body">
+          <h4>${item.TITULO_BAIXO || item.TITULO || ""}</h4>
+          <p>${item.DESCRICAO_BAIXO || ""}</p>
+          <span class="date">
+            📅 ${item.DATA ? new Date(item.DATA).toLocaleDateString("pt-BR") : ""}
+          </span>
+        </div>
+
+      </div>
+    `;
 
   });
-
+  
 }
 
 /* ANIVERSARIANTES */
