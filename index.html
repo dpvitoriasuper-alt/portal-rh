@@ -1345,6 +1345,23 @@ body:not(.carregando) .highlight {
   margin-bottom:10px;
 }
 
+  .ano-contracheque{
+  width:100%;
+  margin-bottom:28px;
+}
+
+.ano-contracheque h3{
+  color:#ffc400;
+  margin-bottom:14px;
+  font-size:24px;
+}
+
+.grid-contracheques{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+  
 .doc-card h3{
   color:#ffc400;
   font-size:19px;
@@ -2373,21 +2390,50 @@ async function carregarPortal(){
       return;
     }
 
-    lista.innerHTML = "";
+  const porAno = {};
 
-    dados.contracheques.forEach(item => {
-      lista.innerHTML += `
-        <div class="doc-card" style="height:auto;min-height:150px;">
-          <div class="doc-icon">📄</div>
-          <h3>${item.competencia || "Contracheque"}</h3>
-          <p>Status: ${item.status || "Disponível"}</p>
+dados.contracheques.forEach(item => {
+  const ano = item.ano || "Sem ano";
 
-          <a href="${item.link}" target="_blank" class="btn">
-            👁 Visualizar
-          </a>
-        </div>
-      `;
-    });
+  if(!porAno[ano]){
+    porAno[ano] = [];
+  }
+
+  porAno[ano].push(item);
+});
+
+lista.innerHTML = "";
+
+Object.keys(porAno)
+  .sort((a,b) => Number(b) - Number(a))
+  .forEach(ano => {
+
+    lista.innerHTML += `
+      <div class="ano-contracheque">
+        <h3>📅 ${ano}</h3>
+        <div class="grid-contracheques" id="ano-${ano}"></div>
+      </div>
+    `;
+
+    const gridAno = lista.querySelector(`#ano-${ano}`);
+
+    porAno[ano]
+      .sort((a,b) => Number(b.mes) - Number(a.mes))
+      .forEach(item => {
+        gridAno.innerHTML += `
+          <div class="doc-card" style="height:auto;min-height:150px;">
+            <div class="doc-icon">📄</div>
+            <h3>${formatarCompetenciaContracheque(item.competencia)}</h3>
+            <p>Status: ${item.status || "Disponível"}</p>
+
+            <a href="${item.link}" target="_blank" class="btn">
+              👁 Visualizar
+            </a>
+          </div>
+        `;
+      });
+
+  });
 
   }catch(erro){
     console.error("Erro ao buscar contracheques:", erro);
@@ -2397,6 +2443,30 @@ async function carregarPortal(){
 
 function fecharMeusContracheques(){
   document.getElementById("contrachequesModal").style.display = "none";
+}
+
+function formatarCompetenciaContracheque(comp){
+
+  const meses = {
+    "01":"Janeiro",
+    "02":"Fevereiro",
+    "03":"Março",
+    "04":"Abril",
+    "05":"Maio",
+    "06":"Junho",
+    "07":"Julho",
+    "08":"Agosto",
+    "09":"Setembro",
+    "10":"Outubro",
+    "11":"Novembro",
+    "12":"Dezembro"
+  };
+
+  const partes = String(comp || "").split("/");
+  const mes = partes[0];
+  const ano = partes[1];
+
+  return (meses[mes] || comp) + (ano ? "/" + ano : "");
 }
 
 /* AVISOS */
