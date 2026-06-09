@@ -2860,6 +2860,11 @@ function senhaEhFacil(senha){
   
 function liberarPortal(dados){
 
+  localStorage.setItem("portalLogin", JSON.stringify({
+    dados: dados,
+    expira: new Date().getTime() + (24 * 60 * 60 * 1000)
+  }));
+
   cpfLogado = dados.cpf || cpfLoginTemporario || "";
 
   document.getElementById("loginTela").style.display = "none";
@@ -2999,7 +3004,33 @@ async function limparNotificacaoAtual(){
     botao.innerText = "👁️";
   }
 }
-  carregarPortal();
+  function verificarLoginSalvo(){
+
+  const loginSalvo = localStorage.getItem("portalLogin");
+
+  if(!loginSalvo) return false;
+
+  try{
+    const sessao = JSON.parse(loginSalvo);
+
+    if(new Date().getTime() > sessao.expira){
+      localStorage.removeItem("portalLogin");
+      return false;
+    }
+
+    liberarPortal(sessao.dados);
+    return true;
+
+  }catch(erro){
+    localStorage.removeItem("portalLogin");
+    return false;
+  }
+}
+ carregarPortal();
+
+setTimeout(() => {
+  verificarLoginSalvo();
+}, 500);
 
 const TELEFONES_RH_LOJAS = {
   COROADO: "5592982554733",
