@@ -2446,17 +2446,27 @@ Object.keys(porAno)
       .sort((a,b) => Number(b.mes) - Number(a.mes))
       .forEach(item => {
         gridAno.innerHTML += `
-          <div class="doc-card" style="height:auto;min-height:150px;">
-            <div class="doc-icon">📄</div>
-            <h3>${formatarCompetenciaContracheque(item.competencia)}</h3>
-            <p>Status: ${item.status || "Disponível"}</p>
+  <div class="doc-card" style="height:auto;min-height:170px;">
+    <div class="doc-icon">📄</div>
+    <h3>${formatarCompetenciaContracheque(item.competencia)}</h3>
 
-            <a href="${item.link}" target="_blank" class="btn">
-              👁 Visualizar
-            </a>
-          </div>
-        `;
-      });
+    ${
+      item.recebido
+      ? `
+        <p>✅ Recebido</p>
+        <a href="${item.link}" target="_blank" class="btn">
+          👁 Visualizar
+        </a>
+      `
+      : `
+        <p>⏳ Pendente de recebimento</p>
+        <button class="btn" onclick="abrirRecebimentoContracheque('${item.competencia}')">
+          📥 Receber
+        </button>
+      `
+    }
+  </div>
+`;      });
 
   });
 
@@ -2500,6 +2510,83 @@ function formatarCompetenciaContracheque(comp){
   if(!grid) return;
 
   grid.style.display = grid.style.display === "none" ? "flex" : "none";
+}
+  let competenciaRecebimentoAtual = "";
+
+function abrirRecebimentoContracheque(competencia){
+  competenciaRecebimentoAtual = competencia;
+
+  document.getElementById("recebimentoCompetenciaTexto").innerText =
+    "Competência: " + formatarCompetenciaContracheque(competencia);
+
+  document.getElementById("aceiteContracheque").checked = false;
+  document.getElementById("senhaRecebimento").value = "";
+  document.getElementById("mensagemRecebimento").innerText = "";
+
+  document.getElementById("recebimentoModal").style.display = "flex";
+}
+
+function fecharRecebimentoContracheque(){
+  document.getElementById("recebimentoModal").style.display = "none";
+}
+
+async function confirmarRecebimentoContracheque(){
+  const msg = document.getElementById("mensagemRecebimento");
+  const aceite = document.getElementById("aceiteContracheque").checked;
+  const senha = document.getElementById("senhaRecebimento").value;
+
+  if(!aceite){
+    msg.innerText = "Você precisa marcar a declaração de recebimento.";
+    return;
+  }
+
+  if(!senha){
+    msg.innerText = "Digite sua senha para confirmar.";
+    return;
+  }
+
+  const loginSalvo = localStorage.getItem("portalLogin");
+
+  if(!loginSalvo){
+    msg.innerText = "Sessão expirada. Faça login novamente.";
+    return;
+  }
+
+  const sessao = JSON.parse(loginSalvo);
+  const cpf = sessao.dados.cpf;
+
+  msg.innerText = "Registrando recebimento...";
+
+  const url =
+    API_URL +
+    "?action=receberContracheque" +
+    "&cpf=" + encodeURIComponent(cpf) +
+    "&senha=" + encodeURIComponent(senha) +
+    "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
+    "&navegador=" + encodeURIComponent(navigator.userAgent) +
+    "&sistema=" + encodeURIComponent(navigator.platform || "") +
+    "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador");
+
+  try{
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+
+    if(!dados.sucesso){
+      msg.innerText = dados.mensagem || "Não foi possível registrar.";
+      return;
+    }
+
+    msg.innerText = "Recebimento confirmado. Protocolo: " + dados.protocolo;
+
+    setTimeout(() => {
+      fecharRecebimentoContracheque();
+      abrirMeusContracheques();
+    }, 1200);
+
+  }catch(erro){
+    console.error("Erro ao confirmar recebimento:", erro);
+    msg.innerText = "Erro ao registrar recebimento.";
+  }
 }
 
 /* AVISOS */
@@ -3406,6 +3493,35 @@ function mostrarTodosAvisos(){
     <div id="contrachequesLista">
       Carregando...
     </div>
+  </div>
+</div>
+  <div id="recebimentoModal" class="documentos-modal" style="display:none;">
+  <div class="documentos-box" style="max-width:650px;">
+
+    <div class="documentos-header">
+      <h2>📥 Receber Contracheque</h2>
+      <button onclick="fecharRecebimentoContracheque()">✕</button>
+    </div>
+
+    <p id="recebimentoCompetenciaTexto"></p>
+
+    <label style="display:flex;gap:10px;align-items:flex-start;margin:18px 0;color:#fff;">
+      <input type="checkbox" id="aceiteContracheque" style="margin-top:5px;">
+      <span>
+        Declaro que recebi e tive acesso ao meu contracheque referente à competência informada,
+        estando ciente das verbas, descontos e informações nele constantes.
+      </span>
+    </label>
+
+    <input type="password" id="senhaRecebimento" placeholder="Confirme sua senha"
+      style="width:100%;padding:14px;border-radius:14px;border:1px solid #ffc400;background:#111;color:#fff;margin-bottom:14px;">
+
+    <button class="btn" onclick="confirmarRecebimentoContracheque()">
+      Confirmar recebimento
+    </button>
+
+    <p id="mensagemRecebimento" style="margin-top:15px;color:#ffc400;font-weight:800;"></p>
+
   </div>
 </div>
 </body>
