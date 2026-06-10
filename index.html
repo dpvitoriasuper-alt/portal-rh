@@ -2542,6 +2542,27 @@ function alternarSenhaRecebimento(){
   }
 
 }
+  function identificarVersaoNavegador(){
+  const ua = navigator.userAgent;
+
+  if(ua.includes("Edg/")){
+    return "Edge " + (ua.match(/Edg\/([\d.]+)/) || [,""])[1];
+  }
+
+  if(ua.includes("Chrome/")){
+    return "Chrome " + (ua.match(/Chrome\/([\d.]+)/) || [,""])[1];
+  }
+
+  if(ua.includes("Firefox/")){
+    return "Firefox " + (ua.match(/Firefox\/([\d.]+)/) || [,""])[1];
+  }
+
+  if(ua.includes("Safari/") && ua.includes("Version/")){
+    return "Safari " + (ua.match(/Version\/([\d.]+)/) || [,""])[1];
+  }
+
+  return "Não identificado";
+}
   
 async function confirmarRecebimentoContracheque(){
   const msg = document.getElementById("mensagemRecebimento");
@@ -3558,7 +3579,10 @@ function mostrarTodosAvisos(){
 
 </div>
 
-<button class="btn" onclick="confirmarRecebimentoContracheque()">
+<button
+  class="btn"
+  onclick="confirmarRecebimentoContracheque()"
+  style="margin-top:20px;">
   Confirmar recebimento
 </button>
 
