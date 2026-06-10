@@ -2637,6 +2637,7 @@ try{
   try{
     const resposta = await fetch(url);
     const dados = await resposta.json();
+    console.log("RETORNO RECEBIMENTO:", dados);
 
     if(!dados.sucesso){
       msg.innerText = dados.mensagem || "Não foi possível registrar.";
@@ -2651,9 +2652,9 @@ try{
     }, 1200);
 
   }catch(erro){
-    console.error("Erro ao confirmar recebimento:", erro);
-    msg.innerText = "Erro ao registrar recebimento.";
-  }
+  console.error("Erro ao confirmar recebimento:", erro);
+  msg.innerText = "Erro ao registrar recebimento: " + erro.message;
+}
 }  
   
 /* AVISOS */
