@@ -2618,22 +2618,25 @@ try{
   msg.innerText = "Registrando recebimento...";
 
   const url =
-    API_URL +
-    "?action=receberContracheque" +
-    "&cpf=" + encodeURIComponent(cpf) +
-    "&senha=" + encodeURIComponent(senha) +
-    "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
-    "&navegador=" + encodeURIComponent(navigator.userAgent) +
-    "&sistema=" + encodeURIComponent(navigator.platform || "") +
-    "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador") +
-    "&resolucao=" + encodeURIComponent(resolucaoTela) +
-    "&versaoNavegador=" + encodeURIComponent(versaoNavegador) +
-    "&ip=" + encodeURIComponent(ipPublico) +
-"&cidade=" + encodeURIComponent(cidade) +
-"&estado=" + encodeURIComponent(estado) +
-"&pais=" + encodeURIComponent(pais)
-    "&v=" + new Date().getTime();
-
+  API_URL +
+  "?action=receberContracheque" +
+  "&cpf=" + encodeURIComponent(cpf) +
+  "&senha=" + encodeURIComponent(senha) +
+  "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
+  "&navegador=" + encodeURIComponent(versaoNavegador) +
+  "&sistema=" + encodeURIComponent(navigator.platform || "") +
+  "&dispositivo=" + encodeURIComponent(
+      /Mobi|Android/i.test(navigator.userAgent)
+        ? "Celular"
+        : "Computador"
+    ) +
+  "&resolucao=" + encodeURIComponent(resolucaoTela) +
+  "&versaoNavegador=" + encodeURIComponent(versaoNavegador) +
+  "&ip=" + encodeURIComponent(ipPublico) +
+  "&cidade=" + encodeURIComponent(cidade) +
+  "&estado=" + encodeURIComponent(estado) +
+  "&pais=" + encodeURIComponent(pais) +
+  "&v=" + new Date().getTime();
   try{
     const resposta = await fetch(url);
     const dados = await resposta.json();
