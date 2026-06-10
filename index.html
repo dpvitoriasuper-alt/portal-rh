@@ -3536,15 +3536,33 @@ function mostrarTodosAvisos(){
       font-size:20px;">
     👁
   </span>
+<div style="position:relative;margin-bottom:14px;">
+
+  <input
+    type="password"
+    id="senhaRecebimento"
+    placeholder="Confirme sua senha"
+    style="width:100%;padding:14px 50px 14px 14px;border-radius:14px;border:1px solid #ffc400;background:#111;color:#fff;">
+
+  <span
+    onclick="alternarSenhaRecebimento()"
+    style="
+      position:absolute;
+      right:15px;
+      top:50%;
+      transform:translateY(-50%);
+      cursor:pointer;
+      font-size:18px;">
+    👁
+  </span>
+
 </div>
-      style="width:100%;padding:14px;border-radius:14px;border:1px solid #ffc400;background:#111;color:#fff;margin-bottom:14px;">
 
-    <button class="btn" onclick="confirmarRecebimentoContracheque()">
-      Confirmar recebimento
-    </button>
+<button class="btn" onclick="confirmarRecebimentoContracheque()">
+  Confirmar recebimento
+</button>
 
-    <p id="mensagemRecebimento" style="margin-top:15px;color:#ffc400;font-weight:800;"></p>
-
+<p id="mensagemRecebimento" style="margin-top:15px;color:#ffc400;font-weight:800;"></p>
   </div>
 </div>
 </body>
