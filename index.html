@@ -2552,21 +2552,26 @@ async function confirmarRecebimentoContracheque(){
     return;
   }
 
-const resolucaoTela = screen.width + "x" + screen.height;
-const versaoNavegador = identificarVersaoNavegador();
+  const sessao = JSON.parse(loginSalvo);
+  const cpf = sessao.dados.cpf;
 
-const url =
-  API_URL +
-  "?action=receberContracheque" +
-  "&cpf=" + encodeURIComponent(cpf) +
-  "&senha=" + encodeURIComponent(senha) +
-  "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
-  "&navegador=" + encodeURIComponent(navigator.userAgent) +
-  "&sistema=" + encodeURIComponent(navigator.platform || "") +
-  "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador") +
-  "&resolucao=" + encodeURIComponent(resolucaoTela) +
-  "&versaoNavegador=" + encodeURIComponent(versaoNavegador) +
-  "&v=" + new Date().getTime();
+  const resolucaoTela = screen.width + "x" + screen.height;
+  const versaoNavegador = identificarVersaoNavegador();
+
+  msg.innerText = "Registrando recebimento...";
+
+  const url =
+    API_URL +
+    "?action=receberContracheque" +
+    "&cpf=" + encodeURIComponent(cpf) +
+    "&senha=" + encodeURIComponent(senha) +
+    "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
+    "&navegador=" + encodeURIComponent(navigator.userAgent) +
+    "&sistema=" + encodeURIComponent(navigator.platform || "") +
+    "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador") +
+    "&resolucao=" + encodeURIComponent(resolucaoTela) +
+    "&versaoNavegador=" + encodeURIComponent(versaoNavegador) +
+    "&v=" + new Date().getTime();
 
   try{
     const resposta = await fetch(url);
@@ -2588,29 +2593,7 @@ const url =
     console.error("Erro ao confirmar recebimento:", erro);
     msg.innerText = "Erro ao registrar recebimento.";
   }
-}
-function identificarVersaoNavegador(){
-  const ua = navigator.userAgent;
-
-  if(ua.includes("Edg/")){
-    return "Edge " + (ua.match(/Edg\/([\d.]+)/) || [,""])[1];
-  }
-
-  if(ua.includes("Chrome/")){
-    return "Chrome " + (ua.match(/Chrome\/([\d.]+)/) || [,""])[1];
-  }
-
-  if(ua.includes("Firefox/")){
-    return "Firefox " + (ua.match(/Firefox\/([\d.]+)/) || [,""])[1];
-  }
-
-  if(ua.includes("Safari/") && ua.includes("Version/")){
-    return "Safari " + (ua.match(/Version\/([\d.]+)/) || [,""])[1];
-  }
-
-  return "Não identificado";
-}
-  
+}  
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
 
@@ -3535,7 +3518,25 @@ function mostrarTodosAvisos(){
       </span>
     </label>
 
-    <input type="password" id="senhaRecebimento" placeholder="Confirme sua senha"
+    <div style="position:relative;">
+  <input
+    type="password"
+    id="senhaRecebimento"
+    placeholder="Confirme sua senha"
+    style="width:100%;padding:14px 50px 14px 14px;border-radius:14px;border:1px solid #ffc400;background:#111;color:#fff;">
+
+  <span
+    onclick="alternarSenhaRecebimento()"
+    style="
+      position:absolute;
+      right:15px;
+      top:50%;
+      transform:translateY(-50%);
+      cursor:pointer;
+      font-size:20px;">
+    👁
+  </span>
+</div>
       style="width:100%;padding:14px;border-radius:14px;border:1px solid #ffc400;background:#111;color:#fff;margin-bottom:14px;">
 
     <button class="btn" onclick="confirmarRecebimentoContracheque()">
