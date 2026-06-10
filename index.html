@@ -2529,7 +2529,20 @@ function abrirRecebimentoContracheque(competencia){
 function fecharRecebimentoContracheque(){
   document.getElementById("recebimentoModal").style.display = "none";
 }
+function alternarSenhaRecebimento(){
 
+  const campo = document.getElementById("senhaRecebimento");
+
+  if(!campo) return;
+
+  if(campo.type === "password"){
+    campo.type = "text";
+  }else{
+    campo.type = "password";
+  }
+
+}
+  
 async function confirmarRecebimentoContracheque(){
   const msg = document.getElementById("mensagemRecebimento");
   const aceite = document.getElementById("aceiteContracheque").checked;
@@ -2594,6 +2607,7 @@ async function confirmarRecebimentoContracheque(){
     msg.innerText = "Erro ao registrar recebimento.";
   }
 }  
+  
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
 
@@ -3519,12 +3533,7 @@ function mostrarTodosAvisos(){
     </label>
 
     <div style="position:relative;">
-  <input
-    type="password"
-    id="senhaRecebimento"
-    placeholder="Confirme sua senha"
-    style="width:100%;padding:14px 50px 14px 14px;border-radius:14px;border:1px solid #ffc400;background:#111;color:#fff;">
-
+  
   <span
     onclick="alternarSenhaRecebimento()"
     style="
