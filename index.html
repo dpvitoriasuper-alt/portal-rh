@@ -2637,6 +2637,7 @@ try{
   "&estado=" + encodeURIComponent(estado) +
   "&pais=" + encodeURIComponent(pais) +
   "&v=" + new Date().getTime();
+ 
   try{
     const resposta = await fetch(url);
     const dados = await resposta.json();
