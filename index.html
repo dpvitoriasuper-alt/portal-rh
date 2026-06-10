@@ -1361,6 +1361,27 @@ body:not(.carregando) .highlight {
   flex-wrap:wrap;
   gap:20px;
 }
+
+  .btn-ano-contracheque{
+  width:100%;
+  background:rgba(0,0,0,.55);
+  color:#ffc400;
+  border:1px solid rgba(255,196,0,.45);
+  border-radius:16px;
+  padding:14px 18px;
+  font-size:22px;
+  font-weight:900;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.btn-ano-contracheque:hover{
+  background:rgba(255,196,0,.08);
+  box-shadow:0 0 12px rgba(255,196,0,.25);
+}
   
 .doc-card h3{
   color:#ffc400;
@@ -2409,11 +2430,15 @@ Object.keys(porAno)
   .forEach(ano => {
 
     lista.innerHTML += `
-      <div class="ano-contracheque">
-        <h3>📅 ${ano}</h3>
-        <div class="grid-contracheques" id="ano-${ano}"></div>
-      </div>
-    `;
+  <div class="ano-contracheque">
+    <button class="btn-ano-contracheque" onclick="alternarAnoContracheque('${ano}')">
+      📅 ${ano}
+      <span>▼</span>
+    </button>
+
+    <div class="grid-contracheques" id="ano-${ano}" style="display:none;"></div>
+  </div>
+`;
 
     const gridAno = lista.querySelector(`#ano-${ano}`);
 
@@ -2467,6 +2492,14 @@ function formatarCompetenciaContracheque(comp){
   const ano = partes[1];
 
   return (meses[mes] || comp) + (ano ? "/" + ano : "");
+}
+  
+  function alternarAnoContracheque(ano){
+  const grid = document.getElementById("ano-" + ano);
+
+  if(!grid) return;
+
+  grid.style.display = grid.style.display === "none" ? "flex" : "none";
 }
 
 /* AVISOS */
