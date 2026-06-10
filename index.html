@@ -2565,7 +2565,8 @@ async function confirmarRecebimentoContracheque(){
     "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
     "&navegador=" + encodeURIComponent(navigator.userAgent) +
     "&sistema=" + encodeURIComponent(navigator.platform || "") +
-    "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador");
+    "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador") +
+"&v=" + new Date().getTime();
 
   try{
     const resposta = await fetch(url);
