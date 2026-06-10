@@ -2552,21 +2552,21 @@ async function confirmarRecebimentoContracheque(){
     return;
   }
 
-  const sessao = JSON.parse(loginSalvo);
-  const cpf = sessao.dados.cpf;
+const resolucaoTela = screen.width + "x" + screen.height;
+const versaoNavegador = identificarVersaoNavegador();
 
-  msg.innerText = "Registrando recebimento...";
-
-  const url =
-    API_URL +
-    "?action=receberContracheque" +
-    "&cpf=" + encodeURIComponent(cpf) +
-    "&senha=" + encodeURIComponent(senha) +
-    "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
-    "&navegador=" + encodeURIComponent(navigator.userAgent) +
-    "&sistema=" + encodeURIComponent(navigator.platform || "") +
-    "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador") +
-"&v=" + new Date().getTime();
+const url =
+  API_URL +
+  "?action=receberContracheque" +
+  "&cpf=" + encodeURIComponent(cpf) +
+  "&senha=" + encodeURIComponent(senha) +
+  "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
+  "&navegador=" + encodeURIComponent(navigator.userAgent) +
+  "&sistema=" + encodeURIComponent(navigator.platform || "") +
+  "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador") +
+  "&resolucao=" + encodeURIComponent(resolucaoTela) +
+  "&versaoNavegador=" + encodeURIComponent(versaoNavegador) +
+  "&v=" + new Date().getTime();
 
   try{
     const resposta = await fetch(url);
@@ -2589,7 +2589,28 @@ async function confirmarRecebimentoContracheque(){
     msg.innerText = "Erro ao registrar recebimento.";
   }
 }
+function identificarVersaoNavegador(){
+  const ua = navigator.userAgent;
 
+  if(ua.includes("Edg/")){
+    return "Edge " + (ua.match(/Edg\/([\d.]+)/) || [,""])[1];
+  }
+
+  if(ua.includes("Chrome/")){
+    return "Chrome " + (ua.match(/Chrome\/([\d.]+)/) || [,""])[1];
+  }
+
+  if(ua.includes("Firefox/")){
+    return "Firefox " + (ua.match(/Firefox\/([\d.]+)/) || [,""])[1];
+  }
+
+  if(ua.includes("Safari/") && ua.includes("Version/")){
+    return "Safari " + (ua.match(/Version\/([\d.]+)/) || [,""])[1];
+  }
+
+  return "Não identificado";
+}
+  
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
 
