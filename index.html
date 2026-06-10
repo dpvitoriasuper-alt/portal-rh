@@ -2393,12 +2393,15 @@ async function carregarPortal(){
   const cpf = sessao.dados.cpf;
 
   const url =
-    API_URL +
-    "?action=contracheques" +
-    "&cpf=" + encodeURIComponent(cpf);
+  API_URL +
+  "?action=contracheques" +
+  "&cpf=" + encodeURIComponent(cpf) +
+  "&v=" + new Date().getTime();
 
   try{
-    const resposta = await fetch(url);
+    const resposta = await fetch(url, {
+  cache: "no-store"
+});
     const dados = await resposta.json();
 
     if(!dados.sucesso){
