@@ -2591,6 +2591,26 @@ async function confirmarRecebimentoContracheque(){
 
   const resolucaoTela = screen.width + "x" + screen.height;
   const versaoNavegador = identificarVersaoNavegador();
+  let ipPublico = "";
+let cidade = "";
+let estado = "";
+let pais = "";
+
+try{
+
+  const respostaIp = await fetch("https://ipapi.co/json/");
+  const dadosIp = await respostaIp.json();
+
+  ipPublico = dadosIp.ip || "";
+  cidade = dadosIp.city || "";
+  estado = dadosIp.region || "";
+  pais = dadosIp.country_name || "";
+
+}catch(e){
+
+  console.log("Não foi possível obter IP.");
+
+}
 
   msg.innerText = "Registrando recebimento...";
 
@@ -2605,6 +2625,10 @@ async function confirmarRecebimentoContracheque(){
     "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador") +
     "&resolucao=" + encodeURIComponent(resolucaoTela) +
     "&versaoNavegador=" + encodeURIComponent(versaoNavegador) +
+    "&ip=" + encodeURIComponent(ipPublico) +
+"&cidade=" + encodeURIComponent(cidade) +
+"&estado=" + encodeURIComponent(estado) +
+"&pais=" + encodeURIComponent(pais)
     "&v=" + new Date().getTime();
 
   try{
