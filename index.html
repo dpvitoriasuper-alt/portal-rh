@@ -2606,24 +2606,23 @@ async function confirmarRecebimentoContracheque(){
   let estado = "";
   let pais = "";
 
-  try{
+ try{
 
-    const respostaIp = await fetch("https://ipapi.co/json/");
-    const dadosIp = await respostaIp.json();
+  const respostaIp = await fetch("https://ipwho.is/");
+  const dadosIp = await respostaIp.json();
 
-    console.log("DADOS IP:", dadosIp);
+  console.log("DADOS IP:", dadosIp);
 
-    ipPublico = dadosIp.ip || "";
-    cidade = dadosIp.city || "";
-    estado = dadosIp.region || "";
-    pais = dadosIp.country_name || "";
+  ipPublico = dadosIp.ip || "";
+  cidade = dadosIp.city || "";
+  estado = dadosIp.region || "";
+  pais = dadosIp.country || "";
 
-  }catch(e){
+}catch(e){
 
-    console.log("Não foi possível obter IP e localização.");
+  console.log("Não foi possível obter IP e localização.");
 
-  }
-
+}
   const url =
     API_URL +
     "?action=receberContracheque" +
