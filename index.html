@@ -2608,7 +2608,7 @@ async function confirmarRecebimentoContracheque(){
 
  try{
 
-  const respostaIp = await fetch("https://ipwho.is/");
+  const respostaIp = await fetch("https://ipapi.co/json/");
   const dadosIp = await respostaIp.json();
 
   console.log("DADOS IP:", dadosIp);
@@ -2616,11 +2616,11 @@ async function confirmarRecebimentoContracheque(){
   ipPublico = dadosIp.ip || "";
   cidade = dadosIp.city || "";
   estado = dadosIp.region || "";
-  pais = dadosIp.country || "";
+  pais = dadosIp.country_name || "";
 
 }catch(e){
 
-  console.log("Não foi possível obter IP e localização.");
+  console.log("Não foi possível obter IP e localização:", e);
 
 }
   const url =
