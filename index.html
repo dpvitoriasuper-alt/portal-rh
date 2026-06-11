@@ -2568,7 +2568,10 @@ function alternarSenhaRecebimento(){
 }
   
 async function confirmarRecebimentoContracheque(){
+
   const msg = document.getElementById("mensagemRecebimento");
+  const btn = document.getElementById("btnConfirmarRecebimento");
+
   const aceite = document.getElementById("aceiteContracheque").checked;
   const senha = document.getElementById("senhaRecebimento").value;
 
@@ -2589,66 +2592,76 @@ async function confirmarRecebimentoContracheque(){
     return;
   }
 
+  btn.disabled = true;
+  btn.innerText = "Registrando...";
+  msg.innerText = "Registrando recebimento...";
+
   const sessao = JSON.parse(loginSalvo);
   const cpf = sessao.dados.cpf;
 
   const resolucaoTela = screen.width + "x" + screen.height;
   const versaoNavegador = identificarVersaoNavegador();
+
   let ipPublico = "";
-let cidade = "";
-let estado = "";
-let pais = "";
+  let cidade = "";
+  let estado = "";
+  let pais = "";
 
-try{
+  try{
 
-  const respostaIp = await fetch("https://ipapi.co/json/");
-  const dadosIp = await respostaIp.json();
+    const respostaIp = await fetch("https://ipapi.co/json/");
+    const dadosIp = await respostaIp.json();
 
-  ipPublico = dadosIp.ip || "";
-  cidade = dadosIp.city || "";
-  estado = dadosIp.region || "";
-  pais = dadosIp.country_name || "";
+    ipPublico = dadosIp.ip || "";
+    cidade = dadosIp.city || "";
+    estado = dadosIp.region || "";
+    pais = dadosIp.country_name || "";
 
-}catch(e){
-
-  console.log("Não foi possível obter IP.");
-
-}
-
-  msg.innerText = "Registrando recebimento...";
+  }catch(e){
+    console.log("Não foi possível obter IP.");
+  }
 
   const url =
-  API_URL +
-  "?action=receberContracheque" +
-  "&cpf=" + encodeURIComponent(cpf) +
-  "&senha=" + encodeURIComponent(senha) +
-  "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
-  "&navegador=" + encodeURIComponent(versaoNavegador) +
-  "&sistema=" + encodeURIComponent(navigator.platform || "") +
-  "&dispositivo=" + encodeURIComponent(
-      /Mobi|Android/i.test(navigator.userAgent)
-        ? "Celular"
-        : "Computador"
-    ) +
-  "&resolucao=" + encodeURIComponent(resolucaoTela) +
-  "&versaoNavegador=" + encodeURIComponent(versaoNavegador) +
-  "&ip=" + encodeURIComponent(ipPublico) +
-  "&cidade=" + encodeURIComponent(cidade) +
-  "&estado=" + encodeURIComponent(estado) +
-  "&pais=" + encodeURIComponent(pais) +
-  "&v=" + new Date().getTime();
- 
+    API_URL +
+    "?action=receberContracheque" +
+    "&cpf=" + encodeURIComponent(cpf) +
+    "&senha=" + encodeURIComponent(senha) +
+    "&competencia=" + encodeURIComponent(competenciaRecebimentoAtual) +
+    "&navegador=" + encodeURIComponent(versaoNavegador) +
+    "&sistema=" + encodeURIComponent(navigator.platform || "") +
+    "&dispositivo=" + encodeURIComponent(/Mobi|Android/i.test(navigator.userAgent) ? "Celular" : "Computador") +
+    "&resolucao=" + encodeURIComponent(resolucaoTela) +
+    "&versaoNavegador=" + encodeURIComponent(versaoNavegador) +
+    "&ip=" + encodeURIComponent(ipPublico) +
+    "&cidade=" + encodeURIComponent(cidade) +
+    "&estado=" + encodeURIComponent(estado) +
+    "&pais=" + encodeURIComponent(pais) +
+    "&v=" + new Date().getTime();
+
   try{
-    const resposta = await fetch(url);
+
+    const resposta = await fetch(url, {
+      cache: "no-store"
+    });
+
     const dados = await resposta.json();
+
     console.log("RETORNO RECEBIMENTO:", dados);
 
     if(!dados.sucesso){
-      msg.innerText = dados.mensagem || "Não foi possível registrar.";
+
+      btn.disabled = false;
+      btn.innerText = "Confirmar recebimento";
+
+      msg.innerText =
+        dados.mensagem || "Não foi possível registrar.";
+
       return;
     }
 
-    msg.innerText = "Recebimento confirmado. Protocolo: " + dados.protocolo;
+    msg.innerText =
+      "Recebimento confirmado. Protocolo: " +
+      dados.protocolo;
 
     setTimeout(() => {
       fecharRecebimentoContracheque();
@@ -2656,10 +2669,17 @@ try{
     }, 1200);
 
   }catch(erro){
-  console.error("Erro ao confirmar recebimento:", erro);
-  msg.innerText = "Erro ao registrar recebimento: " + erro.message;
+
+    console.error("Erro ao confirmar recebimento:", erro);
+
+    btn.disabled = false;
+    btn.innerText = "Confirmar recebimento";
+
+    msg.innerText =
+      "Erro ao registrar recebimento: " +
+      erro.message;
+  }
 }
-}  
   
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
