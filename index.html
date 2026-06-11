@@ -2608,31 +2608,29 @@ async function confirmarRecebimentoContracheque(){
 
   try{
 
-try{
+    const respostaIp = await fetch("https://ipapi.co/json/", {
+      cache: "no-store"
+    });
 
-  const respostaIp = await fetch("https://ipapi.co/json/", {
-    cache: "no-store"
-  });
+    const dadosIp = await respostaIp.json();
 
-  const dadosIp = await respostaIp.json();
+    console.log("DADOS IP:", dadosIp);
 
-  console.log("DADOS IP:", dadosIp);
+    ipPublico = dadosIp.ip || "";
+    cidade = dadosIp.city || "";
+    estado = dadosIp.region || "";
+    pais = dadosIp.country_name || "";
 
-  ipPublico = dadosIp.ip || "";
-  cidade = dadosIp.city || "";
-  estado = dadosIp.region || "";
-  pais = dadosIp.country_name || "";
+  }catch(e){
 
-}catch(e){
+    console.error("Erro ao obter IP:", e);
 
-  console.error("Erro ao obter IP:", e);
+    ipPublico = "";
+    cidade = "";
+    estado = "";
+    pais = "";
 
-  ipPublico = "";
-  cidade = "";
-  estado = "";
-  pais = "";
-
-}
+  }
 
   const url =
     API_URL +
@@ -2690,7 +2688,7 @@ try{
       "Erro ao registrar recebimento: " +
       erro.message;
   }
-}  
+}
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
 
