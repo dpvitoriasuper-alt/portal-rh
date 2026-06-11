@@ -2593,7 +2593,7 @@ async function confirmarRecebimentoContracheque(){
   }
 
   btn.disabled = true;
-  btn.innerText = "Registrando...";
+  msg.innerText = "Registrando recebimento...";
 
   const sessao = JSON.parse(loginSalvo);
   const cpf = sessao.dados.cpf;
@@ -2650,7 +2650,6 @@ async function confirmarRecebimentoContracheque(){
     if(!dados.sucesso){
 
       btn.disabled = false;
-      btn.innerText = "Confirmar recebimento";
 
       msg.innerText =
         dados.mensagem || "Não foi possível registrar.";
@@ -2672,14 +2671,12 @@ async function confirmarRecebimentoContracheque(){
     console.error("Erro ao confirmar recebimento:", erro);
 
     btn.disabled = false;
-    btn.innerText = "Confirmar recebimento";
 
     msg.innerText =
       "Erro ao registrar recebimento: " +
       erro.message;
   }
-}
-  
+}  
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
 
