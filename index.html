@@ -2608,10 +2608,7 @@ async function confirmarRecebimentoContracheque(){
 
   try{
 
-    const respostaIp = await fetch("https://ipapi.co/json/", {
-      cache: "no-store"
-    });
-
+    const respostaIp = await fetch("https://ipapi.co/json/");
     const dadosIp = await respostaIp.json();
 
     console.log("DADOS IP:", dadosIp);
@@ -2623,12 +2620,7 @@ async function confirmarRecebimentoContracheque(){
 
   }catch(e){
 
-    console.error("Erro ao obter IP:", e);
-
-    ipPublico = "";
-    cidade = "";
-    estado = "";
-    pais = "";
+    console.log("Não foi possível obter IP e localização.");
 
   }
 
