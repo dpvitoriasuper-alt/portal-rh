@@ -2534,18 +2534,14 @@ if(recibos.length === 0){
   return;
 }
 
-    lista.innerHTML = `
-      <h2 style="color:#ffc400;margin-bottom:18px;">
-        📑 Meus Recibos Eletrônicos
-      </h2>
-    `;
+    lista.innerHTML = "";
 
     recibos.forEach(item => {
       lista.innerHTML += `
         <div class="doc-card" style="height:auto;min-height:190px;">
           <div class="doc-icon">📑</div>
 
-          <h3>${item.competencia || "Competência"}</h3>
+         <h3>${formatarCompetenciaContracheque(item.competencia)}</h3>
 
           <p>
             <b>Data:</b> ${item.data || "-"}<br>
