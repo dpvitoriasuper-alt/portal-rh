@@ -2520,12 +2520,19 @@ async function abrirMeusRecibos(){
       cache: "no-store"
     });
 
-    const recibos = await resposta.json();
+    const dados = await resposta.json();
 
-    if(!recibos || recibos.length === 0){
-      lista.innerHTML = "<p>Nenhum recibo eletrônico disponível para este CPF.</p>";
-      return;
-    }
+if(!dados.sucesso){
+  lista.innerHTML = "<p>" + (dados.mensagem || "Erro ao buscar recibos eletrônicos.") + "</p>";
+  return;
+}
+
+const recibos = dados.recibos || [];
+
+if(recibos.length === 0){
+  lista.innerHTML = "<p>Nenhum recibo eletrônico disponível para este CPF.</p>";
+  return;
+}
 
     lista.innerHTML = `
       <h2 style="color:#ffc400;margin-bottom:18px;">
