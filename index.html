@@ -2392,6 +2392,7 @@ async function carregarPortal(){
   const lista = document.getElementById("contrachequesLista");
 
   modal.style.display = "flex";
+    document.getElementById("tituloModalContracheques").innerText = "📄 Meus Contracheques";
   lista.innerHTML = "<p>Carregando seus contracheques...</p>";
 
   const loginSalvo = localStorage.getItem("portalLogin");
@@ -2495,6 +2496,7 @@ async function abrirMeusRecibos(){
   const lista = document.getElementById("contrachequesLista");
 
   modal.style.display = "flex";
+  document.getElementById("tituloModalContracheques").innerText = "📑 Meus Recibos Eletrônicos";
   lista.innerHTML = "<p>Carregando seus recibos eletrônicos...</p>";
 
   const loginSalvo = localStorage.getItem("portalLogin");
@@ -2564,6 +2566,7 @@ async function abrirMeusRecibos(){
   const lista = document.getElementById("contrachequesLista");
 
   modal.style.display = "flex";
+    document.getElementById("tituloModalContracheques").innerText = "✅ Validar Documento";
 
   lista.innerHTML = `
     <h2 style="color:#ffc400;margin-bottom:14px;">
@@ -2582,7 +2585,7 @@ async function abrirMeusRecibos(){
     >
 
     <button class="btn" onclick="validarReciboEletronico()">
-      🔎 Validar Recibo
+      🔎 Validar Documento
     </button>
 
     <div id="resultadoValidacaoRecibo" style="margin-top:18px;"></div>
@@ -3745,7 +3748,7 @@ function mostrarTodosAvisos(){
   <div id="contrachequesModal" class="documentos-modal">
   <div class="documentos-box">
     <div class="documentos-header">
-      <h2>📄 Meus Contracheques</h2>
+      <h2 id="tituloModalContracheques">📄 Meus Contracheques</h2>
       <button onclick="fecharMeusContracheques()">×</button>
     </div>
 
