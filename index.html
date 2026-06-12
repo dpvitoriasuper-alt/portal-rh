@@ -2557,6 +2557,8 @@ async function abrirMeusRecibos(){
     console.error("Erro ao buscar recibos:", erro);
     lista.innerHTML = "<p>Erro ao carregar recibos eletrônicos.</p>";
   }
+
+  }
   async function abrirValidacaoRecibo(){
   const modal = document.getElementById("contrachequesModal");
   const lista = document.getElementById("contrachequesLista");
@@ -2644,7 +2646,7 @@ async function abrirMeusRecibos(){
     console.error("Erro ao validar recibo:", erro);
     resultado.innerHTML = "<p>Erro ao validar recibo eletrônico.</p>";
   }
-    
+}
 function fecharMeusContracheques(){
   document.getElementById("contrachequesModal").style.display = "none";
 }
