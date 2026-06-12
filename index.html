@@ -2562,7 +2562,39 @@ if(recibos.length === 0){
     console.error("Erro ao buscar recibos:", erro);
     lista.innerHTML = "<p>Erro ao carregar recibos eletrônicos.</p>";
   }
+function abrirCentralDocumentos(){
+  const modal = document.getElementById("contrachequesModal");
+  const lista = document.getElementById("contrachequesLista");
 
+  modal.style.display = "flex";
+
+  document.getElementById("tituloModalContracheques").innerText =
+    "📂 Central de Documentos";
+
+  lista.innerHTML = `
+    <div class="documentos-grid">
+
+      <div class="doc-card" onclick="abrirMeusContracheques()" style="cursor:pointer;">
+        <div class="doc-icon">📄</div>
+        <h3>Contracheques</h3>
+        <p>Visualizar contracheques disponíveis</p>
+      </div>
+
+      <div class="doc-card" onclick="abrirMeusRecibos()" style="cursor:pointer;">
+        <div class="doc-icon">📑</div>
+        <h3>Recibos Eletrônicos</h3>
+        <p>Comprovantes de recebimento</p>
+      </div>
+
+      <div class="doc-card" onclick="abrirValidacaoRecibo()" style="cursor:pointer;">
+        <div class="doc-icon">✅</div>
+        <h3>Validar Documento</h3>
+        <p>Consultar autenticidade por protocolo</p>
+      </div>
+
+    </div>
+  `;
+}
   }
   async function abrirValidacaoRecibo(){
   const modal = document.getElementById("contrachequesModal");
