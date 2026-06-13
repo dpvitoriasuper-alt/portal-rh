@@ -2797,17 +2797,16 @@ async function confirmarRecebimentoContracheque(){
   const resolucaoTela = screen.width + "x" + screen.height;
   const versaoNavegador = identificarVersaoNavegador();
 
-  let ipPublico = "TESTE-IP";
-let cidade = "TESTE-CIDADE";
-let estado = "TESTE-ESTADO";
-let pais = "TESTE-PAIS";
+let ipPublico = "";
+let cidade = "";
+let estado = "";
+let pais = "";
 
- try{
-
+try{
   const respostaIp = await fetch("https://ipapi.co/json/");
   const dadosIp = await respostaIp.json();
 
-  console.log("DADOS IP:", dadosIp);
+  console.log("DADOS IPAPI:", dadosIp);
 
   ipPublico = dadosIp.ip || "";
   cidade = dadosIp.city || "";
@@ -2815,6 +2814,8 @@ let pais = "TESTE-PAIS";
   pais = dadosIp.country_name || "";
 
 }catch(e){
+  console.log("Erro ipapi:", e);
+}
 
   console.log("Não foi possível obter IP e localização:", e);
 
