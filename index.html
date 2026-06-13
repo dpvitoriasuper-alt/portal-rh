@@ -2804,17 +2804,38 @@ async function confirmarRecebimentoContracheque(){
 
  try{
 
-  const respostaIp = await fetch("https://ipapi.co/json/");
+  const respostaIp = await fetch("https://ipwho.is/");
   const dadosIp = await respostaIp.json();
 
   console.log("DADOS IP:", dadosIp);
 
-  ipPublico = dadosIp.ip || "";
-  cidade = dadosIp.city || "";
-  estado = dadosIp.region || "";
-  pais = dadosIp.country_name || "";
+  if(dadosIp && dadosIp.success !== false){
+    ipPublico = dadosIp.ip || "";
+    cidade = dadosIp.city || "";
+    estado = dadosIp.region || "";
+    pais = dadosIp.country || "";
+  }
 
 }catch(e){
+
+  console.log("Não foi possível obter IP e localização pelo ipwho.is:", e);
+
+  try{
+    const respostaIp2 = await fetch("https://api.ipify.org?format=json");
+    const dadosIp2 = await respostaIp2.json();
+
+    ipPublico = dadosIp2.ip || "";
+    cidade = "";
+    estado = "";
+    pais = "";
+
+    console.log("IP alternativo:", ipPublico);
+
+  }catch(erro2){
+    console.log("Não foi possível obter nem o IP alternativo:", erro2);
+  }
+
+}
 
   console.log("Não foi possível obter IP e localização:", e);
 
