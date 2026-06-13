@@ -2803,6 +2803,7 @@ let estado = "";
 let pais = "";
 
 try{
+  
   const respostaIp = await fetch("https://ipapi.co/json/");
   const dadosIp = await respostaIp.json();
 
@@ -2815,10 +2816,6 @@ try{
 
 }catch(e){
   console.log("Erro ipapi:", e);
-}
-
-  console.log("Não foi possível obter IP e localização:", e);
-
 }
 
   const url =
