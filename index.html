@@ -2802,37 +2802,23 @@ async function confirmarRecebimentoContracheque(){
   let estado = "";
   let pais = "";
 
-  try{
+ try{
 
-    const respostaIp = await fetch("https://ipwho.is/");
-    const dadosIp = await respostaIp.json();
+  const respostaIp = await fetch("https://ipapi.co/json/");
+  const dadosIp = await respostaIp.json();
 
-    console.log("DADOS IP:", dadosIp);
+  console.log("DADOS IP:", dadosIp);
 
-    if(dadosIp && dadosIp.success !== false){
-      ipPublico = dadosIp.ip || "";
-      cidade = dadosIp.city || "";
-      estado = dadosIp.region || "";
-      pais = dadosIp.country || "";
-    }
+  ipPublico = dadosIp.ip || "";
+  cidade = dadosIp.city || "";
+  estado = dadosIp.region || "";
+  pais = dadosIp.country_name || "";
 
-  }catch(e){
+}catch(e){
 
-    console.log("Não foi possível obter IP e localização pelo ipwho.is:", e);
+  console.log("Não foi possível obter IP e localização:", e);
 
-    try{
-      const respostaIp2 = await fetch("https://api.ipify.org?format=json");
-      const dadosIp2 = await respostaIp2.json();
-
-      ipPublico = dadosIp2.ip || "";
-
-      console.log("IP alternativo:", ipPublico);
-
-    }catch(erro2){
-      console.log("Não foi possível obter nem o IP alternativo:", erro2);
-    }
-
-  }
+}
 
   const url =
     API_URL +
