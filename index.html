@@ -3450,11 +3450,10 @@ function senhaEhFacil(senha){
 
   location.reload();
 }
+  
 function liberarPortal(dados){
 
   console.log("DADOS LOGIN:", dados);
-
-  localStorage.setItem("portalLogin", JSON.stringify({
 
   localStorage.setItem("portalLogin", JSON.stringify({
     dados: dados,
