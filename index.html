@@ -2131,6 +2131,17 @@ body:not(.carregando) .highlight {
 
 </section>
 
+<!-- MENU RH - aparece somente para RH/ADMIN -->
+<div id="menuRh" style="display:none; margin:25px auto; width:min(1220px,95%);">
+
+  <div class="quick-card gloss" style="height:auto; min-height:150px; cursor:pointer;">
+    <div class="icon">👥</div>
+    <h3>Área RH</h3>
+    <p>Funcionários, importação, relatórios e administração</p>
+  </div>
+
+</div>
+
 <div class="row-title">
 
   <h2 class="section-title">
@@ -3468,11 +3479,17 @@ function liberarPortal(dados){
   preencherPerfilColaborador(dados);
   carregarNotificacoesColaborador(dados.notificacoes || []);
 
-  if (
-    dados.perfilAcesso === "RH" ||
-    dados.perfilAcesso === "ADMIN"
-  ) {
-    console.log("USUÁRIO RH/ADMIN");
+ if (
+  dados.perfilAcesso === "RH" ||
+  dados.perfilAcesso === "ADMIN"
+) {
+
+  console.log("USUÁRIO RH/ADMIN");
+
+  const menuRh = document.getElementById("menuRh");
+
+  if(menuRh){
+    menuRh.style.display = "block";
   }
 
 }
