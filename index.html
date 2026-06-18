@@ -2134,7 +2134,7 @@ body:not(.carregando) .highlight {
 <!-- MENU RH - aparece somente para RH/ADMIN -->
 <div id="menuRh" style="display:none; margin:25px auto; width:min(1220px,95%);">
 
-  <div class="quick-card gloss" style="height:auto; min-height:150px; cursor:pointer;">
+  <div class="quick-card gloss" onclick="abrirAreaRh()" style="height:auto; min-height:150px; cursor:pointer;">
     <div class="icon">👥</div>
     <h3>Área RH</h3>
     <p>Funcionários, importação, relatórios e administração</p>
@@ -2562,7 +2562,15 @@ if(recibos.length === 0){
     lista.innerHTML = "<p>Erro ao carregar recibos eletrônicos.</p>";
   }
 }
+  
+function abrirAreaRh(){
+  document.getElementById("modalAreaRh").style.display = "flex";
+}
 
+function fecharAreaRh(){
+  document.getElementById("modalAreaRh").style.display = "none";
+}
+  
 function abrirCentralDocumentos(){
   const modal = document.getElementById("contrachequesModal");
   const lista = document.getElementById("contrachequesLista");
@@ -3864,5 +3872,39 @@ function mostrarTodosAvisos(){
 <p id="mensagemRecebimento" style="margin-top:15px;color:#ffc400;font-weight:800;"></p>
   </div>
 </div>
+
+  <div id="modalAreaRh" class="documentos-modal">
+  <div class="documentos-box">
+
+    <div class="documentos-header">
+      <h2>👥 Área RH</h2>
+      <button onclick="fecharAreaRh()">×</button>
+    </div>
+
+    <div class="documentos-grid">
+
+      <div class="doc-card">
+        <div class="doc-icon">👥</div>
+        <h3>Funcionários</h3>
+        <p>Consultar e gerenciar cadastros</p>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📥</div>
+        <h3>Importação Domínio</h3>
+        <p>Importar planilha de funcionários</p>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📄</div>
+        <h3>Relatórios</h3>
+        <p>Ver resultados das importações</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+  
 </body>
 </html>
