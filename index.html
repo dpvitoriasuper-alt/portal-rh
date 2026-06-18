@@ -3467,6 +3467,13 @@ function liberarPortal(dados){
 
   preencherPerfilColaborador(dados);
   carregarNotificacoesColaborador(dados.notificacoes || []);
+if(
+  dados.perfilAcesso === "RH" ||
+  dados.perfilAcesso === "ADMIN"
+){
+  console.log("USUÁRIO RH/ADMIN");
+
+  // aqui vamos liberar o menu RH
 }
 
 function preencherPerfilColaborador(dados){
