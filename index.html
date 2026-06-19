@@ -225,6 +225,59 @@
   color:#ccc !important;
   padding:28px !important;
 }
+  .rh-abas{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+.rh-aba{
+  padding:12px 18px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+  background:#1f1f1f;
+  color:#fff;
+}
+
+.rh-aba.ativa{
+  background:#ffc400;
+  color:#000;
+}
+
+.rh-conteudo-aba{
+  display:none;
+}
+
+.rh-conteudo-aba.ativa{
+  display:block;
+}
+
+.perfil-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:12px;
+}
+
+.perfil-item{
+  background:#111;
+  border:1px solid rgba(255,196,0,.25);
+  border-radius:12px;
+  padding:12px;
+}
+
+.perfil-item small{
+  display:block;
+  color:#999;
+  margin-bottom:4px;
+}
+
+.perfil-item span{
+  color:#fff;
+  font-weight:600;
+}
 
 @media(max-width:900px){
   .rh-filtros{
@@ -2589,12 +2642,146 @@ function fecharFuncionariosRh(){
 
   modal.style.display = "flex";
 
-  conteudo.innerHTML = `
-    <div class="rh-card-info">
-      <strong>Carregando cadastro...</strong>
-      <span>CPF: ${cpf}</span>
+ conteudo.innerHTML = `
+
+<div class="rh-card-info">
+  <strong>${c.NOME || "-"}</strong>
+  <span>
+    CPF: ${c.CPF || "-"} |
+    Matrícula: ${c["MATRICULA ESOCIAL"] || "-"}
+  </span>
+</div>
+
+<div class="rh-abas">
+
+  <button
+    id="abaBtn_pessoal"
+    class="rh-aba ativa"
+    onclick="trocarAbaRh('pessoal')">
+    👤 Dados Pessoais
+  </button>
+
+  <button
+    id="abaBtn_contrato"
+    class="rh-aba"
+    onclick="trocarAbaRh('contrato')">
+    🏢 Dados Contratuais
+  </button>
+
+</div>
+
+<div id="aba_pessoal" class="rh-conteudo-aba ativa">
+
+  <div class="perfil-grid">
+
+    <div class="perfil-item">
+      <small>RG</small>
+      <span>${c.RG || "-"}</span>
     </div>
-  `;
+
+    <div class="perfil-item">
+      <small>PIS</small>
+      <span>${c.PIS || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Data Nascimento</small>
+      <span>${c.DATA_NASCIMENTO || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Nome da Mãe</small>
+      <span>${c.NOME_MAE || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Nome do Pai</small>
+      <span>${c.NOME_PAI || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Telefone</small>
+      <span>${c.TELEFONE || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>E-mail</small>
+      <span>${c.EMAIL || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Endereço</small>
+      <span>${c.ENDERECO || "-"} ${c.NUMERO || ""}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Bairro</small>
+      <span>${c.BAIRRO || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>CEP</small>
+      <span>${c.CEP || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Cidade / UF</small>
+      <span>${c.CIDADE || "-"} / ${c.UF || "-"}</span>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="aba_contrato" class="rh-conteudo-aba">
+
+  <div class="perfil-grid">
+
+    <div class="perfil-item">
+      <small>Loja</small>
+      <span>${c.LOJA || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>CNPJ</small>
+      <span>${c.CNPJ || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Função</small>
+      <span>${c.FUNCAO || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Salário</small>
+      <span>${formatarMoedaRh(c.SALARIO)}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Admissão</small>
+      <span>${c.DATA_ADMISSAO || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>1º Contrato</small>
+      <span>${c.VENCIMENTO_1_CONTRATO || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>2º Contrato</small>
+      <span>${c.VENCIMENTO_2_CONTRATO || "-"}</span>
+    </div>
+
+    <div class="perfil-item">
+      <small>Status</small>
+      <span>${c.STATUS || "-"}</span>
+    </div>
+
+  </div>
+
+</div>
+
+`;
 
   const sessao = JSON.parse(localStorage.getItem("portalLogin"));
   const cpfUsuario = sessao.dados.cpf;
@@ -2674,7 +2861,24 @@ function fecharFuncionariosRh(){
 function fecharCadastroCompletoRh(){
   document.getElementById("modalCadastroCompletoRh").style.display = "none";
 }
-  
+  function trocarAbaRh(nome){
+
+  document
+    .querySelectorAll(".rh-aba")
+    .forEach(el => el.classList.remove("ativa"));
+
+  document
+    .querySelectorAll(".rh-conteudo-aba")
+    .forEach(el => el.classList.remove("ativa"));
+
+  document
+    .getElementById("abaBtn_" + nome)
+    .classList.add("ativa");
+
+  document
+    .getElementById("aba_" + nome)
+    .classList.add("ativa");
+}
   async function abrirMeusContracheques(){
   const modal = document.getElementById("contrachequesModal");
   const lista = document.getElementById("contrachequesLista");
