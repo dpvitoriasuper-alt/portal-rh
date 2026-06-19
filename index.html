@@ -2534,6 +2534,23 @@ async function carregarPortal(){
   }
 
 }
+  function abrirCategoriaDocumentoRh(categoria){
+
+  document.getElementById("tituloCategoriaDocumentoRh").innerText = categoria;
+  document.getElementById("modalCategoriaDocumentoRh").style.display = "flex";
+
+  document.getElementById("listaArquivosCategoriaRh").innerHTML = `
+    <tr>
+      <td colspan="4" class="rh-vazio">
+        Nenhum arquivo nesta categoria.
+      </td>
+    </tr>
+  `;
+}
+
+function fecharCategoriaDocumentoRh(){
+  document.getElementById("modalCategoriaDocumentoRh").style.display = "none";
+}
   function abrirFuncionariosRh(){
   document.getElementById("modalFuncionariosRh").style.display = "flex";
 }
@@ -2768,126 +2785,205 @@ function fecharFuncionariosRh(){
 
       <tbody>
 
-        <tr>
-          <td>📄 Documentos Pessoais</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+       <tr>
+  <td>📄 Documentos Pessoais</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📄 Documentos Pessoais')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
-        <tr>
-          <td>📋 Ficha de Registro</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+<tr>
+  <td>📋 Ficha de Registro</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📋 Ficha de Registro')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
-        <tr>
-          <td>📝 Contrato</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+<tr>
+  <td>📝 Contrato</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📝 Contrato')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
-        <tr>
-          <td>🦺 Cautelas de EPI</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+<tr>
+  <td>🦺 Cautelas de EPI</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('🦺 Cautelas de EPI')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
-        <tr>
-          <td>🩺 ASO</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+<tr>
+  <td>🩺 ASO</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('🩺 ASO')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
-        <tr>
-          <td>🏥 Atestado</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+<tr>
+  <td>🏥 Atestado</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('🏥 Atestado')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
-        <tr>
-          <td>🎉 Férias</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+<tr>
+  <td>🎉 Férias</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('🎉 Férias')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
-        <tr>
-          <td>📄 Contracheques</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+<tr>
+  <td>📄 Contracheques</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📄 Contracheques')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
-        <tr>
-          <td>🧾 Recibos Eletrônicos</td>
-          <td>0</td>
-          <td><button>Abrir</button></td>
-        </tr>
+<tr>
+  <td>🧾 Recibos Eletrônicos</td>
+  <td>0</td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('🧾 Recibos Eletrônicos')">
+      Abrir
+    </button>
+  </td>
+</tr>
 
 <tr>
   <td>⚠️ Advertência e Suspensão</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('⚠️ Advertência e Suspensão')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>🛌 Afastamento</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('🛌 Afastamento')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>📑 Termos</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📑 Termos')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>⏰ Ponto</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('⏰ Ponto')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>⌛ Banco de Horas</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('⌛ Banco de Horas')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>📕 Doc Rescisório</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📕 Doc Rescisório')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>📄 Recibos de Pagamento</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📄 Recibos de Pagamento')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>👶 Pensão Alimentícia</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('👶 Pensão Alimentícia')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>📷 Foto do Funcionário</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📷 Foto do Funcionário')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>📮 Cartas de Cancelamento</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📮 Cartas de Cancelamento')">
+      Abrir
+    </button>
+  </td>
 </tr>
 
 <tr>
   <td>📎 Outros</td>
   <td>0</td>
-  <td><button>Abrir</button></td>
+  <td>
+    <button onclick="abrirCategoriaDocumentoRh('📎 Outros')">
+      Abrir
+    </button>
+  </td>
 </tr>
-
       </tbody>
 
     </table>
@@ -4556,6 +4652,51 @@ function mostrarTodosAvisos(){
     </div>
 
     <div id="conteudoCadastroCompletoRh"></div>
+
+  </div>
+
+</div>
+
+  <div id="modalCategoriaDocumentoRh" class="documentos-modal">
+
+  <div class="documentos-box" style="max-width:1050px;">
+
+    <div class="documentos-header">
+      <h2 id="tituloCategoriaDocumentoRh">📁 Documentos</h2>
+      <button onclick="fecharCategoriaDocumentoRh()">×</button>
+    </div>
+
+    <div class="rh-card-info">
+      <strong>Arquivos da categoria</strong>
+      <span>Visualize, baixe, edite ou exclua documentos individuais.</span>
+    </div>
+
+    <div style="margin:15px 0;">
+      <button class="btn" onclick="alert('Upload será criado na próxima etapa.')">
+        ➕ Novo Documento
+      </button>
+    </div>
+
+    <div class="rh-tabela-box">
+      <table class="rh-tabela">
+        <thead>
+          <tr>
+            <th>Arquivo</th>
+            <th>Data</th>
+            <th>Usuário</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody id="listaArquivosCategoriaRh">
+          <tr>
+            <td colspan="4" class="rh-vazio">
+              Nenhum arquivo nesta categoria.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
   </div>
 
