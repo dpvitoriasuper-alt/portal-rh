@@ -3545,10 +3545,17 @@ try{
       erro.message;
   }
 }
-  function abrirNovoDocumentoRh(){
+ function abrirNovoDocumentoRh(){
 
   document.getElementById("categoriaDocumentoRh").value =
     window.categoriaDocumentoAtual || "";
+
+  document.getElementById("descricaoDocumentoRh").value = "";
+  document.getElementById("observacaoDocumentoRh").value = "";
+  document.getElementById("dataDocumentoRh").value = "";
+  document.getElementById("arquivoDocumentoRh").value = "";
+  document.getElementById("documentoAtivoRh").checked = true;
+  document.getElementById("mensagemDocumentoRh").innerText = "";
 
   document.getElementById("modalNovoDocumentoRh").style.display = "flex";
 }
