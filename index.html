@@ -3554,18 +3554,33 @@ function fecharNovoDocumentoRh(){
   document.getElementById("modalNovoDocumentoRh").style.display = "none";
 }
 
-function salvarDocumentoRh(){
+async function salvarDocumentoRh(){
 
-  const categoria = document.getElementById("categoriaDocumentoRh").value;
-  const descricao = document.getElementById("descricaoDocumentoRh").value;
-  const observacao = document.getElementById("observacaoDocumentoRh").value;
-  const dataDocumento = document.getElementById("dataDocumentoRh").value;
-  const ativo = document.getElementById("documentoAtivoRh").checked ? "SIM" : "NÃO";
-  const arquivo = document.getElementById("arquivoDocumentoRh").files[0];
-  const msg = document.getElementById("mensagemDocumentoRh");
+  const categoria =
+    document.getElementById("categoriaDocumentoRh").value;
+
+  const descricao =
+    document.getElementById("descricaoDocumentoRh").value;
+
+  const observacao =
+    document.getElementById("observacaoDocumentoRh").value;
+
+  const dataDocumento =
+    document.getElementById("dataDocumentoRh").value;
+
+  const ativo =
+    document.getElementById("documentoAtivoRh").checked
+      ? "SIM"
+      : "NÃO";
+
+  const arquivo =
+    document.getElementById("arquivoDocumentoRh").files[0];
+
+  const msg =
+    document.getElementById("mensagemDocumentoRh");
 
   if(!descricao){
-    msg.innerText = "Informe a descrição do documento.";
+    msg.innerText = "Informe a descrição.";
     return;
   }
 
@@ -3574,16 +3589,62 @@ function salvarDocumentoRh(){
     return;
   }
 
-  msg.innerText = "Formulário validado. Próximo passo: gravar na planilha.";
+  const sessao =
+    JSON.parse(localStorage.getItem("portalLogin"));
 
-  console.log({
-    categoria,
-    descricao,
-    observacao,
-    dataDocumento,
-    ativo,
-    arquivo
-  });
+  const cpfUsuario = sessao.dados.cpf || "";
+  const nomeUsuario = sessao.dados.nome || "";
+
+  msg.innerText = "Salvando...";
+
+  try{
+
+    const url =
+      API_URL +
+      "?action=salvarDocumentoFuncionarioRh" +
+      "&cpf=" + encodeURIComponent(cpfCadastroAtual) +
+      "&nome=" + encodeURIComponent(nomeFuncionarioAtual) +
+      "&categoria=" + encodeURIComponent(categoria) +
+      "&descricao=" + encodeURIComponent(descricao) +
+      "&observacao=" + encodeURIComponent(observacao) +
+      "&dataDocumento=" + encodeURIComponent(dataDocumento) +
+      "&arquivo=" + encodeURIComponent(arquivo.name) +
+      "&usuario=" + encodeURIComponent(nomeUsuario) +
+      "&ativo=" + encodeURIComponent(ativo) +
+      "&callback=?";
+
+    const resposta = await fetch(
+      url.replace("&callback=?", "")
+    );
+
+    const dados = await resposta.json();
+
+    if(dados.sucesso){
+
+      msg.innerText =
+        "Documento registrado com sucesso.";
+
+      setTimeout(() => {
+
+        fecharNovoDocumentoRh();
+
+      }, 1000);
+
+    }else{
+
+      msg.innerText =
+        dados.mensagem || "Erro ao salvar.";
+
+    }
+
+  }catch(erro){
+
+    console.error(erro);
+
+    msg.innerText =
+      "Erro ao gravar documento.";
+
+  }
 }
   
 /* AVISOS */
