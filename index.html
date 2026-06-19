@@ -2583,9 +2583,24 @@ function fecharFuncionariosRh(){
   }
 }
   function abrirCadastroCompletoRh(cpf){
-  alert("Abrir cadastro completo do CPF: " + cpf);
-}
 
+  const modal = document.getElementById("modalCadastroCompletoRh");
+  const conteudo = document.getElementById("conteudoCadastroCompletoRh");
+
+  modal.style.display = "flex";
+
+  conteudo.innerHTML = `
+    <div class="rh-card-info">
+      <strong>Carregando cadastro...</strong>
+      <span>CPF: ${cpf}</span>
+    </div>
+  `;
+
+}
+function fecharCadastroCompletoRh(){
+  document.getElementById("modalCadastroCompletoRh").style.display = "none";
+}
+  
   async function abrirMeusContracheques(){
   const modal = document.getElementById("contrachequesModal");
   const lista = document.getElementById("contrachequesLista");
@@ -4192,6 +4207,20 @@ function mostrarTodosAvisos(){
       </div>
 
     </div>
+
+  </div>
+
+</div>
+  <div id="modalCadastroCompletoRh" class="documentos-modal">
+
+  <div class="documentos-box" style="max-width:1150px;">
+
+    <div class="documentos-header">
+      <h2>👤 Cadastro Completo</h2>
+      <button onclick="fecharCadastroCompletoRh()">×</button>
+    </div>
+
+    <div id="conteudoCadastroCompletoRh"></div>
 
   </div>
 
