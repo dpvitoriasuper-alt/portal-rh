@@ -2536,6 +2536,8 @@ async function carregarPortal(){
 }
   function abrirCategoriaDocumentoRh(categoria){
 
+    window.categoriaDocumentoAtual = categoria;
+    
   document.getElementById("tituloCategoriaDocumentoRh").innerText = categoria;
   document.getElementById("modalCategoriaDocumentoRh").style.display = "flex";
 
@@ -3540,6 +3542,40 @@ try{
       erro.message;
   }
 }
+  function abrirNovoDocumentoRh(){
+
+  document.getElementById("categoriaDocumentoRh").value =
+    window.categoriaDocumentoAtual || "";
+
+  document.getElementById("modalNovoDocumentoRh").style.display = "flex";
+}
+
+function fecharNovoDocumentoRh(){
+  document.getElementById("modalNovoDocumentoRh").style.display = "none";
+}
+
+function salvarDocumentoRh(){
+
+  const categoria =
+    document.getElementById("categoriaDocumentoRh").value;
+
+  const descricao =
+    document.getElementById("descricaoDocumentoRh").value;
+
+  const arquivo =
+    document.getElementById("arquivoDocumentoRh").files[0];
+
+  console.log("CATEGORIA:", categoria);
+  console.log("DESCRIÇÃO:", descricao);
+  console.log("ARQUIVO:", arquivo);
+
+  alert(
+    "Formulário funcionando.\n\n" +
+    "Categoria: " + categoria + "\n" +
+    "Descrição: " + descricao
+  );
+}
+  
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
 
@@ -4672,9 +4708,9 @@ function mostrarTodosAvisos(){
     </div>
 
     <div style="margin:15px 0;">
-      <button class="btn" onclick="alert('Upload será criado na próxima etapa.')">
-        ➕ Novo Documento
-      </button>
+     <button class="btn" onclick="abrirNovoDocumentoRh()">
+  ➕ Novo Documento
+</button>
     </div>
 
     <div class="rh-tabela-box">
@@ -4696,6 +4732,52 @@ function mostrarTodosAvisos(){
           </tr>
         </tbody>
       </table>
+    </div>
+
+  </div>
+
+</div>
+
+  <div id="modalNovoDocumentoRh" class="documentos-modal">
+
+  <div class="documentos-box" style="max-width:700px;">
+
+    <div class="documentos-header">
+      <h2>📎 Novo Documento</h2>
+      <button onclick="fecharNovoDocumentoRh()">×</button>
+    </div>
+
+    <div style="padding:20px;">
+
+      <label>Categoria</label>
+      <input
+        type="text"
+        id="categoriaDocumentoRh"
+        readonly
+        style="width:100%;margin-bottom:15px;"
+      >
+
+      <label>Descrição</label>
+      <input
+        type="text"
+        id="descricaoDocumentoRh"
+        placeholder="Ex: RG Frente"
+        style="width:100%;margin-bottom:15px;"
+      >
+
+      <label>Arquivo</label>
+      <input
+        type="file"
+        id="arquivoDocumentoRh"
+        style="width:100%;margin-bottom:20px;"
+      >
+
+      <button
+        class="btn"
+        onclick="salvarDocumentoRh()">
+        💾 Salvar Documento
+      </button>
+
     </div>
 
   </div>
