@@ -3610,12 +3610,19 @@ async function salvarDocumentoRh(){
 
     const dados = await resposta.json();
 
-    if(dados.sucesso){
-      msg.innerText = "Documento salvo no Drive com sucesso.";
+    msg.innerText = "Documento salvo no Drive com sucesso.";
 
-      setTimeout(() => {
-        fecharNovoDocumentoRh();
-      }, 1200);
+document.getElementById("descricaoDocumentoRh").value = "";
+document.getElementById("observacaoDocumentoRh").value = "";
+document.getElementById("dataDocumentoRh").value = "";
+document.getElementById("arquivoDocumentoRh").value = "";
+
+setTimeout(() => {
+  fecharNovoDocumentoRh();
+
+  abrirCategoriaDocumentoRh(window.categoriaDocumentoAtual);
+
+}, 1200);
 
     }else{
       msg.innerText = dados.mensagem || "Erro ao salvar.";
