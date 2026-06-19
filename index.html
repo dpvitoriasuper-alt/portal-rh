@@ -3556,24 +3556,34 @@ function fecharNovoDocumentoRh(){
 
 function salvarDocumentoRh(){
 
-  const categoria =
-    document.getElementById("categoriaDocumentoRh").value;
+  const categoria = document.getElementById("categoriaDocumentoRh").value;
+  const descricao = document.getElementById("descricaoDocumentoRh").value;
+  const observacao = document.getElementById("observacaoDocumentoRh").value;
+  const dataDocumento = document.getElementById("dataDocumentoRh").value;
+  const ativo = document.getElementById("documentoAtivoRh").checked ? "SIM" : "NÃO";
+  const arquivo = document.getElementById("arquivoDocumentoRh").files[0];
+  const msg = document.getElementById("mensagemDocumentoRh");
 
-  const descricao =
-    document.getElementById("descricaoDocumentoRh").value;
+  if(!descricao){
+    msg.innerText = "Informe a descrição do documento.";
+    return;
+  }
 
-  const arquivo =
-    document.getElementById("arquivoDocumentoRh").files[0];
+  if(!arquivo){
+    msg.innerText = "Selecione um arquivo.";
+    return;
+  }
 
-  console.log("CATEGORIA:", categoria);
-  console.log("DESCRIÇÃO:", descricao);
-  console.log("ARQUIVO:", arquivo);
+  msg.innerText = "Formulário validado. Próximo passo: gravar na planilha.";
 
-  alert(
-    "Formulário funcionando.\n\n" +
-    "Categoria: " + categoria + "\n" +
-    "Descrição: " + descricao
-  );
+  console.log({
+    categoria,
+    descricao,
+    observacao,
+    dataDocumento,
+    ativo,
+    arquivo
+  });
 }
   
 /* AVISOS */
@@ -4740,7 +4750,7 @@ function mostrarTodosAvisos(){
 
   <div id="modalNovoDocumentoRh" class="documentos-modal">
 
-  <div class="documentos-box" style="max-width:700px;">
+  <div class="documentos-box" style="max-width:760px;">
 
     <div class="documentos-header">
       <h2>📎 Novo Documento</h2>
@@ -4750,37 +4760,36 @@ function mostrarTodosAvisos(){
     <div style="padding:20px;">
 
       <label>Categoria</label>
-      <input
-        type="text"
-        id="categoriaDocumentoRh"
-        readonly
-        style="width:100%;margin-bottom:15px;"
-      >
+      <input type="text" id="categoriaDocumentoRh" readonly style="width:100%;margin-bottom:15px;">
 
       <label>Descrição</label>
-      <input
-        type="text"
-        id="descricaoDocumentoRh"
-        placeholder="Ex: RG Frente"
-        style="width:100%;margin-bottom:15px;"
-      >
+      <input type="text" id="descricaoDocumentoRh" placeholder="Ex: RG Frente" style="width:100%;margin-bottom:15px;">
+
+      <label>Observação</label>
+      <textarea id="observacaoDocumentoRh" placeholder="Observações sobre o documento..." style="width:100%;height:90px;margin-bottom:15px;"></textarea>
+
+      <label>Data do Documento</label>
+      <input type="date" id="dataDocumentoRh" style="width:100%;margin-bottom:15px;">
 
       <label>Arquivo</label>
-      <input
-        type="file"
-        id="arquivoDocumentoRh"
-        style="width:100%;margin-bottom:20px;"
-      >
+      <input type="file" id="arquivoDocumentoRh" style="width:100%;margin-bottom:18px;">
 
-      <button
-        class="btn"
-        onclick="salvarDocumentoRh()">
+      <label style="display:flex;gap:8px;align-items:center;margin-bottom:18px;">
+        <input type="checkbox" id="documentoAtivoRh" checked>
+        Documento ativo
+      </label>
+
+      <button class="btn" onclick="salvarDocumentoRh()">
         💾 Salvar Documento
       </button>
+
+      <div id="mensagemDocumentoRh" style="margin-top:15px;color:#ffc400;font-weight:800;"></div>
 
     </div>
 
   </div>
+
+</div>
 
 </div>
   
