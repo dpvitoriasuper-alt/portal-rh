@@ -2386,6 +2386,22 @@ async function carregarPortal(){
   }
 
 }
+  function abrirFuncionariosRh(){
+  document.getElementById("modalFuncionariosRh").style.display = "flex";
+}
+
+function fecharFuncionariosRh(){
+  document.getElementById("modalFuncionariosRh").style.display = "none";
+}
+  function pesquisarFuncionariosRh(){
+
+  const termo =
+    document.getElementById("buscaFuncionarioRh").value;
+
+  document.getElementById("resultadoFuncionariosRh").innerHTML =
+    "Pesquisando: " + termo;
+
+}
   async function abrirMeusContracheques(){
   const modal = document.getElementById("contrachequesModal");
   const lista = document.getElementById("contrachequesLista");
@@ -3883,11 +3899,11 @@ function mostrarTodosAvisos(){
 
     <div class="documentos-grid">
 
-      <div class="doc-card">
-        <div class="doc-icon">👥</div>
-        <h3>Funcionários</h3>
-        <p>Consultar e gerenciar cadastros</p>
-      </div>
+      <div class="doc-card" onclick="abrirFuncionariosRh()">
+  <div class="doc-icon">👥</div>
+  <h3>Funcionários</h3>
+  <p>Consultar e gerenciar cadastros</p>
+</div>
 
       <div class="doc-card">
         <div class="doc-icon">📥</div>
@@ -3904,6 +3920,39 @@ function mostrarTodosAvisos(){
     </div>
 
   </div>
+</div>
+  <div id="modalFuncionariosRh" class="documentos-modal">
+
+  <div class="documentos-box">
+
+    <div class="documentos-header">
+      <h2>👥 Funcionários</h2>
+      <button onclick="fecharFuncionariosRh()">×</button>
+    </div>
+
+    <div style="padding:20px;">
+
+      <input
+        type="text"
+        id="buscaFuncionarioRh"
+        placeholder="Pesquisar por nome, CPF ou matrícula..."
+        style="width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;"
+      >
+
+      <button
+        onclick="pesquisarFuncionariosRh()"
+        style="margin-top:10px;"
+      >
+        🔍 Pesquisar
+      </button>
+
+      <div id="resultadoFuncionariosRh" style="margin-top:20px;">
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
   
 </body>
