@@ -2693,6 +2693,9 @@ function fecharFuncionariosRh(){
 
   const c = dados.cadastro;
 
+   window.cpfCadastroAtual = c.CPF || "";
+window.nomeFuncionarioAtual = c.NOME || "";
+
   conteudo.innerHTML = `
 
     <div class="rh-card-info">
