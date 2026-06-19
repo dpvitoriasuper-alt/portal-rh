@@ -3559,28 +3559,13 @@ function fecharNovoDocumentoRh(){
 
 async function salvarDocumentoRh(){
 
-  const categoria =
-    document.getElementById("categoriaDocumentoRh").value;
-
-  const descricao =
-    document.getElementById("descricaoDocumentoRh").value;
-
-  const observacao =
-    document.getElementById("observacaoDocumentoRh").value;
-
-  const dataDocumento =
-    document.getElementById("dataDocumentoRh").value;
-
-  const ativo =
-    document.getElementById("documentoAtivoRh").checked
-      ? "SIM"
-      : "NÃO";
-
-  const arquivo =
-    document.getElementById("arquivoDocumentoRh").files[0];
-
-  const msg =
-    document.getElementById("mensagemDocumentoRh");
+  const categoria = document.getElementById("categoriaDocumentoRh").value;
+  const descricao = document.getElementById("descricaoDocumentoRh").value;
+  const observacao = document.getElementById("observacaoDocumentoRh").value;
+  const dataDocumento = document.getElementById("dataDocumentoRh").value;
+  const ativo = document.getElementById("documentoAtivoRh").checked ? "SIM" : "NÃO";
+  const arquivo = document.getElementById("arquivoDocumentoRh").files[0];
+  const msg = document.getElementById("mensagemDocumentoRh");
 
   if(!descricao){
     msg.innerText = "Informe a descrição.";
@@ -3592,9 +3577,7 @@ async function salvarDocumentoRh(){
     return;
   }
 
-  const sessao =
-    JSON.parse(localStorage.getItem("portalLogin"));
-
+  const sessao = JSON.parse(localStorage.getItem("portalLogin"));
   const nomeUsuario = sessao.dados.nome || "";
 
   msg.innerText = "Preparando arquivo...";
@@ -3603,29 +3586,31 @@ async function salvarDocumentoRh(){
 
   msg.innerText = "Enviando para o Drive...";
 
+  const payload = {
+    action: "salvarDocumentoFuncionarioRh",
+    cpf: cpfCadastroAtual,
+    nome: nomeFuncionarioAtual,
+    categoria: categoria,
+    descricao: descricao,
+    observacao: observacao,
+    dataDocumento: dataDocumento,
+    arquivo: arquivo.name,
+    tipoArquivo: arquivo.type || "application/octet-stream",
+    arquivoBase64: arquivoBase64,
+    usuario: nomeUsuario,
+    ativo: ativo
+  };
+
   try{
 
-    const url =
-      API_URL +
-      "?action=salvarDocumentoFuncionarioRh" +
-      "&cpf=" + encodeURIComponent(cpfCadastroAtual) +
-      "&nome=" + encodeURIComponent(nomeFuncionarioAtual) +
-      "&categoria=" + encodeURIComponent(categoria) +
-      "&descricao=" + encodeURIComponent(descricao) +
-      "&observacao=" + encodeURIComponent(observacao) +
-      "&dataDocumento=" + encodeURIComponent(dataDocumento) +
-      "&arquivo=" + encodeURIComponent(arquivo.name) +
-      "&tipoArquivo=" + encodeURIComponent(arquivo.type || "application/octet-stream") +
-      "&arquivoBase64=" + encodeURIComponent(arquivoBase64) +
-      "&usuario=" + encodeURIComponent(nomeUsuario) +
-      "&ativo=" + encodeURIComponent(ativo) +
-      "&v=" + new Date().getTime();
+    const resposta = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
 
-    const resposta = await fetch(url, { cache: "no-store" });
     const dados = await resposta.json();
 
     if(dados.sucesso){
-
       msg.innerText = "Documento salvo no Drive com sucesso.";
 
       setTimeout(() => {
@@ -3637,11 +3622,10 @@ async function salvarDocumentoRh(){
     }
 
   }catch(erro){
-
     console.error(erro);
     msg.innerText = "Erro ao gravar documento no Drive.";
-
   }
+}
 }
   function converterArquivoParaBase64Rh(arquivo){
   return new Promise((resolve, reject) => {
