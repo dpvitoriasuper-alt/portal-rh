@@ -2700,6 +2700,13 @@ function fecharFuncionariosRh(){
         🏢 Dados Contratuais
       </button>
 
+<button
+  id="abaBtn_documentos"
+  class="rh-aba"
+  onclick="trocarAbaRh('documentos')">
+  📁 Documentos
+</button>
+
     </div>
 
     <div id="aba_pessoal" class="rh-conteudo-aba ativa">
@@ -2738,6 +2745,90 @@ function fecharFuncionariosRh(){
       </div>
 
     </div>
+<div id="aba_documentos" class="rh-conteudo-aba">
+
+  <div class="rh-card-info">
+    <strong>📁 Documentos do Funcionário</strong>
+    <span>
+      Todos os documentos serão armazenados na pasta individual do colaborador.
+    </span>
+  </div>
+
+  <div class="rh-tabela-box">
+
+    <table class="rh-tabela">
+
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th>Arquivos</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>📄 Documentos Pessoais</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+        <tr>
+          <td>📋 Ficha de Registro</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+        <tr>
+          <td>📝 Contrato</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+        <tr>
+          <td>🦺 Cautelas de EPI</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+        <tr>
+          <td>🩺 ASO</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+        <tr>
+          <td>🏥 Atestado</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+        <tr>
+          <td>🎉 Férias</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+        <tr>
+          <td>📄 Contracheques</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+        <tr>
+          <td>🧾 Recibos Eletrônicos</td>
+          <td>0</td>
+          <td><button>Abrir</button></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
 
   `;
 }
