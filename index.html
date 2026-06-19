@@ -3595,10 +3595,13 @@ async function salvarDocumentoRh(){
   const sessao =
     JSON.parse(localStorage.getItem("portalLogin"));
 
-  const cpfUsuario = sessao.dados.cpf || "";
   const nomeUsuario = sessao.dados.nome || "";
 
-  msg.innerText = "Salvando...";
+  msg.innerText = "Preparando arquivo...";
+
+  const arquivoBase64 = await converterArquivoParaBase64Rh(arquivo);
+
+  msg.innerText = "Enviando para o Drive...";
 
   try{
 
@@ -3612,42 +3615,50 @@ async function salvarDocumentoRh(){
       "&observacao=" + encodeURIComponent(observacao) +
       "&dataDocumento=" + encodeURIComponent(dataDocumento) +
       "&arquivo=" + encodeURIComponent(arquivo.name) +
+      "&tipoArquivo=" + encodeURIComponent(arquivo.type || "application/octet-stream") +
+      "&arquivoBase64=" + encodeURIComponent(arquivoBase64) +
       "&usuario=" + encodeURIComponent(nomeUsuario) +
       "&ativo=" + encodeURIComponent(ativo) +
-      "&callback=?";
+      "&v=" + new Date().getTime();
 
-    const resposta = await fetch(
-      url.replace("&callback=?", "")
-    );
-
+    const resposta = await fetch(url, { cache: "no-store" });
     const dados = await resposta.json();
 
     if(dados.sucesso){
 
-      msg.innerText =
-        "Documento registrado com sucesso.";
+      msg.innerText = "Documento salvo no Drive com sucesso.";
 
       setTimeout(() => {
-
         fecharNovoDocumentoRh();
-
-      }, 1000);
+      }, 1200);
 
     }else{
-
-      msg.innerText =
-        dados.mensagem || "Erro ao salvar.";
-
+      msg.innerText = dados.mensagem || "Erro ao salvar.";
     }
 
   }catch(erro){
 
     console.error(erro);
-
-    msg.innerText =
-      "Erro ao gravar documento.";
+    msg.innerText = "Erro ao gravar documento no Drive.";
 
   }
+}
+  function converterArquivoParaBase64Rh(arquivo){
+  return new Promise((resolve, reject) => {
+    const leitor = new FileReader();
+
+    leitor.onload = () => {
+      const resultado = leitor.result || "";
+      const base64 = String(resultado).split(",")[1];
+      resolve(base64);
+    };
+
+    leitor.onerror = () => {
+      reject("Erro ao ler arquivo.");
+    };
+
+    leitor.readAsDataURL(arquivo);
+  });
 }
   
 /* AVISOS */
