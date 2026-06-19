@@ -2645,7 +2645,7 @@ function fecharFuncionariosRh(){
       <div class="perfil-item"><small>Loja</small><span>${c.LOJA || "-"}</span></div>
       <div class="perfil-item"><small>CNPJ</small><span>${c.CNPJ || "-"}</span></div>
       <div class="perfil-item"><small>Função</small><span>${c.FUNCAO || "-"}</span></div>
-      <div class="perfil-item"><small>Salário</small><span>${c.SALARIO || "-"}</span></div>
+      <div class="perfil-item"><small>Salário</small><span>${formatarMoedaRh(c.SALARIO)}</span></div>
       <div class="perfil-item"><small>Admissão</small><span>${c.DATA_ADMISSAO || "-"}</span></div>
       <div class="perfil-item"><small>1º Contrato</small><span>${c.VENCIMENTO_1_CONTRATO || "-"}</span></div>
       <div class="perfil-item"><small>2º Contrato</small><span>${c.VENCIMENTO_2_CONTRATO || "-"}</span></div>
@@ -2653,6 +2653,23 @@ function fecharFuncionariosRh(){
 
     </div>
   `;
+}
+  function formatarMoedaRh(valor){
+
+  if(!valor) return "-";
+
+  let numero = String(valor)
+    .replace(/\./g,"")
+    .replace(",", ".");
+
+  numero = parseFloat(numero);
+
+  if(isNaN(numero)) return valor;
+
+  return numero.toLocaleString("pt-BR",{
+    style:"currency",
+    currency:"BRL"
+  });
 }
 function fecharCadastroCompletoRh(){
   document.getElementById("modalCadastroCompletoRh").style.display = "none";
