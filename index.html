@@ -3582,26 +3582,26 @@ async function salvarDocumentoRh(){
 
   msg.innerText = "Preparando arquivo...";
 
-  const arquivoBase64 = await converterArquivoParaBase64Rh(arquivo);
-
-  msg.innerText = "Enviando para o Drive...";
-
-  const payload = {
-    action: "salvarDocumentoFuncionarioRh",
-    cpf: cpfCadastroAtual,
-    nome: nomeFuncionarioAtual,
-    categoria: categoria,
-    descricao: descricao,
-    observacao: observacao,
-    dataDocumento: dataDocumento,
-    arquivo: arquivo.name,
-    tipoArquivo: arquivo.type || "application/octet-stream",
-    arquivoBase64: arquivoBase64,
-    usuario: nomeUsuario,
-    ativo: ativo
-  };
-
   try{
+
+    const arquivoBase64 = await converterArquivoParaBase64Rh(arquivo);
+
+    msg.innerText = "Enviando para o Drive...";
+
+    const payload = {
+      action: "salvarDocumentoFuncionarioRh",
+      cpf: cpfCadastroAtual,
+      nome: nomeFuncionarioAtual,
+      categoria: categoria,
+      descricao: descricao,
+      observacao: observacao,
+      dataDocumento: dataDocumento,
+      arquivo: arquivo.name,
+      tipoArquivo: arquivo.type || "application/octet-stream",
+      arquivoBase64: arquivoBase64,
+      usuario: nomeUsuario,
+      ativo: ativo
+    };
 
     const resposta = await fetch(API_URL, {
       method: "POST",
@@ -3610,27 +3610,29 @@ async function salvarDocumentoRh(){
 
     const dados = await resposta.json();
 
-    msg.innerText = "Documento salvo no Drive com sucesso.";
+    if(dados.sucesso){
 
-document.getElementById("descricaoDocumentoRh").value = "";
-document.getElementById("observacaoDocumentoRh").value = "";
-document.getElementById("dataDocumentoRh").value = "";
-document.getElementById("arquivoDocumentoRh").value = "";
+      msg.innerText = "Documento salvo no Drive com sucesso.";
 
-setTimeout(() => {
-  fecharNovoDocumentoRh();
+      document.getElementById("descricaoDocumentoRh").value = "";
+      document.getElementById("observacaoDocumentoRh").value = "";
+      document.getElementById("dataDocumentoRh").value = "";
+      document.getElementById("arquivoDocumentoRh").value = "";
 
-  abrirCategoriaDocumentoRh(window.categoriaDocumentoAtual);
+      setTimeout(() => {
+        fecharNovoDocumentoRh();
+        abrirCategoriaDocumentoRh(window.categoriaDocumentoAtual);
+      }, 1200);
 
-}, 1200);
-
-  else{
+    }else{
       msg.innerText = dados.mensagem || "Erro ao salvar.";
     }
 
   }catch(erro){
+
     console.error(erro);
     msg.innerText = "Erro ao gravar documento no Drive.";
+
   }
 }
   function converterArquivoParaBase64Rh(arquivo){
