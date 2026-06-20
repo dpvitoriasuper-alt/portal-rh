@@ -2534,20 +2534,90 @@ async function carregarPortal(){
   }
 
 }
-  function abrirCategoriaDocumentoRh(categoria){
+  async function abrirCategoriaDocumentoRh(categoria){
 
-    window.categoriaDocumentoAtual = categoria;
-    
+  window.categoriaDocumentoAtual = categoria;
+
   document.getElementById("tituloCategoriaDocumentoRh").innerText = categoria;
   document.getElementById("modalCategoriaDocumentoRh").style.display = "flex";
 
-  document.getElementById("listaArquivosCategoriaRh").innerHTML = `
+  const lista = document.getElementById("listaArquivosCategoriaRh");
+
+  lista.innerHTML = `
     <tr>
       <td colspan="4" class="rh-vazio">
-        Nenhum arquivo nesta categoria.
+        Carregando documentos...
       </td>
     </tr>
   `;
+
+  const url =
+    API_URL +
+    "?action=buscarDocumentosFuncionarioRh" +
+    "&cpf=" + encodeURIComponent(cpfCadastroAtual) +
+    "&categoria=" + encodeURIComponent(categoria) +
+    "&v=" + new Date().getTime();
+
+  try{
+
+    const resposta = await fetch(url, { cache: "no-store" });
+    const dados = await resposta.json();
+
+    if(!dados.sucesso){
+      lista.innerHTML = `
+        <tr>
+          <td colspan="4" class="rh-vazio">
+            ${dados.mensagem || "Erro ao buscar documentos."}
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    if(!dados.documentos || dados.documentos.length === 0){
+      lista.innerHTML = `
+        <tr>
+          <td colspan="4" class="rh-vazio">
+            Nenhum arquivo nesta categoria.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    lista.innerHTML = "";
+
+    dados.documentos.forEach(doc => {
+
+      lista.innerHTML += `
+        <tr>
+          <td>${doc.arquivo || doc.descricao || "-"}</td>
+          <td>${doc.data || "-"}</td>
+          <td>${doc.usuario || "-"}</td>
+          <td>
+            <a href="${doc.link}" target="_blank">👁</a>
+            &nbsp;
+            <a href="${doc.link}" target="_blank">⬇</a>
+            &nbsp;
+            <button onclick="alert('Excluir será ativado depois.')">🗑</button>
+          </td>
+        </tr>
+      `;
+
+    });
+
+  }catch(erro){
+
+    console.error("Erro ao carregar documentos:", erro);
+
+    lista.innerHTML = `
+      <tr>
+        <td colspan="4" class="rh-vazio">
+          Erro ao carregar documentos.
+        </td>
+      </tr>
+    `;
+  }
 }
 
 function fecharCategoriaDocumentoRh(){
