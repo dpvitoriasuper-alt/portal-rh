@@ -2534,6 +2534,20 @@ async function carregarPortal(){
   }
 
 }
+  function abrirNovaOcorrenciaRh(){
+  document.getElementById("descricaoOcorrenciaRh").value = "";
+  document.getElementById("mensagemOcorrenciaRh").innerText = "";
+  document.getElementById("modalNovaOcorrenciaRh").style.display = "flex";
+}
+
+function fecharNovaOcorrenciaRh(){
+  document.getElementById("modalNovaOcorrenciaRh").style.display = "none";
+}
+
+function salvarOcorrenciaRh(){
+  document.getElementById("mensagemOcorrenciaRh").innerText =
+    "Formulário funcionando. Próximo passo: gravar no histórico.";
+}
   async function carregarHistoricoRh(){
 
   const lista = document.getElementById("listaHistoricoRh");
@@ -5168,6 +5182,44 @@ function mostrarTodosAvisos(){
   </div>
 
 </div>
+
+</div>
+
+  <div id="modalNovaOcorrenciaRh" class="documentos-modal">
+
+  <div class="documentos-box" style="max-width:750px;">
+
+    <div class="documentos-header">
+      <h2>➕ Nova Ocorrência</h2>
+      <button onclick="fecharNovaOcorrenciaRh()">×</button>
+    </div>
+
+    <div style="padding:20px;">
+
+      <label>Tipo da Ocorrência</label>
+      <select id="tipoOcorrenciaRh" style="width:100%;margin-bottom:15px;">
+        <option value="OBSERVAÇÃO">📌 Observação</option>
+        <option value="TRANSFERÊNCIA DE LOJA">🏬 Transferência de Loja</option>
+        <option value="ADVERTÊNCIA">⚠️ Advertência</option>
+        <option value="SUSPENSÃO">⛔ Suspensão</option>
+        <option value="AFASTAMENTO">🛌 Afastamento</option>
+        <option value="ALTERAÇÃO CONTRATUAL">📄 Alteração Contratual</option>
+        <option value="ALTERAÇÃO SALARIAL">💰 Alteração Salarial</option>
+        <option value="OUTROS">📎 Outros</option>
+      </select>
+
+      <label>Descrição / Justificativa</label>
+      <textarea id="descricaoOcorrenciaRh" style="width:100%;height:120px;margin-bottom:15px;"></textarea>
+
+      <button onclick="salvarOcorrenciaRh()">
+        💾 Salvar Ocorrência
+      </button>
+
+      <div id="mensagemOcorrenciaRh" style="margin-top:15px;color:#ffc400;font-weight:800;"></div>
+
+    </div>
+
+  </div>
 
 </div>
   
