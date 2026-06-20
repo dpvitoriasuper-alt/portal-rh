@@ -2606,9 +2606,9 @@ async function carregarPortal(){
           <td>${formatarDataHoraRh(doc.data)}</td>
           <td>${doc.usuario || "-"}</td>
           <td>
-            <a href="${doc.link}" target="_blank">👁</a>
+           <a href="${doc.link.replace('/view', '/uc?export=download')}" target="_blank">⬇</a>
             &nbsp;
-            <a href="${doc.link}" target="_blank">⬇</a>
+            <a href="${doc.link.replace("/view", "/uc?export=download")}" target="_blank">⬇</a>
             &nbsp;
             <button onclick="alert('Excluir será ativado depois.')">🗑</button>
           </td>
