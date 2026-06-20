@@ -2548,19 +2548,69 @@ async function carregarPortal(){
   }
 
 }
-  function abrirTransferenciaLojaRh(){
+  async function carregarLojasTransferenciaRh(lojaAtual){
+
+  const select = document.getElementById("novaLojaTransferenciaRh");
+
+  select.innerHTML = `
+    <option value="">Carregando lojas...</option>
+  `;
+
+  const url =
+    API_URL +
+    "?action=buscarLojasCadastroRh" +
+    "&v=" + new Date().getTime();
+
+  try{
+
+    const resposta = await fetch(url, { cache:"no-store" });
+    const dados = await resposta.json();
+
+    if(!dados.sucesso){
+      select.innerHTML = `
+        <option value="">Erro ao carregar lojas</option>
+      `;
+      return;
+    }
+
+    select.innerHTML = `
+      <option value="">Selecione...</option>
+    `;
+
+    dados.lojas.forEach(loja => {
+
+      if(String(loja).trim().toUpperCase() === String(lojaAtual).trim().toUpperCase()){
+        return;
+      }
+
+      select.innerHTML += `
+        <option value="${loja}">${loja}</option>
+      `;
+
+    });
+
+  }catch(erro){
+
+    console.error("Erro ao carregar lojas:", erro);
+
+    select.innerHTML = `
+      <option value="">Erro ao carregar lojas</option>
+    `;
+  }
+}
+  async function abrirTransferenciaLojaRh(){
 
   const lojaAtual =
     document.querySelector("#aba_contrato .perfil-item span")?.innerText || "";
 
   document.getElementById("lojaAtualTransferenciaRh").value = lojaAtual;
-  document.getElementById("novaLojaTransferenciaRh").value = "";
   document.getElementById("justificativaTransferenciaRh").value = "";
   document.getElementById("mensagemTransferenciaRh").innerText = "";
 
   document.getElementById("modalTransferenciaLojaRh").style.display = "flex";
-}
 
+  await carregarLojasTransferenciaRh(lojaAtual);
+}
 function fecharTransferenciaLojaRh(){
   document.getElementById("modalTransferenciaLojaRh").style.display = "none";
 }
@@ -5386,19 +5436,12 @@ function mostrarTodosAvisos(){
       >
 
       <label>Nova Loja</label>
-      <select
-        id="novaLojaTransferenciaRh"
-        style="width:100%;margin-bottom:15px;"
-      >
-        <option value="">Selecione...</option>
-        <option value="RG">RG</option>
-        <option value="CIDADE NOVA">CIDADE NOVA</option>
-        <option value="GRANDE CIRCULAR">GRANDE CIRCULAR</option>
-        <option value="COROADO">COROADO</option>
-        <option value="JAPIIM">JAPIIM</option>
-        <option value="SÃO JOSÉ">SÃO JOSÉ</option>
-        <option value="PARQUE 10">PARQUE 10</option>
-      </select>
+     <select
+  id="novaLojaTransferenciaRh"
+  style="width:100%;margin-bottom:15px;"
+>
+  <option value="">Carregando lojas...</option>
+</select>
 
       <label>Justificativa</label>
       <textarea
