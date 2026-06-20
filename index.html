@@ -2534,22 +2534,24 @@ async function carregarPortal(){
   }
 
 }
-  async function abrirCategoriaDocumentoRh(categoria){
+  async function abrirCategoriaDocumentoRh(categoria, somenteContar){
 
   window.categoriaDocumentoAtual = categoria;
 
-  document.getElementById("tituloCategoriaDocumentoRh").innerText = categoria;
-  document.getElementById("modalCategoriaDocumentoRh").style.display = "flex";
-
   const lista = document.getElementById("listaArquivosCategoriaRh");
 
-  lista.innerHTML = `
-    <tr>
-      <td colspan="4" class="rh-vazio">
-        Carregando documentos...
-      </td>
-    </tr>
-  `;
+  if(!somenteContar){
+    document.getElementById("tituloCategoriaDocumentoRh").innerText = categoria;
+    document.getElementById("modalCategoriaDocumentoRh").style.display = "flex";
+
+    lista.innerHTML = `
+      <tr>
+        <td colspan="4" class="rh-vazio">
+          Carregando documentos...
+        </td>
+      </tr>
+    `;
+  }
 
   const url =
     API_URL +
@@ -2562,6 +2564,15 @@ async function carregarPortal(){
 
     const resposta = await fetch(url, { cache: "no-store" });
     const dados = await resposta.json();
+
+    atualizarQuantidadeCategoriaRh(
+      categoria,
+      dados.quantidade || 0
+    );
+
+    if(somenteContar){
+      return;
+    }
 
     if(!dados.sucesso){
       lista.innerHTML = `
@@ -2586,12 +2597,7 @@ async function carregarPortal(){
     }
 
     lista.innerHTML = "";
-    
-atualizarQuantidadeCategoriaRh(
-  categoria,
-  dados.quantidade || 0
-);
-    
+
     dados.documentos.forEach(doc => {
 
       lista.innerHTML += `
@@ -2610,6 +2616,38 @@ atualizarQuantidadeCategoriaRh(
       `;
 
     });
+
+  }catch(erro){
+
+    console.error("Erro ao carregar documentos:", erro);
+
+    if(!somenteContar){
+      lista.innerHTML = `
+        <tr>
+          <td colspan="4" class="rh-vazio">
+            Erro ao carregar documentos.
+          </td>
+        </tr>
+      `;
+    }
+  }
+}
+  function carregarQuantidadesDocumentosRh(){
+
+  const linhas = document.querySelectorAll("#aba_documentos tbody tr");
+
+  linhas.forEach(linha => {
+
+    const categoria = linha.cells[0]?.innerText || "";
+
+    if(!categoria) return;
+
+    abrirCategoriaDocumentoRh(categoria, true);
+
+  });
+
+}
+  
 function atualizarQuantidadeCategoriaRh(categoria, quantidade){
 
   const linhas = document.querySelectorAll("table tbody tr");
@@ -2643,7 +2681,21 @@ function atualizarQuantidadeCategoriaRh(categoria, quantidade){
     `;
   }
 }
+function carregarQuantidadesDocumentosRh(){
 
+  const linhas = document.querySelectorAll("#aba_documentos tbody tr");
+
+  linhas.forEach(linha => {
+
+    const categoria = linha.cells[0]?.innerText || "";
+
+    if(!categoria) return;
+
+    abrirCategoriaDocumentoRh(categoria, true);
+
+  });
+
+}
 function fecharCategoriaDocumentoRh(){
   document.getElementById("modalCategoriaDocumentoRh").style.display = "none";
 }
@@ -2819,7 +2871,7 @@ window.nomeFuncionarioAtual = c.NOME || "";
 <button
   id="abaBtn_documentos"
   class="rh-aba"
-  onclick="trocarAbaRh('documentos')">
+  onclick="trocarAbaRh('documentos'); carregarQuantidadesDocumentosRh();"
   📁 Documentos
 </button>
 
