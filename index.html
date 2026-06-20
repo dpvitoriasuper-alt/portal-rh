@@ -3209,6 +3209,27 @@ window.nomeFuncionarioAtual = c.NOME || "";
   </div>
 
 </div>
+<div id="aba_historico" class="rh-conteudo-aba">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+
+    <h3 style="margin:0;">
+      📝 Histórico Geral do Colaborador
+    </h3>
+
+    <button onclick="abrirNovaOcorrenciaRh()">
+      ➕ Nova Ocorrência
+    </button>
+
+  </div>
+
+  <div id="listaHistoricoRh">
+    <div class="rh-vazio">
+      Carregando histórico...
+    </div>
+  </div>
+
+</div>
 
   `;
 }
