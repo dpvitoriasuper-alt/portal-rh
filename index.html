@@ -2534,6 +2534,59 @@ async function carregarPortal(){
   }
 
 }
+  async function excluirDocumentoRh(idDocumento){
+
+  if(!confirm("Deseja realmente excluir este documento?")){
+    return;
+  }
+
+  const sessao =
+    JSON.parse(localStorage.getItem("portalLogin"));
+
+  const usuario =
+    sessao?.dados?.nome || "USUARIO";
+
+  try{
+
+    const url =
+      API_URL +
+      "?action=excluirDocumentoFuncionarioRh" +
+      "&idDocumento=" + encodeURIComponent(idDocumento) +
+      "&usuario=" + encodeURIComponent(usuario) +
+      "&v=" + new Date().getTime();
+
+    const resposta =
+      await fetch(url,{cache:"no-store"});
+
+    const dados =
+      await resposta.json();
+
+    if(!dados.sucesso){
+
+      alert(
+        dados.mensagem ||
+        "Erro ao excluir documento."
+      );
+
+      return;
+    }
+
+    alert("Documento movido para a lixeira.");
+
+    abrirCategoriaDocumentoRh(
+      window.categoriaDocumentoAtual
+    );
+
+  }catch(erro){
+
+    console.error(erro);
+
+    alert(
+      "Erro ao excluir documento."
+    );
+
+  }
+}
   async function abrirCategoriaDocumentoRh(categoria, somenteContar){
 
   window.categoriaDocumentoAtual = categoria;
@@ -2601,11 +2654,13 @@ async function carregarPortal(){
     dados.documentos.forEach(doc => {
 
       lista.innerHTML += `
-        <tr>
-          <td>${doc.arquivo || doc.descricao || "-"}</td>
-          <td>${formatarDataHoraRh(doc.data)}</td>
-          <td>${doc.usuario || "-"}</td>
-          <td>
+        <td>
+  <a href="https://drive.google.com/file/d/${doc.arquivoId}/view" target="_blank">👁</a>
+  &nbsp;
+  <a href="https://drive.google.com/uc?export=download&id=${doc.arquivoId}" target="_blank">⬇</a>
+  &nbsp;
+  <button onclick="excluirDocumentoRh('${doc.id}')">🗑</button>
+</td>
   <a href="https://drive.google.com/file/d/${doc.arquivoId}/view" target="_blank">👁</a>
   &nbsp;
   <a href="https://drive.google.com/uc?export=download&id=${doc.arquivoId}" target="_blank">⬇</a>
