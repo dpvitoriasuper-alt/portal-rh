@@ -2615,7 +2615,7 @@ function fecharTransferenciaLojaRh(){
   document.getElementById("modalTransferenciaLojaRh").style.display = "none";
 }
 
-function salvarTransferenciaLojaRh(){
+async function salvarTransferenciaLojaRh(){
 
   const lojaAtual =
     document.getElementById("lojaAtualTransferenciaRh").value;
@@ -2639,8 +2639,44 @@ function salvarTransferenciaLojaRh(){
     return;
   }
 
-  msg.innerText =
-    "Formulário funcionando. Próximo passo: gravar transferência.";
+  const sessao =
+    JSON.parse(localStorage.getItem("portalLogin"));
+
+  const usuario =
+    sessao?.dados?.nome || "USUARIO";
+
+  msg.innerText = "Realizando transferência...";
+
+  const url =
+    API_URL +
+    "?action=transferirLojaRh" +
+    "&cpf=" + encodeURIComponent(cpfCadastroAtual) +
+    "&novaLoja=" + encodeURIComponent(novaLoja) +
+    "&justificativa=" + encodeURIComponent(justificativa) +
+    "&usuario=" + encodeURIComponent(usuario) +
+    "&v=" + new Date().getTime();
+
+  try{
+
+    const resposta = await fetch(url, { cache:"no-store" });
+    const dados = await resposta.json();
+
+    if(!dados.sucesso){
+      msg.innerText = dados.mensagem || "Erro ao transferir.";
+      return;
+    }
+
+    msg.innerText = "Transferência realizada com sucesso.";
+
+    setTimeout(() => {
+      fecharTransferenciaLojaRh();
+      abrirCadastroCompletoRh(cpfCadastroAtual);
+    }, 1200);
+
+  }catch(erro){
+    console.error("Erro ao transferir loja:", erro);
+    msg.innerText = "Erro ao realizar transferência.";
+  }
 }
   function abrirNovaOcorrenciaRh(){
   document.getElementById("descricaoOcorrenciaRh").value = "";
