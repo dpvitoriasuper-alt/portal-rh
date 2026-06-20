@@ -2630,13 +2630,15 @@ async function salvarOcorrenciaRh(){
     lista.innerHTML = "";
 
     dados.historico.forEach(item => {
-      lista.innerHTML += `
-        <div class="rh-card-info" style="margin-bottom:15px;">
-          <strong>📌 Registro de Histórico</strong>
-          <span>${JSON.stringify(item.linha)}</span>
-        </div>
-      `;
-    });
+  lista.innerHTML += `
+    <div class="rh-card-info" style="margin-bottom:15px;">
+      <strong>📌 ${item.tipo || "OCORRÊNCIA"}</strong>
+      <span style="white-space:pre-line;">
+${item.descricaoCompleta || item.justificativa || "-"}
+      </span>
+    </div>
+  `;
+});
 
   }catch(erro){
     console.error(erro);
