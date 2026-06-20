@@ -2548,6 +2548,50 @@ async function carregarPortal(){
   }
 
 }
+  function abrirTransferenciaLojaRh(){
+
+  const lojaAtual =
+    document.querySelector("#aba_contrato .perfil-item span")?.innerText || "";
+
+  document.getElementById("lojaAtualTransferenciaRh").value = lojaAtual;
+  document.getElementById("novaLojaTransferenciaRh").value = "";
+  document.getElementById("justificativaTransferenciaRh").value = "";
+  document.getElementById("mensagemTransferenciaRh").innerText = "";
+
+  document.getElementById("modalTransferenciaLojaRh").style.display = "flex";
+}
+
+function fecharTransferenciaLojaRh(){
+  document.getElementById("modalTransferenciaLojaRh").style.display = "none";
+}
+
+function salvarTransferenciaLojaRh(){
+
+  const lojaAtual =
+    document.getElementById("lojaAtualTransferenciaRh").value;
+
+  const novaLoja =
+    document.getElementById("novaLojaTransferenciaRh").value;
+
+  const justificativa =
+    document.getElementById("justificativaTransferenciaRh").value;
+
+  const msg =
+    document.getElementById("mensagemTransferenciaRh");
+
+  if(!novaLoja){
+    msg.innerText = "Selecione a nova loja.";
+    return;
+  }
+
+  if(!justificativa){
+    msg.innerText = "Informe a justificativa da transferência.";
+    return;
+  }
+
+  msg.innerText =
+    "Formulário funcionando. Próximo passo: gravar transferência.";
+}
   function abrirNovaOcorrenciaRh(){
   document.getElementById("descricaoOcorrenciaRh").value = "";
   document.getElementById("mensagemOcorrenciaRh").innerText = "";
@@ -5315,6 +5359,64 @@ function mostrarTodosAvisos(){
       </button>
 
       <div id="mensagemOcorrenciaRh" style="margin-top:15px;color:#ffc400;font-weight:800;"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+  <div id="modalTransferenciaLojaRh" class="documentos-modal">
+
+  <div class="documentos-box" style="max-width:750px;">
+
+    <div class="documentos-header">
+      <h2>🔄 Transferência de Loja</h2>
+      <button onclick="fecharTransferenciaLojaRh()">×</button>
+    </div>
+
+    <div style="padding:20px;">
+
+      <label>Loja Atual</label>
+      <input
+        type="text"
+        id="lojaAtualTransferenciaRh"
+        readonly
+        style="width:100%;margin-bottom:15px;"
+      >
+
+      <label>Nova Loja</label>
+      <select
+        id="novaLojaTransferenciaRh"
+        style="width:100%;margin-bottom:15px;"
+      >
+        <option value="">Selecione...</option>
+        <option value="RG">RG</option>
+        <option value="CIDADE NOVA">CIDADE NOVA</option>
+        <option value="GRANDE CIRCULAR">GRANDE CIRCULAR</option>
+        <option value="COROADO">COROADO</option>
+        <option value="JAPIIM">JAPIIM</option>
+        <option value="SÃO JOSÉ">SÃO JOSÉ</option>
+        <option value="PARQUE 10">PARQUE 10</option>
+      </select>
+
+      <label>Justificativa</label>
+      <textarea
+        id="justificativaTransferenciaRh"
+        placeholder="Informe o motivo da transferência..."
+        style="width:100%;height:120px;margin-bottom:15px;"
+      ></textarea>
+
+      <button
+        class="rh-btn-acao"
+        onclick="salvarTransferenciaLojaRh()">
+        💾 Confirmar Transferência
+      </button>
+
+      <div
+        id="mensagemTransferenciaRh"
+        style="margin-top:15px;color:#ffc400;font-weight:800;">
+      </div>
 
     </div>
 
