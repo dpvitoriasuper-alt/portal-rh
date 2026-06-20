@@ -2606,12 +2606,12 @@ async function carregarPortal(){
           <td>${formatarDataHoraRh(doc.data)}</td>
           <td>${doc.usuario || "-"}</td>
           <td>
-           <a href="${doc.link.replace('/view', '/uc?export=download')}" target="_blank">⬇</a>
-            &nbsp;
-            <a href="${doc.link.replace("/view", "/uc?export=download")}" target="_blank">⬇</a>
-            &nbsp;
-            <button onclick="alert('Excluir será ativado depois.')">🗑</button>
-          </td>
+  <a href="https://drive.google.com/file/d/${doc.arquivoId}/view" target="_blank">👁</a>
+  &nbsp;
+  <a href="https://drive.google.com/uc?export=download&id=${doc.arquivoId}" target="_blank">⬇</a>
+  &nbsp;
+  <button onclick="alert('Excluir será ativado depois.')">🗑</button>
+</td>
         </tr>
       `;
 
