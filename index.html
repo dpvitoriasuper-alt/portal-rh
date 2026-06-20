@@ -2647,39 +2647,22 @@ async function carregarPortal(){
   });
 
 }
-  
-function atualizarQuantidadeCategoriaRh(categoria, quantidade){
+  function atualizarQuantidadeCategoriaRh(categoria, quantidade){
 
-  const linhas = document.querySelectorAll("table tbody tr");
+  const linhas = document.querySelectorAll("#aba_documentos tbody tr");
 
   linhas.forEach(linha => {
 
-    const categoriaLinha =
-      linha.cells[0]?.innerText || "";
+    const categoriaLinha = linha.cells[0]?.innerText || "";
 
-    if(
-      categoriaLinha
-        .toUpperCase()
-        .includes(categoria.toUpperCase())
-    ){
+    if(categoriaLinha.trim() === categoria.trim()){
       linha.cells[1].innerText = quantidade;
     }
 
   });
 
-  }catch(erro){
-
-    console.error("Erro ao carregar documentos:", erro);
-
-    lista.innerHTML = `
-      <tr>
-        <td colspan="4" class="rh-vazio">
-          Erro ao carregar documentos.
-        </td>
-      </tr>
-    `;
-  }
 }
+
 function carregarQuantidadesDocumentosRh(){
 
   const linhas = document.querySelectorAll("#aba_documentos tbody tr");
