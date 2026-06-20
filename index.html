@@ -2651,27 +2651,50 @@ async function carregarPortal(){
 
     lista.innerHTML = "";
 
-    dados.documentos.forEach(doc => {
+   dados.documentos.forEach(doc => {
 
-      lista.innerHTML += `
-        <td>
-  <a href="https://drive.google.com/file/d/${doc.arquivoId}/view" target="_blank">👁</a>
-  &nbsp;
-  <a href="https://drive.google.com/uc?export=download&id=${doc.arquivoId}" target="_blank">⬇</a>
-  &nbsp;
-  <button onclick="excluirDocumentoRh('${doc.id}')">🗑</button>
-</td>
-  <a href="https://drive.google.com/file/d/${doc.arquivoId}/view" target="_blank">👁</a>
-  &nbsp;
-  <a href="https://drive.google.com/uc?export=download&id=${doc.arquivoId}" target="_blank">⬇</a>
-  &nbsp;
-  <button onclick="alert('Excluir será ativado depois.')">🗑</button>
-</td>
-        </tr>
-      `;
+  lista.innerHTML += `
+    <tr>
 
-    });
+      <td>${doc.arquivo || "-"}</td>
 
+      <td>
+        ${formatarDataHoraRh(doc.data)}
+      </td>
+
+      <td>
+        ${doc.usuario || "-"}
+      </td>
+
+      <td>
+
+        <a
+          href="https://drive.google.com/file/d/${doc.arquivoId}/view"
+          target="_blank">
+          👁
+        </a>
+
+        &nbsp;
+
+        <a
+          href="https://drive.google.com/uc?export=download&id=${doc.arquivoId}"
+          target="_blank">
+          ⬇
+        </a>
+
+        &nbsp;
+
+        <button
+          onclick="excluirDocumentoRh('${doc.id}')">
+          🗑
+        </button>
+
+      </td>
+
+    </tr>
+  `;
+
+});
   }catch(erro){
 
     console.error("Erro ao carregar documentos:", erro);
