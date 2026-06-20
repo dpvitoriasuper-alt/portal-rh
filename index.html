@@ -2534,6 +2534,57 @@ async function carregarPortal(){
   }
 
 }
+  async function carregarHistoricoRh(){
+
+  const lista = document.getElementById("listaHistoricoRh");
+
+  lista.innerHTML = `
+    <div class="rh-vazio">
+      Carregando histórico...
+    </div>
+  `;
+
+  const url =
+    API_URL +
+    "?action=buscarHistoricoFuncionarioRh" +
+    "&cpf=" + encodeURIComponent(cpfCadastroAtual) +
+    "&v=" + new Date().getTime();
+
+  try{
+
+    const resposta = await fetch(url, { cache: "no-store" });
+    const dados = await resposta.json();
+
+    if(!dados.sucesso){
+      lista.innerHTML = dados.mensagem || "Erro ao carregar histórico.";
+      return;
+    }
+
+    if(!dados.historico || dados.historico.length === 0){
+      lista.innerHTML = `
+        <div class="rh-vazio">
+          Nenhum histórico registrado para este colaborador.
+        </div>
+      `;
+      return;
+    }
+
+    lista.innerHTML = "";
+
+    dados.historico.forEach(item => {
+      lista.innerHTML += `
+        <div class="rh-card-info" style="margin-bottom:15px;">
+          <strong>📌 Registro de Histórico</strong>
+          <span>${JSON.stringify(item.linha)}</span>
+        </div>
+      `;
+    });
+
+  }catch(erro){
+    console.error(erro);
+    lista.innerHTML = "Erro ao carregar histórico.";
+  }
+}
   async function excluirDocumentoRh(idDocumento){
 
   if(!confirm("Deseja realmente excluir este documento?")){
