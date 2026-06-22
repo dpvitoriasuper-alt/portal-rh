@@ -293,6 +293,69 @@
   transform:translateY(-2px);
   box-shadow:0 4px 12px rgba(245,196,0,.4);
 }
+  .modal-rh{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-rh-conteudo{
+  background:#111;
+  color:#fff;
+  width:90%;
+  max-width:900px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:16px;
+  padding:24px;
+  border:1px solid #c9a646;
+}
+
+.modal-rh-topo{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.modal-rh-topo button{
+  background:#c9a646;
+  color:#000;
+  border:none;
+  border-radius:8px;
+  font-size:22px;
+  width:36px;
+  height:36px;
+  cursor:pointer;
+}
+
+.form-rh{
+  display:grid;
+  gap:12px;
+}
+
+.form-rh input{
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #444;
+  background:#1b1b1b;
+  color:#fff;
+}
+
+.form-rh button{
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#c9a646;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+  
 @media(max-width:900px){
   .rh-filtros{
     grid-template-columns:1fr;
@@ -5033,6 +5096,27 @@ function abrirWhatsappLoja(loja){
 function mostrarTodosAvisos(){
   carregarAvisos(window.todosAvisos || [], true);
 }
+  function abrirNovoFuncionarioRh(){
+  const modal = document.getElementById("modalNovoFuncionarioRh");
+
+  if(!modal){
+    alert("Tela de Novo Funcionário ainda não foi criada no HTML.");
+    return;
+  }
+
+  modal.style.display = "flex";
+}
+
+function abrirExperienciaRh(){
+  const modal = document.getElementById("modalExperienciaRh");
+
+  if(!modal){
+    alert("Tela de Experiência ainda não foi criada no HTML.");
+    return;
+  }
+
+  modal.style.display = "flex";
+}
 
 </script>
 <div class="galeria-modal" id="galeriaModal">
@@ -5523,6 +5607,65 @@ function mostrarTodosAvisos(){
 
   </div>
 
+</div>
+
+  <div id="modalNovoFuncionarioRh" class="modal-rh">
+  <div class="modal-rh-conteudo">
+    <div class="modal-rh-topo">
+      <h2>➕ Novo Funcionário</h2>
+      <button onclick="fecharModalRh('modalNovoFuncionarioRh')">×</button>
+    </div>
+
+    <p>Tela de cadastro manual do colaborador.</p>
+  </div>
+</div>
+
+<div id="modalExperienciaRh" class="modal-rh">
+  <div class="modal-rh-conteudo">
+    <div class="modal-rh-topo">
+      <h2>⏳ Funcionários em Experiência</h2>
+      <button onclick="fecharModalRh('modalExperienciaRh')">×</button>
+    </div>
+
+    <p>Lista de colaboradores com contrato de experiência.</p>
+  </div>
+</div>
+
+  <div id="modalExperienciaRh" class="modal-rh">
+  <div class="modal-rh-conteudo">
+    <div class="modal-rh-topo">
+      <h2>Controle de Experiência</h2>
+      <button onclick="fecharModaisRh()">×</button>
+    </div>
+
+    <div id="listaExperienciaRh">
+      <p>Carregando funcionários em experiência...</p>
+    </div>
+  </div>
+</div>
+
+<div id="modalAdicionarColaboradorRh" class="modal-rh">
+  <div class="modal-rh-conteudo">
+    <div class="modal-rh-topo">
+      <h2>Adicionar Colaborador</h2>
+      <button onclick="fecharModaisRh()">×</button>
+    </div>
+
+    <div class="form-rh">
+      <input id="novoNomeColaborador" placeholder="Nome completo">
+      <input id="novoCpfColaborador" placeholder="CPF">
+      <input id="novaMatriculaColaborador" placeholder="Matrícula">
+      <input id="novaLojaColaborador" placeholder="Loja">
+      <input id="novaFuncaoColaborador" placeholder="Função">
+      <input id="novaAdmissaoColaborador" type="date">
+
+      <button onclick="salvarNovoColaboradorRh()">
+        Salvar Colaborador
+      </button>
+    </div>
+
+    <div id="mensagemAdicionarColaboradorRh"></div>
+  </div>
 </div>
   
 </body>
