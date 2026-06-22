@@ -2882,6 +2882,67 @@ async function salvarOcorrenciaRh(){
     lista.innerHTML = "Erro ao carregar histórico.";
   }
 }
+  window.salvarNovoFuncionarioRh = async function(){
+
+  const msg = document.getElementById("mensagemNovoFuncionarioRh");
+
+  const dados = {
+    nome: document.getElementById("novoNomeRh").value,
+    cpf: document.getElementById("novoCpfRh").value,
+    rg: document.getElementById("novoRgRh").value,
+    pis: document.getElementById("novoPisRh").value,
+    nascimento: document.getElementById("novoNascimentoRh").value,
+    mae: document.getElementById("novoMaeRh").value,
+    pai: document.getElementById("novoPaiRh").value,
+    endereco: document.getElementById("novoEnderecoRh").value,
+    numero: document.getElementById("novoNumeroRh").value,
+    bairro: document.getElementById("novoBairroRh").value,
+    cep: document.getElementById("novoCepRh").value,
+    cidade: document.getElementById("novoCidadeRh").value,
+    uf: document.getElementById("novoUfRh").value,
+    telefone: document.getElementById("novoTelefoneRh").value,
+    email: document.getElementById("novoEmailRh").value,
+    loja: document.getElementById("novoLojaRh").value,
+    cnpj: document.getElementById("novoCnpjRh").value,
+    matricula: document.getElementById("novoMatriculaRh").value,
+    funcao: document.getElementById("novoFuncaoRh").value,
+    departamento: document.getElementById("novoDepartamentoRh").value,
+    salario: document.getElementById("novoSalarioRh").value,
+    admissao: document.getElementById("novoAdmissaoRh").value,
+    contrato1: document.getElementById("novoContrato1Rh").value,
+    contrato2: document.getElementById("novoContrato2Rh").value
+  };
+
+  if(!dados.nome || !dados.cpf || !dados.loja || !dados.funcao || !dados.admissao){
+    msg.innerText = "Preencha pelo menos Nome, CPF, Loja, Função e Data de Admissão.";
+    return;
+  }
+
+  msg.innerText = "Salvando funcionário...";
+
+  const url =
+    API_URL +
+    "?action=salvarNovoFuncionarioRh" +
+    "&dados=" + encodeURIComponent(JSON.stringify(dados)) +
+    "&v=" + new Date().getTime();
+
+  try{
+    const resposta = await fetch(url, { cache:"no-store" });
+    const retorno = await resposta.json();
+
+    if(!retorno.sucesso){
+      msg.innerText = retorno.mensagem || "Erro ao salvar funcionário.";
+      return;
+    }
+
+    msg.innerText = "Funcionário salvo com sucesso.";
+
+  }catch(erro){
+    console.error(erro);
+    msg.innerText = "Erro ao salvar funcionário.";
+  }
+};
+  
   async function excluirDocumentoRh(idDocumento){
 
   if(!confirm("Deseja realmente excluir este documento?")){
@@ -5632,12 +5693,57 @@ function abrirExperienciaRh(){
 
 <div id="modalNovoFuncionarioRh" class="modal-rh">
   <div class="modal-rh-conteudo">
+
     <div class="modal-rh-topo">
       <h2>➕ Novo Funcionário</h2>
       <button onclick="fecharModalRh('modalNovoFuncionarioRh')">×</button>
     </div>
 
-    <p>Tela abriu corretamente.</p>
+    <div class="form-rh">
+
+      <input id="novoNomeRh" placeholder="Nome completo">
+      <input id="novoCpfRh" placeholder="CPF">
+      <input id="novoRgRh" placeholder="RG">
+      <input id="novoPisRh" placeholder="PIS">
+
+      <input id="novoNascimentoRh" type="date">
+      <input id="novoMaeRh" placeholder="Nome da mãe">
+      <input id="novoPaiRh" placeholder="Nome do pai">
+
+      <input id="novoEnderecoRh" placeholder="Endereço">
+      <input id="novoNumeroRh" placeholder="Número">
+      <input id="novoBairroRh" placeholder="Bairro">
+      <input id="novoCepRh" placeholder="CEP">
+      <input id="novoCidadeRh" placeholder="Cidade">
+      <input id="novoUfRh" placeholder="UF">
+
+      <input id="novoTelefoneRh" placeholder="Telefone">
+      <input id="novoEmailRh" placeholder="E-mail">
+
+      <input id="novoLojaRh" placeholder="Loja">
+      <input id="novoCnpjRh" placeholder="CNPJ">
+      <input id="novoMatriculaRh" placeholder="Matrícula eSocial">
+      <input id="novoFuncaoRh" placeholder="Função">
+      <input id="novoDepartamentoRh" placeholder="Departamento">
+      <input id="novoSalarioRh" placeholder="Salário">
+
+      <label>Data de admissão</label>
+      <input id="novoAdmissaoRh" type="date">
+
+      <label>Vencimento 1º Contrato</label>
+      <input id="novoContrato1Rh" type="date">
+
+      <label>Vencimento 2º Contrato</label>
+      <input id="novoContrato2Rh" type="date">
+
+      <button onclick="salvarNovoFuncionarioRh()">
+        💾 Salvar Funcionário
+      </button>
+
+      <div id="mensagemNovoFuncionarioRh"></div>
+
+    </div>
+
   </div>
 </div>
 
