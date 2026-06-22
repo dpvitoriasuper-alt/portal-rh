@@ -5667,6 +5667,33 @@ function abrirExperienciaRh(){
     <div id="mensagemAdicionarColaboradorRh"></div>
   </div>
 </div>
+
+  <script>
+window.abrirNovoFuncionarioRh = function(){
+  alert("Botão Novo Funcionário clicado!");
+
+  const modal = document.getElementById("modalNovoFuncionarioRh");
+  if(modal){
+    modal.style.display = "flex";
+  }
+};
+
+window.abrirExperienciaRh = function(){
+  alert("Botão Experiência clicado!");
+
+  const modal = document.getElementById("modalExperienciaRh");
+  if(modal){
+    modal.style.display = "flex";
+  }
+};
+
+window.fecharModalRh = function(id){
+  const modal = document.getElementById(id);
+  if(modal){
+    modal.style.display = "none";
+  }
+};
+</script>
   
 </body>
 </html>
