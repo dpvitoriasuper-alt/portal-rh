@@ -5609,64 +5609,6 @@ function abrirExperienciaRh(){
 
 </div>
 
-  <div id="modalNovoFuncionarioRh" class="modal-rh">
-  <div class="modal-rh-conteudo">
-    <div class="modal-rh-topo">
-      <h2>➕ Novo Funcionário</h2>
-      <button onclick="fecharModalRh('modalNovoFuncionarioRh')">×</button>
-    </div>
-
-    <p>Tela de cadastro manual do colaborador.</p>
-  </div>
-</div>
-
-<div id="modalExperienciaRh" class="modal-rh">
-  <div class="modal-rh-conteudo">
-    <div class="modal-rh-topo">
-      <h2>⏳ Funcionários em Experiência</h2>
-      <button onclick="fecharModalRh('modalExperienciaRh')">×</button>
-    </div>
-
-    <p>Lista de colaboradores com contrato de experiência.</p>
-  </div>
-</div>
-
-  <div id="modalExperienciaRh" class="modal-rh">
-  <div class="modal-rh-conteudo">
-    <div class="modal-rh-topo">
-      <h2>Controle de Experiência</h2>
-      <button onclick="fecharModaisRh()">×</button>
-    </div>
-
-    <div id="listaExperienciaRh">
-      <p>Carregando funcionários em experiência...</p>
-    </div>
-  </div>
-</div>
-
-<div id="modalAdicionarColaboradorRh" class="modal-rh">
-  <div class="modal-rh-conteudo">
-    <div class="modal-rh-topo">
-      <h2>Adicionar Colaborador</h2>
-      <button onclick="fecharModaisRh()">×</button>
-    </div>
-
-    <div class="form-rh">
-      <input id="novoNomeColaborador" placeholder="Nome completo">
-      <input id="novoCpfColaborador" placeholder="CPF">
-      <input id="novaMatriculaColaborador" placeholder="Matrícula">
-      <input id="novaLojaColaborador" placeholder="Loja">
-      <input id="novaFuncaoColaborador" placeholder="Função">
-      <input id="novaAdmissaoColaborador" type="date">
-
-      <button onclick="salvarNovoColaboradorRh()">
-        Salvar Colaborador
-      </button>
-    </div>
-
-    <div id="mensagemAdicionarColaboradorRh"></div>
-  </div>
-</div>
 <div id="modalNovoFuncionarioRh" class="modal-rh">
   <div class="modal-rh-conteudo">
     <div class="modal-rh-topo">
@@ -5688,6 +5630,33 @@ function abrirExperienciaRh(){
     <p>Tela de experiência abriu corretamente.</p>
   </div>
 </div>
+
+<script>
+window.abrirNovoFuncionarioRh = function(){
+  const modal = document.getElementById("modalNovoFuncionarioRh");
+  if(modal){
+    modal.style.display = "flex";
+  }else{
+    alert("Modal Novo Funcionário não encontrado.");
+  }
+};
+
+window.abrirExperienciaRh = function(){
+  const modal = document.getElementById("modalExperienciaRh");
+  if(modal){
+    modal.style.display = "flex";
+  }else{
+    alert("Modal Experiência não encontrado.");
+  }
+};
+
+window.fecharModalRh = function(id){
+  const modal = document.getElementById(id);
+  if(modal){
+    modal.style.display = "none";
+  }
+};
+</script>
   
 </body>
 </html>
