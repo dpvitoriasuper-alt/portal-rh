@@ -4946,7 +4946,7 @@ async function limparNotificacaoAtual(){
     botao.innerText = "👁️";
   }
 }
-  function verificarLoginSalvo(){
+async function verificarLoginSalvo(){
 
   const loginSalvo = localStorage.getItem("portalLogin");
 
@@ -4960,7 +4960,28 @@ async function limparNotificacaoAtual(){
       return false;
     }
 
-    liberarPortal(sessao.dados);
+    const cpf = sessao.dados.cpf || "";
+
+    const url =
+      API_URL +
+      "?action=validarSessaoPortal" +
+      "&cpf=" + encodeURIComponent(cpf) +
+      "&v=" + new Date().getTime();
+
+    const resposta = await fetch(url, { cache: "no-store" });
+    const dados = await resposta.json();
+
+    if(!dados.sucesso){
+      localStorage.removeItem("portalLogin");
+      alert(dados.mensagem || "Seu acesso foi bloqueado.");
+      location.reload();
+      return false;
+    }
+
+    sessao.dados = dados.dados;
+    localStorage.setItem("portalLogin", JSON.stringify(sessao));
+
+    liberarPortal(dados.dados);
     return true;
 
   }catch(erro){
