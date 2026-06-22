@@ -5667,7 +5667,28 @@ function abrirExperienciaRh(){
     <div id="mensagemAdicionarColaboradorRh"></div>
   </div>
 </div>
+<div id="modalNovoFuncionarioRh" class="modal-rh">
+  <div class="modal-rh-conteudo">
+    <div class="modal-rh-topo">
+      <h2>➕ Novo Funcionário</h2>
+      <button onclick="fecharModalRh('modalNovoFuncionarioRh')">×</button>
+    </div>
 
+    <p>Tela abriu corretamente.</p>
+  </div>
+</div>
+
+<div id="modalExperienciaRh" class="modal-rh">
+  <div class="modal-rh-conteudo">
+    <div class="modal-rh-topo">
+      <h2>⏳ Funcionários em Experiência</h2>
+      <button onclick="fecharModalRh('modalExperienciaRh')">×</button>
+    </div>
+
+    <p>Tela de experiência abriu corretamente.</p>
+  </div>
+</div>
+  
   <script>
 window.abrirNovoFuncionarioRh = function(){
   alert("Botão Novo Funcionário clicado!");
