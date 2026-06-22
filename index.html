@@ -4281,12 +4281,16 @@ async function salvarDocumentoRh(){
 };
 
 window.abrirImportarDominioRh = function(){
+  alert("Botão Importar Domínio clicado!");
+
   const modal = document.getElementById("modalImportarDominioRh");
-  if(modal){
-    modal.style.display = "flex";
-  }else{
-    alert("Modal Importar Domínio não encontrado.");
+
+  if(!modal){
+    alert("Modal modalImportarDominioRh não encontrado.");
+    return;
   }
+
+  modal.style.display = "flex";
 };
   
 /* AVISOS */
@@ -5372,9 +5376,9 @@ function abrirExperienciaRh(){
           🚫 Desligados
         </button>
 
-        <button onclick="abrirImportacaoRh()">
-          📥 Importar Domínio
-        </button>
+       <button onclick="abrirImportarDominioRh()">
+  📥 Importar Domínio
+</button>
 
       </div>
 
