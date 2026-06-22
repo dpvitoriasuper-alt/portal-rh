@@ -4271,6 +4271,23 @@ async function salvarDocumentoRh(){
     leitor.readAsDataURL(arquivo);
   });
 }
+  window.abrirDesligadosRh = function(){
+  const modal = document.getElementById("modalDesligadosRh");
+  if(modal){
+    modal.style.display = "flex";
+  }else{
+    alert("Modal Desligados não encontrado.");
+  }
+};
+
+window.abrirImportarDominioRh = function(){
+  const modal = document.getElementById("modalImportarDominioRh");
+  if(modal){
+    modal.style.display = "flex";
+  }else{
+    alert("Modal Importar Domínio não encontrado.");
+  }
+};
   
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
@@ -5658,6 +5675,28 @@ window.fecharModalRh = function(id){
   }
 };
 </script>
+
+  <div id="modalDesligadosRh" class="modal-rh">
+  <div class="modal-rh-conteudo">
+    <div class="modal-rh-topo">
+      <h2>🚫 Funcionários Desligados</h2>
+      <button onclick="fecharModalRh('modalDesligadosRh')">×</button>
+    </div>
+
+    <p>Tela de desligados abriu corretamente.</p>
+  </div>
+</div>
+
+<div id="modalImportarDominioRh" class="modal-rh">
+  <div class="modal-rh-conteudo">
+    <div class="modal-rh-topo">
+      <h2>📥 Importar Domínio</h2>
+      <button onclick="fecharModalRh('modalImportarDominioRh')">×</button>
+    </div>
+
+    <p>Tela de importação do Domínio abriu corretamente.</p>
+  </div>
+</div>
   
 </body>
 </html>
