@@ -1882,6 +1882,21 @@ body:not(.carregando) .highlight {
   color:#ffc400;
   font-weight:700;
 }
+  .campo-data-rh{
+  display:flex;
+  flex-direction:column;
+}
+
+.campo-data-rh label{
+  color:#ffc400;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.campo-data-rh input{
+  width:100%;
+}
 
 /* ÁREA DO COLABORADOR */
 .area-colaborador{
@@ -5807,39 +5822,38 @@ function abrirExperienciaRh(){
     </div>
   </div>
 
-  <div class="form-rh-bloco">
+   <div class="form-rh-bloco">
     <h3>💼 Dados Contratuais</h3>
 
-   <div class="form-rh-grid">
-  <input id="novoLojaRh" placeholder="Loja">
+    <div class="form-rh-grid">
 
-  <input id="novoCnpjRh" placeholder="CNPJ">
+      <input id="novoLojaRh" placeholder="Loja">
+      <input id="novoCnpjRh" placeholder="CNPJ">
 
-  <input id="novoMatriculaRh" placeholder="Matrícula eSocial">
+      <input id="novoMatriculaRh" placeholder="Matrícula eSocial">
+      <input id="novoFuncaoRh" placeholder="Função">
 
-  <input id="novoFuncaoRh" placeholder="Função">
+      <input id="novoDepartamentoRh" placeholder="Departamento">
+      <input id="novoSalarioRh" placeholder="Salário">
 
-  <input id="novoDepartamentoRh" placeholder="Departamento">
-
-  <input id="novoSalarioRh" placeholder="Salário">
-</div>
-
-      <div>
+      <div class="campo-data-rh">
         <label>Data de Admissão</label>
         <input id="novoAdmissaoRh" type="date">
       </div>
 
-      <div>
+      <div class="campo-data-rh">
         <label>Vencimento 1º Contrato</label>
         <input id="novoContrato1Rh" type="date">
       </div>
 
-      <div>
+      <div class="campo-data-rh">
         <label>Vencimento 2º Contrato</label>
         <input id="novoContrato2Rh" type="date">
       </div>
-    </div>
-  </div>
+
+    </div> <!-- fecha form-rh-grid -->
+
+  </div> <!-- fecha form-rh-bloco -->
 
   <div class="form-rh-acoes">
     <button onclick="salvarNovoFuncionarioRh()">
