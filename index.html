@@ -5271,16 +5271,21 @@ function mostrarTodosAvisos(){
   modal.style.display = "flex";
 }
 
-function abrirExperienciaRh(){
-  const modal = document.getElementById("modalExperienciaRh");
+window.abrirExperienciaRh = async function(){
+
+  const modal =
+    document.getElementById("modalExperienciaRh");
 
   if(!modal){
-    alert("Tela de Experiência ainda não foi criada no HTML.");
+    alert("Modal Experiência não encontrado.");
     return;
   }
 
   modal.style.display = "flex";
-}
+
+  carregarExperienciaRh();
+
+};
 
 </script>
 <div class="galeria-modal" id="galeriaModal">
