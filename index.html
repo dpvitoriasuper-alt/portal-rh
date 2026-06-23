@@ -5869,14 +5869,48 @@ function abrirExperienciaRh(){
 </div>
 
 <div id="modalExperienciaRh" class="modal-rh">
-  <div class="modal-rh-conteudo">
+
+  <div class="modal-rh-conteudo" style="max-width:1200px;">
+
     <div class="modal-rh-topo">
       <h2>⏳ Funcionários em Experiência</h2>
       <button onclick="fecharModalRh('modalExperienciaRh')">×</button>
     </div>
 
-    <p>Tela de experiência abriu corretamente.</p>
+    <div id="listaExperienciaRh">
+
+      <table class="rh-tabela">
+
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Loja</th>
+            <th>Função</th>
+            <th>Admissão</th>
+            <th>1º Contrato</th>
+            <th>2º Contrato</th>
+            <th>Dias</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody id="resultadoExperienciaRh">
+
+          <tr>
+            <td colspan="9" class="rh-vazio">
+              Carregando colaboradores...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
   </div>
+
 </div>
 
 <script>
@@ -5886,15 +5920,6 @@ window.abrirNovoFuncionarioRh = function(){
     modal.style.display = "flex";
   }else{
     alert("Modal Novo Funcionário não encontrado.");
-  }
-};
-
-window.abrirExperienciaRh = function(){
-  const modal = document.getElementById("modalExperienciaRh");
-  if(modal){
-    modal.style.display = "flex";
-  }else{
-    alert("Modal Experiência não encontrado.");
   }
 };
 
