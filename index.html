@@ -5685,6 +5685,38 @@ window.carregarExperienciaRh = async function(){
 
       <div class="rh-acoes-topo">
 
+        <div class="rh-filtros">
+
+  <input
+    type="text"
+    id="pesquisaFuncionarioRh"
+    placeholder="Pesquisar por nome, CPF ou matrícula"
+  >
+
+  <select id="statusFuncionarioRh">
+    <option value="">
+      Todos os status
+    </option>
+
+    <option value="ATIVO">
+      Ativo
+    </option>
+
+    <option value="AFASTADO">
+      Afastado
+    </option>
+
+    <option value="DESLIGADO">
+      Desligado
+    </option>
+  </select>
+
+  <button onclick="pesquisarFuncionarioRh()">
+    🔍 Pesquisar
+  </button>
+
+</div>
+
         <button onclick="abrirNovoFuncionarioRh()">
           ➕ Novo Funcionário
         </button>
