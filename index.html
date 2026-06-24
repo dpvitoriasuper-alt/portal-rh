@@ -6214,14 +6214,23 @@ window.pesquisarFuncionarioRh = async function(){
   try{
 
     const resposta =
-      await fetch(
-        API_URL +
-        "?action=buscarFuncionariosRh" +
-        "&pesquisa=" + encodeURIComponent(pesquisa) +
-        "&status=" + encodeURIComponent(status) +
-        "&v=" + Date.now(),
-        { cache:"no-store" }
-      );
+  await fetch(
+    API_URL +
+    "?action=buscarFuncionariosRh" +
+    "&pesquisa=" + encodeURIComponent(pesquisa) +
+    "&status=" + encodeURIComponent(status) +
+    "&v=" + Date.now(),
+    { cache:"no-store" }
+  );
+
+console.log("STATUS:", resposta.status);
+
+const texto = await resposta.text();
+
+console.log("RESPOSTA API:");
+console.log(texto);
+
+const dados = JSON.parse(texto);
 
     const dados =
       await resposta.json();
