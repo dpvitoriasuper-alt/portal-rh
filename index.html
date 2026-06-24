@@ -6214,26 +6214,21 @@ window.pesquisarFuncionarioRh = async function(){
   try{
 
     const resposta =
-  await fetch(
-    API_URL +
-    "?action=buscarFuncionariosRh" +
-    "&pesquisa=" + encodeURIComponent(pesquisa) +
-    "&status=" + encodeURIComponent(status) +
-    "&v=" + Date.now(),
-    { cache:"no-store" }
-  );
+      await fetch(
+        API_URL +
+        "?action=buscarFuncionariosRh" +
+        "&pesquisa=" + encodeURIComponent(pesquisa) +
+        "&status=" + encodeURIComponent(status) +
+        "&v=" + Date.now(),
+        { cache:"no-store" }
+      );
 
-console.log("STATUS:", resposta.status);
-
-const texto = await resposta.text();
-
-console.log("RESPOSTA API:");
-console.log(texto);
-
-const dados = JSON.parse(texto);
+    console.log("STATUS:", resposta.status);
 
     const dados =
       await resposta.json();
+
+    console.log("DADOS API:", dados);
 
     if(!dados.sucesso){
 
@@ -6280,7 +6275,7 @@ const dados = JSON.parse(texto);
 
   }catch(erro){
 
-    console.error(erro);
+    console.error("ERRO FUNCIONÁRIOS:", erro);
 
     tabela.innerHTML =
       "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
@@ -6288,6 +6283,26 @@ const dados = JSON.parse(texto);
   }
 
 };
+  window.pesquisarFuncionarioRh = async function(){
+
+  const pesquisa =
+    document
+      .getElementById("pesquisaFuncionarioRh")
+      .value
+      .trim();
+
+  const status =
+    document
+      .getElementById("statusFuncionarioRh")
+      .value;
+
+  await carregarFuncionariosRh(
+    pesquisa,
+    status
+  );
+
+};
+  
 </script>
 
   <div id="modalDesligadosRh" class="modal-rh">
