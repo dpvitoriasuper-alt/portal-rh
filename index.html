@@ -5683,7 +5683,26 @@ window.carregarExperienciaRh = async function(){
         <span>Consulta, cadastro, documentos e histórico</span>
       </div>
 
-      <div class="rh-acoes-topo">
+     <div class="rh-acoes-topo">
+
+  <button onclick="abrirNovoFuncionarioRh()">
+    ➕ Novo Funcionário
+  </button>
+
+  <button onclick="abrirExperienciaRh()">
+    ⏳ Em Experiência
+  </button>
+
+  <button onclick="abrirDesligadosRh()">
+    🚫 Desligados
+  </button>
+
+  <button onclick="abrirImportarDominioRh()">
+    📥 Importar Domínio
+  </button>
+
+</div>
+
 <div class="rh-filtros">
 
   <input
@@ -5693,50 +5712,16 @@ window.carregarExperienciaRh = async function(){
   >
 
   <select id="statusFuncionarioRh">
-
-    <option value="">
-      Todos os status
-    </option>
-
-    <option value="ATIVO">
-      Ativo
-    </option>
-
-    <option value="AFASTADO">
-      Afastado
-    </option>
-
-    <option value="DESLIGADO">
-      Desligado
-    </option>
-
+    <option value="">Todos os status</option>
+    <option value="ATIVO">Ativo</option>
+    <option value="AFASTADO">Afastado</option>
+    <option value="DESLIGADO">Desligado</option>
   </select>
 
   <button onclick="pesquisarFuncionarioRh()">
     🔍 Pesquisar
   </button>
 
-</div>
-        
-        <button onclick="abrirNovoFuncionarioRh()">
-          ➕ Novo Funcionário
-        </button>
-
-        <button onclick="abrirExperienciaRh()">
-          ⏳ Em Experiência
-        </button>
-
-        <button onclick="abrirDesligadosRh()">
-          🚫 Desligados
-        </button>
-
-       <button onclick="abrirImportarDominioRh()">
-  📥 Importar Domínio
-</button>
-
-      </div>
-
-     <div class="rh-filtros">
 </div>
 
 <div class="rh-tabela-box">
