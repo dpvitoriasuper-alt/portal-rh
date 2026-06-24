@@ -6260,43 +6260,6 @@ window.pesquisarFuncionarioRh = function(){
   }
 
 };
-
-    tabela.innerHTML = html;
-
- }catch(erro){
-
-  console.error("ERRO FUNCIONÁRIOS:", erro);
-
-  alert(
-    "ERRO: " +
-    erro.message
-  );
-
-  tabela.innerHTML =
-    "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
-
-}
-
-};
-  window.pesquisarFuncionarioRh = async function(){
-
-  const pesquisa =
-    document
-      .getElementById("pesquisaFuncionarioRh")
-      .value
-      .trim();
-
-  const status =
-    document
-      .getElementById("statusFuncionarioRh")
-      .value;
-
-  await carregarFuncionariosRh(
-    pesquisa,
-    status
-  );
-
-};
   
 </script>
 
