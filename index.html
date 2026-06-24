@@ -3385,7 +3385,6 @@ modal.style.zIndex = "999999";
   const dados = await resposta.json();
 
    console.log("CADASTRO COMPLETO:", dados);
-alert(JSON.stringify(dados));
    
   if(!dados.sucesso){
     conteudo.innerHTML = `
@@ -3399,13 +3398,10 @@ alert(JSON.stringify(dados));
 
   const c = dados.cadastro;
 
-   alert("CHEGOU NO CADASTRO");
 console.log(c);
    
    window.cpfCadastroAtual = c.CPF || "";
 window.nomeFuncionarioAtual = c.NOME || "";
-
-   alert("VAI MONTAR HTML");
    
   conteudo.innerHTML = `
 
