@@ -6194,7 +6194,11 @@ window.pesquisarFuncionarioRh = function(){
       .trim();
 
   const cpfUsuario =
-    localStorage.getItem("portalCpf") || "";
+  JSON.parse(
+    localStorage.getItem("portalLogin") || "{}"
+  ).dados?.cpf || "";
+    
+    console.log("CPF USUÁRIO:", cpfUsuario);
 
   const tabela =
     document.getElementById("resultadoFuncionariosRh");
