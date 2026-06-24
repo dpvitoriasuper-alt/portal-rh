@@ -6228,8 +6228,8 @@ window.pesquisarFuncionarioRh = async function(){
     const dados =
       await resposta.json();
 console.log("DADOS API:", dados);
-    console.log("DADOS API:", dados);
-
+    alert(JSON.stringify(dados).substring(0,1000));
+    
     if(!dados.sucesso){
 
       tabela.innerHTML =
