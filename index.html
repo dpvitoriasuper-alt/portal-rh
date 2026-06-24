@@ -5260,6 +5260,27 @@ function abrirWhatsappLoja(loja){
 function mostrarTodosAvisos(){
   carregarAvisos(window.todosAvisos || [], true);
 }
+  window.carregarExperienciaRh = async function(){
+
+  alert("FUNÇÃO ENCONTRADA");
+
+  const tabela =
+    document.getElementById("resultadoExperienciaRh");
+
+  if(!tabela){
+    alert("Tabela não encontrada");
+    return;
+  }
+
+  tabela.innerHTML = `
+    <tr>
+      <td colspan="9">
+        TESTE FUNCIONOU
+      </td>
+    </tr>
+  `;
+
+};
   function abrirNovoFuncionarioRh(){
   const modal = document.getElementById("modalNovoFuncionarioRh");
 
