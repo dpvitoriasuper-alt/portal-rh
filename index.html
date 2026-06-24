@@ -3378,6 +3378,9 @@ function fecharFuncionariosRh(){
   const resposta = await fetch(url, { cache: "no-store" });
   const dados = await resposta.json();
 
+   console.log("CADASTRO COMPLETO:", dados);
+alert(JSON.stringify(dados));
+   
   if(!dados.sucesso){
     conteudo.innerHTML = `
       <div class="rh-card-info">
