@@ -6181,29 +6181,20 @@ window.fecharModalRh = function(id){
   await carregarExperienciaRh();
 
 };
-window.pesquisarFuncionarioRh = async function(){
+window.pesquisarFuncionarioRh = function(){
+  carregarFuncionariosRh();
+};
+  
+  window.carregarFuncionariosRh = async function(){
 
-  const pesquisa =
+  const termo =
     document
       .getElementById("pesquisaFuncionarioRh")
       .value
       .trim();
 
-  const status =
-    document
-      .getElementById("statusFuncionarioRh")
-      .value;
-
-  await carregarFuncionariosRh(
-    pesquisa,
-    status
-  );
-
-};
-  window.carregarFuncionariosRh = async function(
-  pesquisa = "",
-  status = ""
-){
+  const cpfUsuario =
+    localStorage.getItem("portalCpf") || "";
 
   const tabela =
     document.getElementById("resultadoFuncionariosRh");
@@ -6216,51 +6207,38 @@ window.pesquisarFuncionarioRh = async function(){
     const resposta =
       await fetch(
         API_URL +
-        "?action=buscarFuncionariosRh" +
-        "&pesquisa=" + encodeURIComponent(pesquisa) +
-        "&status=" + encodeURIComponent(status) +
-        "&v=" + Date.now(),
-        { cache:"no-store" }
+        "?action=portalRhPesquisarFuncionarios" +
+        "&termo=" + encodeURIComponent(termo) +
+        "&cpfUsuario=" + encodeURIComponent(cpfUsuario) +
+        "&v=" + Date.now()
       );
-
-    console.log("STATUS:", resposta.status);
 
     const dados =
       await resposta.json();
-console.log("DADOS API:", dados);
-    alert(JSON.stringify(dados).substring(0,1000));
-    
+
     if(!dados.sucesso){
 
       tabela.innerHTML =
-        "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
-
-      return;
-    }
-
-    if(
-      !dados.funcionarios ||
-      dados.funcionarios.length === 0
-    ){
-
-      tabela.innerHTML =
-        "<tr><td colspan='7'>Nenhum funcionário encontrado.</td></tr>";
-
+        `<tr>
+           <td colspan="7">
+             ${dados.mensagem || "Nenhum resultado"}
+           </td>
+         </tr>`;
       return;
     }
 
     let html = "";
 
-    dados.funcionarios.forEach(f => {
+    dados.resultados.forEach(f => {
 
       html += `
         <tr>
-          <td>${f.nome || ""}</td>
-          <td>${f.cpf || ""}</td>
-          <td>${f.matricula || ""}</td>
-          <td>${f.loja || ""}</td>
-          <td>${f.funcao || ""}</td>
-          <td>${f.status || ""}</td>
+          <td>${f.nome}</td>
+          <td>${f.cpf}</td>
+          <td>${f.matricula}</td>
+          <td>${f.loja}</td>
+          <td>${f.funcao}</td>
+          <td>${f.status}</td>
           <td>
             <button onclick="abrirCadastroCompletoRh('${f.cpf}')">
               👁 Ver Cadastro
@@ -6268,8 +6246,20 @@ console.log("DADOS API:", dados);
           </td>
         </tr>
       `;
-
     });
+
+    tabela.innerHTML = html;
+
+  }catch(erro){
+
+    console.error(erro);
+
+    tabela.innerHTML =
+      "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
+
+  }
+
+};
 
     tabela.innerHTML = html;
 
