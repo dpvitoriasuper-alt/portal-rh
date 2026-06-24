@@ -5270,10 +5270,18 @@ function abrirWhatsappLoja(loja){
 function mostrarTodosAvisos(){
   carregarAvisos(window.todosAvisos || [], true);
 }
- window.carregarExperienciaRh = async function(){
+ window.listaExperienciaRh = [];
+
+window.carregarExperienciaRh = async function(){
 
   const tabela =
     document.getElementById("resultadoExperienciaRh");
+
+  const resumo =
+    document.getElementById("resumoExperienciaRh");
+
+  const filtroLoja =
+    document.getElementById("filtroLojaExperienciaRh");
 
   tabela.innerHTML =
     "<tr><td colspan='9'>Carregando colaboradores...</td></tr>";
@@ -5299,58 +5307,65 @@ function mostrarTodosAvisos(){
       return;
     }
 
-    if(
-      !dados.funcionarios ||
-      dados.funcionarios.length === 0
-    ){
+    window.listaExperienciaRh =
+      dados.funcionarios || [];
 
-      tabela.innerHTML =
-        "<tr><td colspan='9'>Nenhum funcionário em experiência.</td></tr>";
+    // RESUMO
+    const total =
+      window.listaExperienciaRh.length;
 
-      return;
-    }
+    const urgentes =
+      window.listaExperienciaRh.filter(
+        x => x.status === "URGENTE"
+      ).length;
 
-    let html = "";
+    const atencao =
+      window.listaExperienciaRh.filter(
+        x => x.status === "ATENÇÃO"
+      ).length;
 
-    dados.funcionarios.forEach(f => {
+    const normais =
+      window.listaExperienciaRh.filter(
+        x => x.status === "EM EXPERIÊNCIA"
+      ).length;
 
-      let corStatus = "#28a745";
+    resumo.innerHTML = `
+      <div style="
+        display:flex;
+        gap:25px;
+        flex-wrap:wrap;
+        font-weight:bold;
+      ">
+        <span>⏳ Funcionários em Experiência: ${total}</span>
+        <span style="color:#dc3545;">🔴 Urgentes: ${urgentes}</span>
+        <span style="color:#ffc107;">🟡 Atenção: ${atencao}</span>
+        <span style="color:#28a745;">🟢 Normais: ${normais}</span>
+      </div>
+    `;
 
-      if(f.status === "ATENÇÃO"){
-        corStatus = "#ffc107";
-      }
+    // MONTA FILTRO DE LOJAS
+    const lojas =
+      [...new Set(
+        window.listaExperienciaRh.map(x => x.loja)
+      )]
+      .sort();
 
-      if(f.status === "VENCIDO"){
-        corStatus = "#dc3545";
-      }
+    filtroLoja.innerHTML =
+      '<option value="">Todas as Lojas</option>';
 
-      html += `
-        <tr>
-          <td>${f.nome}</td>
-          <td>${f.loja}</td>
-          <td>${f.funcao}</td>
-          <td>${f.admissao}</td>
-          <td>${f.contrato1}</td>
-          <td>${f.contrato2}</td>
-          <td>${f.dias}</td>
-          <td>
-            <span style="
-              color:${corStatus};
-              font-weight:bold;
-            ">
-              ${f.status}
-            </span>
-          </td>
-          <td>
-            <button onclick="abrirCadastroCompletoRh('${f.cpf}')">
-              👁 Ver Cadastro
-            </button>
-          </td>
-        </tr>
+    lojas.forEach(loja => {
+
+      filtroLoja.innerHTML += `
+        <option value="${loja}">
+          ${loja}
+        </option>
       `;
+
     });
 
-    tabela.innerHTML = html;
+    renderizarExperienciaRh(
+      window.listaExperienciaRh
+    );
 
   }catch(erro){
 
@@ -5362,32 +5377,89 @@ function mostrarTodosAvisos(){
   }
 
 };
-  function abrirNovoFuncionarioRh(){
-  const modal = document.getElementById("modalNovoFuncionarioRh");
+  function renderizarExperienciaRh(lista){
 
-  if(!modal){
-    alert("Tela de Novo Funcionário ainda não foi criada no HTML.");
-    return;
-  }
+  const tabela =
+    document.getElementById("resultadoExperienciaRh");
 
-  modal.style.display = "flex";
+  let html = "";
+
+  lista.forEach(f => {
+
+    let corStatus = "#28a745";
+
+    if(f.status === "ATENÇÃO"){
+      corStatus = "#ffc107";
+    }
+
+    if(f.status === "URGENTE"){
+      corStatus = "#dc3545";
+    }
+
+    html += `
+      <tr>
+        <td>${f.nome}</td>
+        <td>${f.loja}</td>
+        <td>${f.funcao}</td>
+        <td>${f.admissao}</td>
+        <td>${f.contrato1}</td>
+        <td>${f.contrato2}</td>
+        <td>${f.dias}</td>
+        <td>
+          <span style="
+            color:${corStatus};
+            font-weight:bold;
+          ">
+            ${f.status}
+          </span>
+        </td>
+        <td>
+          <button onclick="abrirCadastroCompletoRh('${f.cpf}')">
+            👁 Ver Cadastro
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  tabela.innerHTML = html;
 }
+  function aplicarFiltroExperienciaRh(){
 
-window.abrirExperienciaRh = async function(){
+  const loja =
+    document.getElementById(
+      "filtroLojaExperienciaRh"
+    ).value;
 
-  const modal =
-    document.getElementById("modalExperienciaRh");
+  const status =
+    document.getElementById(
+      "filtroStatusExperienciaRh"
+    ).value;
 
-  if(!modal){
-    alert("Modal Experiência não encontrado.");
-    return;
+  let lista =
+    [...window.listaExperienciaRh];
+
+  if(loja){
+
+    lista =
+      lista.filter(
+        x => x.loja === loja
+      );
+
   }
 
-  modal.style.display = "flex";
+  if(status){
 
-  await carregarExperienciaRh();
+    lista =
+      lista.filter(
+        x => x.status === status
+      );
 
-};
+  }
+
+  renderizarExperienciaRh(lista);
+
+}
   
 </script>
 <div class="galeria-modal" id="galeriaModal">
