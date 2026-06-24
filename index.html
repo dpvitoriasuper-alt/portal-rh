@@ -6227,7 +6227,7 @@ window.pesquisarFuncionarioRh = async function(){
 
     const dados =
       await resposta.json();
-
+console.log("DADOS API:", dados);
     console.log("DADOS API:", dados);
 
     if(!dados.sucesso){
@@ -6273,14 +6273,19 @@ window.pesquisarFuncionarioRh = async function(){
 
     tabela.innerHTML = html;
 
-  }catch(erro){
+ }catch(erro){
 
-    console.error("ERRO FUNCIONÁRIOS:", erro);
+  console.error("ERRO FUNCIONÁRIOS:", erro);
 
-    tabela.innerHTML =
-      "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
+  alert(
+    "ERRO: " +
+    erro.message
+  );
 
-  }
+  tabela.innerHTML =
+    "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
+
+}
 
 };
   window.pesquisarFuncionarioRh = async function(){
