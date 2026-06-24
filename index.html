@@ -3384,7 +3384,7 @@ modal.style.zIndex = "999999";
 
   const resposta = await fetch(url, { cache: "no-store" });
   const dados = await resposta.json();
-
+alert(JSON.stringify(dados).substring(0,500));
    console.log("CADASTRO COMPLETO:", dados);
    
   if(!dados.sucesso){
