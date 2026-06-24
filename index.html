@@ -3354,6 +3354,10 @@ function fecharFuncionariosRh(){
  async function abrirCadastroCompletoRh(cpf){
 
   const modal = document.getElementById("modalCadastroCompletoRh");
+
+   modal.style.display = "flex";
+modal.style.zIndex = "999999";
+   
   const conteudo = document.getElementById("conteudoCadastroCompletoRh");
 
   modal.style.display = "flex";
