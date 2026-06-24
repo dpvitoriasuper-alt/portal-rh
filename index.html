@@ -5260,25 +5260,96 @@ function abrirWhatsappLoja(loja){
 function mostrarTodosAvisos(){
   carregarAvisos(window.todosAvisos || [], true);
 }
-  window.carregarExperienciaRh = async function(){
-
-  alert("FUNÇÃO ENCONTRADA");
+ window.carregarExperienciaRh = async function(){
 
   const tabela =
     document.getElementById("resultadoExperienciaRh");
 
-  if(!tabela){
-    alert("Tabela não encontrada");
-    return;
-  }
+  tabela.innerHTML =
+    "<tr><td colspan='9'>Carregando colaboradores...</td></tr>";
 
-  tabela.innerHTML = `
-    <tr>
-      <td colspan="9">
-        TESTE FUNCIONOU
-      </td>
-    </tr>
-  `;
+  try{
+
+    const resposta =
+      await fetch(
+        API_URL +
+        "?action=buscarExperienciaRh" +
+        "&v=" + Date.now(),
+        { cache:"no-store" }
+      );
+
+    const dados =
+      await resposta.json();
+
+    if(!dados.sucesso){
+
+      tabela.innerHTML =
+        "<tr><td colspan='9'>Erro ao carregar funcionários.</td></tr>";
+
+      return;
+    }
+
+    if(
+      !dados.funcionarios ||
+      dados.funcionarios.length === 0
+    ){
+
+      tabela.innerHTML =
+        "<tr><td colspan='9'>Nenhum funcionário em experiência.</td></tr>";
+
+      return;
+    }
+
+    let html = "";
+
+    dados.funcionarios.forEach(f => {
+
+      let corStatus = "#28a745";
+
+      if(f.status === "ATENÇÃO"){
+        corStatus = "#ffc107";
+      }
+
+      if(f.status === "VENCIDO"){
+        corStatus = "#dc3545";
+      }
+
+      html += `
+        <tr>
+          <td>${f.nome}</td>
+          <td>${f.loja}</td>
+          <td>${f.funcao}</td>
+          <td>${f.admissao}</td>
+          <td>${f.contrato1}</td>
+          <td>${f.contrato2}</td>
+          <td>${f.dias}</td>
+          <td>
+            <span style="
+              color:${corStatus};
+              font-weight:bold;
+            ">
+              ${f.status}
+            </span>
+          </td>
+          <td>
+            <button onclick="abrirCadastroCompletoRh('${f.cpf}')">
+              👁 Ver Cadastro
+            </button>
+          </td>
+        </tr>
+      `;
+    });
+
+    tabela.innerHTML = html;
+
+  }catch(erro){
+
+    console.error(erro);
+
+    tabela.innerHTML =
+      "<tr><td colspan='9'>Erro ao carregar funcionários.</td></tr>";
+
+  }
 
 };
   function abrirNovoFuncionarioRh(){
@@ -5293,7 +5364,6 @@ function mostrarTodosAvisos(){
 }
 
 window.abrirExperienciaRh = async function(){
-  alert("ABRIR EXPERIENCIA EXECUTOU");
 
   const modal =
     document.getElementById("modalExperienciaRh");
@@ -5305,10 +5375,10 @@ window.abrirExperienciaRh = async function(){
 
   modal.style.display = "flex";
 
-  carregarExperienciaRh();
+  await carregarExperienciaRh();
 
 };
-
+  
 </script>
 <div class="galeria-modal" id="galeriaModal">
 
