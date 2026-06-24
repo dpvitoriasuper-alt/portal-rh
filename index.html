@@ -3393,9 +3393,14 @@ alert(JSON.stringify(dados));
 
   const c = dados.cadastro;
 
+   alert("CHEGOU NO CADASTRO");
+console.log(c);
+   
    window.cpfCadastroAtual = c.CPF || "";
 window.nomeFuncionarioAtual = c.NOME || "";
 
+   alert("VAI MONTAR HTML");
+   
   conteudo.innerHTML = `
 
     <div class="rh-card-info">
