@@ -6181,9 +6181,30 @@ window.fecharModalRh = function(id){
   await carregarExperienciaRh();
 
 };
-  window.pesquisarFuncionarioRh = async function(){
+ window.pesquisarFuncionarioRh = async function(){
 
-  const pesquisa =window.carregarFuncionariosRh = async function(pesquisa = "", status = ""){
+  const pesquisa =
+    document
+      .getElementById("pesquisaFuncionarioRh")
+      .value
+      .trim();
+
+  const status =
+    document
+      .getElementById("statusFuncionarioRh")
+      .value;
+
+  await carregarFuncionariosRh(
+    pesquisa,
+    status
+  );
+
+};
+
+window.carregarFuncionariosRh = async function(
+  pesquisa = "",
+  status = ""
+){
 
   const tabela =
     document.getElementById("resultadoFuncionariosRh");
@@ -6203,6 +6224,20 @@ window.fecharModalRh = function(id){
         { cache:"no-store" }
       );
 
+    const dados = await resposta.json();
+
+    // restante do seu código...
+
+  }catch(erro){
+
+    console.error(erro);
+
+    tabela.innerHTML =
+      "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
+
+  }
+
+};
     const dados =
       await resposta.json();
 
