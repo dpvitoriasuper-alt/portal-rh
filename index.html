@@ -2663,6 +2663,7 @@ function carregarDocumentos(lista){
     });
 
 }
+  
 async function carregarPortal(){
 
   try{
@@ -6180,7 +6181,25 @@ window.fecharModalRh = function(id){
   await carregarExperienciaRh();
 
 };
-  
+  window.pesquisarFuncionarioRh = async function(){
+
+  const pesquisa =
+    document
+      .getElementById("pesquisaFuncionarioRh")
+      .value
+      .trim();
+
+  const status =
+    document
+      .getElementById("statusFuncionarioRh")
+      .value;
+
+  await carregarFuncionariosRh(
+    pesquisa,
+    status
+  );
+
+};
 </script>
 
   <div id="modalDesligadosRh" class="modal-rh">
