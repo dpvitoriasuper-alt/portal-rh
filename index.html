@@ -5986,9 +5986,55 @@ window.abrirExperienciaRh = async function(){
 
     <div id="listaExperienciaRh">
 
-      <table class="rh-tabela">
+  <div id="resumoExperienciaRh"
+       class="rh-card-info"
+       style="margin-bottom:15px;">
+  </div>
 
-        <thead>
+  <div
+    style="
+      display:flex;
+      gap:10px;
+      margin-bottom:15px;
+      flex-wrap:wrap;
+    "
+  >
+
+    <select id="filtroLojaExperienciaRh">
+      <option value="">
+        Todas as Lojas
+      </option>
+    </select>
+
+    <select id="filtroStatusExperienciaRh">
+
+      <option value="">
+        Todos os Status
+      </option>
+
+      <option value="URGENTE">
+        🔴 Urgente
+      </option>
+
+      <option value="ATENÇÃO">
+        🟡 Atenção
+      </option>
+
+      <option value="EM EXPERIÊNCIA">
+        🟢 Em Experiência
+      </option>
+
+    </select>
+
+    <button onclick="aplicarFiltroExperienciaRh()">
+      🔍 Filtrar
+    </button>
+
+  </div>
+
+  <table class="rh-tabela">
+
+    <thead>
           <tr>
             <th>Nome</th>
             <th>Loja</th>
