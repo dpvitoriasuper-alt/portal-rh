@@ -5703,25 +5703,28 @@ window.carregarExperienciaRh = async function(){
 
       </div>
 
-      <div class="rh-filtros">
+     <div class="rh-filtros">
 
-        <input
-          id="buscaFuncionarioRh"
-          placeholder="Pesquisar por nome, CPF ou matrícula"
-        >
+  <select id="filtroLojaRh"></select>
 
-        <select id="filtroStatusFuncionarioRh">
-          <option value="">Todos os status</option>
-          <option value="ATIVO">Ativos</option>
-          <option value="EXPERIENCIA">Em Experiência</option>
-          <option value="DESLIGADO">Desligados</option>
-        </select>
+  <select id="filtroStatusRh">
+    <option value="">Todos</option>
+    <option value="URGENTE">Urgente</option>
+    <option value="ATENCAO">Atenção</option>
+    <option value="EM EXPERIENCIA">Normal</option>
+  </select>
 
-        <button onclick="pesquisarFuncionariosRh()">
-          🔍 Pesquisar
-        </button>
+  <input
+    type="text"
+    id="filtroNomeRh"
+    placeholder="Pesquisar colaborador..."
+  >
 
-      </div>
+  <button onclick="filtrarExperienciaRh()">
+    🔎 Filtrar
+  </button>
+
+</div>
 
       <div class="rh-tabela-box">
 
