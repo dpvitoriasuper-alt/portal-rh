@@ -2709,264 +2709,191 @@ SCRV DASHBOARD EXECUTIVO
 INÍCIO
 ========================== -->
 
-<section id="areaColaborador" class="dashboardExecutivo">
+<section id="areaColaborador" class="area-colaborador">
 
-    <div class="dashboardHeader">
+<div id="dashboardExecutivo">
 
-        <div class="dashboardTitulo">
+<div class="scrv-dashboard">
 
-            <span class="dashboardSistema">
+<div class="scrv-header">
 
-                🏢 Sistema Corporativo Rede Vitória
+<div class="scrv-header-left">
 
-            </span>
+<span class="scrv-sistema">
 
-            <h1 id="dashboardSaudacao">
+🏢 SISTEMA CORPORATIVO REDE VITÓRIA
 
-                Bom dia!
+</span>
 
-            </h1>
+<h1 id="dashboardSaudacao">
 
-            <p class="dashboardDescricao">
+Bom dia!
 
-                <span id="dashboardFuncao">
+</h1>
 
-                    Carregando...
+<p id="dashboardNome">
 
-                </span>
+Carregando...
 
-                •
+</p>
 
-                <span id="dashboardLoja">
+<p id="dashboardFuncao">
 
-                    Carregando...
+Carregando função...
 
-                </span>
+</p>
 
-            </p>
+<div class="dashboard-data">
 
-            <p class="dashboardUltimo">
+<span id="dashboardData"></span>
 
-                Último acesso
+<span id="dashboardHora"></span>
 
-                <span id="ultimoAcessoTexto">
+</div>
 
-                    --
+</div>
 
-                </span>
+<div class="scrv-header-right">
 
-            </p>
+<button class="botaoDashboard">
 
-        </div>
+🔔
 
-        <div class="dashboardDireita">
+<span id="badgeNotificacao">
 
-            <div class="dashboardRelogio">
+0
 
-                <span id="dashboardData">
+</span>
 
-                </span>
+</button>
 
-                <strong id="dashboardHora">
+<button class="botaoDashboard">
 
-                </strong>
+⚙
 
-            </div>
+</button>
 
-            <button
-                class="dashboardBotao"
-                onclick="sairPortal()">
+<button
 
-                🚪 Sair
+class="botaoDashboard sair"
 
-            </button>
+onclick="sairPortal()">
 
-        </div>
+Sair
 
-    </div>
+</button>
 
-    <div class="dashboardIndicadores">
+</div>
 
-        <div class="indicador">
+</div>
 
-            <span>
+<div class="scrv-cards">
 
-                👥
+<div class="scrv-card azul">
 
-            </span>
+<div class="icone">
 
-            <h3>
+👥
 
-                Funcionários
+</div>
 
-            </h3>
+<div>
 
-            <strong id="cardFuncionarios">
+<h4>
 
-                1280
+Funcionários
 
-            </strong>
+</h4>
 
-        </div>
+<strong id="totalFuncionarios">
 
-        <div class="indicador">
+1280
 
-            <span>
+</strong>
 
-                🏬
+</div>
 
-            </span>
+</div>
 
-            <h3>
+<div class="scrv-card verde">
 
-                Lojas
+<div class="icone">
 
-            </h3>
+🏬
 
-            <strong>
+</div>
 
-                7
+<div>
 
-            </strong>
+<h4>
 
-        </div>
+Lojas
 
-        <div class="indicador">
+</h4>
 
-            <span>
+<strong>
 
-                📄
+7
 
-            </span>
+</strong>
 
-            <h3>
+</div>
 
-                Contracheques
+</div>
 
-            </h3>
+<div class="scrv-card vermelho">
 
-            <strong>
+<div class="icone">
 
-                45
+📄
 
-            </strong>
+</div>
 
-        </div>
+<div>
 
-        <div class="indicador">
+<h4>
 
-            <span>
+Contracheques
 
-                📢
+</h4>
 
-            </span>
+<strong>
 
-            <h3>
+45
 
-                Notícias
+</strong>
 
-            </h3>
+</div>
 
-            <strong>
+</div>
 
-                8
+<div class="scrv-card amarelo">
 
-            </strong>
+<div class="icone">
 
-        </div>
+📢
 
-    </div>
+</div>
 
-    <div class="dashboardPerfil">
+<div>
 
-        <div class="perfilCard">
+<h4>
 
-            <small>👤 Nome</small>
+Notícias
 
-            <span id="perfilNome">
+</h4>
 
-                -
+<strong>
 
-            </span>
+8
 
-        </div>
+</strong>
 
-        <div class="perfilCard">
+</div>
 
-            <small>🪪 CPF</small>
+</div>
 
-            <span id="perfilCpf">
-
-                -
-
-            </span>
-
-        </div>
-
-        <div class="perfilCard">
-
-            <small>🆔 Matrícula</small>
-
-            <span id="perfilMatricula">
-
-                -
-
-            </span>
-
-        </div>
-
-        <div class="perfilCard">
-
-            <small>💼 Cargo</small>
-
-            <span id="perfilFuncao">
-
-                -
-
-            </span>
-
-        </div>
-
-        <div class="perfilCard">
-
-            <small>🏬 Loja</small>
-
-            <span id="perfilLoja">
-
-                -
-
-            </span>
-
-        </div>
-
-        <div class="perfilCard">
-
-            <small>📅 Admissão</small>
-
-            <span id="perfilAdmissao">
-
-                -
-
-            </span>
-
-        </div>
-
-    </div>
-
-    <div class="dashboardNotificacoes">
-
-        <div class="dashboardTituloBloco">
-
-            🔔 Central de Notificações
-
-        </div>
-
-        <div
-            id="listaNotificacoes">
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
