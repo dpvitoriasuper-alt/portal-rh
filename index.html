@@ -2316,7 +2316,277 @@ body:not(.carregando) .highlight {
   }
 
 }
-  
+  /*=========================================
+SCRV DASHBOARD EXECUTIVO
+=========================================*/
+
+.dashboardExecutivo{
+
+    background:linear-gradient(135deg,#0a1830,#13284b);
+
+    border-radius:22px;
+
+    padding:35px;
+
+    margin:25px 0;
+
+    color:#fff;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+}
+
+.dashboardHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:30px;
+
+    margin-bottom:30px;
+
+}
+
+.dashboardSistema{
+
+    display:inline-block;
+
+    background:#FFC400;
+
+    color:#111;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.dashboardTitulo h1{
+
+    font-size:38px;
+
+    margin:0;
+
+    font-weight:800;
+
+}
+
+.dashboardDescricao{
+
+    margin-top:12px;
+
+    color:#d8d8d8;
+
+    font-size:17px;
+
+}
+
+.dashboardUltimo{
+
+    margin-top:8px;
+
+    color:#bbbbbb;
+
+}
+
+.dashboardRelogio{
+
+    text-align:right;
+
+}
+
+#dashboardHora{
+
+    display:block;
+
+    font-size:38px;
+
+    color:#FFC400;
+
+    margin-top:10px;
+
+}
+
+.dashboardBotao{
+
+    margin-top:20px;
+
+    background:#FFC400;
+
+    color:#111;
+
+    border:none;
+
+    padding:14px 25px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+.dashboardBotao:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 20px rgba(255,196,0,.25);
+
+}
+
+.dashboardIndicadores{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:18px;
+
+    margin-bottom:30px;
+
+}
+
+.indicador{
+
+    background:#ffffff10;
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.25s;
+
+}
+
+.indicador:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#FFC400;
+
+}
+
+.indicador span{
+
+    font-size:35px;
+
+}
+
+.indicador h3{
+
+    margin:15px 0 10px;
+
+    font-size:16px;
+
+    color:#ddd;
+
+}
+
+.indicador strong{
+
+    font-size:34px;
+
+    color:#FFC400;
+
+}
+
+.dashboardPerfil{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+    gap:16px;
+
+    margin-bottom:30px;
+
+}
+
+.perfilCard{
+
+    background:#ffffff10;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.perfilCard small{
+
+    display:block;
+
+    color:#FFC400;
+
+    margin-bottom:10px;
+
+    font-weight:700;
+
+}
+
+.perfilCard span{
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.dashboardNotificacoes{
+
+    background:#ffffff10;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.dashboardTituloBloco{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+@media(max-width:900px){
+
+.dashboardHeader{
+
+flex-direction:column;
+
+}
+
+.dashboardRelogio{
+
+text-align:left;
+
+}
+
+}
 </style>
 </head>
 
@@ -2434,88 +2704,276 @@ body:not(.carregando) .highlight {
     <main id="conteudoSCRV">
 
 
-<section id="areaColaborador" class="area-colaborador">
+<!-- ==========================
+SCRV DASHBOARD EXECUTIVO
+INÍCIO
+========================== -->
 
-  <div class="colaborador-card gloss">
+<section id="areaColaborador" class="dashboardExecutivo">
 
-    <div class="topo-colaborador">
-      <h2 id="saudacaoColaborador">Olá, colaborador!</h2><div class="dashboard-topo">
+    <div class="dashboardHeader">
 
-    <div>
+        <div class="dashboardTitulo">
 
-        <span class="dashboard-tag">
-            🏢 Sistema Corporativo Rede Vitória
-        </span>
+            <span class="dashboardSistema">
 
-        <h2 id="saudacaoColaborador">
-            Bom dia!
-        </h2>
+                🏢 Sistema Corporativo Rede Vitória
 
-        <p class="dashboard-subtitulo">
+            </span>
 
-            <span id="perfilFuncaoTopo">Função</span>
+            <h1 id="dashboardSaudacao">
 
-            •
+                Bom dia!
 
-            <span id="perfilLojaTopo">Loja</span>
+            </h1>
 
-        </p>
+            <p class="dashboardDescricao">
+
+                <span id="dashboardFuncao">
+
+                    Carregando...
+
+                </span>
+
+                •
+
+                <span id="dashboardLoja">
+
+                    Carregando...
+
+                </span>
+
+            </p>
+
+            <p class="dashboardUltimo">
+
+                Último acesso
+
+                <span id="ultimoAcessoTexto">
+
+                    --
+
+                </span>
+
+            </p>
+
+        </div>
+
+        <div class="dashboardDireita">
+
+            <div class="dashboardRelogio">
+
+                <span id="dashboardData">
+
+                </span>
+
+                <strong id="dashboardHora">
+
+                </strong>
+
+            </div>
+
+            <button
+                class="dashboardBotao"
+                onclick="sairPortal()">
+
+                🚪 Sair
+
+            </button>
+
+        </div>
 
     </div>
 
-    <button onclick="sairPortal()" class="btn-sair">
+    <div class="dashboardIndicadores">
 
-        🚪 Sair
+        <div class="indicador">
 
-    </button>
+            <span>
 
-</div>
+                👥
 
-    <p id="ultimoAcessoTexto">Seu último acesso será exibido aqui.</p>
-    <p id="ultimoAcessoTexto">Seu último acesso será exibido aqui.</p>
+            </span>
 
-    <div class="perfil-grid">
-      <div class="perfil-item">
-        <small>👤 Nome</small>
-        <span id="perfilNome">-</span>
-      </div>
+            <h3>
 
-      <div class="perfil-item">
-        <small>🪪 CPF</small>
-        <span id="perfilCpf">-</span>
-      </div>
+                Funcionários
 
-      <div class="perfil-item">
-        <small>🆔 Matrícula</small>
-        <span id="perfilMatricula">-</span>
-      </div>
+            </h3>
 
-      <div class="perfil-item">
-        <small>💼 Cargo</small>
-        <span id="perfilFuncao">-</span>
-      </div>
+            <strong id="cardFuncionarios">
 
-      <div class="perfil-item">
-    <small>🏬 Loja</small>
-    <span id="perfilLoja">-</span>
-</div>
-      
-      <div class="perfil-item">
-        <small>📅 Admissão</small>
-        <span id="perfilAdmissao">-</span>
-      </div>
+                1280
+
+            </strong>
+
+        </div>
+
+        <div class="indicador">
+
+            <span>
+
+                🏬
+
+            </span>
+
+            <h3>
+
+                Lojas
+
+            </h3>
+
+            <strong>
+
+                7
+
+            </strong>
+
+        </div>
+
+        <div class="indicador">
+
+            <span>
+
+                📄
+
+            </span>
+
+            <h3>
+
+                Contracheques
+
+            </h3>
+
+            <strong>
+
+                45
+
+            </strong>
+
+        </div>
+
+        <div class="indicador">
+
+            <span>
+
+                📢
+
+            </span>
+
+            <h3>
+
+                Notícias
+
+            </h3>
+
+            <strong>
+
+                8
+
+            </strong>
+
+        </div>
+
     </div>
-  </div>
 
-  <div class="notificacao-card gloss">
-    <div class="badge-notificacao" id="badgeNotificacao">0</div>
-    <div class="sino-notificacao">🔔</div>
-    <h3>Notificações</h3>
-    <p id="resumoNotificacoes">Nenhuma notificação nova.</p>
-    <div class="notificacao-lista" id="listaNotificacoes"></div>
-  </div>
+    <div class="dashboardPerfil">
+
+        <div class="perfilCard">
+
+            <small>👤 Nome</small>
+
+            <span id="perfilNome">
+
+                -
+
+            </span>
+
+        </div>
+
+        <div class="perfilCard">
+
+            <small>🪪 CPF</small>
+
+            <span id="perfilCpf">
+
+                -
+
+            </span>
+
+        </div>
+
+        <div class="perfilCard">
+
+            <small>🆔 Matrícula</small>
+
+            <span id="perfilMatricula">
+
+                -
+
+            </span>
+
+        </div>
+
+        <div class="perfilCard">
+
+            <small>💼 Cargo</small>
+
+            <span id="perfilFuncao">
+
+                -
+
+            </span>
+
+        </div>
+
+        <div class="perfilCard">
+
+            <small>🏬 Loja</small>
+
+            <span id="perfilLoja">
+
+                -
+
+            </span>
+
+        </div>
+
+        <div class="perfilCard">
+
+            <small>📅 Admissão</small>
+
+            <span id="perfilAdmissao">
+
+                -
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="dashboardNotificacoes">
+
+        <div class="dashboardTituloBloco">
+
+            🔔 Central de Notificações
+
+        </div>
+
+        <div
+            id="listaNotificacoes">
+
+        </div>
+
+    </div>
 
 </section>
+
+<!-- ==========================
+SCRV DASHBOARD EXECUTIVO
+FIM
+========================== -->
 
 
 <section class="hero gloss">
