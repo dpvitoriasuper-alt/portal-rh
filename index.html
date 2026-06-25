@@ -716,115 +716,7 @@ nav a:hover{
     align-items:flex-start;
   }
 }
-/*==============================
-SCRV LAYOUT
-==============================*/
 
-#scrvLayout{
-
-    display:flex;
-
-    min-height:calc(100vh - 90px);
-
-}
-
-#menuLateralSCRV{
-
-    width:270px;
-
-    background:#07182d;
-
-    border-right:1px solid rgba(255,255,255,.08);
-
-    padding:25px;
-
-    position:sticky;
-
-    top:0;
-
-}
-
-#conteudoSCRV{
-
-    flex:1;
-
-    padding:25px;
-
-}
-
-.menu-logo{
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-}
-
-.menu-logo-img{
-
-    width:80px;
-
-    margin-bottom:12px;
-
-}
-
-.menu-logo h3{
-
-    color:#ffc400;
-
-    margin:0;
-
-    font-size:26px;
-
-}
-
-.menu-logo small{
-
-    color:#bbb;
-
-}
-
-.menu-item{
-
-    width:100%;
-
-    border:none;
-
-    background:none;
-
-    color:#fff;
-
-    text-align:left;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    margin-bottom:8px;
-
-    cursor:pointer;
-
-    font-size:15px;
-
-    transition:.25s;
-
-}
-
-.menu-item:hover{
-
-    background:#0d2d54;
-
-}
-
-.menu-item.ativo{
-
-    background:#ffc400;
-
-    color:#111;
-
-    font-weight:bold;
-
-}
 /* HERO */
 
 .hero{
@@ -2316,277 +2208,7 @@ body:not(.carregando) .highlight {
   }
 
 }
-  /*=========================================
-SCRV DASHBOARD EXECUTIVO
-=========================================*/
-
-.dashboardExecutivo{
-
-    background:linear-gradient(135deg,#0a1830,#13284b);
-
-    border-radius:22px;
-
-    padding:35px;
-
-    margin:25px 0;
-
-    color:#fff;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
-
-}
-
-.dashboardHeader{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    gap:30px;
-
-    margin-bottom:30px;
-
-}
-
-.dashboardSistema{
-
-    display:inline-block;
-
-    background:#FFC400;
-
-    color:#111;
-
-    padding:8px 18px;
-
-    border-radius:999px;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    margin-bottom:15px;
-
-}
-
-.dashboardTitulo h1{
-
-    font-size:38px;
-
-    margin:0;
-
-    font-weight:800;
-
-}
-
-.dashboardDescricao{
-
-    margin-top:12px;
-
-    color:#d8d8d8;
-
-    font-size:17px;
-
-}
-
-.dashboardUltimo{
-
-    margin-top:8px;
-
-    color:#bbbbbb;
-
-}
-
-.dashboardRelogio{
-
-    text-align:right;
-
-}
-
-#dashboardHora{
-
-    display:block;
-
-    font-size:38px;
-
-    color:#FFC400;
-
-    margin-top:10px;
-
-}
-
-.dashboardBotao{
-
-    margin-top:20px;
-
-    background:#FFC400;
-
-    color:#111;
-
-    border:none;
-
-    padding:14px 25px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-    transition:.25s;
-
-}
-
-.dashboardBotao:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:0 10px 20px rgba(255,196,0,.25);
-
-}
-
-.dashboardIndicadores{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-
-    gap:18px;
-
-    margin-bottom:30px;
-
-}
-
-.indicador{
-
-    background:#ffffff10;
-
-    backdrop-filter:blur(10px);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:18px;
-
-    padding:22px;
-
-    transition:.25s;
-
-}
-
-.indicador:hover{
-
-    transform:translateY(-5px);
-
-    border-color:#FFC400;
-
-}
-
-.indicador span{
-
-    font-size:35px;
-
-}
-
-.indicador h3{
-
-    margin:15px 0 10px;
-
-    font-size:16px;
-
-    color:#ddd;
-
-}
-
-.indicador strong{
-
-    font-size:34px;
-
-    color:#FFC400;
-
-}
-
-.dashboardPerfil{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-
-    gap:16px;
-
-    margin-bottom:30px;
-
-}
-
-.perfilCard{
-
-    background:#ffffff10;
-
-    border-radius:16px;
-
-    padding:18px;
-
-    border:1px solid rgba(255,255,255,.08);
-
-}
-
-.perfilCard small{
-
-    display:block;
-
-    color:#FFC400;
-
-    margin-bottom:10px;
-
-    font-weight:700;
-
-}
-
-.perfilCard span{
-
-    font-size:18px;
-
-    font-weight:600;
-
-}
-
-.dashboardNotificacoes{
-
-    background:#ffffff10;
-
-    border-radius:18px;
-
-    padding:22px;
-
-    border:1px solid rgba(255,255,255,.08);
-
-}
-
-.dashboardTituloBloco{
-
-    font-size:22px;
-
-    font-weight:700;
-
-    margin-bottom:20px;
-
-}
-
-@media(max-width:900px){
-
-.dashboardHeader{
-
-flex-direction:column;
-
-}
-
-.dashboardRelogio{
-
-text-align:left;
-
-}
-
-}
+  
 </style>
 </head>
 
@@ -2654,303 +2276,60 @@ text-align:left;
 </div>
 </header>
 
-  <div id="scrvLayout">
-
-    <aside id="menuLateralSCRV">
-
-        <div class="menu-logo">
-            <img src="logo-vitoria.png" class="menu-logo-img">
-
-            <h3>SCRV</h3>
-
-            <small>Sistema Corporativo</small>
-
-        </div>
-
-        <nav>
-
-            <button class="menu-item ativo">
-                🏠 Dashboard
-            </button>
-
-            <button class="menu-item">
-                👥 Recursos Humanos
-            </button>
-
-            <button class="menu-item">
-                💰 Departamento Pessoal
-            </button>
-
-            <button class="menu-item">
-                📢 Comunicação
-            </button>
-
-            <button class="menu-item">
-                📂 Gestão Documental
-            </button>
-
-            <button class="menu-item">
-                📊 Business Intelligence
-            </button>
-
-            <button class="menu-item">
-                ⚙ Administração
-            </button>
-
-        </nav>
-
-    </aside>
-
-    <main id="conteudoSCRV">
-
-
-<!-- ==========================
-SCRV DASHBOARD EXECUTIVO
-INÍCIO
-========================== -->
 
 <section id="areaColaborador" class="area-colaborador">
 
-<div id="dashboardExecutivo">
+  <div class="colaborador-card gloss">
 
-<div class="scrv-dashboard">
+    <div class="topo-colaborador">
+      <h2 id="saudacaoColaborador">Olá, colaborador!</h2>
 
-<div class="scrv-header">
-
-<div class="scrv-header-left">
-
-<span class="scrv-sistema">
-
-🏢 SISTEMA CORPORATIVO REDE VITÓRIA
-
-</span>
-
-<h1 id="dashboardSaudacao">
-
-Bom dia!
-
-</h1>
-
-<p id="dashboardNome">
-
-Carregando...
-
-</p>
-
-<p id="dashboardFuncao">
-
-Carregando função...
-
-</p>
-
-<div class="dashboard-data">
-
-<span id="dashboardData"></span>
-
-<span id="dashboardHora"></span>
-
-</div>
-
-</div>
-
-<div class="scrv-header-right">
-
-<button class="botaoDashboard">
-
-🔔
-
-<span id="badgeNotificacao">
-
-0
-
-</span>
-
-</button>
-
-<button class="botaoDashboard">
-
-⚙
-
-</button>
-
-<button
-
-class="botaoDashboard sair"
-
-onclick="sairPortal()">
-
-Sair
-
-</button>
-
-</div>
-
-</div>
-
-<div class="scrv-cards">
-
-<div class="scrv-card azul">
-
-<div class="icone">
-
-👥
-
-</div>
-
-<div>
-
-<h4>
-
-Funcionários
-
-</h4>
-
-<strong id="totalFuncionarios">
-
-1280
-
-</strong>
-
-</div>
-
-</div>
-
-<div class="scrv-card verde">
-
-<div class="icone">
-
-🏬
-
-</div>
-
-<div>
-
-<h4>
-
-Lojas
-
-</h4>
-
-<strong>
-
-7
-
-</strong>
-
-</div>
-
-</div>
-
-<div class="scrv-card vermelho">
-
-<div class="icone">
-
-📄
-
-</div>
-
-<div>
-
-<h4>
-
-Contracheques
-
-</h4>
-
-<strong>
-
-45
-
-</strong>
-
-</div>
-
-</div>
-
-<div class="scrv-card amarelo">
-
-<div class="icone">
-
-📢
-
-</div>
-
-<div>
-
-<h4>
-
-Notícias
-
-</h4>
-
-<strong>
-
-8
-
-</strong>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================
-SCRV DASHBOARD EXECUTIVO
-FIM
-========================== -->
-
-          <div class="scrv-perfil">
-
-            <div class="perfilCard">
-                <small>👤 Nome</small>
-                <span id="perfilNome">-</span>
-            </div>
-
-            <div class="perfilCard">
-                <small>🪪 CPF</small>
-                <span id="perfilCpf">-</span>
-            </div>
-
-            <div class="perfilCard">
-                <small>🆔 Matrícula</small>
-                <span id="perfilMatricula">-</span>
-            </div>
-
-            <div class="perfilCard">
-                <small>💼 Cargo</small>
-                <span id="perfilFuncao">-</span>
-            </div>
-
-            <div class="perfilCard">
-                <small>🏬 Loja</small>
-                <span id="perfilLoja">-</span>
-            </div>
-
-            <div class="perfilCard">
-                <small>📅 Admissão</small>
-                <span id="perfilAdmissao">-</span>
-            </div>
-
-        </div>
-
-        <div class="scrv-notificacoes">
-
-            <h3>🔔 Notificações</h3>
-
-            <div id="listaNotificacoes">
-
-            </div>
-
-        </div>
-
+      <button onclick="sairPortal()" class="btn-sair">
+        🚪 Sair
+      </button>
     </div>
 
-</div>
+    <p id="ultimoAcessoTexto">Seu último acesso será exibido aqui.</p>
+    <p id="ultimoAcessoTexto">Seu último acesso será exibido aqui.</p>
+
+    <div class="perfil-grid">
+      <div class="perfil-item">
+        <small>Nome</small>
+        <span id="perfilNome">-</span>
+      </div>
+
+      <div class="perfil-item">
+        <small>CPF</small>
+        <span id="perfilCpf">-</span>
+      </div>
+
+      <div class="perfil-item">
+        <small>Matrícula</small>
+        <span id="perfilMatricula">-</span>
+      </div>
+
+      <div class="perfil-item">
+        <small>Função</small>
+        <span id="perfilFuncao">-</span>
+      </div>
+
+      <div class="perfil-item">
+        <small>Admissão</small>
+        <span id="perfilAdmissao">-</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="notificacao-card gloss">
+    <div class="badge-notificacao" id="badgeNotificacao">0</div>
+    <div class="sino-notificacao">🔔</div>
+    <h3>Notificações</h3>
+    <p id="resumoNotificacoes">Nenhuma notificação nova.</p>
+    <div class="notificacao-lista" id="listaNotificacoes"></div>
+  </div>
 
 </section>
+
 
 <section class="hero gloss">
 
@@ -3247,10 +2626,6 @@ FIM
   </div>
 
 </footer>
-
-      </main>
-
-</div>
 
 </div>
 <script>
