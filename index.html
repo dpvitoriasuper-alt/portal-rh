@@ -4480,44 +4480,54 @@ window.abrirImportarDominioRh = function () {
 
     const reader = new FileReader();
 
-    reader.onload = function (e) {
+    reader.onload = async function (e) {
 
         const base64 = e.target.result.split(",")[1];
 
-        google.script.run
+        try {
 
-            .withSuccessHandler(function (resposta) {
+    const resposta = await fetch(API_URL, {
 
-    if (resposta.sucesso) {
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            action: "uploadImportacaoDominio",
+
+            nomeArquivo: arquivo.name,
+
+            base64: base64
+
+        })
+
+    });
+
+    const dados = await resposta.json();
+
+    if (dados.sucesso) {
 
         document.getElementById("statusImportacaoDominio").innerHTML =
-            "✅ " + resposta.mensagem;
+            "✅ " + dados.mensagem;
 
         document.getElementById("resultadoImportacaoDominio").innerHTML = "";
 
     } else {
 
         document.getElementById("statusImportacaoDominio").innerHTML =
-            "❌ " + resposta.mensagem;
+            "❌ " + dados.mensagem;
 
     }
 
-})
-
-.withFailureHandler(function (erro) {
+} catch (erro) {
 
     document.getElementById("statusImportacaoDominio").innerHTML =
         "❌ " + erro.message;
 
-})
-
-.uploadImportacaoDominio(
-
-    arquivo.name,
-
-    base64
-
-);
+}
 
     };
     
