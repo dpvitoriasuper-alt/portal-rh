@@ -4485,7 +4485,7 @@ window.abrirImportarDominioRh = function () {
         const base64 = e.target.result.split(",")[1];
 
         try {
-
+console.log(API_URL);
     const resposta = await fetch(API_URL, {
 
         method: "POST",
