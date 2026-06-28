@@ -4463,6 +4463,58 @@ window.abrirImportarDominioRh = function () {
     }
 
 };
+
+  async function enviarArquivoDominioRh() {
+
+    const input = document.getElementById("arquivoDominioRh");
+
+    if (!input.files.length) {
+        alert("Selecione um arquivo primeiro.");
+        return;
+    }
+
+    const arquivo = input.files[0];
+
+    document.getElementById("statusImportacaoDominio").innerHTML =
+        "⏳ Enviando arquivo...";
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        const base64 = e.target.result.split(",")[1];
+
+        google.script.run
+
+            .withSuccessHandler(function (resposta) {
+
+                document.getElementById("statusImportacaoDominio").innerHTML =
+                    "✅ Importação concluída.";
+
+                document.getElementById("resultadoImportacaoDominio").innerHTML = resposta;
+
+            })
+
+            .withFailureHandler(function (erro) {
+
+                document.getElementById("statusImportacaoDominio").innerHTML =
+                    "❌ " + erro.message;
+
+            })
+
+            .uploadImportacaoDominio(
+
+                arquivo.name,
+
+                base64
+
+            );
+
+    };
+
+    reader.readAsDataURL(arquivo);
+
+}
   
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
