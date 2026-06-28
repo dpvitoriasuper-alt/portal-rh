@@ -4488,29 +4488,36 @@ window.abrirImportarDominioRh = function () {
 
             .withSuccessHandler(function (resposta) {
 
-                document.getElementById("statusImportacaoDominio").innerHTML =
-                    "✅ Importação concluída.";
+    if (resposta.sucesso) {
 
-                document.getElementById("resultadoImportacaoDominio").innerHTML = resposta;
+        document.getElementById("statusImportacaoDominio").innerHTML =
+            "✅ " + resposta.mensagem;
 
-            })
+        document.getElementById("resultadoImportacaoDominio").innerHTML = "";
 
-            .withFailureHandler(function (erro) {
+    } else {
 
-                document.getElementById("statusImportacaoDominio").innerHTML =
-                    "❌ " + erro.message;
+        document.getElementById("statusImportacaoDominio").innerHTML =
+            "❌ " + resposta.mensagem;
 
-            })
+    }
 
-            .uploadImportacaoDominio(
+})
 
-                arquivo.name,
+.withFailureHandler(function (erro) {
 
-                base64
+    document.getElementById("statusImportacaoDominio").innerHTML =
+        "❌ " + erro.message;
 
-            );
+})
 
-    };
+.uploadImportacaoDominio(
+
+    arquivo.name,
+
+    base64
+
+);
 
     reader.readAsDataURL(arquivo);
 
