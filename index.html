@@ -4434,16 +4434,34 @@ async function salvarDocumentoRh(){
   }
 };
 
-window.abrirImportarDominioRh = function(){
+window.abrirImportarDominioRh = function () {
 
-  const modal = document.getElementById("modalImportarDominioRh");
+    const modal = document.getElementById("modalImportarDominioRh");
 
-  if(!modal){
-    alert("Modal modalImportarDominioRh não encontrado.");
-    return;
-  }
+    if (!modal) {
+        alert("Modal modalImportarDominioRh não encontrado.");
+        return;
+    }
 
-  modal.style.display = "flex";
+    modal.style.display = "flex";
+
+    const input = document.getElementById("arquivoDominioRh");
+
+    if (input && !input.dataset.evento) {
+
+        input.dataset.evento = "ok";
+
+        input.addEventListener("change", function () {
+
+            if (this.files.length === 0) return;
+
+            document.getElementById("nomeArquivoDominio").innerHTML =
+                "📄 " + this.files[0].name;
+
+        });
+
+    }
+
 };
   
 /* AVISOS */
@@ -6279,14 +6297,60 @@ window.pesquisarFuncionarioRh = function(){
 </div>
 
 <div id="modalImportarDominioRh" class="modal-rh">
+
   <div class="modal-rh-conteudo">
+
     <div class="modal-rh-topo">
-      <h2>📥 Importar Domínio</h2>
+
+      <h2>📥 Importação Inteligente - Domínio</h2>
+
       <button onclick="fecharModalRh('modalImportarDominioRh')">×</button>
+
     </div>
 
-    <p>Tela de importação do Domínio abriu corretamente.</p>
+    <div class="importacao-dominio">
+
+      <p class="texto-importacao">
+
+        Selecione o arquivo exportado pelo Domínio (.xls ou .xlsx)
+
+      </p>
+
+      <input
+        type="file"
+        id="arquivoDominioRh"
+        accept=".xls,.xlsx">
+
+      <div id="nomeArquivoDominio" class="arquivo-selecionado">
+
+        Nenhum arquivo selecionado.
+
+      </div>
+
+      <button
+        class="botao-importacao"
+        onclick="enviarArquivoDominioRh()">
+
+        📤 Enviar Arquivo
+
+      </button>
+
+      <div
+        id="statusImportacaoDominio"
+        class="status-importacao">
+
+      </div>
+
+      <div
+        id="resultadoImportacaoDominio"
+        class="resultado-importacao">
+
+      </div>
+
+    </div>
+
   </div>
+
 </div>
   
 </body>
