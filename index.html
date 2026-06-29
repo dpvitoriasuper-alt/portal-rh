@@ -4478,60 +4478,50 @@ window.abrirImportarDominioRh = function () {
     document.getElementById("statusImportacaoDominio").innerHTML =
         "⏳ Enviando arquivo...";
 
-    const reader = new FileReader();
+    try {
 
-    reader.onload = async function (e) {
+        const form = new FormData();
 
-        const base64 = e.target.result.split(",")[1];
+        form.append("arquivo", arquivo);
 
-        try {
-console.log(API_URL);
-    const resposta = await fetch(API_URL, {
+        const resposta = await fetch(
+            "https://scrv-api.dpvitoriasuper.workers.dev/upload",
+            {
+                method: "POST",
+                body: form
+            }
+        );
 
-        method: "POST",
+        const dados = await resposta.json();
 
-        headers: {
-            "Content-Type": "application/json"
-        },
+        console.log(dados);
 
-        body: JSON.stringify({
+        if (dados.sucesso) {
 
-            action: "uploadImportacaoDominio",
+            document.getElementById("statusImportacaoDominio").innerHTML =
+                "✅ Arquivo enviado.";
 
-            nomeArquivo: arquivo.name,
+            document.getElementById("resultadoImportacaoDominio").innerHTML =
+                `
+                <b>Arquivo:</b> ${dados.nome}<br>
+                <b>Tamanho:</b> ${dados.tamanho} bytes
+                `;
 
-            base64: base64
+        } else {
 
-        })
+            document.getElementById("statusImportacaoDominio").innerHTML =
+                "❌ " + dados.mensagem;
 
-    });
+        }
 
-    const dados = await resposta.json();
+    } catch (erro) {
 
-    if (dados.sucesso) {
+        console.error(erro);
 
         document.getElementById("statusImportacaoDominio").innerHTML =
-            "✅ " + dados.mensagem;
-
-        document.getElementById("resultadoImportacaoDominio").innerHTML = "";
-
-    } else {
-
-        document.getElementById("statusImportacaoDominio").innerHTML =
-            "❌ " + dados.mensagem;
+            "❌ " + erro.message;
 
     }
-
-} catch (erro) {
-
-    document.getElementById("statusImportacaoDominio").innerHTML =
-        "❌ " + erro.message;
-
-}
-
-    };
-    
-    reader.readAsDataURL(arquivo);
 
 }
   
