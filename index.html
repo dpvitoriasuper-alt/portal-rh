@@ -4469,7 +4469,7 @@ window.abrirImportarDominioRh = function () {
     const input = document.getElementById("arquivoDominioRh");
 
     if (!input.files.length) {
-        alert("Selecione um arquivo primeiro.");
+        alert("Selecione um arquivo.");
         return;
     }
 
@@ -4481,7 +4481,6 @@ window.abrirImportarDominioRh = function () {
     try {
 
         const form = new FormData();
-
         form.append("arquivo", arquivo);
 
         const resposta = await fetch(
@@ -4496,30 +4495,16 @@ window.abrirImportarDominioRh = function () {
 
         console.log(dados);
 
-        if (dados.sucesso) {
+        document.getElementById("statusImportacaoDominio").innerHTML =
+            "✅ Arquivo recebido pela API.";
 
-            document.getElementById("statusImportacaoDominio").innerHTML =
-                "✅ Arquivo enviado.";
+        document.getElementById("resultadoImportacaoDominio").innerHTML =
+            JSON.stringify(dados, null, 2);
 
-            document.getElementById("resultadoImportacaoDominio").innerHTML =
-                `
-                <b>Arquivo:</b> ${dados.nome}<br>
-                <b>Tamanho:</b> ${dados.tamanho} bytes
-                `;
-
-        } else {
-
-            document.getElementById("statusImportacaoDominio").innerHTML =
-                "❌ " + dados.mensagem;
-
-        }
-
-    } catch (erro) {
-
-        console.error(erro);
+    } catch (e) {
 
         document.getElementById("statusImportacaoDominio").innerHTML =
-            "❌ " + erro.message;
+            "❌ " + e.message;
 
     }
 
