@@ -4466,48 +4466,59 @@ window.abrirImportarDominioRh = function () {
 
  async function enviarArquivoDominioRh() {
 
-    const input = document.getElementById("arquivoDominioRh");
+    const arquivo = document.getElementById("arquivoDominioRh").files[0];
+    const status = document.getElementById("statusImportacaoDominio");
 
-    if (!input.files.length) {
-        alert("Selecione um arquivo.");
+    if (!arquivo) {
+        status.innerHTML = "Selecione um arquivo.";
         return;
     }
 
-    const arquivo = input.files[0];
+    status.innerHTML = "⏳ Preparando arquivo...";
 
-    document.getElementById("statusImportacaoDominio").innerHTML =
-        "⏳ Lendo arquivo...";
+    try {
 
-    const reader = new FileReader();
+        const base64 = await converterArquivoParaBase64Rh(arquivo);
 
-    reader.onload = function(e){
+        status.innerHTML = "⏳ Enviando arquivo...";
 
-        const base64 = e.target.result.split(",")[1];
+        const resposta = await fetch(API_URL, {
 
-        google.script.run
+            method: "POST",
 
-        .withSuccessHandler(function(resposta){
+            body: JSON.stringify({
 
-            document.getElementById("statusImportacaoDominio").innerHTML =
-                "✅ " + resposta.mensagem;
+                action: "uploadImportacaoDominio",
 
-        })
+                nomeArquivo: arquivo.name,
 
-        .withFailureHandler(function(erro){
+                tipoArquivo: arquivo.type || "application/octet-stream",
 
-            document.getElementById("statusImportacaoDominio").innerHTML =
-                "❌ " + erro;
+                arquivoBase64: base64
 
-        })
+            })
 
-        .uploadImportacaoDominio(
-            arquivo.name,
-            base64
-        );
+        });
 
-    };
+        const dados = await resposta.json();
 
-    reader.readAsDataURL(arquivo);
+        if (dados.sucesso) {
+
+            status.innerHTML = "✅ " + dados.mensagem;
+
+        } else {
+
+            status.innerHTML = "❌ " + dados.mensagem;
+
+        }
+
+    } catch (e) {
+
+        console.error(e);
+
+        status.innerHTML = "❌ " + e.toString();
+
+    }
 
 }
   
