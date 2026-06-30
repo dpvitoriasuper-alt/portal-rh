@@ -4464,7 +4464,7 @@ window.abrirImportarDominioRh = function () {
 
 };
 
-  async function enviarArquivoDominioRh() {
+ async function enviarArquivoDominioRh() {
 
     const input = document.getElementById("arquivoDominioRh");
 
@@ -4476,37 +4476,38 @@ window.abrirImportarDominioRh = function () {
     const arquivo = input.files[0];
 
     document.getElementById("statusImportacaoDominio").innerHTML =
-        "⏳ Enviando arquivo...";
+        "⏳ Lendo arquivo...";
 
-    try {
+    const reader = new FileReader();
 
-        const form = new FormData();
-        form.append("arquivo", arquivo);
+    reader.onload = function(e){
 
-        const resposta = await fetch(
-            "https://scrv-api.dpvitoriasuper.workers.dev/upload",
-            {
-                method: "POST",
-                body: form
-            }
+        const base64 = e.target.result.split(",")[1];
+
+        google.script.run
+
+        .withSuccessHandler(function(resposta){
+
+            document.getElementById("statusImportacaoDominio").innerHTML =
+                "✅ " + resposta.mensagem;
+
+        })
+
+        .withFailureHandler(function(erro){
+
+            document.getElementById("statusImportacaoDominio").innerHTML =
+                "❌ " + erro;
+
+        })
+
+        .uploadImportacaoDominio(
+            arquivo.name,
+            base64
         );
 
-        const dados = await resposta.json();
+    };
 
-        console.log(dados);
-
-        document.getElementById("statusImportacaoDominio").innerHTML =
-            "✅ Arquivo recebido pela API.";
-
-        document.getElementById("resultadoImportacaoDominio").innerHTML =
-            JSON.stringify(dados, null, 2);
-
-    } catch (e) {
-
-        document.getElementById("statusImportacaoDominio").innerHTML =
-            "❌ " + e.message;
-
-    }
+    reader.readAsDataURL(arquivo);
 
 }
   
