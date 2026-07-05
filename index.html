@@ -4480,37 +4480,36 @@ window.abrirImportarDominioRh = function () {
 
         const base64 = await converterArquivoParaBase64Rh(arquivo);
 
-        status.innerHTML = "⏳ Enviando arquivo...";
+        status.innerHTML = "⏳ Enviando arquivo para a pasta 00_IMPORTAR...";
 
-        const resposta = await fetch(API_URL, {
+        google.script.run
 
-            method: "POST",
+            .withSuccessHandler(function (dados) {
 
-            body: JSON.stringify({
+                if (dados.sucesso) {
 
-                action: "uploadImportacaoDominio",
+                    status.innerHTML = "✅ " + dados.mensagem;
 
-                nomeArquivo: arquivo.name,
+                } else {
 
-                tipoArquivo: arquivo.type || "application/octet-stream",
+                    status.innerHTML = "❌ " + dados.mensagem;
 
-                arquivoBase64: base64
+                }
 
             })
 
-        });
+            .withFailureHandler(function (erro) {
 
-        const dados = await resposta.json();
+                console.error(erro);
 
-        if (dados.sucesso) {
+                status.innerHTML = "❌ " + erro.message;
 
-            status.innerHTML = "✅ " + dados.mensagem;
+            })
 
-        } else {
-
-            status.innerHTML = "❌ " + dados.mensagem;
-
-        }
+            .uploadImportacaoDominio(
+                arquivo.name,
+                base64
+            );
 
     } catch (e) {
 
