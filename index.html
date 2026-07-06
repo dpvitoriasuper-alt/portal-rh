@@ -4464,7 +4464,7 @@ window.abrirImportarDominioRh = function () {
 
 };
 
- async function enviarArquivoDominioRh() {
+async function enviarArquivoDominioRh() {
 
     const arquivo = document.getElementById("arquivoDominioRh").files[0];
     const status = document.getElementById("statusImportacaoDominio");
@@ -4480,41 +4480,31 @@ window.abrirImportarDominioRh = function () {
 
         const base64 = await converterArquivoParaBase64Rh(arquivo);
 
-        status.innerHTML = "⏳ Enviando arquivo para a pasta 00_IMPORTAR...";
+        status.innerHTML = "⏳ Enviando arquivo...";
 
-        google.script.run
-
-            .withSuccessHandler(function (dados) {
-
-                if (dados.sucesso) {
-
-                    status.innerHTML = "✅ " + dados.mensagem;
-
-                } else {
-
-                    status.innerHTML = "❌ " + dados.mensagem;
-
-                }
-
+        const resposta = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: "uploadImportacaoDominio",
+                nomeArquivo: arquivo.name,
+                arquivoBase64: base64
             })
+        });
 
-            .withFailureHandler(function (erro) {
+        const dados = await resposta.json();
 
-                console.error(erro);
-
-                status.innerHTML = "❌ " + erro.message;
-
-            })
-
-            .uploadImportacaoDominio(
-                arquivo.name,
-                base64
-            );
+        if (dados.sucesso) {
+            status.innerHTML = "✅ " + dados.mensagem;
+        } else {
+            status.innerHTML = "❌ " + dados.mensagem;
+        }
 
     } catch (e) {
 
         console.error(e);
-
         status.innerHTML = "❌ " + e.toString();
 
     }
