@@ -4482,18 +4482,16 @@ async function enviarArquivoDominioRh() {
 
         status.innerHTML = "⏳ Enviando arquivo...";
 
-        const resposta = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                action: "uploadImportacaoDominio",
-                nomeArquivo: arquivo.name,
-                arquivoBase64: base64
-            })
-        });
+        const payload = {
+    action: "uploadImportacaoDominio",
+    nomeArquivo: arquivo.name,
+    arquivoBase64: base64
+};
 
+const resposta = await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(payload)
+});
         const dados = await resposta.json();
 
         if (dados.sucesso) {
