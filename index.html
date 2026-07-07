@@ -6218,15 +6218,39 @@ window.carregarExperienciaRh = async function(){
 </div>
 
 <script>
-window.abrirNovoFuncionarioRh = function(){
-  const modal = document.getElementById("modalNovoFuncionarioRh");
-  if(modal){
-    modal.style.display = "flex";
-  }else{
-    alert("Modal Novo Funcionário não encontrado.");
-  }
-};
 
+  function abrirModalFrente(id){
+
+  const modal = document.getElementById(id);
+
+  if(!modal){
+    console.error("Modal não encontrado:", id);
+    return;
+  }
+
+  // Descobre o maior z-index existente
+  let maior = 1000;
+
+  document.querySelectorAll(".documentos-modal, .modal-rh").forEach(m => {
+
+    const z = parseInt(window.getComputedStyle(m).zIndex) || 1000;
+
+    if(z > maior){
+      maior = z;
+    }
+
+  });
+
+  modal.style.zIndex = maior + 1;
+  modal.style.display = "flex";
+
+}
+  
+window.abrirNovoFuncionarioRh = function(){
+
+  abrirModalFrente("modalNovoFuncionarioRh");
+
+};
 window.fecharModalRh = function(id){
   const modal = document.getElementById(id);
   if(modal){
@@ -6239,21 +6263,9 @@ window.fecharModalRh = function(id){
     modal.style.display = "none";
   }
 };
-  window.abrirExperienciaRh = async function(){
+ window.abrirExperienciaRh = async function(){
 
-  const modal =
-    document.getElementById(
-      "modalExperienciaRh"
-    );
-
-  if(!modal){
-    alert(
-      "Modal Experiência não encontrado."
-    );
-    return;
-  }
-
-  modal.style.display = "flex";
+  abrirModalFrente("modalExperienciaRh");
 
   await carregarExperienciaRh();
 
