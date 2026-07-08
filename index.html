@@ -3366,18 +3366,13 @@ function fecharFuncionariosRh(){
     `;
   }
 }
- async function abrirCadastroCompletoRh(cpf){
+async function abrirCadastroCompletoRh(cpf){
+
+  abrirModalFrente("modalCadastroCompletoRh");
 
   const modal = document.getElementById("modalCadastroCompletoRh");
 
-   document.getElementById("modalExperienciaRh").style.display = "none";
-
-   modal.style.display = "flex";
-modal.style.zIndex = "999999";
-   
   const conteudo = document.getElementById("conteudoCadastroCompletoRh");
-
-  modal.style.display = "flex";
 
   conteudo.innerHTML = `
     <div class="rh-card-info">
