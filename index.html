@@ -6243,20 +6243,13 @@ window.carregarExperienciaRh = async function(){
   
 window.abrirNovoFuncionarioRh = function(){
 
-  abrirModalFrente("modalNovoFuncionarioRh");
+  ModalSCRV.abrir("modalNovoFuncionarioRh");
 
 };
 window.fecharModalRh = function(id){
-  const modal = document.getElementById(id);
-  if(modal){
-    modal.style.display = "none";
-  }
-};
-  window.fecharModalRh = function(id){
-  const modal = document.getElementById(id);
-  if(modal){
-    modal.style.display = "none";
-  }
+
+  ModalSCRV.fechar(id);
+
 };
  window.abrirExperienciaRh = async function(){
 
