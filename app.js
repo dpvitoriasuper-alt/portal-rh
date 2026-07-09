@@ -622,7 +622,13 @@ function fecharCategoriaDocumentoRh(){
   document.getElementById("modalCategoriaDocumentoRh").style.display = "none";
 }
   function abrirFuncionariosRh(){
+
+  fecharAreaRh();
+
   document.getElementById("modalFuncionariosRh").style.display = "flex";
+
+  carregarFuncionariosRh();
+
 }
 
 function fecharFuncionariosRh(){
@@ -724,7 +730,10 @@ function fecharFuncionariosRh(){
 }
 async function abrirCadastroCompletoRh(cpf){
 
-  abrirModalFrente("modalCadastroCompletoRh");
+  document.getElementById("modalExperienciaRh").style.display = "none";
+document.getElementById("modalFuncionariosRh").style.display = "none";
+
+document.getElementById("modalCadastroCompletoRh").style.display = "flex";
 
   const modal = document.getElementById("modalCadastroCompletoRh");
 
@@ -3004,11 +3013,14 @@ window.fecharModalRh = function(id){
 };
  window.abrirExperienciaRh = async function(){
 
-  abrirModalFrente("modalExperienciaRh");
+  fecharFuncionariosRh();
+
+  document.getElementById("modalExperienciaRh").style.display = "flex";
 
   await carregarExperienciaRh();
 
-};
+}
+
 window.pesquisarFuncionarioRh = function(){
   carregarFuncionariosRh();
 };
