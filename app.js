@@ -621,13 +621,9 @@ function carregarQuantidadesDocumentosRh(){
 function fecharCategoriaDocumentoRh(){
   document.getElementById("modalCategoriaDocumentoRh").style.display = "none";
 }
-  function abrirFuncionariosRh(){
+function abrirFuncionariosRh(){
 
-  fecharAreaRh();
-
-  document.getElementById("modalFuncionariosRh").style.display = "flex";
-
-  carregarFuncionariosRh();
+  ModalSCRV.abrir("modalFuncionariosRh");
 
 }
 
@@ -730,9 +726,10 @@ function fecharFuncionariosRh(){
 }
 async function abrirCadastroCompletoRh(cpf){
 
-  document.getElementById("modalExperienciaRh").style.display = "none";
-document.getElementById("modalFuncionariosRh").style.display = "none";
+    ModalSCRV.fechar("modalFuncionariosRh");
 
+  ModalSCRV.abrir("modalCadastroCompletoRh");
+  
 document.getElementById("modalCadastroCompletoRh").style.display = "flex";
 
   const modal = document.getElementById("modalCadastroCompletoRh");
@@ -1157,7 +1154,11 @@ window.nomeFuncionarioAtual = c.NOME || "";
   });
 }
 function fecharCadastroCompletoRh(){
-  document.getElementById("modalCadastroCompletoRh").style.display = "none";
+
+    ModalSCRV.fechar("modalCadastroCompletoRh");
+
+    ModalSCRV.abrir("modalFuncionariosRh");
+
 }
   function trocarAbaRh(nome){
 
@@ -2953,32 +2954,6 @@ window.carregarExperienciaRh = async function(){
   renderizarExperienciaRh(lista);
 
 }
-
-
- function abrirModalFrente(id){
-
-  // Fecha qualquer modal aberto
-  document.querySelectorAll(
-    ".modal-rh, .documentos-modal, .galeria-modal, .noticia-modal, .imagem-modal, .modal-lojas"
-  ).forEach(modal => {
-
-    modal.style.zIndex = "999998";
-
-  });
-
-  const modal = document.getElementById(id);
-
-  if(!modal){
-    console.error("Modal não encontrado:", id);
-    return;
-  }
-
-  modal.style.display = "flex";
-  modal.style.visibility = "visible";
-  modal.style.opacity = "1";
-  modal.style.zIndex = "999999";
-
-}
   
 window.abrirNovoFuncionarioRh = function(){
 
@@ -2992,13 +2967,13 @@ window.fecharModalRh = function(id){
 };
  window.abrirExperienciaRh = async function(){
 
-  fecharFuncionariosRh();
+  ModalSCRV.fechar("modalFuncionariosRh");
 
-  document.getElementById("modalExperienciaRh").style.display = "flex";
+  ModalSCRV.abrir("modalExperienciaRh");
 
   await carregarExperienciaRh();
 
-}
+};
 
 window.pesquisarFuncionarioRh = function(){
   carregarFuncionariosRh();
