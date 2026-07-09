@@ -2949,7 +2949,16 @@ window.carregarExperienciaRh = async function(){
 
 
 
-  function abrirModalFrente(id){
+ function abrirModalFrente(id){
+
+  // Fecha qualquer modal aberto
+  document.querySelectorAll(
+    ".modal-rh, .documentos-modal, .galeria-modal, .noticia-modal, .imagem-modal, .modal-lojas"
+  ).forEach(modal => {
+
+    modal.style.zIndex = "999998";
+
+  });
 
   const modal = document.getElementById(id);
 
@@ -2957,6 +2966,13 @@ window.carregarExperienciaRh = async function(){
     console.error("Modal não encontrado:", id);
     return;
   }
+
+  modal.style.display = "flex";
+  modal.style.visibility = "visible";
+  modal.style.opacity = "1";
+  modal.style.zIndex = "999999";
+
+}
 
   // Descobre o maior z-index existente
   let maior = 1000;
