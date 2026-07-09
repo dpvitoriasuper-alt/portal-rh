@@ -2953,9 +2953,6 @@ window.carregarExperienciaRh = async function(){
   renderizarExperienciaRh(lista);
 
 }
-  
-
-
 
 
  function abrirModalFrente(id){
@@ -2980,24 +2977,6 @@ window.carregarExperienciaRh = async function(){
   modal.style.visibility = "visible";
   modal.style.opacity = "1";
   modal.style.zIndex = "999999";
-
-}
-
-  // Descobre o maior z-index existente
-  let maior = 1000;
-
-  document.querySelectorAll(".documentos-modal, .modal-rh").forEach(m => {
-
-    const z = parseInt(window.getComputedStyle(m).zIndex) || 1000;
-
-    if(z > maior){
-      maior = z;
-    }
-
-  });
-
-  modal.style.zIndex = maior + 1;
-  modal.style.display = "flex";
 
 }
   
