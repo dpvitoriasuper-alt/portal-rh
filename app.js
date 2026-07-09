@@ -3163,3 +3163,26 @@ window.fecharModalSCRV = function(id){
     }
 
 };
+
+function limparImportacaoDominioRh(){
+
+    const arquivo = document.getElementById("arquivoDominioRh");
+    const nome = document.getElementById("nomeArquivoDominio");
+    const status = document.getElementById("statusImportacaoDominio");
+    const resultado = document.getElementById("resultadoImportacaoDominio");
+
+    if(arquivo) arquivo.value = "";
+
+    if(nome){
+        nome.innerHTML = "Nenhum arquivo selecionado.";
+    }
+
+    if(status){
+        status.innerHTML = "";
+    }
+
+    if(resultado){
+        resultado.innerHTML = "";
+    }
+
+}
