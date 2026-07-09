@@ -283,27 +283,23 @@
   transform:translateY(-2px);
   box-shadow:0 4px 12px rgba(245,196,0,.4);
 }
- .modal-rh{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.82);
-  z-index:999999999 !important;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
+.modal-rh{
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,.70);
+
+    z-index: 999999;
+
+    overflow-y: auto;
 }
   
 .modal-rh-conteudo{
-  background:#111;
-  color:#fff;
-  width:90%;
-  max-width:900px;
-  max-height:90vh;
-  overflow:auto;
-  border-radius:16px;
-  padding:24px;
-  border:1px solid #c9a646;
+    position: relative;
+    z-index: 1000000;
 }
 
 .modal-rh-topo{
