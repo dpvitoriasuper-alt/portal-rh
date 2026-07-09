@@ -3115,7 +3115,7 @@ window.abrirModalSCRV = function(id){
 
     if(!modal) return;
 
-    const aberto = document.querySelector(".modal-rh.aberto");
+    const aberto = document.querySelector(".modal-rh.aberto, .documentos-modal.aberto");
 
     if(aberto){
 
@@ -3130,8 +3130,10 @@ window.abrirModalSCRV = function(id){
     modal.classList.add("aberto");
 
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
 };
+
 window.fecharModalSCRV = function(id){
 
     const modal = document.getElementById(id);
@@ -3156,9 +3158,14 @@ window.fecharModalSCRV = function(id){
 
         }
 
-    }else{
+    }
+
+    // Sempre libera o scroll se não existir modal aberto
+
+    if(!document.querySelector(".modal-rh.aberto, .documentos-modal.aberto")){
 
         document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
 
     }
 
