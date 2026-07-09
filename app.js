@@ -3186,3 +3186,11 @@ function limparImportacaoDominioRh(){
     }
 
 }
+
+function fecharImportacaoDominioRh(){
+
+    limparImportacaoDominioRh();
+
+    fecharModalRh("modalImportarDominioRh");
+
+}
