@@ -4,6 +4,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbz4aLtDg_OEpJ2PD9fyVGlf
 // GERENCIADOR DE MODAIS SCRV
 // ================================
 const PilhaModaisSCRV = [];
+let modalOrigemRh = "";
 
 // Daqui para baixo começam as funções
 
@@ -733,12 +734,34 @@ function fecharFuncionariosRh(){
 }
 async function abrirCadastroCompletoRh(cpf){
 
-   fecharModalSCRV("modalFuncionariosRh");
+   modalOrigemRh = "";
 
-  ModalSCRV.abrir("modalCadastroCompletoRh");
-  
-document.getElementById("modalCadastroCompletoRh").style.display = "flex";
+// Funcionários
+if(document.getElementById("modalFuncionariosRh")?.style.display === "flex"){
+    modalOrigemRh = "modalFuncionariosRh";
+    fecharModalSCRV("modalFuncionariosRh");
+}
 
+// Experiência
+if(document.getElementById("modalExperienciaRh")?.style.display === "flex"){
+    modalOrigemRh = "modalExperienciaRh";
+    fecharModalSCRV("modalExperienciaRh");
+}
+
+// Desligados
+if(document.getElementById("modalDesligadosRh")?.style.display === "flex"){
+    modalOrigemRh = "modalDesligadosRh";
+    fecharModalSCRV("modalDesligadosRh");
+}
+
+// Importação
+if(document.getElementById("modalImportarDominioRh")?.style.display === "flex"){
+    modalOrigemRh = "modalImportarDominioRh";
+    fecharModalSCRV("modalImportarDominioRh");
+}
+
+// Abre o cadastro
+ModalSCRV.abrir("modalCadastroCompletoRh");
   const modal = document.getElementById("modalCadastroCompletoRh");
 
   const conteudo = document.getElementById("conteudoCadastroCompletoRh");
@@ -1162,9 +1185,15 @@ window.nomeFuncionarioAtual = c.NOME || "";
 }
 function fecharCadastroCompletoRh(){
 
-    ModalSCRV.fechar("modalCadastroCompletoRh");
+    fecharModalSCRV("modalCadastroCompletoRh");
 
-    ModalSCRV.abrir("modalFuncionariosRh");
+    if(modalOrigemRh){
+
+        ModalSCRV.abrir(modalOrigemRh);
+
+        modalOrigemRh = "";
+
+    }
 
 }
   function trocarAbaRh(nome){
