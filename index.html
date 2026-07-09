@@ -1722,60 +1722,68 @@
      MODAL - IMPORTAÇÃO DOMÍNIO
 =========================================================== -->
 
-<div id="modalImportarDominioRh" class="documentos-modal"
+<div id="modalImportarDominioRh" class="documentos-modal">
 
-  <div class="documentos-box">
+    <div class="documentos-box" style="max-width:850px;">
 
-    <div class="documentos-header">
-      <h2>📥 Importação Inteligente - Domínio</h2>
+        <div class="documentos-header">
 
-      <button onclick="fecharModalRh('modalImportarDominioRh')">
-        ×
-      </button>
+            <h2>📥 Importação Inteligente - Domínio</h2>
+
+            <button onclick="fecharModalRh('modalImportarDominioRh')">
+                ×
+            </button>
+
+        </div>
+
+        <div class="rh-card-info">
+
+            <strong>Importação de Funcionários</strong>
+
+            <span>
+                Selecione o arquivo exportado pelo Domínio (.xls ou .xlsx)
+            </span>
+
+        </div>
+
+        <div class="importacao-dominio">
+
+            <input
+                type="file"
+                id="arquivoDominioRh"
+                accept=".xls,.xlsx">
+
+            <div
+                id="nomeArquivoDominio"
+                class="arquivo-selecionado">
+
+                Nenhum arquivo selecionado.
+
+            </div>
+
+            <button
+                class="botao-importacao"
+                onclick="enviarArquivoDominioRh()">
+
+                📤 Enviar Arquivo
+
+            </button>
+
+            <div
+                id="statusImportacaoDominio"
+                class="status-importacao">
+            </div>
+
+            <div
+                id="resultadoImportacaoDominio"
+                class="resultado-importacao">
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="importacao-dominio">
-
-      <p class="texto-importacao">
-        Selecione o arquivo exportado pelo Domínio (.xls ou .xlsx)
-      </p>
-
-      <input
-        type="file"
-        id="arquivoDominioRh"
-        accept=".xls,.xlsx"
-      >
-
-      <div
-        id="nomeArquivoDominio"
-        class="arquivo-selecionado"
-      >
-        Nenhum arquivo selecionado.
-      </div>
-
-      <button
-        class="botao-importacao"
-        onclick="enviarArquivoDominioRh()"
-      >
-        📤 Enviar Arquivo
-      </button>
-
-      <div
-        id="statusImportacaoDominio"
-        class="status-importacao"
-      ></div>
-
-      <div
-        id="resultadoImportacaoDominio"
-        class="resultado-importacao"
-      ></div>
-
-    </div> <!-- importacao-dominio -->
-
-  </div> <!-- modal-rh-conteudo -->
-
-</div> <!-- modalImportarDominioRh -->
+</div>
 
 <!-- ==========================================================
      SCRIPTS
