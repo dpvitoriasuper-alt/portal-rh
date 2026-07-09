@@ -1877,77 +1877,106 @@ const resposta = await fetch(API_URL, {
 /* AVISOS */
 function carregarAvisos(lista, mostrarTodos = false){
 
-  const container = document.getElementById("avisos");
+  const container = document.getElementById("avisosGrid");
 
   if(!container) return;
 
   container.innerHTML = "";
 
   if(!lista || lista.length === 0){
-    container.innerHTML = "<p>Nenhum aviso cadastrado.</p>";
+    container.innerHTML = `
+      <div class="rh-vazio">
+        Nenhum aviso cadastrado.
+      </div>
+    `;
     return;
   }
 
-  const avisosAtivos = lista
-    .filter(item => String(item.ATIVO || "").trim().toUpperCase() === "SIM")
-    .sort((a,b) => Number(a.ORDEM || 0) - Number(b.ORDEM || 0));
+  const avisos = lista
+    .filter(a => String(a.ATIVO || "").toUpperCase() === "SIM")
+    .sort((a,b)=>Number(a.ORDEM||0)-Number(b.ORDEM||0));
 
-  const avisosExibidos = mostrarTodos
-    ? avisosAtivos
-    : avisosAtivos.slice(0,3);
+  const exibir = mostrarTodos ? avisos : avisos.slice(0,3);
 
-  avisosExibidos.forEach(item => {
+  exibir.forEach(item=>{
 
     container.innerHTML += `
       <div class="notice gloss">
 
-        <div class="notice-top" style="background:${item.FUNDO || 'linear-gradient(135deg,#fff2bf,#c89112)'}">
+        <div class="notice-top"
+             style="background:${item.FUNDO || '#b40000'}">
+
           <h3>${item.TITULO || ""}</h3>
+
           <p>
             ${item.SUBTITULO || ""}
             <br><br>
             <em>${item.FRASE || ""}</em>
           </p>
+
         </div>
 
         <div class="notice-body">
-          <h4>${item.TITULO_BAIXO || item.TITULO || ""}</h4>
+
+          <h4>${item.TITULO_BAIXO || item.TITULO}</h4>
+
           <p>${item.DESCRICAO_BAIXO || ""}</p>
+
           <span class="date">
-            📅 ${item.DATA ? new Date(item.DATA).toLocaleDateString("pt-BR") : ""}
+            📅 ${item.DATA || ""}
           </span>
+
         </div>
 
       </div>
     `;
 
   });
-  
+
 }
 
 /* ANIVERSARIANTES */
 
 function carregarAniversariantes(lista){
 
-  if(!lista || lista.length === 0) return;
+    const container =
+    document.getElementById("listaAniversariantes");
 
-  const container = document.querySelector(".people");
+    if(!container) return;
 
-  container.innerHTML = "";
+    container.innerHTML="";
 
-  lista.forEach(item=>{
+    if(!lista || lista.length==0){
 
-    container.innerHTML += `
-      <div class="person">
-        <div class="person-left">
-         <span class="avatar-aniversario">🥳</span>
-          <span>${item.NOME || ""}</span>
+        container.innerHTML=`
+        <div class="rh-vazio">
+        Nenhum aniversariante.
+        </div>`;
+
+        return;
+    }
+
+    lista.forEach(item=>{
+
+        container.innerHTML+=`
+
+        <div class="person">
+
+            <div class="person-left">
+
+                <span class="avatar-aniversario">🥳</span>
+
+                <span>${item.NOME}</span>
+
+            </div>
+
+            <span>${item.DATA}</span>
+
         </div>
-        <span>${item.DATA || ""}</span>
-      </div>
-    `;
 
-  });
+        `;
+
+    });
 
 }
 
@@ -1955,20 +1984,36 @@ function carregarAniversariantes(lista){
 
 function carregarDestaque(lista){
 
-  if(!lista || lista.length === 0) return;
+    const div=
+    document.getElementById("destaqueHome");
 
-  const destaque = lista[0];
+    if(!div) return;
 
-  const avatar = document.querySelector(".avatar");
-  const nome = document.querySelector(".highlight h3");
-  const texto = document.querySelector(".highlight p");
+    div.innerHTML="";
 
-  if(destaque.FOTO){
-    avatar.style.backgroundImage = `url('${destaque.FOTO}')`;
-  }
+    if(!lista || lista.length==0){
 
-  nome.innerHTML = destaque.NOME || "";
-  texto.innerHTML = destaque.TEXTO || "";
+        div.innerHTML=`
+        <div class="rh-vazio">
+        Nenhum destaque.
+        </div>`;
+
+        return;
+    }
+
+    const d=lista[0];
+
+    div.innerHTML=`
+
+        <div class="avatar"
+        style="background-image:url('${d.FOTO||""}')">
+        </div>
+
+        <h3>${d.NOME||""}</h3>
+
+        <p>${d.TEXTO||""}</p>
+
+    `;
 
 }
  function carregarNoticias(lista, mostrarTodas = false){
@@ -2049,7 +2094,13 @@ function carregarGaleria(lista){
     .filter(item => item.ATIVO === "SIM")
     .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM));
 
-  const fotos = document.querySelectorAll(".gallery div");
+  const galeriaHome = document.getElementById("galeriaHome");
+
+if(!galeriaHome) return;
+
+galeriaHome.innerHTML = "";
+
+const fotos = [];
 
   // mistura as fotos por loja
   const porLoja = {};
@@ -2082,18 +2133,22 @@ function carregarGaleria(lista){
     rodada++;
   }
 
-  destaque.forEach((item,index)=>{
+  destaque.forEach(item => {
 
-    if(fotos[index] && item.IMAGEM){
+    galeriaHome.innerHTML += `
+        <div
+            class="gallery-item"
+            onclick="abrirImagem('${item.IMAGEM}')"
+            style="
+                background-image:url('${item.IMAGEM}');
+                background-size:cover;
+                background-position:center;
+            "
+            title="${item.TITULO || ""} - ${item.LOJA || ""}">
+        </div>
+    `;
 
-      fotos[index].style.backgroundImage = `url('${item.IMAGEM}')`;
-      fotos[index].style.backgroundSize = "cover";
-      fotos[index].style.backgroundPosition = "center";
-      fotos[index].title = `${item.TITULO || ""} - ${item.LOJA || ""}`;
-
-    }
-
-  });
+});
 
 }
   let galeriaCompleta = [];
