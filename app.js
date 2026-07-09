@@ -1,11 +1,18 @@
-
-  
 const API_URL = "https://script.google.com/macros/s/AKfycbz4aLtDg_OEpJ2PD9fyVGlfmSsjFY8MBiZoCJIgE2i79Qe_XYUY-XBNjFhpSG4gtb8/exec";
+
+// ================================
+// GERENCIADOR DE MODAIS SCRV
+// ================================
+const PilhaModaisSCRV = [];
+
+// Daqui para baixo começam as funções
+
 function carregarDocumentos(lista){
 
   const container = document.getElementById("documentosGrid");
 
   if(!container) return;
+  
 
   container.innerHTML = "";
 
@@ -623,7 +630,7 @@ function fecharCategoriaDocumentoRh(){
 }
 function abrirFuncionariosRh(){
 
-  ModalSCRV.abrir("modalFuncionariosRh");
+  abrirModalSCRV("modalFuncionariosRh");
 
 }
 
@@ -726,7 +733,7 @@ function fecharFuncionariosRh(){
 }
 async function abrirCadastroCompletoRh(cpf){
 
-    ModalSCRV.fechar("modalFuncionariosRh");
+   fecharModalSCRV("modalFuncionariosRh");
 
   ModalSCRV.abrir("modalCadastroCompletoRh");
   
@@ -3073,3 +3080,57 @@ window.pesquisarFuncionarioRh = function(){
   });
 
 }
+window.abrirModalSCRV = function(id){
+
+    const modal = document.getElementById(id);
+
+    if(!modal) return;
+
+    const aberto = document.querySelector(".modal-rh.aberto");
+
+    if(aberto){
+
+        aberto.classList.remove("aberto");
+        aberto.style.display = "none";
+
+        PilhaModaisSCRV.push(aberto.id);
+
+    }
+
+    modal.style.display = "flex";
+    modal.classList.add("aberto");
+
+    document.body.style.overflow = "hidden";
+
+};
+window.fecharModalSCRV = function(id){
+
+    const modal = document.getElementById(id);
+
+    if(modal){
+
+        modal.style.display = "none";
+        modal.classList.remove("aberto");
+
+    }
+
+    if(PilhaModaisSCRV.length){
+
+        const anterior = PilhaModaisSCRV.pop();
+
+        const m = document.getElementById(anterior);
+
+        if(m){
+
+            m.style.display = "flex";
+            m.classList.add("aberto");
+
+        }
+
+    }else{
+
+        document.body.style.overflow = "";
+
+    }
+
+};
