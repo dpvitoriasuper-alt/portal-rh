@@ -3074,6 +3074,8 @@ window.pesquisarFuncionarioRh = function(){
       "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
 
   }
+    };
+
     function formatarData(valor){
 
   if(!valor) return "-";
