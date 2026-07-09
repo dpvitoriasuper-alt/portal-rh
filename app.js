@@ -3074,6 +3074,20 @@ window.pesquisarFuncionarioRh = function(){
       "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
 
   }
+function formatarData(valor){
 
+  if(!valor) return "-";
+
+  const data = new Date(valor);
+
+  if(isNaN(data.getTime())){
+    return valor;
+  }
+
+  return data.toLocaleDateString("pt-BR",{
+    timeZone:"America/Manaus"
+  });
+
+}
 };
   
