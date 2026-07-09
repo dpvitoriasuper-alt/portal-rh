@@ -1922,8 +1922,8 @@ function carregarAvisos(lista, mostrarTodos = false){
 
           <p>${item.DESCRICAO_BAIXO || ""}</p>
 
-          <span class="date">
-    🗓 ${formatarDataHoraRh(item.DATA)}
+         <span class="date">
+    🗓 ${formatarData(item.DATA)}
 </span>
 
         </div>
