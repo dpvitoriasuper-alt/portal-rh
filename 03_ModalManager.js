@@ -3,102 +3,38 @@
  * Modal Manager v2
  **********************************************************************/
 
-const ModalSCRV = (() => {
+function atualizarBody() {
 
-    let zAtual = 10000;
-    let modaisAbertos = 0;
+    const existeModalAberto = Array.from(
+        document.querySelectorAll(".modal-rh, .documentos-modal")
+    ).some(modal => {
 
-    function atualizarBody(){
+        const estilo = window.getComputedStyle(modal);
 
-        if(modaisAbertos > 0){
+        return (
+            estilo.display !== "none" &&
+            estilo.visibility !== "hidden" &&
+            parseFloat(estilo.opacity) > 0
+        );
 
-            document.body.classList.add("modal-aberto");
-            document.body.style.overflow = "hidden";
+    });
 
-        }else{
+    if (existeModalAberto) {
 
-            document.body.classList.remove("modal-aberto");
-            document.body.style.overflow = "";
+        document.body.classList.add("modal-aberto");
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
 
-            document.documentElement.style.overflow = "";
+    } else {
 
-        }
+        document.body.classList.remove("modal-aberto");
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
 
-    }
-
-    function abrir(id){
-
-        const modal = document.getElementById(id);
-
-        if(!modal){
-            console.error("Modal não encontrado:", id);
-            return;
-        }
-
-        if(modal.style.display !== "flex"){
-            modaisAbertos++;
-        }
-
-        zAtual++;
-
-        modal.style.display = "flex";
-        modal.style.zIndex = zAtual;
-
-        atualizarBody();
-
-    }
-
-    function fechar(id){
-
-        const modal = document.getElementById(id);
-
-        if(!modal) return;
-
-        if(modal.style.display === "flex"){
-
-            modal.style.display = "none";
-
-            modaisAbertos--;
-
-            if(modaisAbertos < 0){
-                modaisAbertos = 0;
-            }
-
-        }
-
-        atualizarBody();
-
-    }
-
-    function fecharTodos(){
-
-        document
-        .querySelectorAll(".modal-rh,.documentos-modal")
-        .forEach(modal=>{
-
-            modal.style.display="none";
-
-        });
-
+        // Sincroniza o contador caso alguém tenha aberto/fechado modal
+        // diretamente com style.display
         modaisAbertos = 0;
 
-        atualizarBody();
-
     }
 
-    function quantidade(){
-
-        return modaisAbertos;
-
-    }
-
-    return{
-
-        abrir,
-        fechar,
-        fecharTodos,
-        quantidade
-
-    };
-
-})();
+}
