@@ -1,68 +1,104 @@
 /**********************************************************************
  * SISTEMA CORPORATIVO REDE VITÓRIA (SCRV)
- * Modal Manager
+ * Modal Manager v2
  **********************************************************************/
 
 const ModalSCRV = (() => {
 
-  let zAtual = 10000;
+    let zAtual = 10000;
+    let modaisAbertos = 0;
 
-  function abrir(id){
+    function atualizarBody(){
 
-    const modal = document.getElementById(id);
+        if(modaisAbertos > 0){
 
-    if(!modal){
-      console.error("Modal não encontrado:", id);
-      return;
+            document.body.classList.add("modal-aberto");
+            document.body.style.overflow = "hidden";
+
+        }else{
+
+            document.body.classList.remove("modal-aberto");
+            document.body.style.overflow = "";
+
+            document.documentElement.style.overflow = "";
+
+        }
+
     }
 
-    zAtual++;
+    function abrir(id){
 
-    modal.style.zIndex = zAtual;
-    modal.style.display = "flex";
+        const modal = document.getElementById(id);
 
-    document.body.classList.add("modal-aberto");
+        if(!modal){
+            console.error("Modal não encontrado:", id);
+            return;
+        }
 
-  }
+        if(modal.style.display !== "flex"){
+            modaisAbertos++;
+        }
 
-  function fechar(id){
+        zAtual++;
 
-    const modal = document.getElementById(id);
+        modal.style.display = "flex";
+        modal.style.zIndex = zAtual;
 
-    if(modal){
-      modal.style.display = "none";
+        atualizarBody();
+
     }
 
-    if(
-      document.querySelectorAll(
-        '.modal-rh[style*="display: flex"], .documentos-modal[style*="display: flex"]'
-      ).length === 0
-    ){
-      document.body.classList.remove("modal-aberto");
+    function fechar(id){
+
+        const modal = document.getElementById(id);
+
+        if(!modal) return;
+
+        if(modal.style.display === "flex"){
+
+            modal.style.display = "none";
+
+            modaisAbertos--;
+
+            if(modaisAbertos < 0){
+                modaisAbertos = 0;
+            }
+
+        }
+
+        atualizarBody();
+
     }
 
-  }
+    function fecharTodos(){
 
-  function fecharTodos(){
+        document
+        .querySelectorAll(".modal-rh,.documentos-modal")
+        .forEach(modal=>{
 
-    document
-      .querySelectorAll(".modal-rh, .documentos-modal")
-      .forEach(m => {
+            modal.style.display="none";
 
-        m.style.display = "none";
+        });
 
-      });
+        modaisAbertos = 0;
 
-    document.body.classList.remove("modal-aberto");
+        atualizarBody();
 
-  }
+    }
 
-  return {
+    function quantidade(){
 
-    abrir,
-    fechar,
-    fecharTodos
+        return modaisAbertos;
 
-  };
+    }
+
+    return{
+
+        abrir,
+        fechar,
+        fecharTodos,
+        quantidade
+
+    };
 
 })();
