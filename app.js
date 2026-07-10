@@ -631,7 +631,7 @@ function fecharCategoriaDocumentoRh(){
 }
 function abrirFuncionariosRh(){
 
-  abrirModalSCRV("modalFuncionariosRh");
+  ModalSCRV.abrir("modalFuncionariosRh");
 
 }
 
@@ -739,25 +739,25 @@ async function abrirCadastroCompletoRh(cpf){
 // Funcionários
 if(document.getElementById("modalFuncionariosRh")?.style.display === "flex"){
     modalOrigemRh = "modalFuncionariosRh";
-    fecharModalSCRV("modalFuncionariosRh");
+   ModalSCRV.fechar("modalFuncionariosRh");
 }
 
 // Experiência
 if(document.getElementById("modalExperienciaRh")?.style.display === "flex"){
     modalOrigemRh = "modalExperienciaRh";
-    fecharModalSCRV("modalExperienciaRh");
+    ModalSCRV.fechar("modalExperienciaRh");
 }
 
 // Desligados
 if(document.getElementById("modalDesligadosRh")?.style.display === "flex"){
     modalOrigemRh = "modalDesligadosRh";
-    fecharModalSCRV("modalDesligadosRh");
+    ModalSCRV.fechar("modalDesligadosRh");
 }
 
 // Importação
 if(document.getElementById("modalImportarDominioRh")?.style.display === "flex"){
     modalOrigemRh = "modalImportarDominioRh";
-    fecharModalSCRV("modalImportarDominioRh");
+    ModalSCRV.fechar("modalImportarDominioRh");
 }
 
 // Abre o cadastro
@@ -1185,7 +1185,7 @@ window.nomeFuncionarioAtual = c.NOME || "";
 }
 function fecharCadastroCompletoRh(){
 
-    fecharModalSCRV("modalCadastroCompletoRh");
+    ModalSCRV.fechar("modalCadastroCompletoRh");
 
     if(modalOrigemRh){
 
@@ -3109,68 +3109,6 @@ window.pesquisarFuncionarioRh = function(){
   });
 
 }
-window.abrirModalSCRV = function(id){
-
-    const modal = document.getElementById(id);
-
-    if(!modal) return;
-
-    const aberto = document.querySelector(".modal-rh.aberto, .documentos-modal.aberto");
-
-    if(aberto){
-
-        aberto.classList.remove("aberto");
-        aberto.style.display = "none";
-
-        PilhaModaisSCRV.push(aberto.id);
-
-    }
-
-    modal.style.display = "flex";
-    modal.classList.add("aberto");
-
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-
-};
-
-window.fecharModalSCRV = function(id){
-
-    const modal = document.getElementById(id);
-
-    if(modal){
-
-        modal.style.display = "none";
-        modal.classList.remove("aberto");
-
-    }
-
-    if(PilhaModaisSCRV.length){
-
-        const anterior = PilhaModaisSCRV.pop();
-
-        const m = document.getElementById(anterior);
-
-        if(m){
-
-            m.style.display = "flex";
-            m.classList.add("aberto");
-
-        }
-
-    }
-
-    // Sempre libera o scroll se não existir modal aberto
-
-    if(!document.querySelector(".modal-rh.aberto, .documentos-modal.aberto")){
-
-        document.body.style.overflow = "";
-        document.documentElement.style.overflow = "";
-
-    }
-
-};
-
 function limparImportacaoDominioRh(){
 
     const arquivo = document.getElementById("arquivoDominioRh");
