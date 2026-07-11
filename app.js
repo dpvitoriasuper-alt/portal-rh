@@ -641,7 +641,7 @@ function fecharFuncionariosRh(){
 }
  async function pesquisarFuncionariosRh(){
 
-  const termo = document.getElementById("buscaFuncionarioRh").value.trim();
+  const termo = document.getElementById("pesquisaFuncionarioRh").value.trim();
   const corpoTabela = document.getElementById("resultadoFuncionariosRh");
 
   const loginSalvo = localStorage.getItem("portalLogin");
