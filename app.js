@@ -733,6 +733,7 @@ function fecharFuncionariosRh(){
     `;
   }
 }
+
 async function abrirCadastroCompletoRh(cpf){
 
    modalOrigemRh = "";
@@ -3013,87 +3014,8 @@ window.fecharModalRh = function(id){
 };
 
 window.pesquisarFuncionarioRh = function(){
-  carregarFuncionariosRh();
+  pesquisarFuncionariosRh();
 };
-  
-  window.carregarFuncionariosRh = async function(){
-
-  const termo =
-    document
-      .getElementById("pesquisaFuncionarioRh")
-      .value
-      .trim();
-
-  const cpfUsuario =
-  JSON.parse(
-    localStorage.getItem("portalLogin") || "{}"
-  ).dados?.cpf || "";
-    
-    console.log("CPF USUÁRIO:", cpfUsuario);
-
-  const tabela =
-    document.getElementById("resultadoFuncionariosRh");
-
-  tabela.innerHTML =
-    "<tr><td colspan='7'>Carregando funcionários...</td></tr>";
-
-  try{
-
-    const resposta =
-      await fetch(
-        API_URL +
-        "?action=portalRhPesquisarFuncionarios" +
-        "&termo=" + encodeURIComponent(termo) +
-        "&cpfUsuario=" + encodeURIComponent(cpfUsuario) +
-        "&v=" + Date.now()
-      );
-
-    const dados =
-      await resposta.json();
-
-    if(!dados.sucesso){
-
-      tabela.innerHTML =
-        `<tr>
-           <td colspan="7">
-             ${dados.mensagem || "Nenhum resultado"}
-           </td>
-         </tr>`;
-      return;
-    }
-
-    let html = "";
-
-    dados.resultados.forEach(f => {
-
-      html += `
-        <tr>
-          <td>${f.nome}</td>
-          <td>${f.cpf}</td>
-          <td>${f.matricula}</td>
-          <td>${f.loja}</td>
-          <td>${f.funcao}</td>
-          <td>${f.status}</td>
-          <td>
-            <button onclick="abrirCadastroCompletoRh('${f.cpf}')">
-              👁 Ver Cadastro
-            </button>
-          </td>
-        </tr>
-      `;
-    });
-
-    tabela.innerHTML = html;
-
-  }catch(erro){
-
-    console.error(erro);
-
-    tabela.innerHTML =
-      "<tr><td colspan='7'>Erro ao carregar funcionários.</td></tr>";
-
-  }
-    };
 
     function formatarData(valor){
 
