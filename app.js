@@ -641,6 +641,16 @@ function fecharFuncionariosRh(){
 }
  async function pesquisarFuncionariosRh(){
 
+   console.log("=== NOVA PESQUISA RH ===");
+
+  const input = document.getElementById("pesquisaFuncionarioRh");
+  console.log("INPUT:", input);
+
+  const tabela = document.getElementById("resultadoFuncionariosRh");
+  console.log("TABELA:", tabela);
+
+  const termo = input.value.trim();
+
   const termo = document.getElementById("pesquisaFuncionarioRh").value.trim();
   const corpoTabela = document.getElementById("resultadoFuncionariosRh");
 
