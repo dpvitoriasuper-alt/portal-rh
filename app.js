@@ -612,21 +612,6 @@ async function salvarOcorrenciaRh(){
 
 }
 
-function carregarQuantidadesDocumentosRh(){
-
-  const linhas = document.querySelectorAll("#aba_documentos tbody tr");
-
-  linhas.forEach(linha => {
-
-    const categoria = linha.cells[0]?.innerText || "";
-
-    if(!categoria) return;
-
-    abrirCategoriaDocumentoRh(categoria, true);
-
-  });
-
-}
 function fecharCategoriaDocumentoRh(){
   document.getElementById("modalCategoriaDocumentoRh").style.display = "none";
 }
