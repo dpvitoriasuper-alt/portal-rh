@@ -3,26 +3,27 @@
  * RH - Cadastro Completo
  **********************************************************************/
 
-window.formatarDataHoraRh = function (valor) {
+function formatarDataHoraRh(valor){
 
-    if (!valor) return "-";
+    if(!valor) return "-";
 
     const data = new Date(valor);
 
-    if (isNaN(data.getTime())) {
+    if(isNaN(data.getTime())){
         return valor;
     }
 
-    return data.toLocaleString("pt-BR", {
+    return data.toLocaleString("pt-BR",{
         timeZone: "America/Manaus",
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
         hour: "2-digit",
-        minute: "2-digit"
+        minute: "2-digit",
+        second: "2-digit"
     });
 
-};
+}
 
 window.formatarMoedaRh = function (valor) {
 
