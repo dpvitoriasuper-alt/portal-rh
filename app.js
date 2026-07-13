@@ -615,117 +615,6 @@ async function salvarOcorrenciaRh(){
 function fecharCategoriaDocumentoRh(){
   document.getElementById("modalCategoriaDocumentoRh").style.display = "none";
 }
-function abrirFuncionariosRh(){
-
-  ModalSCRV.abrir("modalFuncionariosRh");
-
-}
-
-function fecharFuncionariosRh(){
-  document.getElementById("modalFuncionariosRh").style.display = "none";
-}
- async function pesquisarFuncionariosRh(){
-
-  console.log("=== NOVA PESQUISA RH ===");
-
-const input = document.getElementById("pesquisaFuncionarioRh");
-console.log("INPUT:", input);
-
-const tabela = document.getElementById("resultadoFuncionariosRh");
-console.log("TABELA:", tabela);
-
-const termo = input.value.trim();
-const corpoTabela = tabela;
-
-  const loginSalvo = localStorage.getItem("portalLogin");
-
-  if(!loginSalvo){
-    corpoTabela.innerHTML = `
-      <tr>
-        <td colspan="7" class="rh-vazio">Sessão expirada. Faça login novamente.</td>
-      </tr>
-    `;
-    return;
-  }
-
-  const sessao = JSON.parse(loginSalvo);
-  const cpfUsuario = sessao.dados.cpf;
-
-  if(!termo){
-    corpoTabela.innerHTML = `
-      <tr>
-        <td colspan="7" class="rh-vazio">Digite um nome, CPF ou matrícula para pesquisar.</td>
-      </tr>
-    `;
-    return;
-  }
-
-  corpoTabela.innerHTML = `
-    <tr>
-      <td colspan="7" class="rh-vazio">Pesquisando...</td>
-    </tr>
-  `;
-
-  const url =
-    API_URL +
-    "?action=portalRhPesquisarFuncionarios" +
-    "&termo=" + encodeURIComponent(termo) +
-    "&cpfUsuario=" + encodeURIComponent(cpfUsuario) +
-    "&v=" + new Date().getTime();
-
-  try{
-
-    const resposta = await fetch(url, { cache: "no-store" });
-    const dados = await resposta.json();
-
-    if(!dados.sucesso){
-      corpoTabela.innerHTML = `
-        <tr>
-          <td colspan="7" class="rh-vazio">${dados.mensagem || "Erro ao pesquisar."}</td>
-        </tr>
-      `;
-      return;
-    }
-
-    if(!dados.resultados || dados.resultados.length === 0){
-      corpoTabela.innerHTML = `
-        <tr>
-          <td colspan="7" class="rh-vazio">Nenhum funcionário encontrado.</td>
-        </tr>
-      `;
-      return;
-    }
-
-    corpoTabela.innerHTML = "";
-
-    dados.resultados.forEach(func => {
-      corpoTabela.innerHTML += `
-        <tr>
-          <td>${func.nome || "-"}</td>
-          <td>${func.cpf || "-"}</td>
-          <td>${func.matricula || "-"}</td>
-          <td>${func.loja || "-"}</td>
-          <td>${func.funcao || "-"}</td>
-          <td>${func.status || "ATIVO"}</td>
-          <td>
-            <button onclick="abrirCadastroCompletoRh('${func.cpf}')">
-              👁 Ver cadastro
-            </button>
-          </td>
-        </tr>
-      `;
-    });
-
-  }catch(erro){
-    console.error("Erro ao pesquisar funcionários:", erro);
-
-    corpoTabela.innerHTML = `
-      <tr>
-        <td colspan="7" class="rh-vazio">Erro ao pesquisar funcionários.</td>
-      </tr>
-    `;
-  }
-}
 
 async function abrirCadastroCompletoRh(cpf){
 
@@ -3004,10 +2893,6 @@ window.fecharModalRh = function(id){
 
   await carregarExperienciaRh();
 
-};
-
-window.pesquisarFuncionarioRh = function(){
-  pesquisarFuncionariosRh();
 };
 
     function formatarData(valor){
