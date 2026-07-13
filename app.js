@@ -1031,73 +1031,7 @@ window.nomeFuncionarioAtual = c.NOME || "";
 
   `;
 }
-  function formatarDataHoraRh(valor){
 
-  if(!valor) return "-";
-
-  const data = new Date(valor);
-
-  if(isNaN(data.getTime())){
-    return valor;
-  }
-
-  return data.toLocaleString("pt-BR", {
-    timeZone: "America/Manaus",
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
-}
-  function formatarMoedaRh(valor){
-
-  if(!valor) return "-";
-
-  let numero = String(valor)
-    .replace(/\./g,"")
-    .replace(",", ".");
-
-  numero = parseFloat(numero);
-
-  if(isNaN(numero)) return valor;
-
-  return numero.toLocaleString("pt-BR",{
-    style:"currency",
-    currency:"BRL"
-  });
-}
-function fecharCadastroCompletoRh(){
-
-    ModalSCRV.fechar("modalCadastroCompletoRh");
-
-    if(modalOrigemRh){
-
-        ModalSCRV.abrir(modalOrigemRh);
-
-        modalOrigemRh = "";
-
-    }
-
-}
-  function trocarAbaRh(nome){
-
-  document
-    .querySelectorAll(".rh-aba")
-    .forEach(el => el.classList.remove("ativa"));
-
-  document
-    .querySelectorAll(".rh-conteudo-aba")
-    .forEach(el => el.classList.remove("ativa"));
-
-  document
-    .getElementById("abaBtn_" + nome)
-    .classList.add("ativa");
-
-  document
-    .getElementById("aba_" + nome)
-    .classList.add("ativa");
-}
   async function abrirMeusContracheques(){
   const modal = document.getElementById("contrachequesModal");
   const lista = document.getElementById("contrachequesLista");
