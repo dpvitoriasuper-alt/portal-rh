@@ -56,7 +56,7 @@ async function salvarOcorrenciaRh(){
     msg.innerText = "Erro ao registrar ocorrência.";
   }
 }
-  async function carregarHistoricoRh(){
+ async function carregarHistoricoRh(){
 
   const lista = document.getElementById("listaHistoricoRh");
 
@@ -70,11 +70,11 @@ async function salvarOcorrenciaRh(){
     API_URL +
     "?action=buscarHistoricoFuncionarioRh" +
     "&cpf=" + encodeURIComponent(cpfCadastroAtual) +
-    "&v=" + new Date().getTime();
+    "&v=" + Date.now();
 
   try{
 
-    const resposta = await fetch(url, { cache: "no-store" });
+    const resposta = await fetch(url,{ cache:"no-store" });
     const dados = await resposta.json();
 
     if(!dados.sucesso){
@@ -93,16 +93,63 @@ async function salvarOcorrenciaRh(){
 
     let html = "";
 
-dados.historico.forEach(item => {
+    dados.historico.forEach(item => {
 
-    html += `...`;
+      html += `
+        <div class="rh-card-info" style="margin-bottom:15px;">
 
-});
+          <strong>📌 ${item.tipo || "OCORRÊNCIA"}</strong>
 
-lista.innerHTML = html;
+          <div style="margin-top:12px;line-height:1.8;color:#fff;">
+
+            <div>
+              📅 <b>Data:</b>
+              ${formatarDataHoraRh(item.data)}
+            </div>
+
+            ${
+              item.lojaAnterior
+              ? `<div>🏬 <b>Loja anterior:</b> ${item.lojaAnterior}</div>`
+              : ""
+            }
+
+            ${
+              item.novaLoja
+              ? `<div>🏬 <b>Nova loja:</b> ${item.novaLoja}</div>`
+              : ""
+            }
+
+            ${
+              item.tempoLojaAnterior
+              ? `<div>⏳ <b>Tempo na loja anterior:</b> ${item.tempoLojaAnterior}</div>`
+              : ""
+            }
+
+            <div>
+              📝 <b>Justificativa:</b>
+              ${item.justificativa || "-"}
+            </div>
+
+            <div>
+              👤 <b>Usuário:</b>
+              ${item.usuario || "-"}
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+    });
+
+    lista.innerHTML = html;
 
   }catch(erro){
+
     console.error(erro);
+
     lista.innerHTML = "Erro ao carregar histórico.";
+
   }
+
 }
