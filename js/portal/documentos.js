@@ -15,21 +15,29 @@ function carregarDocumentos(lista){
     ...new Set(documentosCompletos.map(item => item.CATEGORIA).filter(Boolean))
   ];
 
- filtros.innerHTML = "";
+  let htmlFiltros = "";
 
-let htmlFiltros = "";
-
-categorias.forEach(cat => {
+  categorias.forEach(cat => {
 
     htmlFiltros += `
-        <button
-            class="categoria-card"
-            onclick="filtrarDocumentos('${cat}', this)">
-            ${cat}
-        </button>
+      <button
+        class="doc-filtro"
+        onclick="filtrarDocumentos('${cat}', this)">
+        ${cat}
+      </button>
     `;
 
-});
+  });
+
+  filtros.innerHTML = htmlFiltros;
+
+  grid.innerHTML = `
+    <div class="mensagem-documentos">
+      Selecione uma categoria acima.
+    </div>
+  `;
+
+}
 
 filtros.innerHTML = htmlFiltros;
 
