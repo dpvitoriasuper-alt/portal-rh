@@ -1,27 +1,35 @@
+/**********************************************************************
+ * SCRV - Galeria
+ **********************************************************************/
+
+let galeriaCompleta = [];
+
+/**********************************************************************
+ * Carrega Galeria Home
+ **********************************************************************/
+
 function carregarGaleria(lista){
 
   if(!lista || lista.length === 0) return;
 
   galeriaCompleta = lista
-    .filter(item => item.ATIVO === "SIM")
-    .sort((a,b) => Number(a.ORDEM) - Number(b.ORDEM));
+    .filter(item => String(item.ATIVO || "").trim().toUpperCase() === "SIM")
+    .sort((a,b) => Number(a.ORDEM || 0) - Number(b.ORDEM || 0));
 
   const galeriaHome = document.getElementById("galeriaHome");
 
-if(!galeriaHome) return;
+  if(!galeriaHome) return;
 
-galeriaHome.innerHTML = "";
-
-const fotos = [];
-
-  // mistura as fotos por loja
   const porLoja = {};
 
   galeriaCompleta.forEach(item => {
+
     if(!porLoja[item.LOJA]){
       porLoja[item.LOJA] = [];
     }
+
     porLoja[item.LOJA].push(item);
+
   });
 
   const lojas = Object.keys(porLoja);
@@ -34,111 +42,213 @@ const fotos = [];
     let adicionou = false;
 
     lojas.forEach(loja => {
-      if(porLoja[loja][rodada] && destaque.length < 6){
+
+      if(
+        porLoja[loja][rodada] &&
+        destaque.length < 6
+      ){
+
         destaque.push(porLoja[loja][rodada]);
         adicionou = true;
+
       }
+
     });
 
     if(!adicionou) break;
 
     rodada++;
+
   }
+
+  let html = "";
 
   destaque.forEach(item => {
 
-    galeriaHome.innerHTML += `
-        <div
-            class="gallery-item"
-            onclick="abrirImagem('${item.IMAGEM}')"
-            style="
-                background-image:url('${item.IMAGEM}');
-                background-size:cover;
-                background-position:center;
-            "
-            title="${item.TITULO || ""} - ${item.LOJA || ""}">
-        </div>
+    html += `
+      <div
+          class="gallery-item"
+          onclick="abrirImagem('${item.IMAGEM}')"
+          style="
+              background-image:url('${item.IMAGEM}');
+              background-size:cover;
+              background-position:center;
+          "
+          title="${item.TITULO || ""} - ${item.LOJA || ""}">
+      </div>
     `;
 
-});
+  });
+
+  galeriaHome.innerHTML = html;
 
 }
-  let galeriaCompleta = [];
+
+/**********************************************************************
+ * Modal
+ **********************************************************************/
 
 function abrirGaleria(){
+
   document.getElementById("galeriaModal").style.display = "block";
-  renderizarGaleria(galeriaCompleta);
+
   preencherFiltros();
+
+  renderizarGaleria(galeriaCompleta);
+
 }
 
 function fecharGaleria(){
+
   document.getElementById("galeriaModal").style.display = "none";
+
 }
+
+/**********************************************************************
+ * Filtros
+ **********************************************************************/
 
 function preencherFiltros(){
 
-  const lojas = [...new Set(galeriaCompleta.map(item => item.LOJA).filter(Boolean))];
-  const categorias = [...new Set(galeriaCompleta.map(item => item.CATEGORIA).filter(Boolean))];
+  const lojas = [
+    ...new Set(
+      galeriaCompleta
+        .map(item => item.LOJA)
+        .filter(Boolean)
+    )
+  ];
 
-  const filtroLoja = document.getElementById("filtroLoja");
-  const filtroCategoria = document.getElementById("filtroCategoria");
+  const categorias = [
+    ...new Set(
+      galeriaCompleta
+        .map(item => item.CATEGORIA)
+        .filter(Boolean)
+    )
+  ];
 
-  filtroLoja.innerHTML =
-    '<option value="">Todas as lojas</option>';
+  const filtroLoja =
+    document.getElementById("filtroLoja");
 
-  filtroCategoria.innerHTML =
-    '<option value="">Todas categorias</option>';
+  const filtroCategoria =
+    document.getElementById("filtroCategoria");
 
-  lojas.forEach(loja=>{
-    filtroLoja.innerHTML += `<option value="${loja}">${loja}</option>`;
+  let htmlLojas =
+    `<option value="">Todas as lojas</option>`;
+
+  lojas.forEach(loja => {
+
+    htmlLojas += `
+      <option value="${loja}">
+        ${loja}
+      </option>
+    `;
+
   });
 
-  categorias.forEach(cat=>{
-    filtroCategoria.innerHTML += `<option value="${cat}">${cat}</option>`;
+  filtroLoja.innerHTML = htmlLojas;
+
+  let htmlCategorias =
+    `<option value="">Todas categorias</option>`;
+
+  categorias.forEach(cat => {
+
+    htmlCategorias += `
+      <option value="${cat}">
+        ${cat}
+      </option>
+    `;
+
   });
+
+  filtroCategoria.innerHTML = htmlCategorias;
+
 }
+
+/**********************************************************************
+ * Filtrar
+ **********************************************************************/
 
 function filtrarGaleria(){
 
-  const loja = document.getElementById("filtroLoja").value;
-  const categoria = document.getElementById("filtroCategoria").value;
+  const loja =
+    document.getElementById("filtroLoja").value;
+
+  const categoria =
+    document.getElementById("filtroCategoria").value;
 
   let filtrada = galeriaCompleta;
 
   if(loja){
-    filtrada = filtrada.filter(item => item.LOJA === loja);
+
+    filtrada =
+      filtrada.filter(item => item.LOJA === loja);
+
   }
 
   if(categoria){
-    filtrada = filtrada.filter(item => item.CATEGORIA === categoria);
+
+    filtrada =
+      filtrada.filter(item => item.CATEGORIA === categoria);
+
   }
 
   renderizarGaleria(filtrada);
+
 }
+
+/**********************************************************************
+ * Renderizar
+ **********************************************************************/
 
 function renderizarGaleria(lista){
 
-  const grid = document.getElementById("galeriaGrid");
+  const grid =
+    document.getElementById("galeriaGrid");
 
-  grid.innerHTML = "";
+  if(!grid) return;
 
-  lista.forEach(item=>{
+  if(!lista || lista.length === 0){
 
-   grid.innerHTML += `
-  <div class="galeria-item"
-     onclick="abrirImagem(this.dataset.img)"
-     data-img="${item.IMAGEM}"
-     style="background-image:url('${item.IMAGEM}')">
+    grid.innerHTML = `
+      <div class="rh-vazio">
+        Nenhuma imagem encontrada.
+      </div>
+    `;
 
-    <div class="galeria-overlay">
-      <p>📍 ${item.LOJA || ""}</p>
-    </div>
+    return;
 
-  </div>
-`;
+  }
+
+  let html = "";
+
+  lista.forEach(item => {
+
+    html += `
+      <div
+        class="galeria-item"
+        onclick="abrirImagem('${item.IMAGEM}')"
+        style="background-image:url('${item.IMAGEM}')">
+
+        <div class="galeria-overlay">
+
+          <p>📍 ${item.LOJA || ""}</p>
+
+        </div>
+
+      </div>
+    `;
+
   });
+
+  grid.innerHTML = html;
+
 }
-  function abrirImagem(url){
+
+/**********************************************************************
+ * Imagem
+ **********************************************************************/
+
+function abrirImagem(url){
 
   document.getElementById("imagemGrande").src = url;
 
