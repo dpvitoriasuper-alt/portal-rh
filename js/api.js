@@ -4,48 +4,82 @@
 
 SCRV.API.get = async function(action, parametros = {}) {
 
-    const url = new URL(API_URL);
+    try{
 
-    url.searchParams.set("action", action);
+        const url = new URL(API_URL);
 
-    Object.entries(parametros).forEach(([chave, valor]) => {
+        url.searchParams.set("action", action);
 
-        if (
-            valor !== undefined &&
-            valor !== null &&
-            valor !== ""
-        ) {
+        Object.entries(parametros).forEach(([chave, valor]) => {
 
-            url.searchParams.set(chave, valor);
+            if(
+                valor !== undefined &&
+                valor !== null &&
+                valor !== ""
+            ){
+                url.searchParams.set(chave, valor);
+            }
 
+        });
+
+        url.searchParams.set("_", Date.now());
+
+        const resposta = await fetch(url,{
+            cache:"no-store"
+        });
+
+        if(!resposta.ok){
+            throw new Error(`HTTP ${resposta.status}`);
         }
 
-    });
+        return await resposta.json();
 
-    url.searchParams.set("_", Date.now());
+    }catch(erro){
 
-    const resposta = await fetch(url, {
+        console.error("SCRV.API.get:", erro);
 
-        cache: "no-store"
+        return {
+            sucesso:false,
+            mensagem:"Erro de comunicação com o servidor."
+        };
 
-    });
-
-    return await resposta.json();
+    }
 
 };
 
-SCRV.API.post = async function(action, dados = {}) {
+SCRV.API.post = async function(action,dados={}){
 
-    dados.action = action;
+    try{
 
-    const resposta = await fetch(API_URL, {
+        dados.action = action;
 
-        method: "POST",
+        const resposta = await fetch(API_URL,{
 
-        body: JSON.stringify(dados)
+            method:"POST",
 
-    });
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-    return await resposta.json();
+            body:JSON.stringify(dados)
+
+        });
+
+        if(!resposta.ok){
+            throw new Error(`HTTP ${resposta.status}`);
+        }
+
+        return await resposta.json();
+
+    }catch(erro){
+
+        console.error("SCRV.API.post:", erro);
+
+        return{
+            sucesso:false,
+            mensagem:"Erro de comunicação com o servidor."
+        };
+
+    }
 
 };
