@@ -14,8 +14,7 @@ async function carregarPortal(){
 
   try{
 
-    const resposta = await fetch(API_URL + "?v=" + new Date().getTime());
-    const dados = await resposta.json();
+    const dados = await SCRV.API.get("");
 
     console.log("DADOS DO PORTAL:", dados);
     console.log("DOCUMENTOS RECEBIDOS:", dados.DOCUMENTOS);
@@ -30,8 +29,6 @@ async function carregarPortal(){
     carregarNoticias(window.todasNoticias, false);
     carregarDocumentos(dados.DOCUMENTOS);
 
-    console.log("NOTICIAS RECEBIDAS:", dados.NOTICIAS);
-    
     document.body.classList.remove("carregando");
 
   }catch(erro){
