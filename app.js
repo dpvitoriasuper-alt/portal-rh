@@ -1,5 +1,4 @@
 console.log("APP.JS VERSÃO TESTE 17:58");
-const API_URL = "https://script.google.com/macros/s/AKfycbz4aLtDg_OEpJ2PD9fyVGlfmSsjFY8MBiZoCJIgE2i79Qe_XYUY-XBNjFhpSG4gtb8/exec";
 
 // ================================
 // GERENCIADOR DE MODAIS SCRV
