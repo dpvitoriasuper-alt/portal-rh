@@ -2,13 +2,15 @@
  * SCRV API
  **********************************************************************/
 
-SCRV.API.get = async function(action, parametros = {}) {
+SCRV.API.get = async function(action = "", parametros = {}) {
 
     try{
 
         const url = new URL(API_URL);
 
-        url.searchParams.set("action", action);
+        if(action){
+            url.searchParams.set("action", action);
+        }
 
         Object.entries(parametros).forEach(([chave, valor]) => {
 
@@ -38,9 +40,9 @@ SCRV.API.get = async function(action, parametros = {}) {
 
         console.error("SCRV.API.get:", erro);
 
-        return {
+        return{
             sucesso:false,
-            mensagem:"Erro de comunicação com o servidor."
+            mensagem:"Erro de comunicação."
         };
 
     }
