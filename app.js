@@ -4,10 +4,6 @@ const API_URL = "https://script.google.com/macros/s/AKfycbz4aLtDg_OEpJ2PD9fyVGlf
 // ================================
 // GERENCIADOR DE MODAIS SCRV
 // ================================
-const PilhaModaisSCRV = [];
-let modalOrigemRh = "";
-
-// Daqui para baixo começam as funções
 
   
 async function carregarPortal(){
