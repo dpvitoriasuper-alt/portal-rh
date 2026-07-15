@@ -78,18 +78,3 @@ window.fecharModalRh = function(id){
 
 };
 
-    function formatarData(valor){
-
-  if(!valor) return "-";
-
-  const data = new Date(valor);
-
-  if(isNaN(data.getTime())){
-    return valor;
-  }
-
-  return data.toLocaleDateString("pt-BR",{
-    timeZone:"America/Manaus"
-  });
-
-}
