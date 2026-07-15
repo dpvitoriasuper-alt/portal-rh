@@ -2,6 +2,8 @@
  * SISTEMA CORPORATIVO REDE VITÓRIA (SCRV)
  * Modal Manager
  **********************************************************************/
+const PilhaModaisSCRV = [];
+let modalOrigemRh = "";
 
 const ModalSCRV = (() => {
 
