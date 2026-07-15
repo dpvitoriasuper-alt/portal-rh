@@ -54,12 +54,13 @@ function fecharAreaRh(){
 };
 
 
- carregarPortal();
+ document.addEventListener("DOMContentLoaded", async () => {
 
-setTimeout(() => {
-  verificarLoginSalvo();
-}, 500);
+    await carregarPortal();
 
+    await verificarLoginSalvo();
+
+});
 
 window.abrirNovoFuncionarioRh = function(){
 
