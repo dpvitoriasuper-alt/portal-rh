@@ -40,20 +40,21 @@ async function carregarPortal(){
 }
   
 function abrirAreaRh(){
-  document.getElementById("modalAreaRh").style.display = "flex";
+
+  ModalSCRV.abrir("modalAreaRh");
+
 }
 
 function fecharAreaRh(){
-  document.getElementById("modalAreaRh").style.display = "none";
+
+  ModalSCRV.fechar("modalAreaRh");
+
 }
   
   window.abrirDesligadosRh = function(){
-  const modal = document.getElementById("modalDesligadosRh");
-  if(modal){
-    modal.style.display = "flex";
-  }else{
-    alert("Modal Desligados não encontrado.");
-  }
+
+    ModalSCRV.abrir("modalDesligadosRh");
+
 };
 
 
