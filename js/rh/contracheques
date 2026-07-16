@@ -132,3 +132,4 @@ function fecharImportacaoContrachequesRh(){
     );
 
 }
+console.log("TIPO:", typeof window.abrirImportarContrachequesRh);
