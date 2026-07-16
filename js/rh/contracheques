@@ -1,8 +1,3 @@
-// ==========================================================
-// IMPORTAÇÃO DE CONTRACHEQUES
-// ==========================================================
-
-
 window.abrirImportarContrachequesRh = function () {
 
     const modal = document.getElementById("modalImportarContrachequesRh");
