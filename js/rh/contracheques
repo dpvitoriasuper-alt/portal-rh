@@ -1,3 +1,5 @@
+console.log("CONTRACHEQUES.JS CARREGOU");
+
 window.abrirImportarContrachequesRh = function () {
 
     const modal = document.getElementById("modalImportarContrachequesRh");
