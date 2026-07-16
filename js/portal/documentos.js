@@ -39,15 +39,6 @@ function carregarDocumentos(lista){
 
 }
 
-filtros.innerHTML = htmlFiltros;
-
-  document.getElementById("documentosGrid").innerHTML = `
-  <div class="mensagem-documentos">
-    Selecione uma categoria acima.
-  </div>
-`;
-}
-
 function filtrarDocumentos(categoria, botao){
 
   document.querySelectorAll(".doc-filtro").forEach(btn=>{
