@@ -1,7 +1,12 @@
-console.log("CONTRACHEQUES.JS CARREGOU");
-
 window.abrirImportarContrachequesRh = function () {
 
-    alert("FUNCIONOU!");
+    const modal = document.getElementById("modalImportarContrachequesRh");
+
+    if (!modal) {
+        alert("Modal não encontrado.");
+        return;
+    }
+
+    modal.style.display = "flex";
 
 };
