@@ -1789,6 +1789,75 @@
 
 </div>
 
+
+<!-- ==========================================================
+     MODAL - IMPORTAÇÃO CONTRACHEQUES
+=========================================================== -->
+
+<div id="modalImportarContrachequesRh" class="documentos-modal">
+
+    <div class="documentos-box" style="max-width:850px;">
+
+        <div class="documentos-header">
+
+            <h2>📄 Importação de Contracheques</h2>
+
+            <button onclick="fecharImportacaoContrachequesRh()">
+                ×
+            </button>
+
+        </div>
+
+        <div class="rh-card-info">
+
+            <strong>Importação de Contracheques</strong>
+
+            <span>
+                Selecione o arquivo PDF exportado da folha.
+            </span>
+
+        </div>
+
+        <div class="importacao-dominio">
+
+            <input
+                type="file"
+                id="arquivoContrachequesRh"
+                accept=".pdf">
+
+            <div
+                id="nomeArquivoContracheques"
+                class="arquivo-selecionado">
+
+                Nenhum arquivo selecionado.
+
+            </div>
+
+            <button
+                class="botao-importacao"
+                onclick="enviarArquivoContrachequesRh()">
+
+                📤 Enviar Arquivo
+
+            </button>
+
+            <div
+                id="statusImportacaoContracheques"
+                class="status-importacao">
+            </div>
+
+            <div
+                id="resultadoImportacaoContracheques"
+                class="resultado-importacao">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+     
+     
 <!-- ==========================================================
      SCRIPTS
 =========================================================== -->
