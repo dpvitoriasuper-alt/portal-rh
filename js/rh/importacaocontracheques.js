@@ -73,9 +73,11 @@ async function enviarArquivoContrachequesRh() {
 
             });
 
-            const dados = await resposta.json();
+            const texto = await resposta.text();
 
-            status.innerHTML = dados.mensagem;
+console.log("RESPOSTA:", texto);
+
+status.innerHTML = texto;
 
         } catch (erro) {
 
