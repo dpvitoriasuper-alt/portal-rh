@@ -1862,54 +1862,139 @@
      PROCESSAMENTO
 =========================================================== -->
 
-     <div id="scrvProcessamento" class="scrv-processamento oculto">
+<div id="scrvProcessamento" class="scrv-processamento-overlay" style="display:none;">
 
-    <div class="scrv-processamento-card">
+    <div class="scrv-processamento">
 
-        <div class="scrv-header">
+        <div class="scrv-processamento-header">
 
-            <h2 id="scrvTitulo">Central de Processamento</h2>
+            <div>
 
-            <span id="scrvStatus">Preparando...</span>
+                <h2 id="scrvTituloProcessamento">
+                    Processamento SCRV
+                </h2>
+
+                <span id="scrvSubtituloProcessamento">
+                    Preparando...
+                </span>
+
+            </div>
 
         </div>
 
-        <div class="scrv-arquivo">
+        <div class="scrv-processamento-arquivo">
 
             <strong>Arquivo:</strong>
 
-            <span id="scrvArquivo"></span>
+            <span id="scrvArquivoProcessamento"></span>
 
         </div>
 
-        <div class="scrv-barra">
+        <div class="scrv-progress">
 
-            <div id="scrvBarraInterna"></div>
-
-        </div>
-
-        <div id="scrvPercentual">0%</div>
-
-        <div class="scrv-estatisticas">
-
-            <div>Página <span id="scrvPagina">0 / 0</span></div>
-
-            <div>✔ Processados <span id="scrvProcessados">0</span></div>
-
-            <div>⚠ Pendências <span id="scrvPendencias">0</span></div>
-
-            <div>❌ Erros <span id="scrvErros">0</span></div>
-
-            <div>⏱ Tempo <span id="scrvTempo">00:00</span></div>
+            <div id="scrvProgressBar"></div>
 
         </div>
 
-        <div id="scrvLog" class="scrv-log"></div>
+        <div id="scrvPercentual" class="scrv-percentual">
+
+            0%
+
+        </div>
+
+        <div class="scrv-grid">
+
+            <div>
+
+                <span>Página</span>
+
+                <strong id="scrvPaginaAtual">
+
+                    0 / 0
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>Importados</span>
+
+                <strong id="scrvImportados">
+
+                    0
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>Pendências</span>
+
+                <strong id="scrvPendencias">
+
+                    0
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>Erros</span>
+
+                <strong id="scrvErros">
+
+                    0
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>Tempo</span>
+
+                <strong id="scrvTempo">
+
+                    00:00
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="scrv-log">
+
+            <div class="scrv-log-titulo">
+
+                LOG DO PROCESSAMENTO
+
+            </div>
+
+            <div id="scrvLogConteudo">
+
+            </div>
+
+        </div>
+
+        <div class="scrv-processamento-footer">
+
+            <button
+                id="scrvBtnFecharProcessamento"
+                style="display:none;">
+
+                Fechar
+
+            </button>
+
+        </div>
 
     </div>
 
 </div>
-
      
      
 <!-- ==========================================================
