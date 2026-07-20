@@ -2219,4 +2219,45 @@ body:not(.carregando) .highlight {
   }
 
 }
-  
+
+/* ==========================================================
+   MODAL PROCESSAMENTO SCRV
+   ========================================================== */
+
+.scrv-modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.80);
+
+    backdrop-filter:blur(4px);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999999999;
+
+}
+
+.scrv-processamento{
+
+    width:min(900px,95vw);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:#111;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,196,0,.45);
+
+    padding:25px;
+
+}
