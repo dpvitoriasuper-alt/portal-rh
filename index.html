@@ -1856,6 +1856,60 @@
     </div>
 
 </div>
+
+     
+<!-- ==========================================================
+     PROCESSAMENTO
+=========================================================== -->
+
+     <div id="scrvProcessamento" class="scrv-processamento oculto">
+
+    <div class="scrv-processamento-card">
+
+        <div class="scrv-header">
+
+            <h2 id="scrvTitulo">Central de Processamento</h2>
+
+            <span id="scrvStatus">Preparando...</span>
+
+        </div>
+
+        <div class="scrv-arquivo">
+
+            <strong>Arquivo:</strong>
+
+            <span id="scrvArquivo"></span>
+
+        </div>
+
+        <div class="scrv-barra">
+
+            <div id="scrvBarraInterna"></div>
+
+        </div>
+
+        <div id="scrvPercentual">0%</div>
+
+        <div class="scrv-estatisticas">
+
+            <div>Página <span id="scrvPagina">0 / 0</span></div>
+
+            <div>✔ Processados <span id="scrvProcessados">0</span></div>
+
+            <div>⚠ Pendências <span id="scrvPendencias">0</span></div>
+
+            <div>❌ Erros <span id="scrvErros">0</span></div>
+
+            <div>⏱ Tempo <span id="scrvTempo">00:00</span></div>
+
+        </div>
+
+        <div id="scrvLog" class="scrv-log"></div>
+
+    </div>
+
+</div>
+
      
      
 <!-- ==========================================================
@@ -1869,6 +1923,9 @@
 <script src="js/api.js"></script>
 
 <script src="js/utils.js"></script>
+
+     <!-- CORE SCRV -->
+<script src="js/core/scrv.processamento.js"></script>
 
 <!-- PORTAL -->
 <script src="js/portal/login.js"></script>
