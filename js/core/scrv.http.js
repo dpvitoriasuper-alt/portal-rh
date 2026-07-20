@@ -93,3 +93,10 @@ const dados = await SCRV.Http.post({
     ultimoSeq
 
 });
+const resposta = await SCRV.Http.upload({
+
+    action: "uploadImportacaoContracheques",
+
+    arquivo
+
+});
